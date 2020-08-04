@@ -1,0 +1,30 @@
+%!TEX root = P231_notes.tex
+
+\section{Introduction: Why mathematical methods?}
+\lecdate{lec~01}
+
+Physics 231:~Methods of Theoretical Physics is a course for first-year physics and astronomy graduate students. It is a `crash course’ in mathematical methods necessary for graduate courses in electrodynamics, quantum mechanics, and statistical mechanics. It is a \emph{boot camp} rather than a rigorous theorem--proof mathematics class. Where possible, the emphasis is on physical intuition rather than mathematical precision. 
+
+\subsection{Green’s functions}
+
+Our primary goal is to solve linear differential equations:
+\begin{align}
+  \mathcal O f(x) = s(x) \ .
+\end{align}
+In this equation, $\mathcal O$ is a \emph{differential operator} that encodes some kind of physical dynamics, say $\mathcal O = (d/dx)^2 + 3x\,(d/dx)$.  $s(x)$ is the \emph{source} of those dynamics. Finally, $f(x)$ is the system's physical \emph{response} that we would like to determine. The solution to this equation is:
+\begin{align}
+  f(x) &= \mathcal O^{-1} s(x) \ .
+\end{align}
+Simply writing that is deeply unsatisfying! %It is as if we were asked to solve $f'(x) = 3x$ and simply wrote $f(x) = \int 3x\, dx$. The real 
+In this course, we think carefully about what $\mathcal O^{-1}$ actually \emph{means} and how we can calculate it. As you may have guessed, $\mathcal O^{-1}$ is the \textbf{Green's function} for the differential operator $\mathcal O$. 
+
+We will approach this problem by analogy to linear algebra, where a linear transformation $A$ acting on a vector space can give equations like:
+\begin{align}
+  A \vec{v} = \vec{w} \ ,
+\end{align}
+whose solution is
+\begin{align}
+  \vec{v} = A^{-1} \vec{w} \ .
+\end{align}
+We will connect the notion of a linear differential operator to a matrix in infinite dimensional space to give a working definition of $\mathcal O^{-1}$. We will then pull out a bag of tricks from complex analysis to formally solve $\mathcal O^{-1}s(x)$ given $\mathcal O$ and $s(x)$. 
+

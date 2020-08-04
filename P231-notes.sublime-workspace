@@ -1,0 +1,872 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"includ",
+				"\\includegraphics[options]{name}                   \tlatex-document"
+			],
+			[
+				"lang",
+				"\\langle                                           \tlatex-mathsymbols"
+			],
+			[
+				"par",
+				"\\paragraph*{title}                                \tlatex-document"
+			],
+			[
+				"sub",
+				"\\subsection[short]{title}                         \tlatex-document"
+			],
+			[
+				"incl",
+				"\\includegraphics[options]{name}                   \tlatex-document"
+			],
+			[
+				"inc",
+				"\\includegraphics[options]{name}                   \tlatex-document"
+			],
+			[
+				"in",
+				"\\includegraphics{name}                            \tlatex-document"
+			],
+			[
+				"mytal",
+				"\\mytalkskip{}                                     \tlocal"
+			],
+			[
+				"subs",
+				"\\subsection*{title}                               \tlatex-document"
+			],
+			[
+				"subsub",
+				"\\subsubsection*{title}                            \tlatex-document"
+			],
+			[
+				"subsu",
+				"\\subsubsection*{title}                            \tlatex-document"
+			],
+			[
+				"bar",
+				"\\bar{a}                                           \tlatex-mathsymbols"
+			],
+			[
+				"mathcal",
+				"\\mathcal{text}                                    \tlatex-document"
+			],
+			[
+				"begin",
+				"\\begin{sloppypar}                                 \tlatex-l2tabu"
+			],
+			[
+				"algin",
+				"\\begin{align}                                     \tamsmath"
+			],
+			[
+				"UCR",
+				"\\UCRsans"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "P231_notes.tex",
+			"settings":
+			{
+				"buffer_size": 2456,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "P231_header.tex",
+			"settings":
+			{
+				"buffer_size": 4718,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 174,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"PdfLaTeX"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"git: status",
+				"git: status"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"git:st",
+				"git: status"
+			],
+			[
+				"git stat",
+				"git: status"
+			],
+			[
+				"git l",
+				"git: log"
+			],
+			[
+				"branch",
+				"git: branch"
+			],
+			[
+				"git status",
+				"git: status"
+			],
+			[
+				"GitSa",
+				"GitSavvy: help"
+			],
+			[
+				"Package",
+				"Package Control: Install Package"
+			],
+			[
+				"Material Th",
+				"Material Theme: Configuration"
+			],
+			[
+				"MAteri",
+				"Material Theme: Activate theme"
+			],
+			[
+				"Outline",
+				"Browse Mode: Outline (Left)"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"align",
+				"AlignTab: Table Mode"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"Snippet: flip",
+				"Snippet: FLIP-LaTeX-align"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"packack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+			"test",
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": true,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes"
+	],
+	"file_history":
+	[
+		"/Users/flip/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_Prelim.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_BGSig.tex",
+		"/Users/flip/Documents/NSFDescription2020/Project Summary.pages",
+		"/Users/flip/Documents/NSFDescription2020/Project Summary_old.pages",
+		"/Users/flip/Documents/TempLocal/UCR Letterhead/PhysicsLetterhead_Bootleg_xelatex.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_CurrentPending.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_Plan.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_EdBI.tex",
+		"/Users/flip/Documents/NSFDescription2020/Department Chair Letter Notes",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020.bib",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_CourseTable.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_FacilitiesEquipResources.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_DataManagement.tex",
+		"/Users/flip/Documents/NSFDescription2020/eCAFabstract",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_EdBI_OldVers.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020.tex",
+		"/Users/flip/Documents/NSFDescription2020/FlipPreamble.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020.out",
+		"/Users/fliptanedo/Documents/Temp/Defense Against the Dark Arts/DADA.tex",
+		"/Volumes/GoogleDrive/My Drive/Proposals/2020 NSF CAREER/Project Description/.gitignore",
+		"/Users/fliptanedo/Desktop/-.textClipping",
+		"/Users/fliptanedo/Desktop/fac mtg",
+		"/Users/fliptanedo/Desktop/THINGS TO DO",
+		"/Users/fliptanedo/Desktop/FacMtgNotes May 5 2020",
+		"/Users/fliptanedo/Documents/GitHub/DADA/DM.bib",
+		"/Users/fliptanedo/Documents/GitHub/DADA/.gitignore",
+		"/Volumes/GoogleDrive/My Drive/Archived/OldNotes/Defense Against the Dark Arts/DefenseDarkArts.tex",
+		"/var/folders/xr/bhhtr3_x3wz6fj_33ppm57zr0000gn/T/TemporaryItems/(A Document Being Saved By screencaptureui)/Screen Shot 2020-04-23 at 11.55.04 AM.png",
+		"/Users/fliptanedo/Documents/Temp/ConformalDarkReview/FlipPreamble.tex",
+		"/Users/fliptanedo/Desktop/MANIFESTO",
+		"/Users/fliptanedo/Documents/ELEMENTAL",
+		"/Users/fliptanedo/Documents/Personal/tax2020/README.txt",
+		"/Users/fliptanedo/Downloads/physicsbooklist.txt",
+		"/Users/fliptanedo/Documents/Personal/tax2020/README",
+		"/Users/fliptanedo/Documents/Temp/PRD Apr 15/NeutronStarPRD.tex",
+		"/Users/fliptanedo/Desktop/TODAY'S TO DO",
+		"/Users/fliptanedo/Desktop/TO DO LIST",
+		"/Users/fliptanedo/Documents/Temp/PRD Apr 9/NeutronStarPRD.aux",
+		"/Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist",
+		"/Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/WordCount.sublime-settings",
+		"/Users/fliptanedo/Documents/Temp/Hellman 2020/Manuscript/TanedoHellman2020.tex",
+		"/Users/fliptanedo/Documents/Temp/Hellman 2020/Manuscript/Hellman.bib",
+		"/Users/fliptanedo/Documents/Temp/Hellman 2020/why me",
+		"/Users/fliptanedo/Documents/Temp/Hellman 2020/Proposal/TanedoHellman_20.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P40B/Scripts/Things to ask",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P40B/Scripts/Welcome to Physics 40B, Section 20.",
+		"/Users/fliptanedo/Documents/Temp/PRD Mar12/NeutronStarPRDpreamble.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P165/Homework/P165_2020_5.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD Mar 6/diffMar9.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD Mar 6/NeutronStarPRDpreamble.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD Mar 2/NeutronStarBosonTable.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD Mar 2/NeutronStarMatchingTable.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD Mar 2/NeutronStarPRD.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD Mar 2/diffMar4.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD Mar 2/NeutronStarPRDpreamble.tex",
+		"/Users/fliptanedo/Documents/Temp/TASI Letters/LexiTASI.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Recommendations/Alexandria Costantino/Alexandria Constantino_Point.tex",
+		"/Users/fliptanedo/Documents/Temp/TASI Letters/KuntalTASI.tex",
+		"/Users/fliptanedo/Documents/Temp/TASI Letters/MikeTASI.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P230B QFT II/HW/P230B_2020_HW2.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P165/Homework/P165_2020_4a.tex",
+		"/Users/fliptanedo/Documents/Temp/SoftBombPaper/SoftBomb.bbl",
+		"/Users/fliptanedo/Documents/Temp/SoftBombPaper/SoftBomb.bib",
+		"/Users/fliptanedo/Documents/Temp/DOEUpdate",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2017-2018/P165/Homework/P165_2018_2b.tex",
+		"/Users/fliptanedo/Documents/Temp/SoftBombPaper/SoftBomb_header.tex",
+		"/Users/fliptanedo/Downloads/Electron%20Star%20Fire%20-%20PRL%2C%20revisions/diff.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P230B QFT II/HW/P230B_2020_HW1.tex",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/Volumes/GoogleDrive/My Drive/Projects/Neutron Star Electron Capture/PRD Jan 20/NeutronStarPRDpreamble.tex",
+		"/Volumes/GoogleDrive/My Drive/Projects/Neutron Star Electron Capture/PRD Jan 20/NeutronStarPRD.tex",
+		"/Users/fliptanedo/Downloads/SD5thForceFlip 2/SD5thForce.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Service/Referee/2020/JHEP_141P_1019",
+		"/Users/fliptanedo/Downloads/cvtex-master/cv_libertine.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P165/Homework/P165_2020_1a.tex",
+		"/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/hyperref.sty",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Recommendations/MohammaderezaZakeri/Zaki2019TANEDO_Kentucky.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD/NeutronStarPRD.log",
+		"/Users/fliptanedo/Documents/Temp/PRD/NeutronStarPRDAniket.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD/NeutronStarPRD.tex",
+		"/Users/fliptanedo/Documents/Temp/PRD/NeutronStarPRD.bbl",
+		"/Users/fliptanedo/Documents/Temp/PRD/OldThings/FlipPaper_2016.tex",
+		"/Users/fliptanedo/Documents/Temp/AISL 2019 Narrative/AISL_Narrative_Dec3.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Recommendations/Gopolang Mohbaleng/Gopi2019_TANEDO_Faculty.tex",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/LaTeXYZ/README.md",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/LaTeXSmartQuotes/LaTeXSmartQuotes.sublime-settings",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P231 2019/Homework/P231_2019_HW4b.tex",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/LaTeXSmartQuotes.sublime-settings",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/Default (OSX).sublime-keymap",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Recommendations/RecLetter Min 2020/Letter2019fall.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Recommendations/MohammaderezaZakeri/Letter2019fall.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Recommendations/AdamGreen/Old/AdamGreen_2018_DPF.tex",
+		"/Volumes/GoogleDrive/Shared drives/AISL 2019: Science Book Club/LettersOfSupport/XeLaTeX/LetterEddieComeaux.tex",
+		"/Users/fliptanedo/Desktop/1910.07533/LFVcollider.tex",
+		"/Volumes/GoogleDrive/My Drive/Projects/Neutron Star Electron Capture/Aniket/Draft/NS_electron_capture_draft1.tex",
+		"/Users/fliptanedo/Documents/Temp/CourseNotes/FlipNotes.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P231 2019/Homework/P231_2018_HW2b.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P231 2019/CourseNotes/FlipNotes.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P231 2019/CourseNotes/FlipNotes.xdv",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Teaching/2019-2020/P231 2019/CourseNotes/Lec01.tex",
+		"/Users/fliptanedo/Dropbox/LFVcollider/Draft/LFVcollider_1011.pdf",
+		"/Users/fliptanedo/Dropbox/LFVcollider/Draft/LFVcollider_1010.tex",
+		"/Users/fliptanedo/Dropbox/LFVcollider/Draft/LFVcollider_1011.tex",
+		"/Users/fliptanedo/Dropbox/LFVmed/Draft/LFVmed_0111.tex",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/content/home/CV.md",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/FLIP-LaTeX-pmatrix.sublime-snippet",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Merit and Promotion/Year 04/SelfStatement/2019SelfStatement.tex",
+		"/Volumes/GoogleDrive/My Drive/UCR on Google Drive/Merit and Promotion/Year 04/SelfStatement/Letter2019fall.tex",
+		"/Users/fliptanedo/Documents/CV/Tanedo.tex",
+		"/Users/fliptanedo/Documents/CV/Tanedo.log",
+		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/SD5thForce.tex",
+		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/bigtable.tex",
+		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/main_old.tex",
+		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/diff15.tex",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/FLIP-LaTeX-grad.sublime-snippet",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/FLIP-LaTeX-gamma.sublime-snippet",
+		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/FLIP-LaTeX-snippets.sublime-snippet",
+		"/Users/fliptanedo/Downloads/here/Pollica Summer Workshop_2019_Final.tex",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/themes/academic/layouts/partials/widgets/slider.html",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/partials/widgets/about.html",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/shortcodes/googlecalendarlong.html",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/content/home/contact.md",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/shortcodes/googlecalendar.html",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/config/_default/params.toml",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/content/recommendation/_index.md",
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu_2019early/academic-2019-flip/layouts/partials/widgets/CV.html"
+	],
+	"find":
+	{
+		"height": 73.0
+	},
+	"find_in_files":
+	{
+		"height": 167.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "P231_notes.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2456,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28,
+								28
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "P231_header.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4718,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4718,
+								4718
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										4717,
+										4718
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										4690,
+										4691
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"open_with_edit": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 174,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								174,
+								174
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 35.0
+	},
+	"input":
+	{
+		"height": 73.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 300.0
+	},
+	"output.latextools":
+	{
+		"height": 58.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.show_commit_info":
+	{
+		"height": 164.0
+	},
+	"pinned_build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
+	"project": "P231-notes.sublime-project",
+	"replace":
+	{
+		"height": 66.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"NSF2020_Res_BGSig.tex"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"Ablikim:2007ek"
+			]
+		],
+		"width": 789.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 324.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
