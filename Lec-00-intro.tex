@@ -11,14 +11,14 @@ Our primary goal is to solve linear differential equations:
 \begin{align}
   \mathcal O f(x) = s(x) \ .
 \end{align}
-In this equation, $\mathcal O$ is a \emph{differential operator} that encodes some kind of physical dynamics, say $\mathcal O = (d/dx)^2 + 3x\,(d/dx)$.  $s(x)$ is the \emph{source} of those dynamics. Finally, $f(x)$ is the system's physical \emph{response} that we would like to determine. The solution to this equation is:
+In this equation, $\mathcal O$ is a \emph{differential operator} that encodes some kind of physical dynamics\footnote{Say, $\mathcal O = (d/dx)^2 + 3x\,(d/dx)$. Pop quiz: is this operator \emph{linear}? The first term is squared...}, $s(x)$ is the \emph{source} of those dynamics, and $f(x)$ is the system's physical \emph{response} that we would like to determine. The solution to this equation is:
 \begin{align}
   f(x) &= \mathcal O^{-1} s(x) \ .
 \end{align}
 Simply writing that is deeply unsatisfying! %It is as if we were asked to solve $f'(x) = 3x$ and simply wrote $f(x) = \int 3x\, dx$. The real 
 In this course, we think carefully about what $\mathcal O^{-1}$ actually \emph{means} and how we can calculate it. As you may have guessed, $\mathcal O^{-1}$ is the \textbf{Green's function} for the differential operator $\mathcal O$. 
 
-We will approach this problem by analogy to linear algebra, where a linear transformation $A$ acting on a vector space can give equations like:
+We approach problem by analogy to linear algebra, where a linear transformation\footnote{Recall that as physicists, `linear transformation' is a fancy way of saying `matrix.'} $A$ acts on a vector to give equations like
 \begin{align}
   A \vec{v} = \vec{w} \ ,
 \end{align}
@@ -26,5 +26,16 @@ whose solution is
 \begin{align}
   \vec{v} = A^{-1} \vec{w} \ .
 \end{align}
-We will connect the notion of a linear differential operator to a matrix in infinite dimensional space to give a working definition of $\mathcal O^{-1}$. We will then pull out a bag of tricks from complex analysis to formally solve $\mathcal O^{-1}s(x)$ given $\mathcal O$ and $s(x)$. 
+We connect the notion of a linear differential operator to a matrix in an infinite dimensional space to give a working definition of $\mathcal O^{-1}$. We then pull out a bag of tricks from complex analysis to actually solve $\mathcal O^{-1}s(x)$ given $\mathcal O$ and $s(x)$. 
 
+\subsection{This is not what I expected from a math methods course}
+
+This is a course in mathematical methods for \emph{physicists}. We will not solve \emph{every} class of differential equation that is likely to pop up in your research careers\footnote{That would be a course on mathematical methods for \emph{engineers}.}---that's neither feasible nor particularly enjoyable. 
+%
+This is also not a course in formal proofs---there are plenty of excellent textbooks for you to learn those formal proofs to your heart's content\footnote{... and as a graduate student, you should feel well equipped and encouraged to learn all of the necessary material \emph{you} need for \emph{your} research and interests---whether or not they show up in your coursework.}. 
+%
+The goal of this course is to weave together ideas that are not often connected explicitly in undergraduate physics courses in the United States: linear algebra, differential equations, complex analysis. These ideas are not necessarily new---in fact, I \emph{expect} you have seen many them often---but rather we will take a big view of how the interconnection of these ideas come up over and over again in our description of nature.
+
+Do not be surprised if we only mention Bessel functions in passing. Do not think less of our efforts if we do not determine Wronksians or go beyond a single Riemann sheet. As graduate students, it is \emph{your} responsibility to be able to grab your favorite textbook to apply mathematics as needed to your research. \emph{This course} is about the larger narrative that is not often shared explicitly in those books. It is the `knack for math' that physicists are, as a culture, rather proud of. It is what tends to make us employable in Silicon Valley while simultaneously terrible at splitting the bill at a restaurant. 
+ 
+\subsection{Green’s functions}
