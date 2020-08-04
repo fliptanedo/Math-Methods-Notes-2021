@@ -1,0 +1,291 @@
+%% LaTeX Paper Template, Flip Tanedo (flip.tanedo@ucr.edu)
+%% No dependencies
+%% last updated: Sep 2019
+
+\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  COMMON PACKAGES  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}			% inspire bibs
+\usepackage{aas_macros}				% ads bibs
+%\usepackage{amsthm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  UNUSUAL PACKAGES        %%%%
+%%%  Uncomment as necessary. %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% MATH AND PHYSICS SYMBOLS
+%% ------------------------
+\usepackage{slashed}				% \slashed{k}
+\usepackage{mathrsfs}				% Weinberg-esque letters
+\usepackage{bbm}					% \mathbbm{1} conflict: XeLaTeX 
+\usepackage{cancel}					
+%\usepackage[normalem]{ulem} 		% for \sout
+%\usepackage{youngtab}	    		% Young Tableaux
+
+
+%% CONTENT FORMAT AND DESIGN
+%% -------------------------
+\usepackage[dvipsnames]{xcolor}
+\usepackage[hang,flushmargin]{footmisc} % no footnote indent
+
+\usepackage{fancyhdr}		% preprint number
+\usepackage{lipsum}			% block of text 
+\usepackage{framed}			% boxed remarks
+\usepackage{subcaption}		% subfigures
+\usepackage{cite}			% group cites
+\usepackage{xspace}			% macro spacing
+
+
+%% TABLES IN LaTeX
+%% ---------------
+\usepackage{booktabs}		% professional tables
+%\usepackage{nicefrac}		% fractions in tables,
+%\usepackage{multirow}		% multirow elements in a table
+%\usepackage{arydshln}		% dashed lines in arrays
+
+%% Other Packages and Notes
+%% ------------------------
+\usepackage[font=small]{caption} % caption font is small
+\usepackage{float}         % for strict placement e.g. [H]
+ 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  DOCUMENT PROPERTIES  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[margin=2cm]{geometry}   % margins
+\graphicspath{{figures/}}			% figure folder
+\numberwithin{equation}{section}    % set equation numbering
+
+
+%% References in two columns, smaller
+%% http://tex.stackexchange.com/questions/20758/
+\usepackage{multicol}
+\usepackage{etoolbox}
+\usepackage{relsize}
+\patchcmd{\thebibliography}
+  {\list}
+  {\begin{multicols}{2}\smaller\list}
+  {}
+  {}
+\appto{\endthebibliography}{\end{multicols}}
+
+
+% Change list spacing (instead of package paralist)
+% from: http://en.wikibooks.org/wiki/LaTeX/List_Structures#Line_spacing
+\let\oldenumerate\enumerate
+\renewcommand{\enumerate}{
+  \oldenumerate
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  (RE)NEW COMMANDS  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% FOR `NOT SHOUTING' CAPS (e.g. acronyms)
+%% ---------------------------------------
+\newcommand{\acro}[1]{\textsc{\MakeLowercase{#1}}}    
+
+%% COMMON PHYSICS MACROS
+%% ---------------------
+\renewcommand{\tilde}{\widetilde}   % tilde over characters
+\renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+\newcommand{\dbar}{d\mkern-6mu\mathchar'26}    % for d/2pi
+\newcommand{\ket}[1]{\left|#1\right\rangle}    % <#1|
+\newcommand{\bra}[1]{\left\langle#1\right|}    % |#1>
+
+%% COMMANDS FOR TEMPORARY COMMENTS
+%% -------------------------------
+\newcommand{\comment}[2]{\textcolor{red}{[\textbf{#1} #2]}}
+\newcommand{\flip}[1]{{
+	\color{green!50!black} \footnotesize [\textbf{\textsf{Flip}}: \textsf{#1}]
+	}}
+
+
+%% COMMANDS FOR TOP-MATTER
+%% -----------------------
+\newcommand{\email}[1]{\href{mailto:#1}{#1}}
+\newenvironment{institutions}[1][2em]{\begin{list}{}{\setlength\leftmargin{#1}\setlength\rightmargin{#1}}\item[]}{\end{list}}
+
+
+%% COMMANDS FOR LATEXDIFF
+%% ----------------------
+%% see http://bit.ly/1M74uwc
+\providecommand{\DIFadd}[1]{{\protect\color{blue}#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\protect\scriptsize{#1}}}
+
+%% REMARK: use latexdiff option --allow-spaces
+%% for \frac, ref: http://bit.ly/1iFlujR
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%  HYPERREF  %%%%
+%%%%%%%%%%%%%%%%%%%
+
+%% This package has to be at the end; can lead to conflicts
+\usepackage[
+	colorlinks=true,
+	citecolor=green!50!black,
+	linkcolor=NavyBlue!75!black,
+	urlcolor=green!50!black,
+	hypertexnames=false]{hyperref}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  TITLE DATA  %%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+%% PREPRINT NUMBER USING fancyhdr
+%% Don't forget to set \thispagestyle{firststyle}
+%% ----------------------------------------------
+\renewcommand{\headrulewidth}{0pt} 	% no separator
+\setlength{\headheight}{15pt} 		% min to avoid fancyhdr warning
+\fancypagestyle{firststyle}{
+	\rhead{\footnotesize%
+	\texttt{UCR-TR-2019-FLIP-00X}%
+	}}
+
+%% TOC overwrites fancyhdr, here's a fix
+%% http://tex.stackexchange.com/questions/167828/
+\usepackage{etoc}
+\renewcommand{\etocaftertitlehook}{\pagestyle{plain}}
+\renewcommand{\etocaftertochook}{\thispagestyle{firststyle}}
+
+
+
+\begin{document}
+
+%\thispagestyle{empty}		% default if no preprint #
+\thispagestyle{firststyle} 	% to include preprint
+%% I think this may screw up pdfsync on the first page
+
+\begin{center}
+
+    {\huge \bf Clever Paper Title}
+
+    \vskip .7cm
+
+%% SINGLE AUTHOR FORMAT
+%% --------------------
+	\textbf{Flip Tanedo} \\
+	\texttt{\footnotesize \email{flip.tanedo@ucr.edu}}
+
+	\vspace{-1em}
+    \begin{institutions}[2.25cm]
+    \footnotesize
+    {\it 
+	    Department of Physics \& Astronomy, 
+	    University of  California, Riverside, 
+	    {CA} 92521	    
+	    }    
+    \end{institutions}
+
+
+%% MULTIPLE AUTHOR FORMAT
+%% --------------------
+%    { \bf 
+%    	Philip Tanedo$^{a}$
+%    	and 
+%    	Another Author$^{b}$ 
+%    	} 
+%    \\ 
+%    \vspace{-.2em}
+%    { \tt \footnotesize
+%	    \email{flip.tanedo@ucr.edu},
+%	    \email{another.author@university.edu}
+%    }
+%	
+%    \vspace{-.2cm}
+%
+%    \begin{institutions}[2.25cm]
+%    \footnotesize
+%    $^{a}$ 
+%    {\it 
+%	    Department of Physics \& Astronomy, 
+%	    University of  California, Riverside, 
+%	    {CA} 92521	    
+%	    }    
+%	\\ 
+%	\vspace*{0.05cm}   
+%	$^{b}$ 
+%	{\it 
+%        Department of Physics, 
+%        University, 
+%        University Town, CA 90210
+%        }
+%    \end{institutions}
+
+\end{center}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  ABSTRACT    %%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+\noindent 
+This is a simple template for my papers. It's not very different from the plain article style, but it has most of the macros I use pre-written.
+\end{abstract}
+
+
+
+\small
+\setcounter{tocdepth}{2}
+\tableofcontents
+\normalsize
+%\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  THE CONTENT  %%%
+%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+In the beginning... 
+
+
+ \section*{Acknowledgements}
+
+
+%This work is supported in part by 
+%the \textsc{nsf} grant \textsc{phy}-1316792. 
+%
+\textsc{p.t.}\ the students of Physics 231 for their patience and feedback on on this course.
+%
+% \textsc{p.t.} thanks the Aspen Center for Physics (NSF grant \#1066293) for its hospitality during a period where part of this work was completed. \textsc{p.t.} is supported by the DOE grant \textsc{de-sc}/0008541.
+
+%% Appendices
+% \appendix
+
+
+%% Bibliography
+%\bibliographystyle{utcaps} 	% arXiv hyperlinks, preserves caps in title
+%\bibliographystyle{utphys} 	% arXiv hyperlinks
+% \bibliography{bib title without .bib}
+
+
+\end{document}
