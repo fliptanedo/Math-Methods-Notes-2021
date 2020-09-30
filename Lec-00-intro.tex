@@ -10,8 +10,9 @@ Physics 231:~Methods of Theoretical Physics is a course for first-year physics a
 Our primary goal is to solve linear differential equations:
 \begin{align}
   \mathcal O f(x) = s(x) \ .
+  \label{eq:greens:function:equation}
 \end{align}
-In this equation, $\mathcal O$ is a \emph{differential operator} that encodes some kind of physical dynamics\footnote{Say, $\mathcal O = (d/dx)^2 + 3x\,(d/dx)$. Pop quiz: is this operator \emph{linear}? The first term is squared...}, $s(x)$ is the \emph{source} of those dynamics, and $f(x)$ is the system's physical \emph{response} that we would like to determine. The solution to this equation is:
+In this equation, $\mathcal O$ is a \emph{differential operator} that encodes some kind of physical dynamics\footnote{A \textbf{differential operator} is just something built out of derivatives that can act on a function. The differential operator may contain coefficients that depend on the variable that we are differentiating with respect to; for example, $\mathcal O = (d/dx)^2 + 3x\,(d/dx)$. Pop quiz: is this operator \emph{linear}? The first term is squared...}, $s(x)$ is the \emph{source} of those dynamics, and $f(x)$ is the system's physical \emph{response} that we would like to determine. The solution to this equation is:
 \begin{align}
   f(x) &= \mathcal O^{-1} s(x) \ .
 \end{align}
@@ -38,4 +39,38 @@ The goal of this course is to weave together ideas that are not often connected 
 
 Do not be surprised if we only mention Bessel functions in passing. Do not think less of our efforts if we do not determine Wronksians or go beyond a single Riemann sheet. As graduate students, it is \emph{your} responsibility to be able to grab your favorite textbook to apply mathematics as needed to your research. \emph{This course} is about the larger narrative that is not often shared explicitly in those books. It is the `knack for math' that physicists are, as a culture, rather proud of. It is what tends to make us employable in Silicon Valley while simultaneously terrible at splitting the bill at a restaurant. 
  
-\subsection{Green’s functions}
+
+
+
+\subsection{The totally not-mathematical idea  of mathematical niceness}
+
+
+I find it useful to appeal to the notion of a \textbf{nice} mathematical situation. This is not a formal idea, and it is one many things mathematicians find ridiculous about me. But as a physicist, the concept of mathematical \emph{niceness} is helpful. 
+
+The physical systems that we spend the most time thinking about are all \emph{nice}. 
+%
+While our mathematical cousins may spend years proving every exceptional case to a theorem, we tend to be happy to push onward as long as mathematical results are true for the \emph{nice} cases. 
+%
+Nice mathematical models make tidy predictions. Then we can Taylor expand about these nice predictions to make better predictions.
+%
+When doing this, we sometimes say \emph{perturbation theory} multiple times in case someone watching us does not think are being rigorous enough.
+% We make Taylor expansions without anguishing about the radius of convergence\footnote{\url{https://johncarlosbaez.wordpress.com/2016/09/21/struggles-with-the-continuum-part-6/}} and validate it post-facto because it \emph{works}.
+% 
+% We rarely worry about the existence of orthonormal bases---the spaces in physics are all \emph{nice}. We rarely have to worry about these degenerate cases, and so most of our energy goes toward understanding the mathematical properties of the \emph{nice} cases that describe nature.
+%
+
+This is not to say that nature cares at all about our physical models. 
+%
+Every once in a while, we \emph{do} have to worry about the exceptional cases because our models fail to accommodate what is \emph{actually} happening in nature. Those scenarios are the most interesting of all. That’s when our mathematical formalism grabs us by the collar and says, \emph{listen to me---something important is happening and it probably has to do with nature!} This often happens when a calculation tells us that a physical result is infinite. 
+
+\begin{exercise}
+Consider the potential that an electron feels in the hydrogen atom:
+\begin{align}
+	V(r) &= -\frac{\alpha}{r} \ .
+\end{align}
+As the electron--proton separation goes to zero, $r\to 0$, the potential goes to infinity. Classical electrodynamics is telling us that something curious is happening. What actually happens? (And why didn't you ask this question when you were in high school?)
+\end{exercise}
+
+In this course we focus on \emph{nice} functions and \emph{nice} operators and \emph{nice} boundary conditions, etc. For the most part, this is what we need to make progress on our physical models and it’s worth spending our time learning to work with \emph{nice} limits. Leave the degenerate cases to the mathematicians for now. Eventually, though, you may find yourself in a situation where physics demands \emph{not nice} mathematics. In that case---and only when the physics demands it---you will be ready to poke and prod at the mathematical curiosity until the underlying \emph{physics} reason for the not-niceness is apparent.
+
+% All this is to say: if you object to this course because we do not start with proofs about open sets or convergence, then you’re missing the point.

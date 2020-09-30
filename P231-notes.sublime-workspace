@@ -75,7 +75,16 @@
 			"file": "P231_notes.tex",
 			"settings":
 			{
-				"buffer_size": 2456,
+				"buffer_size": 1975,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Lec-00-intro.tex",
+			"settings":
+			{
+				"buffer_size": 7399,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -84,16 +93,56 @@
 			"file": "P231_header.tex",
 			"settings":
 			{
-				"buffer_size": 4718,
+				"buffer_size": 5413,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "README.md",
+			"contents": "Package Control Messages\n========================\n\nGitSavvy\n--------\n\n  GitSavvy 2.26.0\n  ===============\n  \n  - Implement `git: Line History`\n  \n    A \"Line History\" (aka \"log wtf\" or \"log why\") basically calls\n    \"git log -Lx,y:<some_file>\".  This is a supereasy to use tool in\n    the editor.  It is usually the faster (in terms of you get the info\n    you're looking for faster) \"blame\" and also the faster \"File History\"\n    because often you're only interested in some part of a file. Really\n    answering \"Why is this line or section of code here?\".\n  \n    The command can be called from normal views only. Just put your cursor\n    somewhere, or drag a selection, and call the command from the Command Palette.\n    The command is called `gs_line_history` if you want to bind it to a key.\n  \n    Comes with:\n    `[o]` to open the complete commit under the cursor\n    `[O]` to open the file at that revision\n    `[g]` to open the graph context\n  \n  \n  - Improvements to the Repo History\n  \n    We already showed the path down while navigating through the history.  Now\n    we also follow and colorize the path upwards.  (For customization: the scopes\n    we use here are `git_savvy.graph.dot.above`, `git_savvy.graph.path_char.above`)\n  \n    This is not just fancy but allows easier and faster navigation:\n  \n    Use the arrow keys `[up]` and `[down]` to get to the previous or next commit.\n    Use `[alt+up]` or `[alt+down]` for \"wide\" jumps usually following the first parent.\n    After such a wide jump, you can use the built-in `jump_back`/`jump_forward`\n    commands (for example `[ctrl+-]` on Windows/Linux by default) to jump back\n    to the previous location.\n  \n  \n    There is also a new smart copy function.  Just invoke the builtin \"copy\"\n    command (for example `[ctrl+c]`) to directly copy the commit hash, or commit\n    message, or a combination of both to the clipboard (if nothing is selected).\n  \n  \n    Minor:  If on a HEAD commit we offer \"pull\", \"push\", and \"fetch\" in the\n    actions menu (`[enter]`), and the diff action opens the normal diff for staging,\n    unstaging etc.\n  \n    Finally, we now clearly mark fixup/squash commits.  (The scope here is:\n    `string.other.rebase-hint.git-savvy`.)\n  \n  \n  - Improvements to the Commit Message View\n  \n    Being in the diff area, you can now use `[o]` on a hunk to open that location\n    for editing.  Also `[,.]` for navigation per hunk.  But unstaging etc. is not\n    supported yet.\n  \n  \n  - Noteable\n  \n    Removed \"word-diff\" switch from the Diff view.  This has been superseeded\n    by the intraline diffing feature.  There is still the switch to ignore white-\n    space changes though, but the keybinding for that moved (from `[s]`) to `[w]`.\n  \n    The setting \"show_commit_diff\" now defaults to \"full\" (was: \"stat\").\n    The setting \"show_full_commit_info\" now defaults to \"true\" (was: \"false\").\n  \n  \n  For more info:\n    https://github.com/timbrel/GitSavvy/compare/2.25.0...2.26.0\n",
 			"settings":
 			{
-				"buffer_size": 174,
+				"buffer_size": 2970,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "Lec-000-template.tex",
+			"settings":
+			{
+				"buffer_size": 59,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "%!TEX root = P231_notes.tex\n\n\\section{Linear Algebra Review}\n\nAs physicists, linear algebra is part of our \\acro{DNA}, from the vector calculus in our first electrodynamics course to quantum mechanics. So why should we patronize ourselves with yet another review of linear algebra?\n%\nWe want to understand Green’s functions the inverse of a matrix. The `matrix' in question is the differential operator $\\mathcal O$ in \\eqref{eq:greens:function:equation}.\n%\nThis is important:\n\\begin{align}\n\t\\text{differential operator}\n\t&=\n\t\\infty\\text{-dimensional matrix} \\ .\n\\end{align}\nIf differential operators are matrices, what vector space do these matrices act on? These matrices act on a space of functions, which turns out to be a vector space:\n\\begin{align}\n  \\text{function space} &= \\infty\\text{-dimensional vector space} \\ .\n\\end{align}\nDon't be intimidated by terminology like \\emph{function space}; this is just an abstract place where functions live. Just recall back to your intuition from \\acronum{3D} Euclidean vector space, $\\mathbb{R}^3$: any 3-vector $\\vec{v}$ lives in the vector space $\\mathbb{R}^3$. If we transform $\\vec{v}$ by a linear transformation ${A}$, you get a new vector  $\\vec{w} = {A}\\vec{v} \\in \\mathbb{R}^3$ that is also in the vector space.\n\n%\nWeird things can happen when we extend our intuition from finite things to infinite things\\footnote{For example, the Hilbert Hotel puzzle.}, but for this course we'll try to draw as much intuition as we can from finite dimensional linear algebra to apply it to infinite dimensional function spaces.\n\n\\subsection{The basics}\n\nA \\textbf{linear transformation} $A$ acts on a vector $\\vec{v}$ as $A\\vec{v}$. \nThis transformation satisfies\n\\begin{align}\n  A(\\alpha \\vec{v}+ \\beta \\vec{w}) = \\alpha A\\vec{v} + \\beta A\\vec{w} \\ .\n\\end{align}\nHere $\\alpha$ and $\\beta$ are numbers.\n%\nThis is conventionally matrix multiplication. The result is also a vector. One way that we like to think about vectors is as columns of elements:\n\\begin{align}\n  \\begin{pmatrix}\n    v^{1} \\\\ v^{2} \\\\ \\vdots \\\\ v^{N}\n  \\end{pmatrix} \\ ,\n  \\label{eq:vector:def:as:column}\n\\end{align}\nwhere $N$ is the \\textbf{dimension} of the vector space. Our notation is that $v^i$ refers to the $i^\\text{th}$ component of $\\vec{v}$. Sometimes---as physicists---we refer to $v^i$ as the vector itself, which is a slight abuse of notation that occasionally causes confusion.\n\nIn this course we always assume a nice orthonormal basis. In this case, $(\\vec{v} + \\vec{w})^i = v^i + w^i$.\n\\begin{exercise}\nConvince yourself that adding vectors becomes more complicated in polar coordinates. Namely, $(\\vec{v} + \\vec{w})^i \\neq v^i + w^i$.\n\\end{exercise}\n\nBecause the linear transformation of a vector is another vector, we know that the sequential application of linear transformations is itself a linear transformation. This is a bombastic way of saying that you can multiply matrices to produce a matrix.  Here’s how it works in two dimensions. A transformation that takes vectors into vectors takes the following form:\n\\begin{align}\n  A &= \n  \\begin{pmatrix}\n   A^{1}_{\\phantom{1}1} & A^{1}_{\\phantom{1}2}\n   \\\\\n   A^{2}_{\\phantom{1}1} & A^{2}_{\\phantom{1}2}\n  \\end{pmatrix} \\ .\n\\end{align}\nWe have introduced upper and lower indices; for now treat this as a definition. This sometimes causes confusion. So here are some guidelines:\n\\begin{itemize}\n\t\\item Treat the upper and lower indices as a definition. The components of the linear transformation $A$ are \\emph{defined} by $A^i_{\\phantom{i}j}$ where $i$ is the row number and $j$ is the column number. \n\t\\item We have not yet explained the significance of the heights, but for now we mandate that the first index is always upper and the lower index is always lower. The following objects do not (yet) make sense: $A^{1}_{\\phantom{1}2}$ and \\emph{not} $A_{12}$, $A^{12}$, or $A_{1}^{\\phantom{1}2}$.\n\t\\item We will soon define \\emph{additional machinery} to raise and lower indices shortly. This is takes us from a vector space to a metric space.\n\t\\item The heights of the indices are a convenient shorthand notation that we will elucidate shortly; it is related to the choice of upper indices in \\eqref{eq:vector:def:as:column}.\n\t\\item All of this may be familiar from special relativity. Extra credit if you realize that this should also be familiar from quantum mechanics.\n\\end{itemize}\nIf you’re squeamish about the indices, don’t worry: the elements of $A$ have two indices, the first one is written a little higher than the second one. This notation is neither mathematics nor physics, it’s a convention that we use for future convenience.\n\nThe action of a linear transformation $A$ on a vector $\\vec{v}$ is:\n\\begin{align}\n  A\\vec{v}\n  =\n  \\begin{pmatrix}\n    A^{1}_{\\phantom{1}1} & A^{1}_{\\phantom{1}2}\n   \\\\\n   A^{2}_{\\phantom{2}1} & A^{2}_{\\phantom{2}2}   \n  \\end{pmatrix} \n  \\begin{pmatrix}\n    v^1\\\\\n    v^2\n  \\end{pmatrix}\n  =\n  \\begin{pmatrix}\n    A^1_{\\phantom{1}1} v^1 + A^1_{\\phantom{1}2}v^2\\\\\n    A^2_{\\phantom{2}1} v^2 + A^2_{\\phantom{2}2}v^2\n  \\end{pmatrix} \\ .\n\\end{align}\nLook at this carefully. The components of the new vector $(A \\vec{v})^i$ are sums. In each term, the second/lower index of an $A$ element multiplies the component of $\\vec{v}$ with the same index. The first/upper index of $A$ tells you whether that term should is in $(A \\vec{v})^1$ or $(A \\vec{v})^2$. \n\nA generic component of $(A\\vec{v})$ is\n\\begin{align}\n  (A\\vec{v})^i = \\sum_j A^i_{\\phantom{i}j} v^j\n  = A^i_{\\phantom{i}j} v^j \\quad \\text{(Einstein convention)}\n   \\ .\n\\end{align}\nOn the right-hand side we use Einstein notation: \\emph{we implicitly sum over repeated upper/lower indices}. We will use this notation from now on.\n%\nIf you are at all in doubt about this, please work out the $2\\times 2$ case carefully and compare to the succinct notation above. \n\n\\begin{exercise}\nConsider three-dimensional Euclidean space, $\\mathbb{R}^3$. A linear transformation $A$ on this space is a $3\\times 3$ matrix with elements of the form $A^i_{\\phantom{i}j}$. Explicitly write out the second component of the vector $A\\vec{v}$. This is a sum of three terms.\n\\end{exercise}\n\nIf $A$ and $B$ are linear transformations, then $A+B$ is a linear transformation. The components of $A+B$ are simply the piecewise sum of the corresponding components of $A$ and $B$:\n\\begin{align}\n  (A+B)^i_{\\phantom i j} = A^i_{\\phantom i j} + B ^i_{\\phantom i j} \\ .\n\\end{align}\n\n\n\\subsection{Linear Transformations and Vector Spaces}\n\nLet’s be a little more pedantic. We need to move past the idea that a vector $\\vec{v}$ is some \\emph{column of numbers}. A vector space is abstract and we need to to start thinking of vector spaces more generally. The layer of abstraction is encoded in the basis vectors, which we write as $\\vec{e}_{(i)}$. For a space of dimension $N$, there are $N$ such vectors indexed by the subscript. Let us more formally write the vector $\\vec{v}$ as\n\\begin{align}\n  \\vec{v} = \n  v^1 \\vec{e}_{(1)}\n  +\n  v^2 \\vec{e}_{(2)} + \\cdots\n  = v^i \\vec{e}_{(i)} \\ .\n  \\label{eq:v:v1:v2:v3}\n\\end{align}\nThese basis vectors may be unit vectors in space. In the `column of numbers' representation, they can be unit column vectors, e.g.\n\\begin{align}\n  \\vec{e}_{(1)}\n  &= \n  \\begin{pmatrix}\n  1 \\\\ 0 \\\\ 0\n  \\end{pmatrix}\n  &\n    \\vec{e}_{(2)}\n  &= \n  \\begin{pmatrix}\n  0 \\\\ 1 \\\\ 0\n  \\end{pmatrix}\n  &\n  \\cdots \\ .\n\\end{align}\nWith this basis, \\eqref{eq:v:v1:v2:v3} gives \\eqref{eq:vector:def:as:column}\nBut these may be more general objects. For example, you can specify a color of light by specifying the red/green/blue content. We could have $\\vec{e}_{(1)}$ be a unit amount of red light, $\\vec{e}_{(2)}$ be a unit amount of green light, and $\\vec{e}_{(3)}$ be a unit amount of blue light. Then a 3-vector $\\vec{v}$ would correspond to light of a particular color. This color space is a vector space.\n\n\n\n\n\\subsection{A funny vector space: histogram space}\n\nHere’s a funny vector space that we’re going to use as a pedagogical crutch. Imagine histogram-space. The basis vectors are:\n\n\\begin{center}\n\\includegraphics[width=.45\\textwidth]{figures/lec02_e1.pdf}\n\\includegraphics[width=.45\\textwidth]{figures/lec02_e2.pdf}\\\\\n\\includegraphics[width=.45\\textwidth]{figures/lec02_e3.pdf}\n\\includegraphics[width=.45\\textwidth]{figures/lec02_e4.pdf}\n\\end{center}\n\n\\noindent This is a basis for a histogram over unit bins from $x=0$ to $x=4$. A vector in this space is, for example:\n\n\\begin{center}\n\\includegraphics[width=.8\\textwidth]{figures/lec02_hist.pdf}\n\\end{center}\n\n\\noindent We can perform a linear transformation $A$ on $\\vec{v}$ which outputs another vector. Let’s say it’s this:\n\n\n\\begin{center}\n\\includegraphics[width=.8\\textwidth]{figures/lec02_hist2.pdf}\n\\end{center}\n\n\\begin{exercise}\nFrom the image above, can you derive what $A$ is? \n\\end{exercise}\n\n\\noindent The answer to the above exercise is \\emph{no}. Please make sure you convince yourself why: there are many different transformations that convert to old histogram into the new histogram. If you're not convinced: the matrix $A$ is $4\\times 4$ and thus has 16 entries that we need to define. The matrix equation $A\\vec{v} = \\vec{w}$ for known vectors $\\vec{v}$ and $\\vec{w}$ encodes only four equations.\n\nThe power of this admittedly strange formalism is that we can think of these histograms as approximations of continuous functions:\n\n\\begin{center}\n\\includegraphics[width=.4\\textwidth]{figures/lec02_histfun.pdf}\n\\end{center}\n\nThus a vector in this approximate (discretized) \\emph{function} space is \n\\begin{align}\n  \\vec{f} = \n  \\begin{pmatrix}\n    f^1 \\\\\n    f^2 \\\\\n    \\vdots\\\\\n    f^N\n  \\end{pmatrix} \\ .\n\\end{align}\n\n\\subsection{Derivative Operators}\n\nOur discretized function space allows us to define a [forward] derivative:\n\\begin{align}\n  \\vec{f'} =\n  \\frac{1}{\\Delta x}\n  \\begin{pmatrix}\n    f^2 - f^1 \\\\\n    f^3 - f^2 \\\\\n    \\vdots\n    \\\\\n    f^{i+1}-f^i\n    \\\\\n    \\vdots\n  \\end{pmatrix} \\ .\n\\end{align}\nThis is familiar if you’ve ever had to manually program a derivative into a computer program. Note that the right-hand side looks like a linear transformation of $\\vec{f}$. In other words, we expect to be able to write a matrix $D$ so that\n\\begin{align}\n  \\vec{f'} = D\\vec{f} \\ .\n\\end{align}\nOne problem is apparent: what happens at the `bottom’ of the vector? What is the last component of the derivative, $\\vec{f'}^N$? Formally, this is\n\\begin{align}\n  {(f')}^N = \\frac{1}{\\Delta x}(f^{N+1} - f^N) \\,\n\\end{align}\nbut now we have no idea what $f^{N+1}$ is. That was never a component in our vector space. There is no $\\vec{e}_{(N+1)}$ basis vector. \n\nThis demonstrates and important lesson that we’ll need when we move more formally to function spaces: \\emph{boundary conditions are part of the definition of the function space}. \n\nIn the present case, let’s assume Dirichlet boundary conditions. A convenient way to impose this is to define what happens to all functions outside the domain of the function space:\n\\begin{align}\n  f^{i > N} = f^{i < 1} = 0 \\ .\n\\end{align}\nThis solves the problem of the derivative on the last component:\n\\begin{align}\n  {(f')}^N = \\frac{1}{\\Delta x}(f^{N+1} - f^N) \n  = \n  \\frac{- f^N}{\\Delta x}  \\ .\n\\end{align}\n\nAlternatively, we could have also imposed periodic boundary conditions:\n\\begin{align}\n  f^{i} &= f^{i+ kN}\n  & k\\in \\mathbb{Z} \\ .\n\\end{align}\nThis would then give\n\\begin{align}\n  {(f')}^N = \\frac{1}{\\Delta x}(f^{N+1} - f^N) \n  = \n  \\frac{1}{\\Delta x}(f^{1} - f^N) \n  \\ .\n\\end{align}\nOne could have also defined a backward derivative where $(f')^i \\sim f^{i}-f^{i-1}$ \\ . The second derivative may be defined symmetrically:\n\\begin{align}\n  (f'')^i = \\frac{(f^{i+1} - f^i) - (f^i - f^{i-1})}{\\Delta x^2} \\ .\n\\end{align}\nYou may pontificate about the reason why the first derivative does have a symmetric discretization while the second derivative does. \n\n\n\\subsection{Derivatives in other function space bases}\n\nThere are other ways to write a discrete basis of functions. Here’s a natural one for functions that are up to second-order polynomials:\n\\begin{align}\n  \\vec{e}_{(0)} &= 1\n  &\n  \\vec{e}_{(1)} &= x\n  &\n  \\vec{e}_{(2)} &= x^2 \\ .\n\\end{align}\nLet’s sidestep questions about orthonormality for the moment. Clearly linear combinations of these basis functions can produce any quadratic function:\n\\begin{align}\n  f(x) &= a x^2 + bx + c\n  & \\Rightarrow&&\n  \\vec{f} &=\n  \\begin{pmatrix}\n     c \\\\ b \\\\ a\n   \\end{pmatrix} \\ . \n\\end{align}\nThe derivative operator has an easy representation in this space:\n\\begin{align}\n  D = \n  \\begin{pmatrix}\n    0 & 1 & 0   \\\\\n    0 & 0 & 2   \\\\\n    0 & 0 & 0   \n  \\end{pmatrix} \\ .\n\\end{align}\nWe can see that\n\\begin{align}\n  D \\vec{f}  &= \n  \\begin{pmatrix}\n     b \\\\\n     2 a \\\\\n     0\n  \\end{pmatrix} \n  &\n  D^2 \\vec{f}  &= \n  \\begin{pmatrix}\n     2a \\\\\n     0 \\\\\n     0\n  \\end{pmatrix} \n  &\n  D^3 \\vec{f}  &= \n  0 \\ .\n\\end{align}\nThe last line is, of course, the realization that the third-derivative of a quadratic function vanishes. Feel free to attach mathy words to this like \\emph{kernel}.\n\nThere are other bases that we may use for function space. A particularly nice one that we will use over and over is the Fourier basis, which we prosaically refer to as \\emph{momentum space}. The basis vectors are things like sines, cosines, or oscillating exponentials. These do not vanish for any power of $D$.\n\n\n\\subsection{Locality}\n\nNotice that in the histogram basis, the derivative matrix $D$ is sparse. It is zero everywhere away from the diagonal. The only non-zero elements on row $i$ are around the $i\\pm 1$ column.  Higher powers of $D$ will sample further away, but the non-zero elements are always clustered near the diagonal.\n\nThis is simply a notion of locality. Remember the Taylor expansion:\n\\begin{align}\n  f(x) = f(0) + f'(0) x + \\frac{1}{2} f''(0)x^2 + \\cdots \\ .\n\\end{align}\nIf we think about the histogram as a discretization of a continuous function, then it is clear what the higher derivatives are doing. Given a function $f(x) = \\vec{f}$, one might like to know about the function around some point $x_0$ corresponding to some index $i$. That is: $f^i = f(x_0)$. If you’d like to learn more about the function around that point, one can express the derivative at $x_0$. Thus $D\\vec{f}$ says something about the slow, $D^2\\vec{f}$ says something about the curvature, and so on. Because each successive power of $D$ samples terms further away from $f^i$, you can tell that these higher order terms are learning about the function further and further away from $x_0$. \n\nNow think about the types of differential equations that you’ve encountered in physics. They often include one or two derivatives. You hardly ever see three, four, or more derivatives. There’s a reason for this: nature appears to be local, so our mathematical models of nature have locality built in. Physics at one spacetime point should not depend on spacetime points that are far away. \n\nThe reason for this is perhaps most elegant in special relativity. One of the key points of special relativity is that causality may be observer-dependent if two events do not occur at the same spacetime point. If we want to build causal theories of nature, then the dynamics at $x_0$ should not rely on what is happening at $x_1$, a finite distance away.\\footnote{This is different from saying that information could propagate from $x_0$ to $x_1$; such propagation could come from some causal excitation of the electromagnetic field traveling every infinitesimal distance between the two positions.}\n\n\n \n\n\\subsection{Row Vectors and all that}\n\nIn high school we didn’t distinguish between row vectors and column vectors. They both seemed to convey the same information. The row vectors were just `tipped over.’ Perhaps you noticed that they follow the rules of `matrix multiplication’ act on a vector:\n\\begin{align}\n  \\begin{pmatrix}\n    w_1 & w_2 & \\cdots\n  \\end{pmatrix}\n  \\begin{pmatrix}\n    v^1 \\\\\n    v^2 \\\\\n    \\vdots\n  \\end{pmatrix}\n  &= \n  w_1 v^1 + w_2 v^2 + \\cdots \\ .\n\\end{align}\nIn fact, this is like $\\vec{w}^T$ is a function that acts linearly on $\\vec{v}$: \n\\begin{align}\n  \\vec{w}^T(\\vec v) &= w_1 v^1 + w_2 v^2 + \\cdots \\ .\n\\end{align}\n\nIndeed, let is be a bit more formal about this. This layer of formalism is uncharacteristic of our approach in this course, but this underpins so much of the mathematical structure of our physical theories that it is worth getting right from the beginning. \n\nLet $V$ be a vector space. It contains vectors, $\\vec{v}$. Sometimes these are called contravariant vectors or kets. They have basis vectors $\\vec{e}_{(i)}$. \n\nNow introduce a related but \\emph{completely distinct} vector space called $V^*$. This is the space of \\textbf{dual vectors} to $V$. A \\textbf{dual vector} is what you may know as a \\textbf{row vector}, a \\textbf{ket}, a \\textbf{covariant vector}, or a [differential] \\textbf{one-form}. These are all words for the \\emph{same idea}. An element of $V^*$, say $(\\vec{w}^T)$ is a linear function that takes vectors and spits out numbers:\n\\begin{align}\n  \\vec{w}^T \\in V^* \\Rightarrow \\vec{w}^T: V \\to \\mathbb{R} \\ .\n \\end{align}\nDon’t think about $\\vec{w}^T$ as some kind of operation on a vector $\\vec{w}\\in V$; at least not yet. For now the `$^T$' is just part of the name of $\\vec{w}^T$. The two spaces $V$ and $V^*$ are totally different. We haven’t said anything about how to turn elements of $V$ into elements of $V^*$ or vice versa.\n%\nIt should be clear that there is a sense of `duality’ here: the vectors $V$ are also linear functions that take a dual vector and spit out a number. \n\nLet us call the basis of dual vectors $\\tilde{\\vec{e}}^{(i)}$. This notation is cumbersome, so we’ll change to something different soon. The upper index is deliberate. The defining property of $\\tilde{\\vec{e}}^{(i)}$ is:\n\\begin{align}\n  \\tilde{\\vec{e}}^{(i)}\\left(\\vec{e}_{(j)}\\right) \\equiv \\delta^i_j \\ .\n\\end{align}\nOne may check that this gives\n\\begin{align}\n  \\left(w_i\\tilde{\\vec{e}}^{(i)}\\right)\\left(v^j\\vec{e}_{(j)}\\right)\n  = w_i v^j \\delta^i_j = w_i v^i = w_1 v^1 + w_2 v^2 + \\cdots \\ .\n\\end{align}\n\n\n\n\\subsection{Orthonormal Bases}\n\nAt this point we should take a deep breath and state explicitly that we’ve been assuming an orthonormal basis. In this course we will continue to use an orthonormal basis. You may object to this and say that you used to believe in orthonormal bases until you had to write down the gradient (or worse, the Laplacian) in spherical coordinates. \n\nThere are many things to be said about this, none of them are particularly edifying without a full discussion. With no apologies, I’ll make the following [perhaps perplexing] remarks:\n\\begin{enumerate}\n\\item There is no such thing as a `position vector.' Positions refer to some base space, whereas vectors (like differential operators) act on the tangent space at a point of that base space. \n\\item A given tangent space is `nice’ and has a nice orthonormal basis. \n\\item That basis may not be the same for neighboring tangent spaces (perhaps due to coordinates, perhaps due to intrinsic curvature). \n\\end{enumerate}\nIn this course these nuances will not come up. In the rest of your life you’ll still have to deal with curvilinear coordinates. But suffice it to say that our study of function space will be nice an orthonormal. Of course, we haven’t yet given a definition of `normality.’\n\n\\subsection{Bra-Ket Notation}\n\nThere is neither any physics nor mathematics contained in a choice of notation. However, a convenient notation does simplify our lives. Let us introduce bra-ket notation. In this notation, we denote vectors by kets:\n\\begin{align}\n  |v\\rangle = v^i|i\\rangle \\ ,\n\\end{align}\nwhere $|i\\rangle = \\vec{e}_{(i)}$ is the basis of vectors that span the vector space $V$. There is nothing new or different about this object,  $\\vec{v} = |v \\rangle$.\n\nWe denote dual vectors (row-vectors, one-forms) as bras:\n\\begin{align}\n  \\langle w | &= w_i \\langle i| \\ ,\n\\end{align}\nwhere $\\langle i | = \\tilde{\\vec{e}}^{(i)}$. The orthonormality of this basis is encoded in \n\\begin{align}\n  \\langle i | j \\rangle = \\delta^i_j \\ .\n\\end{align}\n\nIn bra-ket notation a linear transformation $A$ has a basis\n\\begin{align}\n  A = A^i_{\\phantom{i}j} |i\\rangle \\langle j| \\ .\n\\end{align}\nThe notation $|i\\rangle \\langle j|$ is shorthand for $|i\\rangle \\otimes \\langle j|$. If the $\\otimes$ doesn’t mean anything to you, that’s fine. It doesn’t mean much to me either. Matrix multiplication proceeds as before:\n\\begin{align}\n  A\\vec{v} = A|v\\rangle = \n  A^i_{\\phantom{i}j} |i\\rangle \\langle j| v^k |k \\rangle\n  = \n  A^i_{\\phantom{i}j}  v^k  |i\\rangle \\langle j|k \\rangle\n  = \n  A^i_{\\phantom{i}j}  v^k  |i\\rangle \\delta^j_k\n  = \n  A^i_{\\phantom{i}j}  v^j  |i\\rangle \\ .\n\\end{align}\nObserve that the power of the notation is clear: the object with the index $v^i$ is just a number. It commutes with everything. All of the vector-ness is carried in the basis objects: the bras, kets, and ket-bras. Those do not commute. But they have a well defined way in which kets act on bras (or vice versa).\\footnote{This is where the $\\oplus$ notation is handy. It keeps track of which kets/bras might hit which other bras/kets. This falls under the name of multi-linear algebra.}\n\n\n\\subsection{Eigenvectors are nice}\n\nGive a sufficiently \\emph{nice} linear transformation, $A$, there is a particularly convenient basis: the eigenvectors of $A$. These are kets $|\\lambda\\rangle$ such that\n\\begin{align}\n  A |\\lambda\\rangle = \\lambda |\\lambda\\rangle \\ .\n\\end{align}\nIn other words, $A$ acts on the eigenvector by rescaling. The rescaling coefficient is the eigenvalues. For \\emph{nice} transformations, there is a complete set of such vectors to span the vector space.\n\nIf you write a general vector $|v\\rangle$ in terms of this eigenbasis,\n\\begin{align}\n  |v\\rangle = v^i |\\lambda_{(i)} \\rangle \\ ,\n\\end{align}\nThen the action of $A$ on this vector is easy:\n\\begin{align}\n  A |v\\rangle = \\sum_i \\lambda_{(i)} v^i |\\lambda_{(i)} \\rangle \\ .\n\\end{align}\nIn fact, assuming that all of the eigenvalues are non-zero, even the matrix inverse is easy:\n\\begin{align}\n  A^{-1}|v\\rangle = \\sum_i \\lambda_{(i)}^{-1} v^i |\\lambda_{(i)} \\rangle \\ .\n\\end{align}\n\n\n\\subsection{The Green’s Function Problem}\n\nGoing back to the big picture: recall that we want to solve differential equations of the form $\\mathcal O f(x) = s(x)$. If we had a sense of the \\emph{eigenfunctions} of $\\mathcal O$, then we could expand $s(x)$ in a basis of those eigenfunctions and then apply $\\mathcal O^{-1}$ to both sides. \n\nThe analog is this:\n\n\\begin{center}\n\\includegraphics[width=.7\\textwidth]{figures/lec02_green01.pdf}\n\\end{center}\n\n The operator $A$ encodes the \\emph{physics} of the system, the underlying dynamics. This is presumably local: it is a near-diagonal matrix coming from one or two powers of derivatives.  The ket $|s\\rangle$ is the source. This is the thing that \\emph{causes} the dynamics. The ket $|\\psi\\rangle$ is some state that we would like to determine. \n\n\\subsection{Metrics}\n\nThus far we have introduced vector spaces. The dual vector space is a set of linear functions that act on elements of a vector space; these are bras/row-vectors/one-forms. Let us now introduce a new piece of machinery: a \\textbf{metric}. This is also known as an \\textbf{inner product} or a \\textbf{dot product}. A space with a metric is called a metric space. We only state this fact to emphasize that we are \\emph{adding this structure by hand}. Vector spaces don‘t come with metrics---someone makes up a metric and slaps it onto the vector space.\n\nThe \\textbf{metric} is a function that takes two vectors and spits out a number. It is linear in each argument. In other words, a metric $g$ is:\n\\begin{align}\n  g:\\; V\\times V\\to \\mathbb{R} \\ .\n\\end{align}\nOccasionally one may want a metric defined such that the output is a complex number. We thus have:\n\\begin{align}\n  g(\\alpha \\vec{v} + \\beta\\vec{w}, \\delta \\vec{x} + \\gamma \\vec{y})\n  &= \n  \\alpha \\delta g(\\vec{v},\\vec{x}) + \\alpha \\gamma g(\\vec{v},\\vec{y}) + \\beta\\delta g(\\vec{w},\\vec{x}) + \\beta\\gamma g(\\vec{w},\\vec{y}) \\ .\n\\end{align}\nOne more special assumption about the metric is that it is \\textbf{symmetric}:\n\\begin{align}\n  g(\\vec{v},\\vec{w}) = g(\\vec{w}, \\vec{v}) \\ .\n\\end{align}\nIn indices one may write\n\\begin{align}\n  g &= g_{ij} \\langle i | \\otimes \\langle j |\n\\end{align}\nso that\n\\begin{align}\n  g(\\vec{v}, \\vec{w}) = g_{ij} v^{i}w^j \\ .\n \\end{align}\n Here we see the usefulness of the $\\otimes$ notation. It tells us that the bras and kets resolve as follows:\n \\begin{align}\n   g_{ij}\\langle i | \\otimes \\langle j | \\left(v^k|k\\rangle\\right)\\left(w^\\ell|\\ell\\rangle\\right) \n   = \n   g_ij v^k w^\\ell \n   \\langle i | k\\rangle \\langle j |\\ell\\rangle\n   = \n   g_ij v^k w^\\ell  \\delta^i_k \\delta^j_\\ell \n   = \n   g_{ij} v^{i}w^j \\ .\n \\end{align}\n For ordinary Euclidean space in flat coordinates, the metric is simply the unit matrix: $g_{ij} = \\text{diag}(1,\\cdots, 1)$. In Minkowksi space there’s a relative minus sign between space and time. In curvilinear coordinates things get ugly. \n \nHere’s the neat thing about metrics. We can take a metric and pre-load it with a vector. Given a metric $g$ and a vector $\\vec{v}$, we may define a function\n\\begin{align}\n  g(\\vec v,\\qquad ) \\ .\n\\end{align}\nThis is simply means that the function $f(\\vec{w}) = g(\\vec v,\\vec w)$. Observe that $f(\\vec{w})$ is a linear function that takes elements of $V$ and returns a number. In other words, this is a \\emph{dual vector} (row-vector, one-form). Observe what having a machine like the metric has done for us: it has allowed us to convert vectors into dual vectors:\n\\begin{align}\n  g(\\vec v,\\qquad )  = g_{ij} v^i \\langle j| \\ .\n\\end{align}\n\nSimilarly, one may define an inverse metric $g^{-1}$ such that $g^{-1}g = \\mathbbm{1}$. In a slight abuse of notation, the inverse metric is written with two upper indices: $g^{ij}$. Note that we do not write the `$^{-1}$.' The inverse metric will \\emph{raise} the index on a lower-index object, while the metric \\emph{lowers} the index of an upper-index object.\\footnote{Of course: what’s really happening is that the metric has a basis $\\langle i|\\otimes \\langle j|$ while the inverse metric has a basis $|i\\rangle \\otimes |j\\rangle$.}\n\n\n\\subsection{Hermitian Conjugate}\n\nNow that we can go between column and row vectors, thanks to the metric and its inverse, it is worth thinking a bit about what we meant by the `transpose’ operator. The transpose precisely turned a column vector $\\vec{v}$ into an associated column vector $\\vec{v}^T$. The generalization of this idea is the Hermitian conjugate, $^\\dag$. \n\n\n\n\n\n",
+			"file": "Lec-03-linear-algebra.tex",
+			"file_size": 26620,
+			"file_write_time": 132415616894500811,
+			"settings":
+			{
+				"buffer_size": 26639,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Lec-01-physics-vs-math.tex",
+			"settings":
+			{
+				"buffer_size": 3216,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Lec-02-dimensional-analysis.tex",
+			"settings":
+			{
+				"buffer_size": 11458,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -266,13 +315,18 @@
 	"file_history":
 	[
 		"/Users/flip/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/Users/flip/Library/Application Support/Sublime Text 3/Packages/BracketHighlighter/Example.sublime-keymap",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/README.md",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/P231_notes.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/P231_header.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-00-intro.tex",
+		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_Plan.tex",
 		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_Prelim.tex",
 		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_BGSig.tex",
 		"/Users/flip/Documents/NSFDescription2020/Project Summary.pages",
 		"/Users/flip/Documents/NSFDescription2020/Project Summary_old.pages",
 		"/Users/flip/Documents/TempLocal/UCR Letterhead/PhysicsLetterhead_Bootleg_xelatex.tex",
 		"/Users/flip/Documents/NSFDescription2020/NSF2020_CurrentPending.tex",
-		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_Plan.tex",
 		"/Users/flip/Documents/NSFDescription2020/NSF2020_EdBI.tex",
 		"/Users/flip/Documents/NSFDescription2020/Department Chair Letter Notes",
 		"/Users/flip/Documents/NSFDescription2020/NSF2020.bib",
@@ -387,16 +441,11 @@
 		"/Users/fliptanedo/Downloads/here/Pollica Summer Workshop_2019_Final.tex",
 		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/themes/academic/layouts/partials/widgets/slider.html",
 		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/partials/widgets/about.html",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/shortcodes/googlecalendarlong.html",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/content/home/contact.md",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/shortcodes/googlecalendar.html",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/config/_default/params.toml",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/content/recommendation/_index.md",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu_2019early/academic-2019-flip/layouts/partials/widgets/CV.html"
+		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/shortcodes/googlecalendarlong.html"
 	],
 	"find":
 	{
-		"height": 73.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -410,6 +459,13 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"bracket",
+			"brace",
+			"bracket",
+			"bracketjj",
+			"bracket",
+			"**",
+			"***"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -427,7 +483,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -436,119 +492,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2456,
+						"buffer_size": 1975,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								28,
-								28
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"git_gutter_is_enabled": true,
-							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "P231_header.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4718,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4718,
-								4718
+								1225,
+								1225
 							]
 						],
 						"settings":
@@ -560,8 +512,8 @@
 								{
 									"1":
 									[
-										4717,
-										4718
+										1224,
+										1225
 									]
 								},
 								"icon":
@@ -576,8 +528,8 @@
 								{
 									"1":
 									[
-										4690,
-										4691
+										1211,
+										1212
 									]
 								},
 								"unmatched":
@@ -586,26 +538,46 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -616,61 +588,38 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"open_with_edit": true,
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1668.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "README.md",
+					"buffer": 1,
+					"file": "Lec-00-intro.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 174,
+						"buffer_size": 7399,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								174,
-								174
+								27,
+								0
 							]
 						],
 						"settings":
@@ -693,26 +642,46 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -723,41 +692,643 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "P231_header.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5413,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3184,
+								3184
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										3183,
+										3184
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										3166,
+										3167
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3045.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2970,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2970,
+								2970
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"bracket_highlighter.busy": false,
+							"default_dir": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"git_gutter_is_enabled": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_width": 2,
+							"word_wrap": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Lec-000-template.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 59,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								59,
+								59
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"open_with_edit": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Lec-03-linear-algebra.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 26639,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7439,
+								7439
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										7463,
+										7464
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										7439,
+										7440
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"open_with_edit": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4949.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Lec-01-physics-vs-math.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2013,
+								2013
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										2012,
+										2013
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1989,
+										1990
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"open_with_edit": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 937.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Lec-02-dimensional-analysis.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11458,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4901,
+								4901
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										4907,
+										4915
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/tag.png",
+										"region.orangish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										4343,
+										4351
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2608.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -864,7 +1435,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 324.0,
+	"side_bar_width": 158.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
