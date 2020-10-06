@@ -34,7 +34,7 @@ If $c=1$, then this means
 \begin{align}
   1 \text{ s} &=  3 \times 10^{10}~\text{cm} \ .
 \end{align}
-This, in turn, connects a unit of time to a unit of distance. By measuring time, the constant $c$ automatically gives us an associated distance. The physical relevance of the distance is tied to the nature of the fundamental constant: one second (or `light-second‘) is the distance that a photon travels in one second. Observe that this only works because $c$ is a constant. 
+This, in turn, connects a unit of time to a unit of distance. By measuring time, the constant $c$ automatically gives us an associated distance. The physical relevance of the distance is tied to the nature of the fundamental constant: one second (or `light-second') is the distance that a photon travels in one second. Observe that this only works because $c$ is a constant. 
 
 \subsection{Quantifying units}
 
@@ -100,7 +100,7 @@ If we wanted to be fancy, we can make this an equal sign by writing a function o
 
 \subsection{Scaling}
 
-A large part of physics has to do with scaling relations. Here’s a somewhat contrived example of how this works. Suppose you have some static, central potential $U(\vec r)$. Maybe it’s some planet orbiting a star. 
+A large part of physics has to do with scaling relations. Here’s a somewhat contrived example of how this works\footnote{This is adapted from section 11 of V.\ I.\ Arnold's \emph{Mathematical Methods of Classical Mechanics}, one of my favorite differential geometry textbooks because it's disguised as a book on mechanics.}. Suppose you have some static, central potential $U(\vec r)$. Maybe it’s some planet orbiting a star. 
 
 \begin{center}
 \includegraphics[width=.7\textwidth]{figures/lec01_orbit.pdf}
@@ -154,9 +154,11 @@ This is a dimensionless quantity that determines how far off $t_0$ is from a mor
 
 Let’s assume that we’re not completely nuts and that we’re in a regime where the error is small\footnote{Note the error has to be dimensionless in order for us to be able to call it `small,` otherwise it begs the question of `small with respect to what?`}. Then the error is a function of some dimensionless parameters, $\xi$, in the system. We define these $\xi$ so that as $\xi \to 0$, $\epsilon(\xi) \to 0$. In other words, the approximation gets better as the $\xi$ are made smaller. By Taylor expansion:
 \begin{align}
-  \epsilon(\xi) = \epsilon(0) + f'(0) \xi + \mathcal O(\xi^2) \ .
+  \epsilon(\xi) = \epsilon(0) + \epsilon'(0) \xi + \mathcal O(\xi^2) \ .
 \end{align}
-By assumption  $\epsilon(0) = 0$ and $\mathcal O(\xi^2)$ is  small. We can then make a reasonable assumption that the dimensionless value $f'(0)$  is $\mathcal O(1)$. This tells us that the error goes like $\epsilon(\xi) \sim \xi$.
+By assumption  $\epsilon(0) = 0$ and $\mathcal O(\xi^2)$ is  small. We can then make a reasonable \emph{assumption} that the dimensionless value $\epsilon'(0)$  is $\mathcal O(1)$. This tells us that the error goes like $\epsilon(\xi) \sim \xi$.
+
+By the way $\mathcal O(1)$ is read ``order one'' and is fancy notation for the order of magnitude. Numbers like 0.6, 2, and $\pi$ are all $\mathcal O(1)$. A number like $4\pi^2$, on the other hand, is $\mathcal O(10)$.  The assumption that a dimensionless number is $\mathcal O(1)$ is reasonable. When nature gives you a dimensionless parameter that is both (a) important and (b) very different from $\mathcal O(1)$, then there's a good chance that it's trying to tell you something about your model. Good examples of this are the cosmological constant, the strong \acro{CP} phase, and the electroweak hierarchy problem\footnote{There are also `bad' examples. The ratio of the angular size of the moon to the angular size of the sun is unity to very good approximation. This is quite certainly a coincidence. Our universe appears to be in an epoch where the density of matter, radiation, and dark energy all happen to be in the same ballpark. Our cosmological models imply that this is purely a coincidence. It would be very curious if this were not the case. As an exercise, you can explore (and critique) the appearance of the anthropic principle in physics.}. 
 
 Here’s how it works in practice. One effect that we miss in our toy calculation of $t_0$ is that the earth is round with radius $R$. This means that assuming a constant $g$ is an approximation. We have two choices for a dimensionless parameter $\xi$:
 \begin{align}
@@ -182,3 +184,6 @@ If both people exercised at the same rate, which one loses more absolute weight?
 \end{exercise}
 
 
+\begin{exercise}
+David Hu won his first IgNobel prize for determining that mammals take about 21 seconds to urinate, largely independently of their size\footnote{I learned about this in his excellent popular science book, \emph{How To Walk on Water and Climb Up Walls}.}. Can you use dimensional analysis to argue why this would be the case? It may be helpful to refer to the paper\footnote{\url{https://doi.org/10.1073/pnas.1402289111}}; as you read this, figure out which terms are negligible (and in what limits), identify the assumptions of the mathematical model (scaling of the bladder and urethra), and prove the approximate scaling relation. Make a note to yourself of which steps were non-trivial and where one may have naively mis-modeled the system. By the way, David Hu won a second IgNobel prize for understanding how wombats poop.
+\end{exercise}

@@ -209,10 +209,14 @@ One problem is apparent: what happens at the `bottom’ of the vector? What is t
   {(f')}^N = \frac{1}{\Delta x}(f^{N+1} - f^N) \,
 \end{align}
 but now we have no idea what $f^{N+1}$ is. That was never a component in our vector space. There is no $\vec{e}_{(N+1)}$ basis vector. 
+%
+This demonstrates and important lesson that we’ll need when we move more formally to function spaces:
+\begin{quote}
+\textbf{Boundary conditions are part of the definition of the function space}.   
+\end{quote}
+That was so important that I put the whole damn sentence in boldface and set it in the middle of the line. 
 
-This demonstrates and important lesson that we’ll need when we move more formally to function spaces: \emph{boundary conditions are part of the definition of the function space}. 
-
-In the present case, let’s assume Dirichlet boundary conditions. A convenient way to impose this is to define what happens to all functions outside the domain of the function space:
+For now let’s assume \textbf{Dirichlet boundary conditions}. A convenient way to impose this is to define what happens to all functions outside the domain of the function space:
 \begin{align}
   f^{i > N} = f^{i < 1} = 0 \ .
 \end{align}
@@ -222,8 +226,7 @@ This solves the problem of the derivative on the last component:
   = 
   \frac{- f^N}{\Delta x}  \ .
 \end{align}
-
-Alternatively, we could have also imposed periodic boundary conditions:
+Alternatively, we could have also imposed \textbf{periodic boundary conditions}:
 \begin{align}
   f^{i} &= f^{i+ kN}
   & k\in \mathbb{Z} \ .
@@ -291,29 +294,29 @@ We can see that
 \end{align}
 The last line is, of course, the realization that the third-derivative of a quadratic function vanishes. Feel free to attach mathy words to this like \emph{kernel}.
 
-There are other bases that we may use for function space. A particularly nice one that we will use over and over is the Fourier basis, which we prosaically refer to as \emph{momentum space}. The basis vectors are things like sines, cosines, or oscillating exponentials. These do not vanish for any power of $D$.
+There are other bases that we may use for function space. A particularly nice one that we will use over and over is the Fourier basis, which we usually refer to as \emph{momentum space}. The basis vectors are things like sines, cosines, or oscillating exponentials. These do not vanish for any power of $D$.
 
 
 \subsection{Locality}
 
-Notice that in the histogram basis, the derivative matrix $D$ is sparse. It is zero everywhere away from the diagonal. The only non-zero elements on row $i$ are around the $i\pm 1$ column.  Higher powers of $D$ will sample further away, but the non-zero elements are always clustered near the diagonal.
+Notice that in the histogram basis, the derivative matrix $D$ is sparse: it is zero everywhere away from the diagonal. The only non-zero elements on the $i^\text{th}$ row are around the $(i\pm 1)^\text{th}$ column.  Higher powers of $D$ sample further away, but the non-zero elements are always clustered near the diagonal.
 
-This is simply a notion of locality. Remember the Taylor expansion:
+This is simply a notion of \textbf{locality}. Remember the Taylor expansion:
 \begin{align}
   f(x) = f(0) + f'(0) x + \frac{1}{2} f''(0)x^2 + \cdots \ .
 \end{align}
 If we think about the histogram as a discretization of a continuous function, then it is clear what the higher derivatives are doing. Given a function $f(x) = \vec{f}$, one might like to know about the function around some point $x_0$ corresponding to some index $i$. That is: $f^i = f(x_0)$. If you’d like to learn more about the function around that point, one can express the derivative at $x_0$. Thus $D\vec{f}$ says something about the slow, $D^2\vec{f}$ says something about the curvature, and so on. Because each successive power of $D$ samples terms further away from $f^i$, you can tell that these higher order terms are learning about the function further and further away from $x_0$. 
 
-Now think about the types of differential equations that you’ve encountered in physics. They often include one or two derivatives. You hardly ever see three, four, or more derivatives. There’s a reason for this: nature appears to be local, so our mathematical models of nature have locality built in. Physics at one spacetime point should not depend on spacetime points that are far away. 
+Now think about the types of differential equations that you’ve encountered in physics. They often include one or two derivatives. You hardly ever see three, four, or more derivatives\footnote{With some thought, it may also be clear why spatial derivatives typically appear squared.}. There’s a reason for this: at the scales that we can access experimentally, nature appears to be local. Our mathematical models of nature typically have locality built in\footnote{A recent counterexample: \url{https://www.quantamagazine.org/physicists-discover-geometry-underlying-particle-physics-20130917/}}. Physics at one spacetime point should not depend on spacetime points that are far away. 
 
-The reason for this is perhaps most elegant in special relativity. One of the key points of special relativity is that causality may be observer-dependent if two events do not occur at the same spacetime point. If we want to build causal theories of nature, then the dynamics at $x_0$ should not rely on what is happening at $x_1$, a finite distance away.\footnote{This is different from saying that information could propagate from $x_0$ to $x_1$; such propagation could come from some causal excitation of the electromagnetic field traveling every infinitesimal distance between the two positions.}
+This may be familiar from the idea of causality---the idea that $A$ \emph{causes} $B$ therefore $A$ must have happened \emph{before} $B$. One of the key results in special relativity is that causality can be tricky if two events do not occur at the same spacetime point. More carefully, $A$ can only cause $B$ if there is a timelike separation of the appropriate sign.  If we want to build causal theories of nature, then the dynamics at $x_0$ should not rely on what is happening at $x_1$, a finite distance away.\footnote{This is different from saying that information cannot propagate from $x_0$ to $x_1$; such propagation could come from some causal excitation of the electromagnetic field traveling every infinitesimal distance between the two positions. This is reminiscent of the classical Zeno's paradox.}
 
 
  
 
 \subsection{Row Vectors and all that}
 
-In high school we didn’t distinguish between row vectors and column vectors. They both seemed to convey the same information. The row vectors were just `tipped over.’ Perhaps you noticed that they follow the rules of `matrix multiplication’ act on a vector:
+In high school we did not distinguish between row vectors and column vectors. They both seemed to convey the same information---they were simply one-dimensional arrays of numbers. Row vectors are just `tipped over.’ Such a tipping-over is convenient since you could apply the elementary schools rules of `matrix multiplication' have the row vector act on a column vector:
 \begin{align}
   \begin{pmatrix}
     w_1 & w_2 & \cdots
@@ -326,16 +329,18 @@ In high school we didn’t distinguish between row vectors and column vectors. T
   &= 
   w_1 v^1 + w_2 v^2 + \cdots \ .
 \end{align}
-In fact, this is like $\vec{w}^T$ is a function that acts linearly on $\vec{v}$: 
+In fact, this is like $\vec{w}^T$ is a function that acts \emph{linearly} on its argument, $\vec{v}$: 
 \begin{align}
   \vec{w}^T(\vec v) &= w_1 v^1 + w_2 v^2 + \cdots \ .
+  \label{eq:oneform:eats:vector}
 \end{align}
+Perhaps you see why we wrote the row vector components with lower indices, $w_i$ so that we may use Einstein summation notation: $\vec{w}^T\vec{v} = w_iv^i$.
 
 Indeed, let is be a bit more formal about this. This layer of formalism is uncharacteristic of our approach in this course, but this underpins so much of the mathematical structure of our physical theories that it is worth getting right from the beginning. 
-
+%
 Let $V$ be a vector space. It contains vectors, $\vec{v}$. Sometimes these are called contravariant vectors or kets. They have basis vectors $\vec{e}_{(i)}$. 
 
-Now introduce a related but \emph{completely distinct} vector space called $V^*$. This is the space of \textbf{dual vectors} to $V$. A \textbf{dual vector} is what you may know as a \textbf{row vector}, a \textbf{ket}, a \textbf{covariant vector}, or a [differential] \textbf{one-form}. These are all words for the \emph{same idea}. An element of $V^*$, say $(\vec{w}^T)$ is a linear function that takes vectors and spits out numbers:
+Now introduce a related but \emph{completely distinct} vector space called $V^*$. This is the space of \textbf{dual vectors} to $V$. A \textbf{dual vector} is what you may know as a \textbf{row vector}, a \textbf{ket}, a \textbf{covariant vector}, or a [differential] \textbf{one-form}. These are all words for the \emph{same idea}. A dual vector, say $(\vec{w}^T)$ is a \emph{linear function that takes vectors and spits out numbers}:
 \begin{align}
   \vec{w}^T \in V^* \Rightarrow \vec{w}^T: V \to \mathbb{R} \ .
  \end{align}
@@ -345,27 +350,54 @@ It should be clear that there is a sense of `duality’ here: the vectors $V$ ar
 
 Let us call the basis of dual vectors $\tilde{\vec{e}}^{(i)}$. This notation is cumbersome, so we’ll change to something different soon. The upper index is deliberate. The defining property of $\tilde{\vec{e}}^{(i)}$ is:
 \begin{align}
-  \tilde{\vec{e}}^{(i)}\left(\vec{e}_{(j)}\right) \equiv \delta^i_j \ .
+  \tilde{\vec{e}}^{(i)}\left(\vec{e}_{(j)}\right) 
+  \equiv 
+  \vec{e}_{(j)}\left(\tilde{\vec{e}}^{(i)}\right) 
+  \equiv
+  \delta^i_j \ .
+  \label{eq:basis:dual:vec:act:on:vec}
 \end{align}
 One may check that this gives
 \begin{align}
   \left(w_i\tilde{\vec{e}}^{(i)}\right)\left(v^j\vec{e}_{(j)}\right)
   = w_i v^j \delta^i_j = w_i v^i = w_1 v^1 + w_2 v^2 + \cdots \ .
+  \label{eq:oneform:eats:vector:basis}
 \end{align}
+All that we've done here is defined basis vectors that carry the intrinsic \emph{vector-ness} or \emph{dual-vector-ness} through their relations \eqref{eq:basis:dual:vec:act:on:vec}. We have `derived' the contraction of a lower-index object with an upper-index object, and hence our summation convention, in terms of these basis vectors.
+
+\subsection{Dual vectors as vector-eaters}
+
+It is perhaps useful to use a slightly different notation based on Pac-Man. Rather than writing $\tilde{\vec{e}}^{(i)}$, lets write the basis dual vectors as
+\begin{center}
+\includegraphics[width=.4\textwidth]{figures/lec05_pacman.png}
+\end{center}
+In this notation, the action of a basis dual vector on a basis vector is simply Pac-Man eating the basis vectors:
+\begin{center}
+\includegraphics[width=.4\textwidth]{figures/lec05_paceats.png}
+\end{center}
+So we can write \eqref{eq:oneform:eats:vector} and \eqref{eq:oneform:eats:vector:basis} as
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/lec05_paccontract.png}
+\end{center}
+
+
+
 
 
 
 \subsection{Orthonormal Bases}
 
-At this point we should take a deep breath and state explicitly that we’ve been assuming an orthonormal basis. In this course we will continue to use an orthonormal basis. You may object to this and say that you used to believe in orthonormal bases until you had to write down the gradient (or worse, the Laplacian) in spherical coordinates. 
-
+At this point we should take a deep breath and state explicitly that we’ve been assuming an orthonormal basis. In this course we will continue to use an orthonormal basis. You may object to this and say that you used to believe in orthonormal bases until you were forced to write down the gradient (or worse, the Laplacian) in spherical coordinates. 
+%
+In other words, in principle one could imagine a basis where \eqref{eq:basis:dual:vec:act:on:vec} does not hold.
+%
 There are many things to be said about this, none of them are particularly edifying without a full discussion. With no apologies, I’ll make the following [perhaps perplexing] remarks:
 \begin{enumerate}
 \item There is no such thing as a `position vector.' Positions refer to some base space, whereas vectors (like differential operators) act on the tangent space at a point of that base space. 
 \item A given tangent space is `nice’ and has a nice orthonormal basis. 
 \item That basis may not be the same for neighboring tangent spaces (perhaps due to coordinates, perhaps due to intrinsic curvature). 
 \end{enumerate}
-In this course these nuances will not come up. In the rest of your life you’ll still have to deal with curvilinear coordinates. But suffice it to say that our study of function space will be nice an orthonormal. Of course, we haven’t yet given a definition of `normality.’
+In this course these nuances will not come up. In the rest of your life you’ll still have to deal with curvilinear coordinates. But suffice it to say that our study of function space will be nice an orthonormal. We haven’t yet given an adequate definition of `orthonormality,’ so let's take \eqref{eq:basis:dual:vec:act:on:vec} as a working definition.
 
 \subsection{Bra-Ket Notation}
 
@@ -388,7 +420,7 @@ In bra-ket notation a linear transformation $A$ has a basis
 \begin{align}
   A = A^i_{\phantom{i}j} |i\rangle \langle j| \ .
 \end{align}
-The notation $|i\rangle \langle j|$ is shorthand for $|i\rangle \otimes \langle j|$. If the $\otimes$ doesn’t mean anything to you, that’s fine. It doesn’t mean much to me either. Matrix multiplication proceeds as before:
+The notation $|i\rangle \langle j|$ is shorthand for the \textbf{tensor product} $|i\rangle \otimes \langle j|$. If the $\otimes$ doesn’t mean anything to you, that’s fine. It doesn’t mean much to me either. Maybe you can replace it with the word `\emph{and}' so that $|i\rangle \otimes \langle j|$ means you have a basis ket $|i\rangle$ \emph{and} an basis bra $\langle j|$ that are somehow stuck together but aren't acting on each other. Matrix multiplication proceeds as before:
 \begin{align}
   A\vec{v} = A|v\rangle = 
   A^i_{\phantom{i}j} |i\rangle \langle j| v^k |k \rangle
@@ -408,7 +440,7 @@ Give a sufficiently \emph{nice} linear transformation, $A$, there is a particula
 \begin{align}
   A |\lambda\rangle = \lambda |\lambda\rangle \ .
 \end{align}
-In other words, $A$ acts on the eigenvector by rescaling. The rescaling coefficient is the eigenvalues. For \emph{nice} transformations, there is a complete set of such vectors to span the vector space.
+In other words, $A$ acts on the eigenvector by rescaling. The rescaling coefficient is the eigenvalues. For \emph{nice} transformations (see Section~\ref{sec:niceness}), there is a complete set of such vectors to span the vector space.
 
 If you write a general vector $|v\rangle$ in terms of this eigenbasis,
 \begin{align}
@@ -421,7 +453,96 @@ Then the action of $A$ on this vector is easy:
 In fact, assuming that all of the eigenvalues are non-zero, even the matrix inverse is easy:
 \begin{align}
   A^{-1}|v\rangle = \sum_i \lambda_{(i)}^{-1} v^i |\lambda_{(i)} \rangle \ .
+  \label{eq:linear:aglebra:inverse:eigenvectors}
 \end{align}
+The first time you see this should have brought a deep joy to your life: if you can decompose a matrix (linear transformation) into its eigenvectors and eigenvalues, then taking the inverse transformation is simple.
+
+
+\subsection{Linearity of Inverse Operators}
+
+Given a linear operator $A$, the inverse operator $A^{-1}$ is defined by
+\begin{align}
+  A^{-1} A = \mathbbm{1}_{N\times N} \ .
+\end{align}
+For an $N$-dimensional vector space, this represents $N^2$ different equations: one for each element. The inverse operator, by the way, is also linear. Let's remind ourselves of what this means. A linear transformation, when written as a matrix, is simply stating what that linear trasformation does to your basis vectors. If a matrix $B$ has elments
+\begin{align}
+  B = 
+  \begin{pmatrix}
+    a & b\\
+    c & d
+  \end{pmatrix}
+  = 
+  B^{i}_{\phantom{i}j} |i\rangle\langle j| \ , 
+\end{align}
+then this simply means that acting on basis vectors $\vec{e}_{(1)} = |1\rangle$ and $\vec{e}_{(2)} = |2\rangle$ gives
+\begin{align}
+  B|1\rangle &= a |1 \rangle + c|2\rangle 
+  \\
+  B|2\rangle &= b |1 \rangle + d|2\rangle  \ .
+  \label{eq:B:basis:action}
+\end{align}
+In column vector notation:
+\begin{align}
+  B
+  \begin{pmatrix}
+  1 \\ 0
+  \end{pmatrix}
+  &= 
+  \begin{pmatrix}
+  a \\ c
+  \end{pmatrix}
+  &
+  B
+  \begin{pmatrix}
+  0 \\ 1
+  \end{pmatrix}
+  &=
+  \begin{pmatrix}
+  b \\ d
+  \end{pmatrix}\ .
+\end{align}
+So knowing the action on basis vectors is the same as knowing the transformation itself. Suppose I told you the action of the inverse transformation $A^{-1}$ on your basis vectors, vis-a-vis \eqref{eq:B:basis:action}:
+\begin{align}
+  A^{-1}|1\rangle &= x |1 \rangle + y|2\rangle 
+  \\
+  A^{-1}2\rangle &= z |1 \rangle + w|2\rangle  \ .
+  \label{eq:Ainv:basis:action}
+\end{align}
+Then you know exactly how $A^{-1}$ acts on a general vector $|s\rangle = s^1|1\rangle + s^2 |2\rangle$:
+\begin{align}
+  A^{-1} |s\rangle &=
+  A^{-1} \left( s^1|1\rangle + s^2 |2\rangle \right)
+  \\ 
+  &=
+  s^1 A^{-1} |1\rangle + s^2 A^{-1} |2\rangle
+  \label{eq:Ainv:basis:action:on:gen:step2}
+  \\
+  &=
+  (s^1x + s^2z)|1\rangle + (s^1y + s^2 z)|2\rangle \ .
+  \label{eq:Ainv:basis:action:on:gen}
+\end{align}
+You can now keep this in mind when we say we want to solve $A|\psi\rangle = |s\rangle$. If we knew the action of $A^{-1}$ on some basis of the space, then the problem is simple:
+\begin{align}
+  |\psi\rangle = \psi^i |i\rangle 
+  &= \left( A^{-1} \right)^i_{\phantom{i}j} |i\rangle\langle j|
+  \, s^k|k\rangle 
+  \\
+  &= \left(A^{-1}\right)^i_{\phantom{i}j} s^k \, |i\rangle\langle j|
+  |k\rangle 
+  \\
+  &=\left(A^{-1}\right)^i_{\phantom{i}j} s^j \, |i\rangle \ .
+\end{align}
+We can write this as an equation for each component:
+\begin{align}
+  \psi^i &= \sum_j \left(A^{-1}\right)^i_{\phantom{i}j} s^j
+  \label{eq:Ainv:acting:on:source} \ .
+\end{align}
+We've restored the explicit sum over $j$ as a convenient reminder. The quantity $\left(A^{-1}\right)^i_{\phantom{i}j}$ is what we would like to identify with a Green's function.
+
+
+
+
+
 
 
 \subsection{The Green’s Function Problem}
@@ -434,11 +555,87 @@ The analog is this:
 \includegraphics[width=.7\textwidth]{figures/lec02_green01.pdf}
 \end{center}
 
- The operator $A$ encodes the \emph{physics} of the system, the underlying dynamics. This is presumably local: it is a near-diagonal matrix coming from one or two powers of derivatives.  The ket $|s\rangle$ is the source. This is the thing that \emph{causes} the dynamics. The ket $|\psi\rangle$ is some state that we would like to determine. 
+ The operator $A$ encodes the \emph{physics} of the system, the underlying dynamics. This is presumably local: it is a near-diagonal matrix coming from one or two powers of derivatives.  The ket $|s\rangle$ is the source. This is the thing that \emph{causes} the dynamics. The ket $|\psi\rangle$ is some state that we would like to determine. \eqref{eq:linear:aglebra:inverse:eigenvectors} is telling us that to invert a differential operator $\mathcal O$, it may be useful to decompose it into \textbf{eigenfunctions}.
+
+ By the way, \emph{this} is where all of the `special functions' in your physics education show up. The reason why you would ever care about Bessel functions (of various kinds) or Legendre polynomials is simply that they are the eigenfunctions of differential operators that we care about\footnote{In fact, they're mostly the eigenfunctions of the same differential operator in different coordinate systems. Do you know which differential operator? I'll give you a guess. It's starts with a `har-' and ends with a `monic oscillator.'}. Sometimes we confuse mathematical physics with `properties of special functions.' I do not care about special functions; perhaps with the notable exception of the $\Gamma$-function. Seriously, to screw special functions. The real intuition for what we're doing is evident in the few-dimensional harmonic oscillator. All the Bessel-schmessel function-ology that will pain you in your Jackson E\&M course are just \emph{technical details}.
+
+\begin{example}
+Consider a differential operator $A\to \mathcal O = (d/dx)^2$. There's a basis of nice eigenvectors $\xi_{(k)}$:
+ \begin{align}
+   \xi_{(k)} &= \sin (kx)
+   &
+   \mathcal O \xi_{(k)} &= -k^2 \xi_{(k)}. 
+ \end{align}
+ I've deliberately avoided normalizing for now. From this you can see that writing a function as a \textbf{Fourier Series} is simply a change of basis to eigenfunctions of $(d/dx)^2$. Can you see how you would `invert' this operator acting on a general function $f(x)$ with a set of Fourier coefficients $f(x) = \sum_k c_k\sin(kx)$?
+\end{example} 
+
+
+\begin{example}
+A common example in electrostatics is the triboelectric effect. Go ahead, take a moment to look it up on Wikipedia. The image is very relevant. If you pet your cat with hard rubber\footnote{I do not recommend doing this.}, the cat builds up some electrostatic charge. For simplicity, let's model this system as a bunch of Lego blocks arranged in a cat-shape where each block has a constant electric charge. Let's say that each block has volume $dV$ and constant charge density $\rho_0$ so that each block has charge $\rho_0 dV$. The entire cat is described by a charge density $\rho(x)$ where $\rho(x)=0$ if you're outside the cat and $\rho(x)=\rho_0$ if you're inside the cat. 
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/lec06_cat.png}
+\end{center}
+You know how this problem works. You want to solve for the electrostatic potential, $\Phi(x)$, given the charge density $\rho(x)$. The relevant equation is
+\begin{align}
+  \nabla^2 \Phi(\vec{x}) = -\rho(\vec{x})\ ,
+\end{align}
+where $\epsilon_0=1$ in convenient units. This looks like a tricky differential equation to solve, but the fist week of our undergraduate electrodynamics course taught us that the potential from a \emph{unit point charge} is
+\begin{align}
+  \Phi(\vec{x}) = \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \ .
+\end{align}
+The relevant diagram is
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/lec06_1charge.png}
+\end{center}
+If we know the potential from a single point charge, then we can invoke linearity---specifically, the linearity of $\nabla^2$)---to write down the potential for two unit point charges: 
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/lec06_2charge.png}
+\end{center}
+At this point, you should start to see how this looks just like \eqref{eq:Ainv:basis:action:on:gen}. The result is
+\begin{align}
+  \Phi(\vec{x}) &= 
+  \sum_{\vec{x}'} \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \rho(\vec{x}') dV
+  \;\to \;
+ \int d^3\vec{x}' \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \rho(\vec{x}')   \ .
+ \label{eq:electrostatics:greens:func}
+\end{align}
+\end{example}
+This last example is really useful. You've seen this calculation before, but please review it carefully from the perspective of the action of $(\nabla^2)^{-1}$. Just as we are able to build a `Lego cat' out of unit blocks, each of those unit blocks comes with an electrostatic potential. The solution to $\nabla^2 \Phi(x) = -\rho(x)$ is to simply sum together those point-source solutions in the same way that one sums together the point sources (assembles the blocks) to model the finite source.
+
+\begin{exercise}
+In the example above, what plays the role of the basis vectors? 
+\end{exercise}
+
+Compare \eqref{eq:electrostatics:greens:func} to \eqref{eq:Ainv:acting:on:source}. The sum over positions $\vec{x}'$ that becomes an integral over $d^3\vec{x}'$ is completely analogous to the sum over the index $j$. $\rho(\vec{x}')$ plays the role of a component of the source, $s^j$. On the left-hand side, $\Phi(\vec{x})$ plays the role of $\psi^i$. We note that the index $i$ is replaced by the position $\vec{x}$. Evidently, the inverse of $\nabla^2$ is simply
+\begin{align}
+  (\nabla^2)^{-1} \equiv G(\vec{x},\vec{x}') = -\frac{1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \ .
+  \label{eq:laplacian:greens:func:eg}
+\end{align}
+Here we've written out $G(\vec{x},\vec{x}')$, the Green's function for $\nabla^2$. Observe that the Green's function has two arguments in the same way that the inverse matrix $\left(A^{-1}\right)^i_{\phantom{i}j}$ has two indices. The $\vec{x}'$ `index' is integrated/summed over---it scans each `building block' of the source in the same way that we sum over $j$ in the index contraction $\left(A^{-1}\right)^i_{\phantom{i}j}s^j$. In other words, we may heuristically write \eqref{eq:laplacian:greens:func:eg} as
+\begin{align}
+  \Phi^i \sim \sum_j G^i_{\phantom{i}j}\rho^j \ .
+\end{align}
+
+At this point, it's useful to point out that the Green's function is often called a \textbf{propagator}. As a function, $G(x,x')$ propagates the information of the source at $x'$ to the observer at $x$ assuming some dynamics---the operator for which $G$ is a Green's function.
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/lec06_propagator.png}
+\end{center}
+
+Please, please, please make sure you understand this example. This will be the key starting point from which we will generalize our study of Green's functions in physics.
+
+\subsection{Remark: Implicit assumption of linearity}
+
+In everything we're building we're assuming that the dynamics that relates  the source $|s\rangle$ and the state $|\psi\rangle$ is \emph{linear}. That's why we can think of the differential operator $\mathcal O$ as a matrix. If $|\psi_0$ is the effect of source $|s_0\rangle$, then you know by linearity that $2|\psi_0\rangle$ is the effect of a source that is twice as strong, $2|s_0\rangle$. 
+
+Linearity is \emph{not} a truth of nature, yet we're spending all of this course developing techniques for dealing with linear dynamics! The fact of the matter is that a good chunk of physics \emph{is} linear---and that's good because those are the parts that we can solve using our standard toolkit. Most of the frontier of physics has to do with how to deal with the \emph{non}-linearities. There are a few options here: numerical solution, perturbation expansions about a linear solution (Feynman diagrams), and looking for topological invariants. 
+
+
+
+
 
 \subsection{Metrics}
 
-Thus far we have introduced vector spaces. The dual vector space is a set of linear functions that act on elements of a vector space; these are bras/row-vectors/one-forms. Let us now introduce a new piece of machinery: a \textbf{metric}. This is also known as an \textbf{inner product} or a \textbf{dot product}. A space with a metric is called a metric space. We only state this fact to emphasize that we are \emph{adding this structure by hand}. Vector spaces don‘t come with metrics---someone makes up a metric and slaps it onto the vector space.
+Thus far we have introduced vector spaces. The dual vector space is a set of linear functions that act on elements of a vector space; these are bras/row-vectors/one-forms. Let us now introduce a new piece of machinery: a \textbf{metric}. This is also known as an \textbf{inner product} or a \textbf{dot product}. A space with a metric is called a metric space. We only state this fact to emphasize that we are \emph{adding this structure by hand}. Vector spaces don't come with metrics---someone makes up a metric and slaps it onto the vector space.
 
 The \textbf{metric} is a function that takes two vectors and spits out a number. It is linear in each argument. In other words, a metric $g$ is:
 \begin{align}
@@ -472,14 +669,21 @@ so that
    g_ij v^k w^\ell  \delta^i_k \delta^j_\ell 
    = 
    g_{ij} v^{i}w^j \ .
+   \label{eq:metric:basis:vectors}
  \end{align}
+ If this is your first time seeing it, please re-read \eqref{eq:metric:basis:vectors} carefully to see exactly how the bras and kets resolve themselves. 
+ %
  For ordinary Euclidean space in flat coordinates, the metric is simply the unit matrix: $g_{ij} = \text{diag}(1,\cdots, 1)$. In Minkowksi space there’s a relative minus sign between space and time. In curvilinear coordinates things get ugly. 
  
-Here’s the neat thing about metrics. We can take a metric and pre-load it with a vector. Given a metric $g$ and a vector $\vec{v}$, we may define a function
+Here’s the neat thing about metrics. We can take a metric $g$ and pre-load it with a vector $\vec{v}$: 
 \begin{align}
   g(\vec v,\qquad ) \ .
 \end{align}
-This is simply means that the function $f(\vec{w}) = g(\vec v,\vec w)$. Observe that $f(\vec{w})$ is a linear function that takes elements of $V$ and returns a number. In other words, this is a \emph{dual vector} (row-vector, one-form). Observe what having a machine like the metric has done for us: it has allowed us to convert vectors into dual vectors:
+In fact, we may then define a function with respect to this pre-loaded metric:
+\begin{align}
+  f(\vec{w}) = g(\vec v,\vec w)
+\end{align}
+Observe that $f(\vec{w})$ is a linear function that takes elements of $V$ and returns a number. In other words, this is a \emph{dual vector} (row-vector, one-form, element of $V^*$). The metric has allowed us to \emph{convert vectors into dual vectors}:
 \begin{align}
   g(\vec v,\qquad )  = g_{ij} v^i \langle j| \ .
 \end{align}
