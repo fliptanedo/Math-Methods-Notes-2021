@@ -79,7 +79,7 @@ The action of a linear transformation $A$ on a vector $\vec{v}$ is:
   =
   \begin{pmatrix}
     A^1_{\phantom{1}1} v^1 + A^1_{\phantom{1}2}v^2\\
-    A^2_{\phantom{2}1} v^2 + A^2_{\phantom{2}2}v^2
+    A^2_{\phantom{2}1} v^1 + A^2_{\phantom{2}2}v^2
   \end{pmatrix} \ .
 \end{align}
 Look at this carefully. The components of the new vector $(A \vec{v})^i$ are sums. In each term, the second/lower index of an $A$ element multiplies the component of $\vec{v}$ with the same index. The first/upper index of $A$ tells you whether that term should is in $(A \vec{v})^1$ or $(A \vec{v})^2$. 
@@ -186,7 +186,7 @@ Thus a vector in this approximate (discretized) \emph{function} space is
 
 \subsection{Derivative Operators}
 
-Our discretized function space allows us to define a [forward] derivative:
+Our discretized function space allows us to define a [forward] derivative\footnote{One could have also defined a backward derivative where $(f')^i \sim f^{i}-f^{i-1}$ \ . Note that you \emph{cannot} try to make this symmetric by defining a `centered' derivative like $(f')^i \sim f^{i+1/2}-f^{i-1/2}$ because there's no such thing as a fractional index. If you tried to write $(f')^i\sim f^{i+1}-f^{i-1}$ you're making a worse approximation. If you're like me, the fact that there's some asymmetry in how we define the first derivative is deeply unsettling. There's something to this intuition!}:
 \begin{align}
   \vec{f'} =
   \frac{1}{\Delta x}
@@ -214,8 +214,12 @@ This demonstrates and important lesson that we’ll need when we move more forma
 \begin{quote}
 \textbf{Boundary conditions are part of the definition of the function space}.   
 \end{quote}
-That was so important that I put the whole damn sentence in boldface and set it in the middle of the line. 
-
+That was so important that I put the whole damn sentence in boldface and set it in the middle of the line. The significance of boundary conditions may be a bit surprising---but think of this as part of the definition of which functions we allow into our function space. 
+%
+\begin{example}
+When one first learns about Fourier series with Dirichlet boundary conditions, one finds that the Fourier expansion \emph{only} contains sines. The solution to the wave equation in such a system is some function that is zero at each endpoint. So the function space relevant to the system is composed only of functions that are zero at each endpoint.
+\end{example}
+%
 For now let’s assume \textbf{Dirichlet boundary conditions}. A convenient way to impose this is to define what happens to all functions outside the domain of the function space:
 \begin{align}
   f^{i > N} = f^{i < 1} = 0 \ .
@@ -238,7 +242,13 @@ This would then give
   \frac{1}{\Delta x}(f^{1} - f^N) 
   \ .
 \end{align}
-One could have also defined a backward derivative where $(f')^i \sim f^{i}-f^{i-1}$ \ . The second derivative may be defined symmetrically:
+Periodic boundary conditions amount to wrapping the $x$-axis into a circle. Older folks sometimes call this \emph{Asteroids} boundary conditions. I'd also accept \emph{Star Control} boundary conditions. Periodic boundary conditions show up \emph{all} the time in physics. Sometimes they show up in obvious places, like the Brillouin zone of a crystal lattice. Other times they show up in not-so-obvious places like the boundary conditions of the known universe. In addition to being crucial for a well-defined function space, the boundary conditions of a system establish its topology\footnote{I cannot over-emphasize the importance of topology in contemporary physics. Most of the physics you will learn in your first year graduate courses are intrinsically \emph{local} because the laws of physics are causal. Topological quantities are \emph{global}, they are integrals over an entire space. Because winding numbers (and their higher-dimensional cousins) are quantized, they are robust against perturbations. The number of holes in a donut is one, whether or not it's been slightly squished in the box. By the way, the best donuts in Southern California are from \emph{Sidecar Doughnuts} in Costa Mesa. Get the Basil Eggs Benedict donut before 11am; you can thank me later.}.
+
+\begin{exercise}
+We don't know anything about the universe outside the Hubble radius. Why do you think it would be reasonable in a physical model to \emph{assume} that it has periodic boundary conditions? Hint: what would happen to the $x$-momentum of an asteroid in the classic arcade game \emph{Asteroids} if the game did not have periodic boundary conditions? 
+\end{exercise}
+
+The second derivative may be defined symmetrically:
 \begin{align}
   (f'')^i = \frac{(f^{i+1} - f^i) - (f^i - f^{i-1})}{\Delta x^2} \ .
 \end{align}
@@ -585,7 +595,7 @@ where $\epsilon_0=1$ in convenient units. This looks like a tricky differential 
 \end{align}
 The relevant diagram is
 \begin{center}
-\includegraphics[width=.5\textwidth]{figures/lec06_1charge.png}
+\includegraphics[width=.6\textwidth]{figures/lec06_1charge.png}
 \end{center}
 If we know the potential from a single point charge, then we can invoke linearity---specifically, the linearity of $\nabla^2$)---to write down the potential for two unit point charges: 
 \begin{center}
