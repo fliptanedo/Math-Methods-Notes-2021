@@ -409,6 +409,9 @@ There are many things to be said about this, none of them are particularly edify
 \end{enumerate}
 In this course these nuances will not come up. In the rest of your life you’ll still have to deal with curvilinear coordinates. But suffice it to say that our study of function space will be nice an orthonormal. We haven’t yet given an adequate definition of `orthonormality,’ so let's take \eqref{eq:basis:dual:vec:act:on:vec} as a working definition.
 
+
+
+
 \subsection{Bra-Ket Notation}
 
 There is neither any physics nor mathematics contained in a choice of notation. However, a convenient notation does simplify our lives. Let us introduce bra-ket notation. In this notation, we denote vectors by kets:
@@ -643,7 +646,7 @@ Linearity is \emph{not} a truth of nature, yet we're spending all of this course
 
 
 
-\subsection{Metrics}
+\subsection{Metrics on Finite Dimensional Vector Spaces}
 
 Thus far we have introduced vector spaces. The dual vector space is a set of linear functions that act on elements of a vector space; these are bras/row-vectors/one-forms. Let us now introduce a new piece of machinery: a \textbf{metric}. This is also known as an \textbf{inner product} or a \textbf{dot product}. A space with a metric is called a metric space. We only state this fact to emphasize that we are \emph{adding this structure by hand}. Vector spaces don't come with metrics---someone makes up a metric and slaps it onto the vector space.
 
@@ -657,7 +660,7 @@ Occasionally one may want a metric defined such that the output is a complex num
   &= 
   \alpha \delta g(\vec{v},\vec{x}) + \alpha \gamma g(\vec{v},\vec{y}) + \beta\delta g(\vec{w},\vec{x}) + \beta\gamma g(\vec{w},\vec{y}) \ .
 \end{align}
-One more special assumption about the metric is that it is \textbf{symmetric}:
+One more special assumption about the metric is that it is \textbf{symmetric}\footnote{Actually it is conjugate symmetric, $g(\vec{v}, \vec{w}) = g(\vec w, \vec v)^*$. This distinction will be important for function spaces.}:
 \begin{align}
   g(\vec{v},\vec{w}) = g(\vec{w}, \vec{v}) \ .
 \end{align}
@@ -701,9 +704,102 @@ Observe that $f(\vec{w})$ is a linear function that takes elements of $V$ and re
 Similarly, one may define an inverse metric $g^{-1}$ such that $g^{-1}g = \mathbbm{1}$. In a slight abuse of notation, the inverse metric is written with two upper indices: $g^{ij}$. Note that we do not write the `$^{-1}$.' The inverse metric will \emph{raise} the index on a lower-index object, while the metric \emph{lowers} the index of an upper-index object.\footnote{Of course: what’s really happening is that the metric has a basis $\langle i|\otimes \langle j|$ while the inverse metric has a basis $|i\rangle \otimes |j\rangle$.}
 
 
-\subsection{Hermitian Conjugate}
+\subsection{The dot/inner product, orthonormality}
 
-Now that we can go between column and row vectors, thanks to the metric and its inverse, it is worth thinking a bit about what we meant by the `transpose’ operator. The transpose precisely turned a column vector $\vec{v}$ into an associated column vector $\vec{v}^T$. The generalization of this idea is the Hermitian conjugate, $^\dag$. 
+You are already familiar with the `obvious' way to take two vectors and spit out a number. This is the dot product of two vectors, also known as the inner product. They are equivalent to each other and equivalent to the action of the metric on a pair of vectors;
+\begin{align}
+  \vec v\cdot \vec w = \langle \vec v, \vec w \rangle = g(\vec v, \vec w) \ .
+\end{align}
+The norm of a vector $\vec v$ is simply the square root of $g(\vec v, \vec v)$. 
+%
+By the linearity of the metric, we can decompose the dot product into the action of the metric on basis vectors:
+\begin{align}
+  g(\vec v, \vec w) &= 
+  g(
+    v^1\vec e_{(1)} + v^2\vec e_{(2)} + \cdots,
+    w^1\vec e_{(1)} + w^2\vec e_{(2)} + \cdots
+  )
+  \\
+  &=
+  v^1 w^1 g(\vec e_{(1)}, \vec e_{(1)}) + 
+  v^1 w^2 g(\vec e_{(1)}, \vec e_{(2)}) + \cdots \ ,
+\end{align}
+where our assumption of an \emph{orthonormal basis}\footnote{Not an `oprhan normal' basis like Zoom's auto-transcription claims I said.} is the statement that
+\begin{align}
+  g(\vec e_{(i)}, \vec e_{(j)}) = \pm \delta^i_j \ .
+  \label{eq:orthonormal}
+\end{align}
+The $\pm$ depends on the signature of the metric. As physicists, this is the distinction between `space' and `time.' For Euclidean space the sign is always plus. For Minkowski spacetime, there's some choice of sign for the timelike direction and the opposite sign for the spacelike direction. The choice is a convention, there's no `right' choice\footnote{The right choice is $+$ for timelike and $-$ for spacelike.}. When \eqref{eq:orthonormal} is not true the basis is not orthonormal. Sometimes this happens when your space is curvy (general relativity); other times you just have curvilinear coordinates for a flat space (e.g.~polar coordinates). I'm glossing over several subtleties here, among them is the idea that position vectors do not exist\footnote{Formally, vectors live in the tangent space of a manifold. They are `intrinsically' tangent vectors (velocities) of some trajectory on the manifold with some `time' parameter. The position on the manifold is a coordinate, but it is not a \emph{vector}. For more on what I mean by this, I recommend \texttt{hep-th/0611201}, Arnold's \emph{Mathematical Methods of Classical Mechanics}, or a graduate general relativity textbook.}.
+\begin{exercise}
+Speaking of the notion of curved space: Consider a sheet of paper as an idealized two-dimensional surface. If you tape opposite edges of the paper together to make a cylinder, is the two-dimensional space curved or flat? For example, if two-dimensional beings lived on the paper like in Edwin Abbot--Abbot's novella \emph{Flatland}, would they say that their space is curved? 
+\end{exercise}
+\begin{exercise}
+The cylinder from the previous exercise is an example of periodic boundary conditions. For those familiar with special relativity, this entire section has probably been a big review. Here's a fun puzzle to think about while you skim. What happens to the twin paradox if the universe were periodic in some spatial direction? The usual resolution to the twin paradox is that the twin that `turns around' must change inertial frame. However, if there were a periodic direction, neither twin has to `turn around' for them to meet once again and compare clocks\footnote{For a nice solution, see: \url{https://doi.org/10.1080/00029890.2001.11919789}}.
+\end{exercise}
+\begin{example}\label{eg:two:ways:to:contract}
+Given two vectors $\vec v$ and $\vec w$, there are two equivalent ways of thinking about how they may be combined into a number. First, one can lower the index of one of the vectors with the metric $v_i \equiv g_{ij}v^i$ and then contract the `row vector' $v_i$ with the `column vector' $w^j$: $v_iw^i$. I am of course abusing notation by conflating the components $v_i$ and $w^j$ with the row/column vectors. The second way of doing this is taking the two vectors and contracting them directly with the metric: $v^i w^j g_{ij}$. Please make sure you are comfortable that these `two ways' are exactly the same thing.
+\end{example}
+
+\subsection{Comment: Why physicists like indices}
+
+Einstein's summation convention tells us that we should see repeated upper/lower indices as contracted pairs---we should treat them differently. In contrast, the un-paired indices tell us something about the physical quantity to which those indices are attached. This is why---despite what our mathematician colleagues tell us---we love indices\footnote{Recent Nobel laureate Roger Penrose has a clever notation that replaces indices with lines; \url{https://en.wikipedia.org/wiki/Penrose_graphical_notation}.} Vectors are objects that transform in a well defined way with respect to rotations: $$v^i \to v'^i = R^i_{\phantom{i}j}v^j \ , $$ where $R$ is a rotation matrix. Similarly, one-forms/column vectors transform `oppositely': 
+\begin{align}
+  w_k \to w'_k = \left(R^T\right)^\ell_{\phantom{\ell}k}w_\ell \ .
+\end{align}
+Observe that the rotation matrix is \emph{transposed} when acting on an \emph{lower} index object.
+%
+This is consistent with the idea that the dot product is invariant under rotations:
+\begin{align}
+  v^i w_i 
+  \to 
+  v'^i w'_i 
+  =R^i_{\phantom{i}j}v^j \left(R^T\right)^\ell_{\phantom{\ell}i}w_\ell
+  = \left[\left(R^T\right)^\ell_{\phantom{\ell}i} R^i_{\phantom{i}j}\right] v^j w_\ell
+  = v^j w_j \ ,
+  \label{eq:moving:terms}
+\end{align}
+where we've used the fact that the matrix in the square brackets is simply $\delta^\ell_j$ which is evident from $R^TR = \mathbbm{1}$.
+\begin{example}
+We exploited something neat about the index notation in \eqref{eq:moving:terms}. Note that there aren't any `vectorial' objects in \eqref{eq:moving:terms}---all there is are a bunch of numbers (components of vectorial objects). We used the fact that we could re-arrange these products to make it clear how they contract. That's why we were able to move the $(R^T)^\ell_{\phantom{\ell}i}$ term all the way to the left. 
+\end{example}
+A neat lesson here is that
+\begin{quote}
+Indices tell us how an object transforms under `rotations'.
+\end{quote}
+Here `rotations' mean whatever the appropriate symmetry is. In quantum mechanics, for example, the rotations are unitary transformations. If an object has indices, then it transforms. If an object has no indices (or is only composed of contracted indices) then it is a scalar with respect to those transformations. 
+%
+This `indexology' is the backbone of how lazy physicists apply representations of symmetry groups\footnote{\url{https://github.com/Tanedo/Physics262-2019}}. It's especially useful in particle physics\footnote{\url{https://sites.google.com/ucr.edu/p165/}}.
+
+The generalization to tensors is hopefully clear. An object with some number of upper indices and some number of lower indices transforms with several factors of the rotation matrix and its transpose:
+\begin{align}
+  T^{i_1i_2\cdots i_n}_{\phantom{i_1i_2\cdots i_n}j_1j_2\cdots j_m}
+  \to 
+  R^{i_1}_{\phantom{i_1}k_1}R^{i_2}_{\phantom{i_2}k_2}\cdots R^{i_n}_{\phantom{i_n}k_n}
+  (R^T)^{\ell_1}_{\phantom{\ell_1}j_1}
+  (R^T)^{\ell_2}_{\phantom{\ell_2}j_2}
+  \cdots
+  (R^T)^{\ell_m}_{\phantom{\ell_m}j_m}
+  T^{k_1k_2\cdots k_n}_{\phantom{k_1k_2\cdots k_n}\ell_1\ell_2\cdots \ell_m} \ .
+\end{align}
+Yes, we are so wealthy with indices that our indices have indices.
+\begin{exercise}
+How does the moment of inertia tensor transform under a rotation $R$?
+\end{exercise}
+
+\subsection{Hermitian Conjugate}
+% Lec09.pdf of 2018 notes
+
+For complex vector spaces---for example, the space of wavefunctions in quantum mechanics---we need to be a little bit more careful with metrics. We won't say much about complex vector spaces in general, but us simply state that the `transpose’ is generalized to the Hermitian conjugate. The transpose turned a column vector $\vec{v}$ into an associated column vector $\vec{v}^T$. The Hermitian conjugate is $\vec{v}^\dag = \vec{v}^{T*}$. You may be most familiar with this in bra-ket notation from quantum mechanics:
+\begin{align}
+  \langle x| = |x\rangle^\dag = \langle x, \quad \rangle \ ,
+\end{align}
+where $\langle x, \quad \rangle$ is simply the inner product on the complex space with one component pre-loaded. By the way, this motivates the bra-ket notation for vectors and dual-vectors:
+\begin{align}
+  \langle x | y\rangle  = \langle x, y\rangle \ .
+\end{align}
+In the above equation, the left-hand side is a bra (dual vector) acting on a ket (vector), while the right-hand side is the inner product acting on two kets. This is simply repeating the statement in Example~\ref{eg:two:ways:to:contract}. 
+
+
 
 
 
