@@ -1,0 +1,291 @@
+%!TEX root = P231_notes.tex
+
+\section{Function Space}
+\lecdate{lec~04}
+
+\textbf{Function spaces} are vector spaces where the vectors are functions. We introduced `histogram space' in Section~\ref{sec:histogramspace} as a crude model of a finite dimensional function spaces. An alternative finite dimensional model is the space of polynomials up to some degree, which we introduced in Section~\ref{sec:derivatives}. Our models of nature are typically continuous\footnote{This does not mean that nature is fundamentally continuous. There is a deep sense in which our models are valid whether or not nature is continuous so long as any granularity is smaller than our experimental probes.}. This requires \emph{infinite} dimensional function spaces, or Hilbert spaces.
+
+\subsection{The Green's Function Problem in Function Space}
+
+The Green's function can be defined by analogy to the finite-dimensional inverse transformation. The finite-dimensional linear system $A\vec v = \vec w$ can be solved by applying the inverse transformation $A^{-1}$ in the same way that the continuum (infinite-dimensional) system $\mathcal O \psi(x) = s(x)$ can be solved with the Green's function $G(x,y)$ of the operator $\mathcal O$:
+\begin{align}
+	v^i &= \sum_i \mat{\left(A^{-1}\right)}{i}{j} w^j
+	&\Rrightarrow
+	&
+	&
+	\psi(x) &= \int  dy\, G(x,y) s(y) \ .
+	\label{eq:def:of:function:space:Greens:function}
+\end{align}
+We've explicitly written out the sum over the dummy index $i$ to emphasize the analogy to the integration over the dummy variable $y$. The arguments of the functions play the role of `continuum indices.'
+
+\subsection{Differential Operators}
+
+Linear transformations on function space are differential operators. In principle you can imagine linear transformations that are not differential operators, for example a finite translation. However, because our models of nature are typically \emph{local} and \emph{causal}, the linear transformations that we obtain from physical models are differential operators\footnote{This is not to say that finite transformations are somehow not permitted. The dynamics that govern our models of nature, however, only dictate how information is transmitted infinitesimally in space and time. Propagation forward in time by some finite interval is described by the exponentiation of infinitesimal forward time translations. This is, of course, why the time-translation operator in quantum mechanics is $e^{i\hat H t}$, where the Hamiltonian $H$ is described as a local function with perhaps one or two derivative operators.}. 
+
+Let's write a general differential operator as:
+\begin{align}
+	\mathcal O = 
+	p_0(x) 
+	+ p_1(x) \frac{d}{dx}
+	+ p_2(x) + \left(\frac{d}{dx}\right)^2
+	+ \cdots
+	\label{eq:differential:operator}
+\end{align}
+where the $p_i(x)$ are polynomials. Sometimes we will write this as $\mathcal O_x$ to make it clear that the argument of the polynomials is $x$ and the variable with which we are differentiating is $x$.  
+\begin{exercise}
+Explain why \eqref{eq:differential:operator} is a linear operator acting on function spaces.
+\end{exercise}
+\begin{exercise}
+A confused colleague argues to you that \eqref{eq:differential:operator} cannot possibly be `linear.' Just look at it, your colleague says: the functions $p_i(x)$ are polynomials---those aren't \emph{linear}! There are also powers of derivatives---how is that possibly linear? Explain to your colleague why the $p_i(x)$ does not have to be linear nor is one restricted to finite powers of derivatives for the operator $\mathcal O$ to be a linear operator acting on function space.
+\end{exercise}
+Technically \eqref{eq:differential:operator} is called a \textbf{formal operator} because we haven't specified the boundary conditions of the function space. Recall in our discretized `histogram space' in Section~\ref{sec:histogramspace} that we had to be careful about how to define the derivative acting on the boundaries of the space. A differential operator along with boundary conditions is called a \textbf{concrete operator}.
+
+\section{Inner Product}
+
+There's a convenient inner product that you may be familiar with from quantum mechanics. For two functions $f(x)$ and $g(x)$ in your function space, define the inner product to be
+\begin{align}
+	\langle f,g\rangle 
+	=
+	\int dx\, f^*(x)g(x) \ .
+	\label{eq:L2:inner:product}
+\end{align}
+\begin{example}
+Wave functions in 1D quantum mechanics obey this norm. For an infinite domain, we typically restrict to square-integrable functions meaning that $|f|^2$ goes to zero fast enough at $\pm \infty$ so that the integral $\langle f, f\rangle$ is finite. 
+\end{example}
+Sometimes the inner product is defined with respect to a \textbf{weight} function $w(x)$:
+\begin{align}
+	\langle f,g\rangle_w 
+	=
+	\int dx\, w(x)\, f^*(x)g(x) \ .
+	\label{eq:weighted:inner:product}
+\end{align}
+There's nothing mysterious about inner products with weights. They typically boil down to the fact that one is not using Cartesian coordinates. 
+\begin{example}
+Have you met the Bessel functions? If not, you're in for a treat in your electrodynamics course. The Bessel functions satisfy a funny orthogonality relation with weight $w(x)\sim x$ because they show up as the radial part of a solution when using polar coordinates. When you separate variables, $d^2x = rdr\,d\theta$, we see that the measure over the radial coordinate $r$ carries a \emph{weight} $r$.
+\end{example}
+We will assume unit weight until we go to higher spatial dimensions\footnote{My dissertation focused on theories of extra dimensions. I also noticed that my weight increased in my final year of graduate school as I spent most of my time writing about extra dimensions and eating cafe pastries.}.
+
+\subsection{Dual Vectors}
+
+What are the `dual functions' (dual vectors, bras) in function space? These are linear functions on act on functions and spit out numbers. Taking inspiration from \eqref{sec:ket:as:pre:loaded:metric}, these are integrals that are pre-loaded with some factors. Assuming unit weight:
+\begin{align}
+	\langle f | = \langle f, \qquad \rangle
+	= 
+	\int dx \, f^*(x) \left[\text{ insert ket here }\right] \ .
+\end{align}
+
+\subsection{Adjoint operators}
+
+What is the adjoint of a differential operator? The definition of the adjoint \eqref{eq:adjoint:definition} and the function space inner product \eqref{eq:L2:inner:product} give us a hint. We define $\mathcal O^\dag$ by the property
+\begin{align}
+	\int dx \, \left[\mathcal O f(x)\right]^* g(x)
+	= 
+	\int dx \, f^*(x) \left[\mathcal O^\dag g(x)\right] \ .
+\end{align}
+The strategy is: given an inner product (integral) over $f^*$ and $g$ where there is some stuff ($\mathcal O$) acting on $g$, can we re-write this as an integral with no stuff acting on $g$ and some \emph{other} stuff acting on $f^*$? If so, then the `other stuff' is the adjoint $\mathcal O^\dag$.
+\begin{example}
+What is the adjoint of the derivative operator, $\mathcal O = d/dx$? Assume an interval $x\in[a,b]$ and Dirichlet boundary conditions, $f(a)=f(b)=0$. There's a simple way to do this: integrate by parts.
+\begin{align}
+	\int dx \, \left[\frac{d}{dx} f(x)\right]^* g(x)
+	=
+	- \int dx \, f^*(x) \left[\frac{d}{dx}g(x)\right]
+	+
+	\left[f^*(x)g(x)\right]^b_a \ 
+	=
+	- \int dx \, f^*(x) \left[\frac{d}{dx}g(x)\right] \ . 
+\end{align}
+From this we deduce that
+\begin{align}
+	\left(\frac{d}{dx}\right)^\dag = -\frac{d}{dx} \ .
+\end{align}
+\end{example}
+
+We will be especially interested in \textbf{self-adjoint} (Hermitian) operators for which
+\begin{align}
+	\mathcal O^\dag = \mathcal O \ .
+\end{align}
+This is, as we mentioned for the finite-dimensional case, because self-adjoint operators are \emph{nice}: they have real eigenvalues and orthogonal eigenvectors. Since most physical values are real eigenvalues of some operator, one may expect that the differential operators that show up in physics are typically self-adjoint.
+\begin{exercise}
+We saw above that the derivative operator is not self-adjoint. What is an appropriate self-adjoint version of the derivative operator? \emph{Hint: what is the momentum operator in quantum mechanics?} 
+\end{exercise}
+\begin{example}
+Consider $\mathcal O = -\partial_x^2$ defined on the domain $x\in [0,1]$ with the boundary conditions $f(0)=f(1)=0$. Is this operator self-adjoint? We want to check of $\langle f,\mathcal O g\rangle = \langle O f, g \rangle$. We have one trick: integration by parts. Let's see how this works.
+\begin{align}
+	\langle f, \mathcal O g\rangle &= - \int dx\, f^*(x)\partial^2 g(x) \ .
+\end{align}
+This is compared to
+\begin{align}
+	\langle \mathcal O f, g\rangle 
+	&= -\int^1_0 dx\, \left[\partial^2 f(x)\right]*g(x) 
+	\\
+	&= 
+	-\left.\left(\partial f(x)\right)^*g(x)\right|^1_0
+	+ \int^1_0 dx \, \left[\partial f(x)\right]^* \partial g(x) 
+	\\
+	&= \left.f^*(x)\partial^2 g(x)\right|^1_0
+	- \int^1_0 dx \, f^*(x) \partial^2 g(x)  
+	\\
+	&=
+	- \int^1_0 dx \, f^*(x) \partial^2 g(x)  
+	\ .
+\end{align}
+And so we see that indeed $(-\partial^2)^\dag = -\partial^2$.
+\end{example}
+\begin{exercise}
+In the previous example, what is the significance of the overall sign of the operator? \emph{Hint: the sign doesn't matter, it's because we typically think of $-\partial^2$ and its higher-dimensional derivatives as the square of the momentum operator.}
+\end{exercise}
+\begin{example}\label{ex:eigenfunction:fourier}
+The \textbf{eigenfunctions} $f_n$ of $-\partial^2$ defined on $x\in [0,1]$ with Dirichlet boundary conditions are simply 
+\begin{align}
+	f_n(x) &= A_n \sin(n\pi x) 
+	&
+	\lambda_n = - n^2\pi^2 \ ,
+	\label{eq:fourier:basis:unit:interval}
+\end{align}
+where $\lambda_n$ is the associated eigenvalue and $A_n$ is some normalization that. These eigenfunctions are orthonormal in the following sense:
+\begin{align}
+	\langle f_n, f_m\rangle = \int_0^1 dx\, \sin(n\pi x)\sin(m\pi x) = \frac{A_nA_m}{2} \delta_{nm} \ ,
+\end{align}
+from which we deduce that the normalization is $A_n = \sqrt{2}$. That's basically all there is to know about Fourier series.
+\end{example}
+\begin{exercise}\label{exe:eigenfunction:fourier}
+A function $g(x)$ defined on an interval $x\in [0,1]$ with Dirichlet boundary conditions can be written with respect to the Fourier basis \eqref{eq:fourier:basis:unit:interval}. In ket notation, the $n^\text{th}$ component of $g$ with respect to this basis is
+\begin{align}
+	g^n = \langle f_n| g\rangle \ .
+\end{align}
+Confirm that this is precisely what you know from Fourier series. In other words, we can decompose $g(x)$ as
+\begin{align}
+	g(x) &= \sum_n \langle f_n| g\rangle f_n(x)  \ .
+\end{align}
+\end{exercise}
+
+
+\lecdate{lec~10}
+\subsection{Completeness in Function Space}
+
+We rarely have much to say about the unit matrix in linear algebra. However, much like when we discussed units, we can squeeze a lot out of inserting the identity in our mathematical machinations. In order to help with translate this to function space, let's review how it works in finite dimensional vector spaces. The unit matrix is $\mathbbm{1}$ and may be written:
+\begin{align}
+	\mathbbm{1} = \sum_i |i\rangle\langle i| \ ,
+	\label{eq:unit:matrix}
+\end{align}
+where $|i\rangle$ and $\langle j|$ are basis (dual-)vectors. 
+\begin{exercise}
+Take a moment and convince yourself that \eqref{eq:unit:matrix} is true and obvious. It may be helpful to explicitly write out $|i\rangle \langle j|$ as a matrix. 
+\end{exercise}
+\begin{exercise}\label{ex:completeness:for:non:cartesian:basis}
+Suppose you have a two-dimensional Euclidean vector space. Show that \eqref{eq:unit:matrix} is true for the basis
+\begin{align}
+	|1 \rangle &= 
+	\frac{1}{\sqrt{2}}
+	\begin{pmatrix}
+	1 \\ 1
+	\end{pmatrix}
+	&
+	|2 \rangle &= 
+	\frac{1}{\sqrt{2}}
+	\begin{pmatrix}
+	1 \\ -1
+	\end{pmatrix}
+	\\
+	\langle 1 | &= 
+	\frac{1}{\sqrt{2}}
+	\begin{pmatrix}
+	1 & 1
+	\end{pmatrix}
+	&
+	\langle 2 | &= 
+	\frac{1}{\sqrt{2}}
+	\begin{pmatrix}
+	1 & -1
+	\end{pmatrix} \ .
+\end{align}
+\end{exercise}
+In fact, \eqref{eq:unit:matrix} defines what it means that a set of basis vectors is \textbf{complete}. You can write any vector $|v\rangle$ with respect to the basis $|i\rangle$---the components are simply
+\begin{align}
+	v^i = \langle i | v \rangle
+\end{align}
+so that 
+\begin{align}
+	|v\rangle = \sum_i |i\rangle \langle i | v \rangle \ ,
+	\label{eq:completeness:by:inserting:1}
+\end{align}
+which we recognize as nothing more than `multiplying by the identity.' 
+%
+
+What does completeness look like in function space?
+\begin{framed}\noindent
+Let $e_{(n)}(x)$ be a set of basis functions. The basis is \textbf{complete} if
+\begin{align}
+	\sum_n \left[e_{(n)}(x)\right]^* e_{(n)}(y) = \delta(x-y) \ .
+	\label{eq:function:space:completeness}
+\end{align}
+\end{framed}
+Compare this \emph{very carefully} with the completeness relation \eqref{eq:unit:matrix}. The sum over $i$ in the finite-dimensional case has been relabeled into a sum over $n$ in the function space---this is just my preference\footnote{I think this is because we will deal with complex functions and I want to avoid using $i$ as an index. But if we're being honest, it's just become a habit.}. The $\mathbbm{1}$ has been replaced by a Dirac $\delta$-function, $\delta(x-y)$. Let's confirm that this makes sense. The \emph{multiply by one} completeness relation \eqref{eq:completeness:by:inserting:1} in function space is
+\begin{align}
+	|g\rangle 
+	&= 
+	\sum_n |e_{(n)}\rangle\langle e_{(n)}| g\rangle
+	&
+	\langle e_{(n)}| g\rangle &=
+	\int dy \, [e_{(n)}(y)]^* g(y) \ .
+\end{align}
+We have deliberately changed the name of the integration variable to $y$ to avoid confusion; since this variable is integrated over it's simply a \emph{dummy variable} and it doesn't matter what we name it---the quantity $\langle e_{(n)}|g\rangle$ is independent of $y$ because $y$ is integrated over\footnote{By the way, this should ring a bell from our summation convention. When an upper and lower tensor index are contracted, the resulting object behaves as if it didn't have those indices: $\mat{A}{i}{j}v^j$ behaves as a vector with one upper index.}. Writing this out explicitly as functions:
+\begin{align}
+	g(x) &= \sum_n\left[\int dy\, e_{(n)}^*(y)g(y)\right] e_{(n)}(x) \ .
+	\label{eq:complenesss:function:space:in:action }
+\end{align}
+The factor in the square brackets is simply $\langle e_{(n)}| g\rangle$, which is just a \emph{number}---it has no functional dependence on $x$.
+If this seems unusual, please refer back to Example~\ref{ex:eigenfunction:fourier} and Exercise~\ref{exe:eigenfunction:fourier}. 
+
+By the way, you'll often hear people (perhaps even me) say that the Dirac $\delta$ function is not strictly an \emph{function} but rather a \textbf{distribution}---this means that it only makes sense when it is integrated over. As physicists we'll sometimes be sloppy and talk about physical quantities that could be Dirac $\delta$-functions. There is \emph{never} an appropriate, measurable physical quantity that is described by a $\delta(x)$. Anything with a $\delta(x)$ is an object that was meant to be integrated over. When you imagine that a point charge density is a $\delta$-function, this is only because you will eventually integrate over it to determine the total charge. This is precisely what we saw in the charged cat in Example~\ref{eq:charged:cat}. If you ever calculate a \emph{measurable} quantity to be $\delta(x)$ check your work. If you ever find $\delta(x)^2$, then go home, it's past your bed time.
+
+\subsection{Orthonormality in Function Space}
+
+One should contrast the notion of completeness of a a basis this with that of \textbf{orthonormality} of the basis. Orthonormality is the statement that
+\begin{align}
+	\langle i | j \rangle = \delta^j_i \ .
+\end{align}
+Completeness has to do with the `outer product' $|i\rangle \langle i|$ while orthonormality has to do with the `inner product' $\langle i | i\rangle = \langle i, i\rangle$. The function space generalization of orthonormality is\footnote{If you're a purist, you'll note that $\delta_{nm}$ should really be written as $\delta^n_m$ because the dual basis vector has an upper index. While this may be true, I'm making the present notational choice because the object that we would call $\tilde{\vec{e}}^{(n)}$ really does contain $e_{(n)}^*(x)$, the complex conjugate of $e_{(n)}(x)$.}
+\begin{align}
+	\langle e_{(n)} | e_{(m)} \rangle = \int dx \, e_{(n)}^*(x) e_{(m)}(x) = \delta_{nm} \ .
+	\label{eq:function:orthonormality}
+\end{align}
+\begin{exercise}
+Why does \eqref{eq:function:orthonormality} have a Kronecker $\delta$ with discrete indices when \eqref{eq:function:space:completeness} has a Dirac $\delta$? Please make sure you can answer this; it establishes the conceptual foundation of the analogy between finite- and infinite-dimensional vector spaces.
+\end{exercise}
+For the completeness relation, we sum over the same eigenfunction label $n$ for a function and its conjugate evaluated at different continuous positions. For the orthonormality relation, we integrate over the positions of two different eigenfunction indices, $n$ and $m$. 
+
+Do not confuse the eigenfunction label with the index of a vector. If this is confusing, please refer back to Exercise~\ref{ex:completeness:for:non:cartesian:basis}. You may be stuck thinking about basis vectors in the Cartesian basis---this is the analog of thinking about basis functions in the `histogram basis' of Section~\ref{sec:histogramspace}. What we want to do is generalize to more convenient bases, like the eigenfunctions of differential operators (e.g.~the Fourier basis for $-\partial^2$).
+
+\subsection{Completeness and Green's Functions}
+
+The utility of the completeness relation should be clear. If you happen to have a nice (self-adjoint) linear differential operator $\mathcal O$ with a nice (complete, orthogonal) eigenfunctions $e_{(n)}$ and eigenvalues $\lambda_n$, then we can expand any function $\psi(x)$ with respect to these eigenfunctions. Then it is easy to invert the differential equation $\mathcal O \psi(x) = s(x)$ to determine the response $\psi(x)$ to a source $s(x)$:
+\begin{align}
+	\psi(x) 
+	&= \mathcal O^{-1}
+	\sum_n \langle e_{(n)}|s\rangle e_{(n)}(x)
+	= \sum_n \frac{\langle e_{(n)}|s\rangle}{\lambda_n} e_{(n)}(x) \ ,
+\end{align}
+where we've simply used \eqref{eq:linear:aglebra:inverse:eigenvectors}. The inner product $\langle e_{(n)}|s\rangle$ is an overlap integral between known functions:
+\begin{align}
+	\psi(x) &= 
+	 \int dy\, \sum_n \frac{e_{(n)}^*(y) e_{(n)}(x)}{\lambda_n} s(y) \ ,
+	 \label{eq:Greens:function:by:completeness}
+\end{align}
+where we have rearranged terms rather suggestively. This is now in the same form as our prototype Green's function example \eqref{eq:electrostatics:greens:func}. 
+
+Referring back to \eqref{eq:def:of:function:space:Greens:function}, 
+we see that our completeness relation---that is, our trick of inserting unity---in \eqref{eq:Greens:function:by:completeness} tells us an explicit form for the Green's function of a differential operator $\mathcal O$ if you know the eigenfunctions and eigenvalues of that operator:
+\begin{align}
+	G(x,y) &= \sum_n \frac{e_{(n)}^*(y) e_{(n)}(x)}{\lambda_n} \ .
+\end{align}
+This is formally an infinite sum and so is only practically useful if each term is successively smaller. 
+
+
+
+
+
+
+
+
+

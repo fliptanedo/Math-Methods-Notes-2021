@@ -138,6 +138,7 @@ But these may be more general objects. For example, you can specify a color of l
 
 
 \subsection{A funny vector space: histogram space}
+\label{sec:histogramspace}
 
 Here’s a funny vector space that we’re going to use as a pedagogical crutch. Imagine histogram-space. The basis vectors are:
 
@@ -256,6 +257,7 @@ You may pontificate about the reason why the first derivative does have a symmet
 
 
 \subsection{Derivatives in other function space bases}
+\label{sec:derivatives}
 
 There are other ways to write a discrete basis of functions. Here’s a natural one for functions that are up to second-order polynomials:
 \begin{align}
@@ -448,6 +450,7 @@ Observe that the power of the notation is clear: the object with the index $v^i$
 
 
 \subsection{Eigenvectors are nice}
+\label{sec:eigenvectors}
 
 Give a sufficiently \emph{nice} linear transformation, $A$, there is a particularly convenient basis: the eigenvectors of $A$. These are kets $|\lambda\rangle$ such that
 \begin{align}
@@ -583,7 +586,7 @@ Consider a differential operator $A\to \mathcal O = (d/dx)^2$. There's a basis o
 \end{example} 
 
 
-\begin{example}
+\begin{example}\label{eq:charged:cat}
 A common example in electrostatics is the triboelectric effect. Go ahead, take a moment to look it up on Wikipedia. The image is very relevant. If you pet your cat with hard rubber\footnote{I do not recommend doing this.}, the cat builds up some electrostatic charge. For simplicity, let's model this system as a bunch of Lego blocks arranged in a cat-shape where each block has a constant electric charge. Let's say that each block has volume $dV$ and constant charge density $\rho_0$ so that each block has charge $\rho_0 dV$. The entire cat is described by a charge density $\rho(x)$ where $\rho(x)=0$ if you're outside the cat and $\rho(x)=\rho_0$ if you're inside the cat. 
 \begin{center}
 \includegraphics[width=.8\textwidth]{figures/lec06_cat.png}
@@ -699,6 +702,7 @@ In fact, we may then define a function with respect to this pre-loaded metric:
 Observe that $f(\vec{w})$ is a linear function that takes elements of $V$ and returns a number. In other words, this is a \emph{dual vector} (row-vector, one-form, element of $V^*$). The metric has allowed us to \emph{convert vectors into dual vectors}:
 \begin{align}
   g(\vec v,\qquad )  = g_{ij} v^i \langle j| \ .
+  \label{sec:ket:as:pre:loaded:metric}
 \end{align}
 
 Similarly, one may define an inverse metric $g^{-1}$ such that $g^{-1}g = \mathbbm{1}$. In a slight abuse of notation, the inverse metric is written with two upper indices: $g^{ij}$. Note that we do not write the `$^{-1}$.' The inverse metric will \emph{raise} the index on a lower-index object, while the metric \emph{lowers} the index of an upper-index object.\footnote{Of course: what’s really happening is that the metric has a basis $\langle i|\otimes \langle j|$ while the inverse metric has a basis $|i\rangle \otimes |j\rangle$.}
@@ -786,22 +790,63 @@ Yes, we are so wealthy with indices that our indices have indices.
 How does the moment of inertia tensor transform under a rotation $R$?
 \end{exercise}
 
-\subsection{Hermitian Conjugate}
+\subsection{Adjoints and Hermitian Conjugates}
 % Lec09.pdf of 2018 notes
+% with 4.4 of Byron and Fuller
 
-For complex vector spaces---for example, the space of wavefunctions in quantum mechanics---we need to be a little bit more careful with metrics. We won't say much about complex vector spaces in general, but us simply state that the `transpose’ is generalized to the Hermitian conjugate. The transpose turned a column vector $\vec{v}$ into an associated column vector $\vec{v}^T$. The Hermitian conjugate is $\vec{v}^\dag = \vec{v}^{T*}$. You may be most familiar with this in bra-ket notation from quantum mechanics:
+Because the metric lowers the index of a vector and produces a dual vector, you may want to think about this as `tipping over' a column vector---almost like a transpose, right? We should be careful with this notion. Suppose we have a vector $\vec{w} = A \vec{v}$. How do we express the components of the \emph{dual vector} $w_i$ with respect to the elements of the dual vector $v_i$?
+\begin{align}
+  w_i = g_{ij}w^j
+  = g_{ij}\mat{A}{j}{k} v^k
+  = A_{jk}v^k
+  = A_{j}^{\phantom{j}k}v_k
+  \equiv 
+  v_k \mat{(A^T)}{k}{j}
+  \ . \label{eq:wi:and:transpose:A}
+\end{align}
+In the second-to-last step we have used $g^{ij}g_{jk} = \delta^i_k$. In the last step we have \emph{defined} the transpose of a real matrix in the usual way: swap the first and second indices. These happen to have heights that come along for the ride. For convenience we moved the $v_k$ to the left-side of the expression---it should be clear that this does not affect the expression at all (just write out the sum explicitly). We've gone through these gymnastics simply to motivate the notion that
+\begin{align}
+  \vec{w}^T = \vec{v}^T A^T \ .
+\end{align}
+Notice that the $T$ \emph{acts} on the matrix $A$. This is in contrast to our notation where the $T$ in $\vec{w}^T$ is simply a label to remind us that the object is a dual (row) vector.
+
+
+For complex vector spaces---for example, the space of wavefunctions in quantum mechanics---we need to be a little bit more careful. We won't say much about complex vector spaces in general, but us simply state that the `transpose’ is generalized to the Hermitian conjugate. You may be most familiar with this in bra-ket notation from quantum mechanics:
 \begin{align}
   \langle x| = |x\rangle^\dag = \langle x, \quad \rangle \ ,
 \end{align}
-where $\langle x, \quad \rangle$ is simply the inner product on the complex space with one component pre-loaded. By the way, this motivates the bra-ket notation for vectors and dual-vectors:
+where $\langle x, \quad \rangle$ is simply the inner product on the complex space with one component pre-loaded\footnote{By the way, this motivates the bra-ket notation for vectors and dual-vectors:
 \begin{align}
   \langle x | y\rangle  = \langle x, y\rangle \ .
 \end{align}
-In the above equation, the left-hand side is a bra (dual vector) acting on a ket (vector), while the right-hand side is the inner product acting on two kets. This is simply repeating the statement in Example~\ref{eg:two:ways:to:contract}. 
+In the above equation, the left-hand side is a bra (dual vector) acting on a ket (vector), while the right-hand side is the inner product acting on two kets. This is simply repeating the statement in Example~\ref{eg:two:ways:to:contract}. }. You should now see why the Hermitian conjugate isn't just a `transpose' but also a complex conjugation. The \textbf{norm} of a vector is $||\vec v || = \langle \vec{v},\vec{v}\rangle$. We would like the \textbf{norm} to be positive definite\footnote{The notable exception is when you have a space with nontrivial signature like Minkowski space where the relative sign between space and time is relevant.}, even when $\vec v$ is complex. If $\vec v$ has a complex phase, then there needs to be a `complex conjugation' built into the notion of an inner product. 
+\begin{example}
+While this may sound like hand-waving, you already know this from quantum mechanics where the wavefunction $\psi(x)$ is complex. You know that a nice wavefunction is normalized, $\langle \psi,\psi\rangle = 1$, which we interpret as:
+\begin{align}
+  \int dx\, \psi^*(x)\psi(x) = 1 \ .
+\end{align}
+The $\psi^*(x)$ in the integrand is related to the complex conjugation implicit when going from a ket $|\psi\rangle$ to a bra $\langle \psi|$. 
+\end{example}
+We will work this out more carefully when we re-introduce function spaces systematically---but all of this should feel familiar. 
 
+Let us write \textbf{adjoint} to mean transpose for real spaces and Hermitian conjugate for complex spaces. The importance of the adjoint is not converting vectors into dual vectors, but rather the action on operators. Armed with a metric/inner product, the adjoint $A^\dag$ of an operator $A$ satisfies
+\begin{align}
+  \langle A^\dag w, v  \rangle
+  = 
+  \langle w, Av \rangle \ .
+  \label{eq:adjoint:definition}
+\end{align}
+In a given inner product, the adjoint shifts the action from one vector to the other. 
+\begin{example}
+From this definition, it should be clear that
+\begin{align}
+  \langle w | \mathcal A v\rangle = \langle A^\dag w | v\rangle \ .
+  \label{eq:wAv:Awv}
+\end{align}
+This equation does not invoke the metric in contrast to \eqref{eq:adjoint:definition}. Of course, the dual vector $\langle w |$ is related to the vector $|w\rangle$ by the metric.
+\end{example}
+\begin{exercise}
+If you are mathematically inclined, prove the existence, uniqueness, and linearity of the adjoint $A^\dag$ of a linear operator $A$. \emph{Hint: see Byron \& Fuller chapter 4.4}. 
+\end{exercise}
 
-
-
-
-
-
+The adjoint/Hermitian conjugate is important because of the result that \textbf{self-adjoint operators}, $A^\dag = A$, have real eigenvalues and a complete set of orthogonal eigenvectors. Then we can use the strategy of Section~\ref{sec:eigenvectors} to use eigenvectors of $A$ to simplify the solution of $A\vec{v} = \vec{w}$.
