@@ -1,0 +1,296 @@
+\section{Method of Variations}
+\label{app:method:of:variations}
+
+The method of variations is a way to solve inhomogeneous differential equations starting from a basis of solutions to the homogeneous differential equation. We specialize to the case of second-order differential operators, though the technique is valid for higher-order operators.
+
+\subsection{First order equation for coefficients}
+
+Consider the second-order inhomogeneous linear differential equation
+\begin{align}
+	\mathcal Of(x) &= a_2(x)f''(x) + a_1(x) f'(x) + a_0(x) = g(x) \ .
+\end{align}
+One can determine the solution to this equation from varying with respect to the solutions to the homogeneous differential equation, $u(x)$ and $v(x)$. Write the solution to the inhomogeneous equation as
+\begin{align}
+	f(x) &= c(x)u(x) + d(x)v(x)
+\end{align}
+Make the ansatz that
+\begin{align}
+	c'(x) u(x) + d'(x) v(x) = 0 \ .
+	\label{eq:method:of:variations:ansatz}
+\end{align}
+Then the inhomogeneous differential equation reduces to
+\begin{align}
+	\mathcal Of &= a_2(x)\left(c'(x) u'(x) + d'(x) v'(x)\right) =g(x) \ .
+\end{align}
+This gives expressions for $c'$ and $d'$:
+\begin{align}
+	c'(x) &= \frac{-v(x)g(x)/a_2(x)}{u(x) v'(x) - u'(x) v(x)}
+	&
+	d'(x) &= \frac{u(x)g(x)/a_2(x)}{u(x) v'(x) - u'(x) u(x)} \ ,
+	\label{eq:method:of:variations:first:order}
+\end{align}
+where one may recognize the denominators to be the Wronksian, $W = uv' - u'v$. For simplicity, write $\tilde g(x) \equiv g(x)/a_2(x)$.
+% Integrating these equations then gives the solution to the inhomogeneous equation. 
+
+\subsection{Integrating and boundary conditions}
+
+Suppose that the inhomogeneous differential equation has boundary conditions at $x_1$ and $x_2$ given by differential operators $\mathcal B_{1,2}$:
+\begin{align}
+	\mathcal B_1 f(x) &= \alpha_1 f'(x_1) + \beta_1 f(x_1) = 0
+	&
+	\mathcal B_2 f(x) &= \alpha_2 f'(x_2) + \beta_2 f(x_2) = 0 \ .
+\end{align}
+These boundary conditions are, in general, first order for a second order inhomogeneous differential equation. For example, these may come from integrating a second-order equation of motion by parts, leaving a first-order operator on either boundary.
+%
+The ansatz \eqref{eq:method:of:variations:ansatz} simplifies these boundary conditions:
+\begin{align}
+	\mathcal B_i f(x) &= 
+	c(x_i) \mathcal B_i u (x) 
+	+
+	d(x_i) \mathcal B_i v (x) 
+	= 0 
+	\ .
+	\label{eq:method:of:variations:BC}
+\end{align}
+For simplicity, let us write $(\mathcal B_i u) = \alpha_i u'(x_i) + \beta_i f(x_i)$ as a constant that depends on $u$ and $u'$ evaluated at the boundary $x_i$. We define $(\mathcal B_i v)$ similarly. 
+
+Integrate the first-order differential equations for the coefficients \eqref{eq:method:of:variations:first:order} using these boundary conditions. The simplest approach is to integrate a convenient linear combinations:
+\begin{align}
+	\mathcal{I}_1 = 
+	\int_{x_1}^x
+	dy\, c'(y)(\mathcal B_1 u) + d'(y) (\mathcal B_1 v)
+	&= c(x) (\mathcal B_1 u) + d(x) (\mathcal B_1 v) \ ,
+	\label{eq:method:of:variations:int:1}
+\end{align}
+where the lower limit vanishes because $(\mathcal B_i f) \equiv 0$. Similarly, one finds
+\begin{align}
+	\mathcal{I}_2 = 
+	\int_{x}^{x_2}
+	dy\, c'(y)(\mathcal B_2 u) + d'(y) (\mathcal B_2 v)
+	&= -c(x) (\mathcal B_2 u) - d(x) (\mathcal B_2 v) \ .
+	\label{eq:method:of:variations:int:2}
+\end{align}
+The integrals in \eqref{eq:method:of:variations:int:1} and \eqref{eq:method:of:variations:int:2} are equivalently expressed using the expressions for $c'(x)$ and $d'(x)$ in \eqref{eq:method:of:variations:first:order}:
+% \begin{align}
+% 	\int_{x_1}^x
+% 	dy\, c'(y)(\mathcal B_1 u) + d'(y) (\mathcal B_1 v)
+% 	&= 
+% 	\int_{x_1}^x dy \,
+% 	\frac{-v(y)
+% 	% g(x)/a_2(x)
+% 	\tilde g(y)
+% 	}{W(y)}
+% 	(\mathcal B_1 u)
+% 	+ 
+% 	\frac{u(y)
+% 	%g(x)/a_2(x)
+% 	\tilde g(y)
+% 	}{W(y)}
+% 	(\mathcal B_1 v) 
+% 	\\
+% 	\int_{x}^{x_2}
+% 	dy\, c'(y)(\mathcal B_2 u) + d'(y) (\mathcal B_2 v)
+% 	&=
+% 	\int_{x}^{x_2}
+% 	dy\, \frac{-v(y)
+% 	%g(x)/a_2(x)
+% 	\tilde g(y)
+% 	}{W(y)} 
+% 	(\mathcal B_2 u) 
+% 	+ \frac{u(y)
+% 	%g(x)/a_2(x)
+% 	\tilde g(y)
+% 	}{W(y)} 
+% 	(\mathcal B_2 v)
+% 	\ .
+% \end{align}
+\begin{align}
+	\mathcal{I}_1 
+	%= 
+	% \int_{x_1}^x
+	% dy\, c'(y)(\mathcal B_1 u) + d'(y) (\mathcal B_1 v)
+	&= 
+	\int_{x_1}^x dy \,
+	\left[
+	- (\mathcal B_1 u) v(y)
+	+ (\mathcal B_1 v) u(y)
+	\right]
+	\frac{
+	\tilde g(y)
+	}{W(y)}	
+	\\
+	\mathcal{I}_2 
+	% = 
+	% \int_{x}^{x_2}
+	% dy\, c'(y)(\mathcal B_2 u) + d'(y) (\mathcal B_2 v)
+	&=
+	\int_{x}^{x_2}
+	dy\, 
+	\left[  - (\mathcal B_2 u) v(y) 
+			+ (\mathcal B_2 v) u(y)
+	\right]
+	\frac{
+	\tilde g(y)
+	}{W(y)} 
+	\ .
+\end{align}
+Combining this with the right-hand sides of \eqref{eq:method:of:variations:int:1} and \eqref{eq:method:of:variations:int:2} then gives the desired integral solutions for the coefficient functions:
+\begin{align}
+	\left[ \left(\mathcal B_1 u\right)\left(\mathcal B_2 v\right) - \left(\mathcal B_2 u\right)\left(\mathcal B_1 v\right)  \right]
+	c(x)
+	&= 
+	% \phantom{+}
+	\left(\mathcal B_2 v\right)
+	\mathcal{I}_1 
+	% \int_{x_1}^x dy \,
+	% \left[
+	% - (\mathcal B_1 u) v(y)
+	% + (\mathcal B_1 v) u(y)
+	% \right]
+	% \frac{
+	% \tilde g(y)
+	% }{W(y)}	
+	% \\
+	% &\phantom{=}
+	+
+	\left(\mathcal B_1 v\right)
+	% \int_{x}^{x_2}
+	% dy\, 
+	% \left[  - (\mathcal B_2 u) v(y) 
+	% 		+ (\mathcal B_2 v) u(y)
+	% \right]
+	% \frac{
+	% \tilde g(y)
+	% }{W(y)} 
+	\mathcal{I}_2 
+	\\
+	\left[ 
+		\left(\mathcal B_2 u\right)\left(\mathcal B_1 v\right) 
+		- 
+		\left(\mathcal B_1 u\right)\left(\mathcal B_2 v\right)  
+	\right]
+	d(x)
+	&= 
+	\left(\mathcal B_2 u\right)
+	\mathcal{I}_1 
+	+ 
+	\left(\mathcal B_1 u\right)
+	\mathcal{I}_2 
+	\ .
+\end{align}
+% Similarly for the $d(x)$ coefficient:
+% \begin{align}
+% 	\left[ 
+% 		\left(\mathcal B_2 u\right)\left(\mathcal B_1 v\right) 
+% 		- 
+% 		\left(\mathcal B_1 u\right)\left(\mathcal B_2 v\right)  
+% 	\right]
+% 	d(x)
+% 	&= 
+% 	\phantom{+}
+% 	\left(\mathcal B_2 u\right)
+% 	\int_{x_1}^x dy \,
+% 	\left[
+% 	- (\mathcal B_1 u) v(y)
+% 	+ (\mathcal B_1 v) u(y)
+% 	\right]
+% 	\frac{
+% 	\tilde g(y)
+% 	}{W(y)}	
+% 	\\
+% 	&\phantom{=}+
+% 	\left(\mathcal B_1 u\right)
+% 	\int_{x}^{x_2}
+% 	dy\, 
+% 	\left[  - (\mathcal B_2 u) v(y) 
+% 			+ (\mathcal B_2 v) u(y)
+% 	\right]
+% 	\frac{
+% 	\tilde g(y)
+% 	}{W(y)} 
+% 	\ .
+% \end{align}
+Define the left-hand side prefactors:
+\begin{align}
+	(\text{den}.) &\equiv
+	\left(\mathcal B_1 u\right)\left(\mathcal B_2 v\right) - \left(\mathcal B_2 u\right)\left(\mathcal B_1 v\right)  \ ,
+\end{align}
+so that we have 
+\begin{align}
+	f(x) &= 
+	\frac{\left(\mathcal B_2 v\right)
+		\mathcal{I}_1 
+		+
+		\left(\mathcal B_1 v\right)
+		\mathcal{I}_2}{(\text{den.})}
+	u(x)
+	-
+	\frac{\left(\mathcal B_2 u\right)
+		\mathcal{I}_1 
+		+
+		\left(\mathcal B_1 u\right)
+		\mathcal{I}_2}{(\text{den.})}
+	v(x)
+\end{align}
+Collecting the terms by the integration range gives:
+\begin{align}
+	(\text{den.})f(x)&=
+	\int_{x_1}^x dy \frac{\tilde g(y)}{W(y)}
+	\left[
+		-(\mathcal B_1u)(\mathcal B_2u) v(x)v(y)
+		+(\mathcal B_1v)(\mathcal B_2v) u(x)u(y)
+		\right.
+	\\
+	&\phantom{=\int_{x_1}^x dy \frac{\tilde g(y)}{W(y)}[}
+		\left.
+		-(\mathcal B_1u)(\mathcal B_2v) u(x)v(y)
+		+(\mathcal B_1v)(\mathcal B_2u) v(x)u(y)
+	\right] + \cdots
+	\\
+	&=
+	\int_{x_1}^x dy \frac{\tilde g(y)}{W(y)}
+	\left[
+		(\mathcal B_1u)v(y) - (\mathcal B_1v)u(y)
+	\right] 
+	\left[
+		(\mathcal B_2u)v(x) - (\mathcal B_2v)u(x)
+	\right] + \cdots \ .
+\end{align}
+The $\cdots$ represent the $\mathcal I_2$ terms. Performing the same grouping for the $\mathcal I_2$ terms then gives:
+\begin{align}
+	(\text{den.})f(x)&=
+	\int_{x_1}^x dy \frac{\tilde g(y)}{W(y)}
+	\left[
+		(\mathcal B_1u)v(y) - (\mathcal B_1v)u(y)
+	\right] 
+	\left[
+		(\mathcal B_2u)v(x) - (\mathcal B_2v)u(x)
+	\right] + \\
+	&\phantom{=}
+	\int_{x}^{x_2} dy \frac{\tilde g(y)}{W(y)}
+	\left[
+		(\mathcal B_1v)u(x) - (\mathcal B_1u)v(x)
+	\right] 
+	\left[
+		(\mathcal B_2v)u(y) - (\mathcal B_2u)v(y)
+	\right] \ .
+\end{align}
+These two terms can be combined rather nicely:
+\begin{align}
+	f(x) &=
+	\frac{1}{(\text{den.})}
+	\int_{x_1}^{x_2} dy \,
+	\frac{\tilde g(y)}{W(y)}
+	\left[
+		(\mathcal B_1u)v(x_<) - (\mathcal B_1v)u(x_<)
+	\right] 
+	\left[
+		(\mathcal B_2u)v(x_>) - (\mathcal B_2v)u(x_>)
+	\right]
+\end{align}
+where we introduce the convenient notation that
+\begin{align}
+	x_< &= \min(x,y)
+	&
+	x_> &= \max(x,y) \ .
+\end{align}

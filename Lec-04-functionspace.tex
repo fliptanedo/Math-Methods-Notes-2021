@@ -27,7 +27,7 @@ Let's write a general differential operator as:
 	\mathcal O = 
 	p_0(x) 
 	+ p_1(x) \frac{d}{dx}
-	+ p_2(x) + \left(\frac{d}{dx}\right)^2
+	+ p_2(x) \left(\frac{d}{dx}\right)^2
 	+ \cdots
 	\label{eq:differential:operator}
 \end{align}
@@ -106,7 +106,7 @@ We will be especially interested in \textbf{self-adjoint} (Hermitian) operators 
 \end{align}
 This is, as we mentioned for the finite-dimensional case, because self-adjoint operators are \emph{nice}: they have real eigenvalues and orthogonal eigenvectors. Since most physical values are real eigenvalues of some operator, one may expect that the differential operators that show up in physics are typically self-adjoint.
 \begin{exercise}
-We saw above that the derivative operator is not self-adjoint. What is an appropriate self-adjoint version of the derivative operator? \emph{Hint: what is the momentum operator in quantum mechanics?} 
+We saw above that the derivative operator is not self-adjoint. What is an appropriate self-adjoint version of the derivative operator? \emph{Hint: what is the momentum operator in quantum mechanics?}\footnote{\url{https://aapt.scitation.org/doi/abs/10.1119/1.9932}} 
 \end{exercise}
 \begin{example}
 Consider $\mathcal O = -\partial_x^2$ defined on the domain $x\in [0,1]$ with the boundary conditions $f(0)=f(1)=0$. Is this operator self-adjoint? We want to check of $\langle f,\mathcal O g\rangle = \langle O f, g \rangle$. We have one trick: integration by parts. Let's see how this works.
@@ -239,6 +239,25 @@ If this seems unusual, please refer back to Example~\ref{ex:eigenfunction:fourie
 
 By the way, you'll often hear people (perhaps even me) say that the Dirac $\delta$ function is not strictly an \emph{function} but rather a \textbf{distribution}---this means that it only makes sense when it is integrated over. As physicists we'll sometimes be sloppy and talk about physical quantities that could be Dirac $\delta$-functions. There is \emph{never} an appropriate, measurable physical quantity that is described by a $\delta(x)$. Anything with a $\delta(x)$ is an object that was meant to be integrated over. When you imagine that a point charge density is a $\delta$-function, this is only because you will eventually integrate over it to determine the total charge. This is precisely what we saw in the charged cat in Example~\ref{eq:charged:cat}. If you ever calculate a \emph{measurable} quantity to be $\delta(x)$ check your work. If you ever find $\delta(x)^2$, then go home, it's past your bed time.
 
+\begin{example}
+One can vaguely motivate the $\delta$-function as the unit matrix by appealing to the `histogram basis' of discretized function space. In an ordinary finite-dimensional vector space, unit matrix can be written as
+\begin{align}
+	\mathbbm{1} = |1\rangle\langle 1 | + |2\rangle\langle 2 | + \cdots
+	= \sum_{i,j}\delta_{i}^j|i\rangle\langle j| \ .
+\end{align}
+The Dirac $\delta$-function in histogram space is analogous to
+\begin{align}
+	\delta(x-x') &\to \delta_{x}^{x'}|x\rangle\langle x'| \ ,
+\end{align}
+where $x$ and $x'$ are discrete bins on the right-hand side. Thus for a discretized function $f = f(x_1)|x_1\rangle + f(x_2)|x_2\rangle + \cdots$, one has
+\begin{align}
+	\int dy\, \delta(x-y) f(y) = f(x) \longrightarrow \sum_j \delta_{x_j}^{x_i}|x_i\rangle\langle x_j| f\rangle  =  f(x_i) |x_i\rangle\ .
+\end{align}
+
+
+
+\end{example}
+
 \subsection{Orthonormality in Function Space}
 
 One should contrast the notion of completeness of a a basis this with that of \textbf{orthonormality} of the basis. Orthonormality is the statement that
@@ -278,14 +297,270 @@ Referring back to \eqref{eq:def:of:function:space:Greens:function},
 we see that our completeness relation---that is, our trick of inserting unity---in \eqref{eq:Greens:function:by:completeness} tells us an explicit form for the Green's function of a differential operator $\mathcal O$ if you know the eigenfunctions and eigenvalues of that operator:
 \begin{align}
 	G(x,y) &= \sum_n \frac{e_{(n)}^*(y) e_{(n)}(x)}{\lambda_n} \ .
+	\label{eq:G:from:completeness}
 \end{align}
 This is formally an infinite sum and so is only practically useful if each term is successively smaller. 
 
 
+\subsection{Green's Function by Completeness: why is this helpful?}
+\label{sec:Greens:fuctions:by:completeness}
+
+If you look at \eqref{eq:G:from:completeness} and think about our goals for the class, you may say \emph{hooray! We're done.} After all, given the Green's function $G(x,x')$ for a given differential operator\footnote{We've explicitly written the $x$ in $\mathcal O_x$ to indicate that derivatives are with respect to that variable, \emph{not} $x'$.} $\mathcal O_x$, then we know how to \emph{invert} $\mathcal O_x$. So for any source $s(x)$ and differential equation $\mathcal O_x \psi(x) = s(x)$, we can find $\psi(x)$ by
+\begin{align}
+	\psi(x) &= \int dx' \, G(x,x') s(x') \ .
+\end{align}
+The integral is over the domain on which we've defined the function space and subject to functions satisfying the boundary conditions. We interpreted the integral over $x'$ as an integral over the source configuration. Armed with an expression for $G(x,x')$, we can simply perform the overlap integral with $s(x')$---numerically if needed---and that gives us $\psi(x)$. Easy! What are we missing?
+
+First, all of this \emph{assumed} that you know the eigenfunctions of $\mathcal O$. This is actually a fairly safe assumption. There are only so many differential operators that matter in physics, especially since the physically motivated operators are typically self-adjoint and respect many symmetries. In fact, there are so few of these that their eigenfunctions are all famous---so when you're slogging through electrodynamics dealing with spherical harmonics, Bessel functions, and Legendre polynomials---you know that these special functions are `special' because they're eigenfunctions of variations of the Laplacian that show up in physics over and over again. They are so important that ancient graduate students had to use them \emph{before} one could just plug them into \emph{Mathematica}\footnote{Have you ever heard of Gradshteyn and Ryzhik? When I was a student there was a story that most of it was written while the authors were bored in Siberia. In Cornell the theoretical physics journal club used to be called the Gradsteyn seminar because it would ``integrate the knowledge of the graduate student participants.'' (Source: Michael Peskin, private communication.) Anyway, if you've made it this far in the footnote: you should consider running a journal club with your lab/classmates. It may be the best preparation you can give yourself for being a young academic.}. All that is to say for any differential equation that you will probably ever care about in physics, the eigenfunctions are probably known and their properties are well documented\footnote{By the way, if you were expecting this class to be about the properties of Bessel functions and all that, then forget it! I find nothing fun about that. We're going to stick to good old sines and cosines because \emph{all} of the essential intuition is already there. If you deeply understand the orthogonality, completeness, projections onto trigonometric functions, then you can `read' the special functions as generalizations of the trigonometric functions for their respective differential operators. By the way, beware of any young person who seems to know the Bessel function properties \emph{a little too well}... that person has probably been through some shit.}. 
+
+Okay, so if the identification of eigenfunctions is not a problem, why isn't \eqref{eq:G:from:completeness} the end of this course? One reason is that it is an \emph{infinite} series. The differential operator is a `matrix' in  infinite-dimensional space, so there are an infinite number of eigenfunctions that space the space. If you're like me, you really only want to deal with one or two terms---very rarely is it worth it to have to go to many more terms\footnote{One notable local exception is Prof.~Hai-Bo Yu's work on self-interacting dark matter calculations. In the resonant regime, some of these numerical results require sums over hundreds of partial waves.}. This means that the infinite sum is only practical is each successive term is a small correction to the previous terms. While this is not always the case, this may start to sound familiar to you. Let's see it in action with an example.
+
+\begin{example}
+The eigenfunctions for the angular part of the Laplacian, $\nabla^2$, in spherical coordinates are the \textbf{spherical harmonics}, $Y_{\ell m}(\theta, \varphi)$. When you tack on the radial piece, the Green's function for the Laplacian in spherical coordinates is
+\begin{align}
+	G(\vec{r},\vec{r}')
+	&=
+	\sum_{\ell=0}^\infty
+	\sum_{m=-\ell}^\ell
+	\frac{1}{2\ell+1}
+	Y_{\ell m}(\theta, \varphi)
+	Y_{\ell m}^*(\theta', \varphi')
+	\frac{r_<^\ell}{r_>^{\ell+1}} \ ,
+	\label{eq:greens:function:spherical:harmonics}
+\end{align}
+where $r_> = \text{max}(\vec{r},\vec{r}')$ and $r_< = \text{min}(\vec{r},\vec{r}')$. To be concrete you can assume that $r > r'$ so that $r_> = r$ and $r_< = r'$. This corresponds to an observer further away from the origin than the source. Remind yourself of where expressions \emph{just like this} show up in electrodynamics---for example, a charged cat curled up into a small lump near the origin of your coordinate system.
+
+Note that \eqref{eq:greens:function:spherical:harmonics} has \emph{two} sums over eigenfunction `labels' $m$ and $\ell$. That's okay---this simply generalizes the case of a single sum. Clearly this expression has the form of a completeness relation with the radial piece tacked on.
+
+The upshot of having his expression is that you can take \emph{any} source $\rho(\vec{r})$, such as that lump of charged cat, and write a closed form expression for the state (e.g.\ the electrostatic potential):
+\begin{align}
+	\Phi(\vec{r})
+	&=
+	\int d^3 \vec{r}'
+	\frac{r_<^\ell}{r_>^{\ell+1}}
+	\left[
+		\sum_{\ell, m}
+		\frac{1}{2\ell+1}
+		Y_{\ell m}(\theta, \varphi)
+		Y_{\ell m}^*(\theta', \varphi')
+	\right]
+	\rho(\vec{r}') \ ,
+\end{align}
+where the expression in the bracket has a special name:
+\begin{align}
+	P_\ell(\hat{\vec{r}}\cdot\hat{\vec{r}}')
+	&=
+	\sum_{\ell, m}
+		\frac{1}{2\ell+1}
+		Y_{\ell m}(\theta, \varphi)
+		Y_{\ell m}^*(\theta', \varphi') \ .
+\end{align}
+The $P_\ell$'s are called Legendre polynomials\footnote{Once when I was teaching a class of undergraduates in electromagnetism I asked them if they knew what these special functions, $P_\ell$ were called. One of them enthusiastically shouted, \emph{ooh! Is that a Pessel function}? That's when I learned to appreciate the joy of serendipity in teaching.} In the limit where $r\gg r'$, the expression takes the following form:
+\begin{align}
+	\Phi(\vec{r})
+	&=
+	\sum_{\ell, m}
+	\frac{1}{2\ell+1}
+	\frac{Y_{\ell m}(\theta, \varphi)}{r^{\ell+1}}
+	\left[\int d^3 \vec{r}'
+	 	 	\, r'^{\ell}
+	 	 		Y_{\ell m}^*(\theta', \varphi')
+	 	 		\rho(\vec{r}')\right] \ ,
+\end{align}
+where now the term in the brackets is purely a property of the source. Do you recognize what it is? This is simply the \textbf{multipole expansion} of the charged, lumpy cat. Observe that each successive term in the sum is suppressed by an additional power of $r'/r$. As long as $r\gg r'$---that is, as long as we are far away from the charged, lumpy cat---we can approximate its electrostatic potential as the sum of a monopole term, dipole term, etc. 
+\end{example}
+What we see from the above example is that in the limit where there is a small parameter, the Green's function series expression \eqref{eq:G:from:completeness} coming from the completeness of eigenfunctions can be seen as a Taylor expansion.
+
+\subsection{Patching a Green's function together}
+\label{sec:patching}
+
+There is another clever\footnote{`Clever' is not always a positive word. A mathematical technique that is \emph{clever} may have an aesthetic quality that we can appreciate, but it's not practically useful if you have to be \emph{clever} to know to use it. We would rather prefer something that is general and systematic. By the way, this is the reason that high-energy experimentalists all know how to use version control software for their thousand-person publications while theorists have a hard time working simultaneously on a draft between three people.} way of solving for Green's functions. We'll leave most of this work to your homework, but let's sketch the procedure. 
+
+Recall that Green's functions are the analogs to inverse matrices in a finite dimensional vector space. In other words, 
+\begin{align}
+	A(A^{-1}) = \mat{A}{i}{j}\mat{(A^{-1})}{j}{k} = \mat{\mathbbm{1}}{i}{k} = \delta^i_k \ .
+\end{align}
+The infinite dimensional version of this is
+\begin{align}
+	\mathcal O_x G(x,x') = \delta(x-x') \ .
+	\label{eq:Greens:func:as:inverse}
+\end{align}
+\begin{example}
+Let's do a quick `sanity' check for why $\delta(x-x')$ could plausibly play the role of an identity element, $\delta^i_k$. When $\delta^i_k$ acts on a vector, it acts on each component as (writing the sum explicitly):
+\begin{align}
+	\sum_k \delta^i_k v^k = v^i \ .
+\end{align}
+Recalling that finite-dimensional indices are arguments in function space, the analog for the $\delta(x-x')$ acting on a function $f$ is
+\begin{align}
+	\int dx' \, \delta(x-x') f(x') = f(x) \ .
+\end{align}
+\end{example}
+If we compare \eqref{eq:Greens:func:as:inverse} to the class of equations that we wanted to solve, $\mathcal O \psi(x) = s(x)$, we realize that the Green's function $G(x,x')$ is simply the \emph{state} $\psi$  at position $x$ coming from an idealized $\delta$-function source at position $x'$. Of course, there's no such thing as Dirac $\delta$-function sources in nature, so we emphasize that this interpretation should not be taken literally\footnote{In undergraduate electrodynamics we say that the Coulomb potential is the result of a $\delta$-function point source... but you don't actually believe that electrons are $\delta$ functions in charge do you? If you do, take some time to think about this. By the way, this is related to Exercise~\ref{ex:hydrogen:problem}.}.  Heuristically, the Green's function equation looks like:
+\begin{align}
+\mathcal O_x G(x,x')
+&=
+	\vcenter{
+		\hbox{\includegraphics[width=.3\textwidth]{figures/lec10_.png}
+		}}
+	\ . 
+\end{align}
+Note that the source is \emph{zero} for everywhere. This means that everywhere to the left of $x=x'$ is described by a homogeneous equation,
+\begin{align}
+	\mathcal O_x G_<(x,x') = 0 \ .
+\end{align}
+Further, everything to the right of $x=x'$ is described by \emph{another} homogeneous equation,
+\begin{align}
+	\mathcal O_x G_>(x,x') = 0 \ .
+\end{align}
+These are different equations for \emph{different functions}: $G_<$ and $G_>$ are two different functions that obey homogeneous equations \emph{in their respective domains}. $G_<(x,x')$ is \emph{not} defined for $x>x'$. Usually solving homogeneous equations is easier\footnote{I wouldn't really know, but it seems to take less time on \emph{Mathematica} so there you go.}. 
+
+The strategy then  is to solve for $G_<(x,x')$ and $G_>(x,x')$ as functions of $x$ and \emph{patch them together}: 
+\begin{align}
+	G(x,x') = 
+	\begin{cases}
+	G_<(x,x') & \text{ if } x<x'\\
+	G_>(x,x') & \text{ if } x>x'
+	\end{cases}\ .
+\end{align}
+
+Here $x'$ is just a spectator variable---we're keeping it fixed. For simplicity, you may even want to shift your coordinates so that $x'=0$. When we do this, we usually have a second order differential equation---some variant of the Laplacian because that's 99\% of what we do---so we need to have enough boundary conditions to fix our cofficients. Since we have two functions in a second order differential equation, we need \emph{four} boundary conditions. When we defined the Green's function problem, presumably we are considering functions over some interval $x,x'\in [a,b]$. This gives boundary conditions at $a$ and $b$, which may even be at $a=-\infty$ and $b=\infty$. The two additional boundaries are obtained at $x=x'$. These come from requiring the continuity of the solutions
+\begin{align}
+	G_<(x',x') = G_>(x',x')
+\end{align}
+and a `jump condition' between the first derivatives of the soltuiosn:
+\begin{align}
+	\lim_{\epsilon\to 0}\int_{x'-\epsilon}^{x'+\epsilon}dx \mathcal O_x G_(x,x') = 1 \ ,
+\end{align}
+where this comes from simply integrating the defining equation $\mathcal O_xG(x,x') = \delta(x-x')$ over a sliver around $x=x'$. Since $\mathcal O_x$ is assumed to be second order, the jump condition reduces to saying that the first derivatives of $G_<$ and $G_>$ are discontinuous at $x=x'$ by a certain amount. Applying these boundary conditions then gives a piece-wise solution for the Green's function.
 
 
 
+\subsection{Where we're going}
 
+Our primary goal in this course is to find the Green's function $G(x,x')$ given a differential operator $\mathcal O$. There are three primary ways to do this:
+\begin{enumerate}
 
+\item \textbf{Eigenfunctions and completeness}, Section~\ref{sec:Greens:fuctions:by:completeness}. Assuming one knows the eigenfunctions of the differential operator, this gives a series solution for the Green's function. It is practically useful only when the series is convergent.
 
+\item \textbf{Patching}, Section~\ref{sec:patching}. This method assume that one can solve the \emph{homogeneous} differential equation $\mathcal O_x G(x,x')=0$ and then produces a piece-wise solution to the \emph{inhomogeneous} differential equation that defines the Green's function, $\mathcal O_x G(x,x')=\delta(x-x')$. This is practically useful in one dimension where the boundary conditions where the pieces are connected are easy to define.
 
+\item \textbf{Fourier transform and its cousins}. This will be the topic of the rest of our course. We convert the differential equation into an \emph{algebraic equation} in momentum space. Aspects of the causal structure of the system that are manifested in complex momentum space. Furthermore, one can use contour integrals to do the `hard work.'
+\end{enumerate}
+
+Recently I filled a hole in my undergraduate education and used a fourth method called the \emph{method of variations} to solve inhomogeneous differential equations. The method is sketched out in Appendix~\ref{app:method:of:variations}. We won't have anything further to say about that here, except that it turns out you can get a faculty job in theoretical particle physics without knowing how to use it.
+
+\begin{example}
+This problem is from Matthews \& Walker Section 9-4. Consider a unit string with frequency $k= \omega/c$ and Dirichlet boundary conditions at $x=0,1$; where we note that we are using units of `length of the string.' The differential operator describing standing waves is
+\begin{align}
+ 	\mathcal O_x = \frac{d^2}{dx^2} + k^2 \ .
+ \end{align}
+Let's solve this using eigenfunctions. We know the normalized eigenfunctions from Example~\ref{ex:eigenfunction:fourier}:
+\begin{align}
+	f_n(x) &= \sqrt{2} \sin (n\pi x) 
+	&
+	\mathcal O_x f_n(x) 
+	& = \left(-n^2\pi^2 + k^2\right)f_n(x) \equiv \lambda_n f_n(x) \ .
+\end{align}
+By the way, it should  have been \emph{obvious} that these are the eigenfunctions and eigenvalues, even though $\mathcal O_x$ is \emph{not} the same as $d^2/dx^2$. Using our completeness relation, the Green's function is
+\begin{align}
+	G(x,x') &= \sum_n \frac{f^*(x)f(x')}{\lambda_n}
+	=
+	2\sum_n\frac{\sin(n\pi x) \sin (n\pi x')}{k^2 - n^2\pi^2} \ .
+\end{align}
+Thus the solution to the system with some inhomogeneous source $s(x)$
+\begin{align}
+	\left[\frac{d^2}{dx^2} + k^2\right] f(x) &= s(x)
+\end{align}
+is simply
+\begin{align}
+	f(x) &= \int_0^1 dx' \, G(x,x') s(x') \ .
+\end{align}
+\end{example}
+
+\begin{example}
+Let's do the same example with the patching method. In this case we start with the equation (the analog of $A(A^{-1}) =\mathbbm{1}$):
+\begin{align}
+	\left[\frac{d^2}{dx^2} + k^2\right]G(x,x') &= \delta(x-x')
+\end{align}
+We now separate the domain into $x<x'$ and $x>x'$, with \emph{a priori} independent solutions $G_<(x,x')$ and $G_>(x,x')$:
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/lec11_GgGl.png}
+\end{center}
+Applying the Dirichlet boundary conditions at $x=0,1$ gives
+\begin{align}
+	G(x,x') &=
+	\begin{cases}
+	G_<(x,x') = a\sin(kx) & \text{ for } x < x'\\
+	G_>(x,x') = b\sin\left(k(x-1)\right) & \text{ for } x > x'
+	\end{cases} \ .
+\end{align}
+Make sure you understand why $G_>(x,x')$ has a factor of $(x-1)$ and not $x$; this is simply the boundary condition at $x=1$ without setting $b=0$.
+The two coefficients $a$ and $b$ must be fixed by the matching at $x=x'$. 
+To do this, integrate the second order differential equation over a sliver around $x'$:
+\begin{align}
+	\int_{x'-\varepsilon}^{x'+\varepsilon}
+	dx \ , 
+	\left[
+	 \frac{d^2}{dx^2} + k^2
+	\right]
+	G(x,x')
+	&=
+	\int_{x'-\varepsilon}^{x'+\varepsilon} dx\, \delta (x-x') \ .
+\end{align}
+Note that the $k^2 G$ term in the integrand vanishes since it scales like $\varepsilon$. The integral of the second derivative is simple since it is simply the integral of a derivative, $\int dx\, d/dx(G') = \int d(G') = G'$ so that
+\begin{align}
+	\left.\frac{d}{dx}G\right|_{x'-\varepsilon}^{x'+\varepsilon}
+	&=
+	G'_>(x',x') - G'_<(x',x')
+	=
+	 1 \ .
+\end{align}
+This is the jump condition of the first derivative. If we integrate the jump condition once more over a sliver between $x\pm\varepsilon$ gives the continuity condition:
+\begin{align}
+	G_<(x',x') &= G_>(x',x') \ .
+\end{align}
+The jump and continuity conditions give
+\begin{align}
+	ka \cos(kx') + 1 &= kb \cos \left(k(x'-1)\right)
+	\\
+	a\sin(kx') &= b\sin \left(k(x'-1)\right) .
+\end{align}
+One can solve for the coefficients:
+\begin{align}
+	a&= \frac{\sin \left(k(x'-1)\right)}{k\sin k}
+	&
+	b&= \frac{\sin kx'}{k\sin k} \ .
+\end{align}
+Plugging this all in gives 
+\begin{align}
+	G(x,x') &=
+	\frac{1}{k\sin k}
+	\begin{cases}
+	\sin kx \, \sin \left(k(x'-1)\right) &\text{ if }x < x'
+	\\
+	\sin kx' \, \sin \left(k(x-1)\right) &\text{ if }x > x' \ .
+	\end{cases}
+\end{align}
+\end{example}
+Observe that you find two \emph{different} expressions for $G$ by these methods. Please confirm---perhaps numerically---that these indeed represent the same function $G(x,x')$. 
+
+\begin{exercise}
+This example is from Butkov, chapter 12.1. Consider a taut string of length $L$ under the load of a weirdly-shaped rock:
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/lec12_eg.png}
+\end{center}
+The force equation for the vertical displacement of the string, $u(x)$, is
+\begin{align}
+	T u''(x) = F(x),
+\end{align}
+where $T$ is the tension and $F(x)$ is the force-per-unit-length. One may write this more simply as $u''(x) = f(x) = F(x)/T$. Show that the Green's function may be written as a piecewise function
+\begin{align}
+	G(x,x') &=
+	\begin{cases}
+	\left(\frac{x'-L}{L}\right)x  & \text{ if } x<x'
+	\\
+	\left(\frac{x-L}{L}\right)x' & \text{ if } x>x' 
+	\end{cases}\ .
+\end{align}
+Suppose you replace the weird rock by a square paper weight of size $x < L$ in the middle of the string. Sketch what the paper weight on the string looks like.
+\end{exercise}

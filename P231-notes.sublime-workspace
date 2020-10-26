@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"include",
+				"\\includegraphics[options]{name}                   \tlatex-document"
+			],
+			[
 				"includ",
 				"\\includegraphics[options]{name}                   \tlatex-document"
 			],
@@ -75,7 +79,16 @@
 			"file": "P231_notes.tex",
 			"settings":
 			{
-				"buffer_size": 1975,
+				"buffer_size": 2083,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Lec-04-functionspace.tex",
+			"settings":
+			{
+				"buffer_size": 38165,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -84,63 +97,24 @@
 			"file": "Lec-00-intro.tex",
 			"settings":
 			{
-				"buffer_size": 7419,
+				"buffer_size": 7446,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "P231_header.tex",
-			"settings":
-			{
-				"buffer_size": 5413,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Package Control Messages\n========================\n\nGitSavvy\n--------\n\n  GitSavvy 2.26.0\n  ===============\n  \n  - Implement `git: Line History`\n  \n    A \"Line History\" (aka \"log wtf\" or \"log why\") basically calls\n    \"git log -Lx,y:<some_file>\".  This is a supereasy to use tool in\n    the editor.  It is usually the faster (in terms of you get the info\n    you're looking for faster) \"blame\" and also the faster \"File History\"\n    because often you're only interested in some part of a file. Really\n    answering \"Why is this line or section of code here?\".\n  \n    The command can be called from normal views only. Just put your cursor\n    somewhere, or drag a selection, and call the command from the Command Palette.\n    The command is called `gs_line_history` if you want to bind it to a key.\n  \n    Comes with:\n    `[o]` to open the complete commit under the cursor\n    `[O]` to open the file at that revision\n    `[g]` to open the graph context\n  \n  \n  - Improvements to the Repo History\n  \n    We already showed the path down while navigating through the history.  Now\n    we also follow and colorize the path upwards.  (For customization: the scopes\n    we use here are `git_savvy.graph.dot.above`, `git_savvy.graph.path_char.above`)\n  \n    This is not just fancy but allows easier and faster navigation:\n  \n    Use the arrow keys `[up]` and `[down]` to get to the previous or next commit.\n    Use `[alt+up]` or `[alt+down]` for \"wide\" jumps usually following the first parent.\n    After such a wide jump, you can use the built-in `jump_back`/`jump_forward`\n    commands (for example `[ctrl+-]` on Windows/Linux by default) to jump back\n    to the previous location.\n  \n  \n    There is also a new smart copy function.  Just invoke the builtin \"copy\"\n    command (for example `[ctrl+c]`) to directly copy the commit hash, or commit\n    message, or a combination of both to the clipboard (if nothing is selected).\n  \n  \n    Minor:  If on a HEAD commit we offer \"pull\", \"push\", and \"fetch\" in the\n    actions menu (`[enter]`), and the diff action opens the normal diff for staging,\n    unstaging etc.\n  \n    Finally, we now clearly mark fixup/squash commits.  (The scope here is:\n    `string.other.rebase-hint.git-savvy`.)\n  \n  \n  - Improvements to the Commit Message View\n  \n    Being in the diff area, you can now use `[o]` on a hunk to open that location\n    for editing.  Also `[,.]` for navigation per hunk.  But unstaging etc. is not\n    supported yet.\n  \n  \n  - Noteable\n  \n    Removed \"word-diff\" switch from the Diff view.  This has been superseeded\n    by the intraline diffing feature.  There is still the switch to ignore white-\n    space changes though, but the keybinding for that moved (from `[s]`) to `[w]`.\n  \n    The setting \"show_commit_diff\" now defaults to \"full\" (was: \"stat\").\n    The setting \"show_full_commit_info\" now defaults to \"true\" (was: \"false\").\n  \n  \n  For more info:\n    https://github.com/timbrel/GitSavvy/compare/2.25.0...2.26.0\n",
-			"settings":
-			{
-				"buffer_size": 2970,
-				"line_ending": "Unix",
-				"name": "Package Control Messages",
-				"read_only": true,
-				"scratch": true
 			}
 		},
 		{
 			"file": "Lec-000-template.tex",
 			"settings":
 			{
-				"buffer_size": 59,
-				"encoding": "UTF-8",
+				"buffer_size": 80,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Lec-03-linear-algebra.tex",
+			"file": "Lec-05-complex.tex",
 			"settings":
 			{
-				"buffer_size": 50865,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Lec-01-physics-vs-math.tex",
-			"settings":
-			{
-				"buffer_size": 3216,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Lec-02-dimensional-analysis.tex",
-			"settings":
-			{
-				"buffer_size": 14179,
+				"buffer_size": 80,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -205,6 +179,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"git",
+				"git: status"
+			],
+			[
+				"git:",
+				"git: status"
+			],
 			[
 				"git: s",
 				"git: status"
@@ -324,12 +306,19 @@
 	],
 	"file_history":
 	[
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-000-template.tex",
+		"/Users/flip/Documents/Notes/Conformal Dark Sector/ConformalDarkSector_Appendices.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-03-linear-algebra.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-999-Appendix-method-of-variations.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-00-intro.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-02-dimensional-analysis.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-01-physics-vs-math.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/P231_header.tex",
+		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-04-functionspace.tex",
 		"/Users/flip/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
 		"/Users/flip/Library/Application Support/Sublime Text 3/Packages/BracketHighlighter/Example.sublime-keymap",
 		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/README.md",
 		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/P231_notes.tex",
-		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/P231_header.tex",
-		"/Users/flip/Documents/P231 Notes/Math-Methods-Notes/Lec-00-intro.tex",
 		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_Plan.tex",
 		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_Prelim.tex",
 		"/Users/flip/Documents/NSFDescription2020/NSF2020_Res_BGSig.tex",
@@ -444,14 +433,7 @@
 		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/SD5thForce.tex",
 		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/bigtable.tex",
 		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/main_old.tex",
-		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/diff15.tex",
-		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/FLIP-LaTeX-grad.sublime-snippet",
-		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/FLIP-LaTeX-gamma.sublime-snippet",
-		"/Users/fliptanedo/Library/Application Support/Sublime Text 3/Packages/User/FLIP-LaTeX-snippets.sublime-snippet",
-		"/Users/fliptanedo/Downloads/here/Pollica Summer Workshop_2019_Final.tex",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/themes/academic/layouts/partials/widgets/slider.html",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/partials/widgets/about.html",
-		"/Users/fliptanedo/Documents/GitHub/theory.ucr.edu/academic-2019-flip/layouts/shortcodes/googlecalendarlong.html"
+		"/Users/fliptanedo/Documents/Temp/SD5thForceFlip/diff15.tex"
 	],
 	"find":
 	{
@@ -469,6 +451,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"***",
 			"orphan",
 			"orphan normal",
 			"orph",
@@ -497,7 +480,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -506,15 +489,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1975,
+						"buffer_size": 2083,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1323,
-								1323
+								1373,
+								1373
 							]
 						],
 						"settings":
@@ -526,24 +509,24 @@
 								{
 									"1":
 									[
-										1966,
-										1974
+										1373,
+										1374
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/tag.png",
-										"region.orangish"
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
 									]
 								},
 								"open":
 								{
 									"1":
 									[
-										87,
-										95
+										1358,
+										1359
 									]
 								},
 								"unmatched":
@@ -552,88 +535,193 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
-								"bh_regex_content"
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
 							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1668.0,
+						"translation.y": 1518.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Lec-04-functionspace.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 38165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								38165,
+								38165
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"git_gutter_is_enabled": true,
+							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 23363.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "Lec-00-intro.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7419,
+						"buffer_size": 7446,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4321,
-								4335
+								6239,
+								6239
 							]
 						],
 						"settings":
@@ -645,8 +733,8 @@
 								{
 									"1":
 									[
-										4334,
-										4335
+										6259,
+										6260
 									]
 								},
 								"icon":
@@ -661,8 +749,8 @@
 								{
 									"1":
 									[
-										4321,
-										4322
+										6239,
+										6240
 									]
 								},
 								"unmatched":
@@ -671,244 +759,88 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
-								"bh_regex_content"
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
 							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1974.0,
+						"translation.y": 3181.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "P231_header.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5413,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3184,
-								3184
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										3183,
-										3184
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"region.purplish"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										3166,
-										3167
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content"
-							],
-							"git_gutter_is_enabled": true,
-							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3045.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
 					"buffer": 3,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2970,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2970,
-								2970
-							]
-						],
-						"settings":
-						{
-							"auto_indent": false,
-							"bracket_highlighter.busy": false,
-							"default_dir": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"git_gutter_is_enabled": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"tab_width": 2,
-							"translate_tabs_to_spaces": true,
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "Lec-000-template.tex",
-					"semi_transient": false,
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 59,
+						"buffer_size": 80,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								59,
-								59
+								0,
+								0
 							]
 						],
 						"settings":
@@ -931,126 +863,11 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"git_gutter_is_enabled": true,
-							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"open_with_edit": true,
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "Lec-03-linear-algebra.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 50865,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								49384,
-								49384
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										49510,
-										49515
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/tag.png",
-										"region.orangish"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										49128,
-										49133
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1066,148 +883,36 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content"
-							],
-							"git_gutter_is_enabled": true,
-							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"open_with_edit": true,
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 31847.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "Lec-01-physics-vs-math.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3216,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2403,
-								2405
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
@@ -1216,31 +921,30 @@
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"open_with_edit": true,
 							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 937.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "Lec-02-dimensional-analysis.tex",
+					"buffer": 4,
+					"file": "Lec-05-complex.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14179,
+						"buffer_size": 80,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8090,
-								8090
+								80,
+								80
 							]
 						],
 						"settings":
@@ -1250,27 +954,12 @@
 							{
 								"close":
 								{
-									"1":
-									[
-										8090,
-										8091
-									]
 								},
 								"icon":
 								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"region.purplish"
-									]
 								},
 								"open":
 								{
-									"1":
-									[
-										7993,
-										7994
-									]
 								},
 								"unmatched":
 								{
@@ -1278,26 +967,31 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
@@ -1308,26 +1002,21 @@
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
@@ -1336,15 +1025,14 @@
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"open_with_edit": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 8240.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1391,7 +1079,7 @@
 	},
 	"output.latextools":
 	{
-		"height": 58.0
+		"height": 131.0
 	},
 	"output.mdpopups":
 	{
@@ -1451,7 +1139,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 158.0,
+	"side_bar_width": 294.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
