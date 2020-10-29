@@ -46,6 +46,7 @@ so that the defining relation for $G$,
 which suggests a simple expression for the Fourier coefficients:
 \begin{align}
 	\tilde G(k,x') &= e^{ikx'} \left[P(x,-ik)\right]^{-1} \ ,
+	\label{eq:Greens:function:Fourier:transform:heuristic}
 \end{align}
 where one may find $G(x,x')$ from simply taking the inverse Fourier transform. There will turn out to be a few neat features of this approach, but before getting there, let's start from the very beginning.
 
@@ -186,6 +187,7 @@ This implies the \textbf{Cauchy--Riemann equations}, which are equivalent to the
 Thus far we've talked about functions being analytic or not. It turns out that analytic functions are \emph{so} nice that there really aren't that many physically relevant functions that are analytic \emph{everywhere}\footnote{The analog here is people who are nice. Most people are nice most of the time. But very few people are nice \emph{all} of the time. I suspect Fred Rogers may be one of the few who could plausibly be \sout{analytic} \emph{nice} everywhere.}. Instead, we will often talk about functions that are analytic in most places but are not analytic (differentiable) in other places. Indeed, the \emph{non}-analyticity of Green's functions is a key result in this class.
 
 \subsection{A geometric point of view (optional)}
+\label{sec:analytic:geometric}
 
 For culture, let us comment on a geometric perspective of analyticity/complex-differentiability. The differential of a function, $df$, is a \textbf{differential one-form}. If you recall some of our nomenclature for dual vectors, a one-form is a kind of `row vector': it is a linear function that takes in a vector and spits out a number. If $df$ is such a dual vector, what is the vector space upon which it acts?
 
@@ -342,6 +344,351 @@ Do not integrate across a branch cut!
 \subsection{Integration on the Complex Plane}
 % StoGo 17.2.1
 
+Let's now focus on integrating analytic functions. Oops, I just mis-spoke a bit there. What I meant to write was that we want to integrate functions in a region of $\mathbbm{C}$ where those functions are analytic. Rarely are functions simply `analytic' or `not-analytic.' The functions we care about will be analytic in most places, but non-analytic in others. 
+
+When we integrate on the complex plane, $\mathbbm{C}$, we have to define a \textbf{contour}---this is just the curve, $C$, that we are integrating over. This is similar to doing a ``line integral'' in $\mathbbm{R}^2$: you are doing a `one-dimensional integral' over a two[ish]-dimensional space. An integral over the contour $C$ is:
+\begin{align}
+	\int_C dz\, f(z) &= 
+	\int_C (dx + i dy) \ , \left[u(x,y)+ i v(x,y)\right]
+	= 
+	\int_C \left[u(x,y)dx - v(x,y)dy\right] 
+	+ i \int_C \left[u(x,y)dy + v(x,y)dx\right] \ .
+\end{align}
+Written this way, we are simply doing calculus on $\mathbbm{R}^2$ and keeping track of funny factors of $i$. 
+%
+It may be helpful to remind ourselves what this means:
+\begin{center}
+\includegraphics[width=\textwidth]{figures/Lec_2017_12_integral.png}
+\end{center}
+The integral along a curve can be thought of as two-dimensional version of a Riemann sum. Recall that the one-dimensional Riemann sum approximated the integral as a sum of terms $f(x_i)\Delta x$. In more than one dimension, the quantity $\Delta x$ is promoted to a `vector'\footnote{As I write this I feel sick to my stomach. In fact, $\Delta x$ is \emph{not} promoted to a `vector,' though it is promoted to something that points in a direction. More properly, it is a [differential] one-form which is more like an \emph{dual vector} in the sense referenced in Section~\ref{sec:analytic:geometric}.}. In other words, we may write
+\begin{align}
+	\int_C dz\, f(z) = \sum_i \Delta z_i \, f(z_i) \ ,
+	\label{eq:complex:integral:Riemann}
+\end{align}
+where $\Delta z$ has a real and imaginary part: it \emph{points} to a direction in the complex plane. In the picture above, the left-hand side shows the curve $C$ on which we are integrating. Consider some point $z_i$ on the curve. That point is mapped by the function $f$ to a point $f(z_i) = u(z_i)+iv(z_i)$. At that point, the curve also has a differential element, $\Delta z_i$ which is tangent to the curve $C$ at point $z_0$ and has some fixed infinitesimal length for all $i$. The \emph{direction} of $\Delta z$ matters. It contributes to the overall phase of the term $\Delta z_i \, f(z_i)$.
+\begin{example}
+Consider the function $f(z) = z^2+i$.  Consider a specific point, $z_0 = 1+i$. If we consider different curves $C_i$ that pass through $z_0$, the integral $\int_{C_i}dz\,f(z)$ will have different contributions at $z_0$ depending on the \emph{direction of the curve} as it passes through $z_0$. To see this, consider the specific term in the sum \eqref{eq:complex:integral:Riemann} corresponding to $z_i = z_0$. If the curve $C$ happens to be moving in the positive vertical (pure imaginary) direction, then the contribution to the sum from this point is
+\begin{align}
+	\int_C dz\, f(z) = \cdots + i\Delta y\left[(1+i)^2 + i\right] + \cdots \ .
+\end{align}
+However, if the curve $C$ happens to be moving in the horizontal (pure real) direction, the contribution to the sum from this point is
+\begin{align}
+	\int_C dz\, f(z) = \cdots + \Delta x\left[(1+i)^2 + i\right] + \cdots \ .
+\end{align}
+\end{example}
+\begin{exercise}\label{eq:fundamental:theorem:calculus}
+Suppose $f$ is itself a derivative of an analytic function, $f(z)=dF(z)/dz$.
+Convince yourself that if $C$ is a smooth connected path between two points $z_0$ and $z_N$, then the integral of $f(z)$ over $C$ is
+\begin{align}
+	\int_C dz\, f(z) &= F(z_N) - F(z_0) \ ,
+\end{align}
+as you would expect from real-number calculus.
+% \footnote{By the way, this all a generalization of Stokes' theorem: the integral of the derivative of some function $f$ over some domain $D$ is simply the function evaluated on the boundary of the domain, $\partial D$. The $\partial D$ is notation for `boundary of $D$.' The fancy way to write this is
+% \begin{align}
+% 	\int_D df &= \int_{\partial D} f \ .
+% \end{align}
+% This statement holds for $f$ as a differential $n$-form (the generalization of a one-form and related to an $n$-index tensor) and $D$ is an $n$-dimensional domain. Even if you are not familiar with this nomenclature, please note the qualitative similarities with the integral of a derivative in 1D $\int dx\, (df/dx)$---which is simply the difference of $f$ at the endpoints of the domain, the integral of a curl in 2D---which is related to the `circulation' around the boundary of the 2D domain, and the integral of a divergence in 3D---which is simply related to the flux across the enclosing surface. Vector calculus isn't hard---it's just weird when we treat the 2D and 3D cases as different from the general $n$-dimensional case. 
+% }.  
+\end{exercise}
+
+
+ 
+
 \subsection{Cauchy Integral Theorem}
+% Cahill p. 160 for a sketch
+
+As we may have referred to earlier---function that are analytic everywhere are too nice. Have you ever read a novel where everyone just got along nicely? Not very interesting. Complex functions are the same---it turns out that integrals of functions around closed curves in domains where they are analytic end up being zero. 
+
+\subsubsection{Little tiny circles}
+
+Let's show this starting from the simplest possible case. Consider a function $f$ that is analytic in some region $R\in \mathbbm C$. The boundary of this region is a curve $C = \partial R$. First consider the integral of $f$ around a small circle of radius $\varepsilon$ around some point $z_0$:
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Lec_2017_12_circle.png}
+\end{center}
+In other words, $C$ can be parameterized by the angle $\theta$. We can write points $z$ on the curve as
+\begin{align}
+	z(\theta) &= z_0 + \varepsilon e^{i\theta} 
+	&
+	dz &= i \varepsilon e^{i\theta} d\theta \ .
+\end{align}
+Then the integral around the little circle around $z_0$ is
+\begin{align}
+	\oint_C dz\, f(z) &= \int_0^{2\pi} i \varepsilon e^{i\theta} d\theta \, f\left( z_0 + \varepsilon e^{i\theta} \right) \ .
+\end{align}
+Now we observe that since $f$ is analytic, we can differentiate it---which means we can write it as a Taylor expansion:
+\begin{align}
+	f(z)
+	 = f(z_0) + f'(z_0)(z-z_0) + \mathcal O(\varepsilon^2) \ ,
+\end{align}
+where we recognize that $z-z_0 = \varepsilon e^{i\theta}$. Plugging this in gives
+\begin{align}
+	\oint_C dz\, f(z) &= 
+	\int_0^{2\pi} i \varepsilon e^{i\theta} d\theta \, f(z_0) 
+	+
+	\int_0^{2\pi} i \varepsilon^2 e^{2i\theta} d\theta \, f'(z_0) 
+	+ \cdots
+	\ .
+\end{align}
+Observe that the only $\theta$-dependence in the integrand shows up in factors of $e^{n i\theta}$ for positive integers $n$. However, we note that
+\begin{align}
+	\int_0^{2\pi} d\theta e^{in\theta} 
+	= 
+	\frac{1}{in} \left(e^{2\pi i n} - e^{0}\right)
+	= 0 \ .
+	\label{eq:complex:theta:integral:trivial}
+\end{align}
+What we find is that 
+\begin{align}
+	\oint_C dz\, f(z) &= 0
+\end{align}
+for the contour $C$ being a small circle around some arbitrary point $z_0$ inside the region $R$ in which $f$ is analytic. 
+\begin{exercise}
+Convince yourself that it didn't matter that $C$ is a small circle. It could have been any small shape. 
+\end{exercise}
+Notice that we did not rely on $\varepsilon\to 0$ in order to motivate this argument. The circle didn't actually have to be small. We used $\varepsilon\to 0$ to motivate the idea of truncating the Taylor series. But armed with \eqref{eq:complex:theta:integral:trivial}, we realize that \emph{every} term in the Taylor series will vanish, no matter how high the power since that simply corresponds to some larger positive integer $n$. At this point you should start to wonder whether there may be any loopholes in this argument.
+
+\subsubsection{Finite regions}
+
+Let's now prove a more general version of this known as the \textbf{Cauchy Integral Theorem}. If $f$ is analytic in a connected region $R \in \mathbbm{C}$ with some boundary $C = \partial R$ , then 
+\begin{align}
+	\oint_{C=\partial R} dz\, f(z) &= 0 \ ,
+\end{align}
+even if $R$ is some \emph{finite} region, not just some infinitesimally small circle. From the discussion of the case where $C$ is a little circle, you may have already guessed this. Let's show this more carefully. For any such region $R$, let's break it up into boxes:
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/Lec_2017_12_plaquette.png}
+\end{center}
+The boundary of a region $\partial R$ has some orientation. By convention a positive orientation corresponds to counterclockwise. Now that we've carved up the region $R$ into a grid like Manhattan\footnote{Search for `Manhattanhenge.' It has nothing to do with this course, but this is a photogenic consequence of the Manhattan grid.}, we integrate around the boundary of one of these \emph{plaquettes}:
+\begin{center}
+\includegraphics[width=.4\textwidth]{figures/Lec_2017_plaq_int.png}
+\end{center}
+We've assumed that each plaquette has characteristic size $\varepsilon$. Note that for each side of the plaquette the orientation of $\Delta z$ is different. Let $z_0$ correspond to the center of this plaquette. Since the function is analytic, we can write the function as a Taylor function around the plaquette:
+\begin{align}
+	f(z) = f(z_0)(z-z_0) + f'(z_0) (z-z_0)^2 + \cdots
+\end{align}
+This means that we can approximate the integral around the square as
+\begin{align}
+	\oint_\text{plaquette} dz\,  f(z)
+	&= 
+	f(z_0)
+	\left(
+		\Delta z_1 + \Delta z_2 + \Delta z_3 + \Delta z_4
+	\right)
+	+ \cdots
+\end{align}
+where the $\Delta z_i$ are given in the figure above. It should be clear that the sum of the $\Delta z_i$ is zero since opposite sides give equal and opposite contributions. We have shown that to leading order the integral of an analytic function $f$ around a little box around it is zero---not too surprising given our previous result for integrating around a little circle. 
+\begin{exercise}
+What about the next-to-leading order contribution\footnote{Life advice: ``What about the next-to-leading order contribution'' is a good question to ask whenever you have shown that the leading order contribution is zero.}? Show that the next-to-leading order contribution, which goes like $\sum_i f'(z_0)\delta z_i \Delta z_i$ vanishes. Here the $\delta z_i$ is the separation from $z_0$ to the $i^\text{th}$ side, as shown in the figure above. 
+% \begin{align}
+% 	\left[
+% 	\left(\frac{\varepsilon}{2}\right)
+% 	(i\varepsilon)
+% 	+
+% 	\left(\frac{i\varepsilon}{2}\right)
+% 	(-\varepsilon)
+% 	+
+% 	\left(-\frac{\varepsilon}{2}\right)
+% 	(-i\varepsilon)
+% 	+
+% 	\left(-\frac{i\varepsilon}{2}\right)
+% 	(\varepsilon)
+% 	\right] = 0 \ .
+% \end{align}
+\end{exercise}
+The above statement is true about each plaquette. However, note that when we piece the plaquettes together, the sum of the integrals around each little boundary corresponds to the integral around the boundary of the combined region:
+\begin{center}
+\includegraphics[width=.4\textwidth]{figures/Lec_2017_plaqses.png}
+\end{center}
+One can see that neighboring boundaries have opposite orientations so that the integrals along those regions cancel. 
+%
+This means that the integral around a the boundary $C$ of finite region $R$ is equivalent to the sum of the integrals around the little plaquettes that tile that region:
+\begin{align}
+	\oint_C dz\, f(z) &= \sum_i \oint_{\text{plaquette}_i} dz\, f(z) = 0 \ .
+\end{align}
+Since the integral around the boundary of each plaquette is zero, the integral along $C$ is zero. This proves the Cauchy integral theorem, which may now be stated as follows:
+\begin{quote}
+Analytic functions are \emph{so} nice that they're boring.
+\end{quote}
+In other words, if a function $f$ is analytic in a connected region $R$ and you try to integrate over a closed path $C$ that is inside $R$, then the result is zero. 
+
+\subsection{An alternative argument (optional)}
+
+% \footnote{By the way, this all a generalization of Stokes' theorem: the integral of the derivative of some function $f$ over some domain $D$ is simply the function evaluated on the boundary of the domain, $\partial D$. The $\partial D$ is notation for `boundary of $D$.' The fancy way to write this is
+% \begin{align}
+% 	\int_D df &= \int_{\partial D} f \ .
+% \end{align}
+% This statement holds for $f$ as a differential $n$-form (the generalization of a one-form and related to an $n$-index tensor) and $D$ is an $n$-dimensional domain. Even if you are not familiar with this nomenclature, please note the qualitative similarities with the integral of a derivative in 1D $\int dx\, (df/dx)$---which is simply the difference of $f$ at the endpoints of the domain, the integral of a curl in 2D---which is related to the `circulation' around the boundary of the 2D domain, and the integral of a divergence in 3D---which is simply related to the flux across the enclosing surface. Vector calculus isn't hard---it's just weird when we treat the 2D and 3D cases as different from the general $n$-dimensional case. 
+% }.  
+
+For those who are mathematically inclined, here's a geometrically-motivated argument for Cauchy's integral theorem. Consider two points $z_1$ and $z_2$ in a connected region $R$ where a function $f$ is analytic. Now consider any path $C_1$ that connects $z_1$ to $z_2$ and any other path $C_2$ that connects $z_2$ to $z_1$. The orientation matters.
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/Lec_2017_paths.png}
+\end{center}
+In the region of analyticity, a function $f(z)$ has an anti-derivative $F(z)$ such that $f(z) = dF(z)/dz$, recall Exercise~\ref{eq:fundamental:theorem:calculus}. Then we know that
+\begin{align}
+	\int_{C_1} dz\, f(z) &= F(z_2) - F(z_1)
+	&
+	\int_{C_2} dz\, f(z) &= F(z_1) - F(z_2) \ .
+\end{align}
+We deduce that the integral of the combined path $C=C_1+C_2$ is zero. The above argument is true without having to specify what $F(z)$ is and for \emph{any} paths $C_1$ and $C_2$ that share common endpoints. We thus prove Cauchy's Integral Theorem.
+
+\paragraph{Commentary}
+This argument is highlights a general idea in differential geometry, which is the generalized Stokes' theorem. In words, one can state this as:
+\begin{quote}
+The integral of the derivative of some function $f$ over some domain $D$ is simply the function evaluated on the boundary of the domain, $\partial D$. The $\partial D$ is notation for `boundary of $D$.'
+\end{quote}
+Technically it is relevant for the domain $D$ to be sufficiently \emph{nice}; this includes the domain being connected and having a reasonable boundary. Note that the boundary $\partial D$ is always oriented---when we integrate over an interval $[a,b]\in \mathbbm{R}$, the overall sign depends on which boundary is `on top' of the integral and which is `on the bottom.' In other words, it matters if we integrate over $[a,b]$ or $[b,a]$. 
+
+We write formally as follows:
+\begin{align}
+	\int_D df &= \int_{\partial D} f \ .
+\end{align}
+Here the domain $D$ is an $n$-dimensional space and $df$ is called a \emph{differential} $n$-\emph{form}. From the name you should guess that it is related to the idea of a \emph{one-form} as a dual vector; see the optional discussion in Section~\ref{sec:analytic:geometric}.  This is a type of tensor with $n$ indices that is contracted with the `volume form' of the $n$-dimensional space. Formally it looks like this:
+\begin{align}
+	df &= (\partial_{\mu_1} f_{\mu_2\cdots \mu_n}) \; dx^{\mu_1}\wedge dx^{\mu_2}\wedge\cdots\wedge dx^{\mu_n} \ .
+	\label{eq:Stokes}
+\end{align}
+The quantity $dx^{\mu_1}\wedge\cdots\wedge dx^{\mu_n}$ is the volume form and is an \emph{oriented} $n$-dimensional differential volume element. The funny wedge symbols ($\wedge$) represent an antisymmetric tensor product. This should not be so surprising: recall that the vector triple product $\vec{v}\cdot\left(\vec{w}\times\vec{u}\right)$ is a totally antisymmetric combination of vectors that produces the volume of the parallelogram with edges corresponding to the three vectors $\vec{v}$, $\vec{w}$, $\vec{u}$. This is precisely $\vec{v}\wedge\vec{w}\wedge\vec{u}$. The $n$-dimensional wedge product generalizes this notion to $n$-dimensional volumes. 
+
+On the right-hand side of \eqref{eq:Stokes} is an integral over the \emph{boundary} of $D$. This is an oriented $(n-1)$-dimensional space. The integrand is the differential $(n-1)$-form. We thus see that the integral of $df$ over $D$ is related to a lower-dimensional integral of its primitive, $f$, on the boundary of $D$. 
+
+Stokes' theorem is the underpinning of everything you've seen in vector calculus. In one dimension:
+\begin{align}
+	\int_a^b dx\, \frac{df(x)}{dx} = \int_{f(a)}^{f(b)} df = f(b)-f(a) \ .
+\end{align}
+In two dimensions, when you have a vector field $\vec{f}(x)$, the appropriate derivative (and the one that pops out of differential form notation) is the curl, $\nabla\times \vec{f}(x)$. This becomes an integral with respect to the differential surface element $d\hat{S} = \hat{\vec{n}} dS$, which may be chosen to be oriented in the $z$-direction perpendicular to the plane\footnote{Alternatively, $\hat{\vec{n}}$ is the unit normal of the 2D curved surface in a 3D space.}. Then we have the usual  Green's theorem:
+\begin{align}
+	\int_S dS\, \hat{\vec{n}}\cdot \left(\nabla\times \vec{f}(x)\right) 
+	=
+	\oint_{C=\partial S} \vec{f}(x)\cdot d\vec{x} 
+	\ ,
+\end{align}
+where $d\vec{x}$ is a differential line element along the oriented curve $C$ that is the boundary of the integration region $S$. Finally, the divergence theorem in 3D relates the divergence of a vector field to its value on the surface:
+\begin{align}
+	\int_V dV \, \nabla\cdot \vec{f}(x)
+	=
+	\int_{S=\partial V} dS \, \hat{\vec{n}} \cdot \vec{f}(x) \ ,
+\end{align}
+where $\hat{\vec{n}}$ is the unit normal vector at each point on the surface $S$ bounding the volume $V$. These three versions of the `fundamental theorem of calculus' all look tantalizingly similar---and here we see that in fact, they're all manifestations of the general Stokes' theorem. 
+
+Observe that the `boundary of a boundary' is nothing. If you have a disc, the boundary is a circle. The circle itself has no endpoints---in contrast to an interval. We can start to see some of the neat features of differential geometry when we look at Stokes' theorem, \eqref{eq:Stokes}, from this perspective. Indeed, one can read Stokes' theorem as a relation between the differential operator $d$ acting on an integrand and the `boundary operator' $\partial$  acting on the space. The `boundary of a boundary = 0' mantra can be loosely translated into `derivative of a derivative' is zero; where we are not being technically rigorous at all. You've already seen variants of this in vector calculus:
+\begin{align}
+	\nabla\times \nabla f(x) &= 0
+	&
+	\nabla \cdot \nabla\times \vec{f}(x) &=0 \ ,
+\end{align}
+and so forth. I used to think vector calculus was very challenging because there seemed to be so many different rules for how to differentiate and integrate. It turns out that differential geometry unifies this nicely into a general mathematical structure that, when applied to specific dimensions of space, produce all of the funny things you learn in undergraduate electrodynamics. It should not surprise you that this mathematical structure has a lot to say about the structure of theories like electrodynamics and gravity\footnote{One of my favorite introductions: \url{https://arxiv.org/abs/hep-th/0611201v1}.}.
+\begin{exercise}
+To see how this structure shows up in a simple physical system, look up Montgomery's treatment of the Falling Cat Problem. Similarly, Shapere and Wilczek's treatment of swimming animals at low Reynolds number. Wilczek famously won the Nobel prize for his contributions to the gauge theory of the strong nuclear force; a theory based on precisely this type of geometric structure we've discussed here. A final reference is to look up the Parallel Parking Problem, which was a topic of discussion in the first version of this P231 class that I taught in 2016. In that problem, one asks how a car can move transversely given that its only degrees of freedom are to move forward/backward and to turn the steering wheel. For the next two years students raised concerns that this class was hopelessly mathematical---so now here we are at the tail end of an exercise with no specific directions in an optional section of the lecture notes.
+\end{exercise}
+
+\subsection{Cauchy's Integral Formula}
+
+Cauchy's Theorem tells us that integrating functions over domains where they are analytic is boring. Cauchy's Integral Formula\footnote{At this point you wonder: how is it that Cauchy got his name on everything in this business?} is the first step to something that is decidedly \emph{not} boring. The formula applies to a function $f$ that is analytic in some connected domain and a path $C$ entirely contained in that domain:
+\begin{align}
+	f(z_0) &= \frac{1}{2\pi i} \oint_C dz \frac{f(z)}{(z-z_0)}  \ .
+	\label{eq:cauchy:integral}
+\end{align}
+This is the statement that the value of some function at some point $z_0$ is related to an integral of the function around the point. In fact, maybe this shouldn't be so surprising: the right-hand side looks like some kind of average of the function in the neighborhood of the function. Given the relation between analytic functions and harmonic functions, this sounds plausible. On the right-hand side there's a factor of $(2\pi (z-z_0))^{-1}$ which indeed looks like one is averaging over the circumference around the point $z_0$. The factor of $i$ is curious. Those who are familiar with all of this will notice the `famous' combination $(2\pi i)$.
+
+Let is highlight that the integrand on the right-hand side is 
+\begin{align}
+	g(z) &= \frac{f(z)}{z-z_0} \ .
+	\label{eq:g:z:cauchy:integral:theorem}
+\end{align}
+Unlike $f(z)$, $g(z)$ is absolutely \emph{not} analytic `everywhere' in the region that we're looking at. Most notably, it is not analytic at $z=z_0$. What's the derivative of $g(z)$ at the singularity? Heck if I know\footnote{Is it infinity? I suppose, but the notion of infinity in complex space can be a little tricky. At any rate, usually `infinity' is not the kind of answer that inspires much confidence.}. This is important because it is our first example of a function that is analytic in a region up to a single point; we say that the function $g(z)$ has a \textbf{pole} at $z=z_0$.
+
+Since the integrand $g(z)$ has a pole, we probably shouldn't integrate over it. No problem, our integration contour $C$ away from $z_0$. However, $z_0$ still punctures our domain over which the integrand is analytic\footnote{We've given our domain a topology. This, by the way, perhaps the one of the lamest things you can give someone. Once when I was a child I was sad when my parents got me a pair of socks for my birthday. I'd have been even more disappointed with topology. At least the socks kept my feet warm.}. To see what this does, let's consider the integral on the right-hand side.
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/Lec_2017_holes.png}
+\end{center}
+Let us call $C_\text{out}=C$, the original contour over which we're integrating. It is oriented counter clockwise by assumption. Because we're curious about the singularity at $z=z_0$, let's deform the contour by building a little bridge $B_1$ that heads towards $z_0$, then a little circle $-C_\text{in}$ that goes around the pole\footnote{Note the minus sign! We define $C_\text{in}$ to have positive/counter-clockwise orientation. In the picture above, we see that we traverse this little circle in the clockwise direction, so we put a minus sign on $C_\text{in}$.}, and then a little bridge $B_2$ that returns to $C_\text{out}$ where we originally left it. Clearly the integral over $B_1$ and $B_2$ cancel because
+\begin{align}
+	B_1 = -B_2
+\end{align}
+as paths. Note, however, that the region enclosed by the total curve $C_\text{out} +B_1-C_\text{in}+B_2$ is a region in which $g(x)$ is totally analytic. The $-C_\text{in}$ boundary separates the pole from the region enclosed\footnote{An engineer, a physicist, and a mathematician are tasked to optimize the amount of space surrounded by a finite length of fencing. The engineer builds a square pen since that makes it simple to construct. The physicist mumbles something about variational principles and builds a circle, stating that it optimizes the area enclosed for fixed perimeter. The mathematician takes the fence, throws away most of it, and then makes a tiny enclosure. The mathematician then carefully steps inside and says, ``I declare myself to be on the outside.''}. This means that Cauchy's Theorem holds. Because the bridge integrals over $B_1$ and $B_2$ cancel, the theorem tells us that
+\begin{align}
+	\oint_{C_\text{out}} dz\, g(z)
+	-
+	\oint_{C_\text{in}} dz\, g(z)
+	= 0 \ ,
+\end{align}\
+where the minus sign came from $\oint_{-C_\text{in}} = - \oint_{C_\text{in}}$. The first term is precisely the right-hand side of \eqref{eq:cauchy:integral}. Apparently the second term is supposed to be $f(z_0)$. We can evaluate the second term along the contour by parameterizing $C_\text{in}$ as
+\begin{align}
+	C_\text{in}: \quad z(\theta) = z_0 + \varepsilon e^{i\theta} \ ,
+\end{align}
+which goes around $C_\text{in}$ for $\theta \in [0,2\pi]$. Now watch carefully. The relevant quantities in our integrand are:
+\begin{align}
+	dz &= i\varepsilon e^{i\theta} d\theta 
+	&
+	z-z_0 &= \varepsilon e^{i\theta} \ .
+\end{align}
+Now watch carefully: 
+\begin{align}
+	\oint_{C_\text{in}} dz\, g(z)
+	=
+	\oint_{C_\text{in}} dz\, \frac{f(z)}{z-z_0}
+	= 
+	i\oint_{C_\text{in}} d\theta f(z) 
+	= 2\pi i f(z_0). 
+	\label{eq:cauchy:integral:theorem:step}
+\end{align}
+Note that once we wrote the integral with respect to $d\theta$, this is just an ordinary `real' integral where the integrand happens to have complex numbers in it. What is critical is that the powers of $e^{i\theta}$ canceled. Compare this to what happened in \eqref{eq:complex:theta:integral:trivial}, which was the analogous critical step for showing that the integral of analytic functions vanishes. In \eqref{eq:cauchy:integral:theorem:step} we ended up with \emph{no} factors of $e^{i\theta}$ so that the $d\theta$ integral ended up being non-zero. 
+
+Putting this all together gives the desired result,
+\begin{align}
+	f(z_0) = \frac{1}{2\pi i}\oint_C dz\, \frac{f(z)}{z-z_0} \ .
+	\label{eq:cauchy:integral:theorem}
+\end{align}
+
+The star of this discussion is not the analytic function $f(z)$; rather it is the analytic-up-to-a-pole function $g(z)$. Unlike our \emph{boring} scenario of functions that are analytic in a given domain, interesting stuff happens when our functions have singularities. We get to live dangerously and dance around theses singularities. In general, we will refer to singularities that go like $(z-z_0)^{-n}$ to be poles at $z=z_0$. The positive integer $n$ is called the order of the pole. The case $n=1$ is called a \textbf{simple pole}.
+
+\subsection{From Taylor to Laurent}
+
+Functions with poles are clearly not analytic \emph{everywhere}. However, they're pretty close to being analytic. They're analytic except for isolated poles. A function that is analytic up to poles is called \textbf{meromorphic}. If you're like me, you should classify these as \emph{nice, but not too nice} functions. They're just not-nice enough to be interesting. If you're keeping up with the `big picture,' you'll recall that the Fourier transform of a differential operator's Green's function  \eqref{eq:Greens:function:Fourier:transform:heuristic} appears to be in this class.
+
+In a region where $f$ is analytic, differentiability meant that one could write a Taylor expansion: a series of terms that go like $(z-z_0)^n$ for positive integers $n$. When $f$ is merely \emph{meromorphic}, the Taylor expansion is generalized to a \textbf{Laurent expansion}:
+\begin{align}
+	f(z) = \sum_{n=-N}^\infty  a_n(z_0) (z-z_0)^n \ ,
+\end{align}
+where $N$ is the order of the pole at $z_0$ (if there is one). 
+
+\subsection{The Residue Theorem}
+
+Now we arrive at our mail tool. Suppose $f(z)$ is meromorphic in some region of the complex plane. In fact, suppose $f(z)$ has a simple pole at $z_0$; the function $g(z)$ in \eqref{eq:g:z:cauchy:integral:theorem} is a function precisely of this type. Consider the integral of $f(z)$ around a closed contour that goes around the pole once. For example, the pole is in some connected region $R$ and the contour is the boundary of this region, $C=\partial R$. Applying the Laurent expansion about $z_0$ for this meromorphic function $f$ gives
+\begin{align}
+	\oint_C dz\, f(z) &= \oint_C dz 
+	\left[
+	\sum_{n<0} a_n (z-z_0)^n + \sum_{n\geq 0} a_n (z-z_0)^n
+	\right] \ .
+\end{align}
+All we have done is separated the positive-power terms of the Laurent expansion from the negative power terms. We know that the positive power terms integrate to zero because those terms are analytic in $R$. Thanks, Cauchy's Theorem.
+
+What about the term with negative powers? Since we assumed that $z_0$ is a simple pole, we know that only the $a_{-1}$ term is non-zero in this Laurent expansion about $z_0$. That means that we can write the integral as
+\begin{align}
+	\oint_C dz\, f(z) &= 
+	\oint_C dz \,
+	\frac{a_{-1}}{z-z_0} 
+	\ .
+	\label{eq:residue:int:step:1}
+\end{align}
+The coefficient $a_{-1}$ of the Laurent expansion about a pole is called the \textbf{residue} of the function $f$ at the pole $z_0$. We will use the notation $\text{Res}_f(z_0)$. 
+
+
+Now recall Cauchy's Integral Theorem. For the sake of clarity (I have used $f$ too many times), let us write the integral theorem with respect to an analytic-in-this-neighborhood function $h$:
+\begin{align}
+	\oint_C \frac{h(z)}{z-z_0} = {2\pi i} \, h(z_0) \ ,
+\end{align}
+we've gone ahead and re-arranged some terms. Comparing this to \eqref{eq:residue:int:step:1}, we may take $h(z) = a_{-1} = \text{Res}_f(z_0)$. This means that $h(z_0) = \text{Res}_f(z_0)$ so that we ultimately have
+\begin{align}
+	\oint_C dz\, f(z) &=  2\pi i  \, \text{Res}_f(z_0) \ .
+\end{align}
+We will generalize this shortly, but the main idea is in this simple example. If you can identify the $a_{-1}$ coefficient of a meromorphic function at its pole, then you can easily integrate the function around the pole. As long as there aren't any other poles in the neighborhood, it doesn't matter what your contour is as long as you are going around counter-clockwise and you go around exactly once.
+
+
+
+
+
+
+
 
 
