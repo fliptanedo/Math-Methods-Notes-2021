@@ -731,9 +731,9 @@ where $C$ is a positively oriented contour that circles the second-order pole $z
 	\int_0^{2\pi}d\theta\, e^{in\theta} 
 	&=
 	\begin{cases}
-	2\pi i & \text{\quad if } n\neq 0
+	0 & \text{\quad if } n\neq 0
 	\\
-	0 & \text{\quad if } n= 0
+	2\pi  & \text{\quad if } n= 0
 	\end{cases} \ .
 \end{align}
 Following the same in the previous sub-sections, the integral in \eqref{eq:non-simple:pole:example} about a contour $C$ that circles $z_0=2i$ once is equivalent to the integral over smaller contour $C'$ that is a small circle that surrounds $z_0$. Parameterize $C'$ by the angular variable:
@@ -913,7 +913,7 @@ And so we find
 This is an absolutely correct result about a \emph{real} integral that we sneakily derived without actually doing the integral. I assume one may check this by the appropriate trigonometric substitution\footnote{Just kidding, you can just check it on \emph{Mathematica}. You can even tell people that you did the trig substitution if it makes you feel better.} Observe that the critical step was that the curved part of the contour (the one that actually had imaginary parts) went to zero in a well defined limit. 
 \end{example}
 \begin{exercise}
-What result do you get when you solve for the same integral of function $f(x)=(x^2+1){-1}$ over the real line, but this time you use the contour $C'$ that encircles the lower half of the complex plane?
+What result do you get when you solve for the same integral of function $f(x)=(x^2+1)^{-1}$ over the real line, but this time you use the contour $C'$ that encircles the lower half of the complex plane?
 \end{exercise}
 Let's address the question of \textbf{analytic continuation}\footnote{See Appel section 5.3 for a more careful discussion.}. We started with a purely real function $f(x)$ and `generalized it' to a complex function $f(z)$ that happened to have poles in the complex plane. Because we used the residue theorem, the details of these poles (residue and whether they're enclosed by $C$) are critical for performing the integral. So a good question is: is the \emph{complex function} $f(z)$ even uniquely defined given the \emph{real} function $f(x)$?\footnote{My notation is a little glib and assumes the answer. If you want, you can write $f_\mathbbm{C}$ and $f_\mathbbm{R}$ to differentiate the two functions that are different in principle.}
 \begin{center}
@@ -938,7 +938,7 @@ The idea is to place a unit sphere at the origin of $\mathbbm{C}$. The south pol
 \subsection{The Main Example: follow this carefully}
 Let's try another instructive example. Here's an real integral that we would like to solve using contour integral techniques:
 \begin{align}
-f(x) = \int_{-\infty}^\infty  dx\,
+\int dx\, f(x) = \int_{-\infty}^\infty  dx\,
 \frac{2\cos x}{x^2+1} \ .
 \end{align}
 We can analytically continue this into a complex function by simply replacing the real variable with a complex variable, $x\to z$. This complex function $f(z)$ is analytic on the real line. The presence of simple poles at $z=\pm i$ mean that it is meromorphic with respect to the whole complex plane. It is convenient---for reasons that will be clear momentarily---to write the cosine as a sum of exponentials:
@@ -970,19 +970,21 @@ where we recall that $i$ is runs over the poles enclosed by the contour $C$. The
 	z(\theta) &= R\cos\theta + i R\sin\theta
 	\label{eq:z:paramterization:large:arc}
 \end{align}
-where for $C_1$ the arc is given by $\theta \in [0,\pi]$ while for $\bar C_2$ the arc is $\theta\in[0,-\pi]$. We assume the limit $R\to \infty$. The arc integral is then:
+where for $C_1$ the arc is given by $\theta \in [0,\pi]$ while for $\bar C_2$ the arc is $\theta\in[0,-\pi]$. We assume the limit $R\to \infty$. The arc integrals are then:
 \begin{align}
 	\int_{\text{arc}}
 	dz \, 
-	\left[f_+(z) + f_-(z)\right]
+	%  \left[f_+(z) + f_-(z)\right]
+	f_\pm(z)
 	=
 	\int_\text{arc}
 	d\theta \, 
-	\frac{e^{iz}}{z^2+1}
-	+ 
-	\int_\text{arc}
-	d\theta \, 
-	\frac{e^{iz}}{z^2+1} \ .
+	\frac{e^{\pm iz}}{z^2+1}
+	% + 
+	% \int_\text{arc}
+	% d\theta \, 
+	% \frac{e^{iz}}{z^2+1} 
+	\ .
 \end{align}
 When we plug in the parameterization \eqref{eq:z:paramterization:large:arc}, we see that the denominator of $f_\pm$ scales like $R^2$. There's an additional factor of $R$ in the numerator coming from $dz$, and so it may  appear that \emph{either} $C_1$ or $\bar C_2$ could be used. However, recall that $f_{\pm}(z)\sim e^{\pm iz}$ and exponentials beat polynomials. Plugging in $z(\theta)$ into the exponentials gives
 \begin{align}
@@ -1004,7 +1006,7 @@ The oscillating part is not relevant: since $|e^{i\varphi}| = 1$ , this factor d
 \end{itemize}
 Because the $e^{-R}$ exponential suppression defeats the polynomial $R^{-1}$ scaling, the vanishing of the integral along the arc is determined only by this exponential factor: $\lim_{R\to\infty}e^{-R}/R\to 0$. We thus have the following approach to the original real integral:
 \begin{align}
-f(x) &= \int_{-\infty}^\infty  dx\,
+	\int f(x) &= \int_{-\infty}^\infty  dx\,
 \frac{2\cos x}{x^2+1} 
 	= 
 	\int_{-\infty}^\infty  dx\,
@@ -1028,7 +1030,7 @@ f(x) &= \int_{-\infty}^\infty  dx\,
 \end{align}
 In the second step we have used the fact that the integral along the real line can be extended by large arcs along $C_1$ or $\bar C_2$ as long as the integral along those arcs vanishes. The residues are straightforward: 
 \begin{align}
-	\text{Res}_{f_\pm}(\pm i) = \frac{1}{2ie}
+	\text{Res}_{f_\pm}(\pm i) = \pm \frac{1}{2ie}
 \end{align}
 so that the final result is
 \begin{align}
