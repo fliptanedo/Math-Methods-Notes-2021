@@ -1,0 +1,64 @@
+%!TEX root = P231_notes.tex
+
+\section{Fourier Conventions}
+% \lecdate{lec~12}
+% 2017 Lec 15
+
+This section is inspired by an excellent post on \texttt{physics.stackexchange}\footnote{\url{https://physics.stackexchange.com/a/308248}}. There are many different conventions for Fourier transforms. The danger is that you accidentally use one convention to do the Fourier transform and a different convention for the inverse transform. 
+
+There are two choices one can make when defining a Fourier transform convention; we parameterize these choices by real numbers $a$ and $b$. The Fourier transform $\tilde f(\omega)$ of a function $f(t)$ is
+\begin{align}
+	\tilde f(\omega)
+	&= 
+	\sqrt{\frac{|b|}{(2\pi)^{1-a}}}
+	\int_{-\infty}^\infty dt\, e^{ib\omega t} f(t) \ .
+\end{align}
+We see that $a$ tells us about the $(2\pi)$ factors and $b$ tells us about the argument of the basis function $e^{ib\omega t}$. With this basis, the inverse Fourier transform is 
+\begin{align}
+	f(t)&=
+	\sqrt{\frac{|b|}{(2\pi)^{1+a}}}
+	\int_{-\infty}^\infty d\omega\, e^{-ib\omega t} f(\omega) \ .
+\end{align}
+
+One may check that the inverse Fourier transform of a Fourier transform gives the original function:
+\begin{align}
+	\tilde{\tilde f} &=
+	\frac{|b|}{2\pi}
+	\int_{-\infty}^\infty d\omega\, e^{-ib\omega t}
+	\int_{-\infty}^{\infty}
+	ds\, e^{ib\omega s} f(s)
+	\\
+	&= 
+	\frac{|b|}{2\pi}
+	\int ds\, f(z) \int d\omega \, e^{ib\omega(s-t)}
+	\\
+	&= \int ds\, \delta(s-t) f(s) \ ,
+\end{align}
+where we have used $\int d\xi \exp(2\pi i x\xi) = \delta(x)$. 
+
+The convention that we will choose for the \emph{time}--\emph{frequency} [inverse] Fourier transform is
+\begin{align}
+	f(t) &= \int_{-\infty}^{\infty} \dbar\omega e^{-i\omega t} \tilde f(\omega)
+	&
+	\dbar \omega &\equiv\frac{d\omega}{2\pi} \ .
+\end{align}
+This corresponds to $a=-1$ and $b=1$. The corresponding transform for the frequency-domain function is
+\begin{align}
+	\tilde f(\omega) &= 
+	\frac{1}{2\pi}
+	\int_{-\infty}^\infty dt\, e^{i\omega t} f(t) \ .
+\end{align}
+
+
+
+All of this generalizes to higher dimensions: you simply Fourier transform each dimension. In fact, one is free to use a different Fourier transform convention for each direction. We can use this freedom to pick a convention that `automatically' fits our conventions for spacetime. In particular, given a four-vector $x=(t,\vec{x})$ and its conjugate four-momentum $p=(\omega, \vec{k})$, one may choose to Fourier transform as follows: 
+\begin{align}
+	f(x) &= \int \dbar\omega\dbar^3\vec{k} e^{-i(\omega t-\vec{k}\cdot\vec{x})} \tilde f(p)
+	\ .
+\end{align}
+With this convention, the basis function is simply
+\begin{align}
+	e^{-i(\omega t-\vec{k}\cdot\vec{x})} 
+	= e^{-ip\cdot x} \ , 
+\end{align}
+where $p\cdot x$ is the usual Minkowski dot product, $p_\mu x^\mu$. This makes it clear that the basis function is Lorentz invariant. The Fourier transform would still respect the spacetime symmetries even if we had not chosen a convenient notation---it just wouldn't be as simple to see.

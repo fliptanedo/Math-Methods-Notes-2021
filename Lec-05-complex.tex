@@ -217,7 +217,7 @@ However, if we think about this complex space as a two-dimensional real space, t
 	df(z_0)\left[\vec{v}\right] &=
 	\left.\frac{\partial f}{\partial x}\right|_{z_0} \Delta x
 	+
-	\left.\frac{\partial f}{\partial x}\right|_{z_0} \Delta x
+	\left.\frac{\partial f}{\partial y}\right|_{z_0} \Delta y
 	\label{eq:diff:geo:CR:2}
 \end{align}
 Comparing \eqref{eq:diff:geo:CR:1} and \eqref{eq:diff:geo:CR:1} gives 
@@ -463,7 +463,7 @@ The boundary of a region $\partial R$ has some orientation. By convention a posi
 \end{center}
 We've assumed that each plaquette has characteristic size $\varepsilon$. Note that for each side of the plaquette the orientation of $\Delta z$ is different. Let $z_0$ correspond to the center of this plaquette. Since the function is analytic, we can write the function as a Taylor function around the plaquette:
 \begin{align}
-	f(z) = f(z_0)(z-z_0) + f'(z_0) (z-z_0)^2 + \cdots
+	f(z) = f(z_0) + f'(z_0) (z-z_0)^2 + \cdots
 \end{align}
 This means that we can approximate the integral around the square as
 \begin{align}
@@ -652,7 +652,7 @@ In a region where $f$ is analytic, differentiability meant that one could write 
 \end{align}
 where $N$ is the order of the pole at $z_0$ (if there is one). 
 
-\subsection{The Residue Theorem}
+\subsection{The Residue Theorem: a first look}
 
 Now we arrive at our mail tool. Suppose $f(z)$ is meromorphic in some region of the complex plane. In fact, suppose $f(z)$ has a simple pole at $z_0$; the function $g(z)$ in \eqref{eq:g:z:cauchy:integral:theorem} is a function precisely of this type. Consider the integral of $f(z)$ around a closed contour that goes around the pole once. For example, the pole is in some connected region $R$ and the contour is the boundary of this region, $C=\partial R$. Applying the Laurent expansion about $z_0$ for this meromorphic function $f$ gives
 \begin{align}
@@ -685,9 +685,396 @@ we've gone ahead and re-arranged some terms. Comparing this to \eqref{eq:residue
 We will generalize this shortly, but the main idea is in this simple example. If you can identify the $a_{-1}$ coefficient of a meromorphic function at its pole, then you can easily integrate the function around the pole. As long as there aren't any other poles in the neighborhood, it doesn't matter what your contour is as long as you are going around counter-clockwise and you go around exactly once.
 
 
+% Lec 13
+
+\subsection{The Residue Theorem: more carefully}
+
+The residue theorem is our primary tool for calculating integrals on the complex plane. Let's see how it generalizes. Consider a meromorphic function $g(z)$ with two simple poles:
+\begin{align}
+	g(z) &= \frac{h(z)}{(z-z_1)(z-z_2)} 
+	&
+	h(z) \text{ analytic over }\mathbbm{C} \ .
+\end{align}
+The simple poles are located at $z=z_1$ and one at $z=z_2$. Consider a contour $C$ that encloses both poles. The integral of $g(z)$ along $C$ is simply $2\pi i$ times the sum of the residues of the two simple poles. This is easy to see from dividing $C$ into the sum of two paths:
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/Lec_2017_13_2poles.png}
+\end{center}
+Here $C_1$ is a closed contour that encloses $z_1$ but not $z_2$. Similarly, $C_2$ is a closed contour that encloses $z_2$ but not $z_1$. Observe that $C_1$ and $C_2$ overlap along a line that separates the two poles. Because both $C_1$ and $C_2$ are positively oriented, the integrals along this line cancel. From this it is clear that
+\begin{align}
+	\oint_C dz\, g(z) &=
+	\oint_{C_1} dz\, g(z) 
+	+
+	\oint_{C_2} dz\, g(z)
+	= 2\pi i\left(\text{Res}_f(z_1) + \text{Res}_f(z_2)\right) \ .
+\end{align}
+This gives a more general form of the residue theorem. The integral of a meromorphic function $f(z)$ around a closed contour $C$ that is the boundary of some region of the complex plane\footnote{Note that this means that $C$ is positively oriented and only circles around the region once.} is
+\begin{align}
+	\oint_C dz\, f(z) &= 2\pi i \sum_{i\in \text{poles}} \text{Res}_f(z_i) \ ,
+\end{align}
+where the sum is over the poles of $f$ at $z_i$ enclosed inside $C$.
+\begin{exercise}
+How would the residue theorem change if the contour $C$ were oriented in the opposite direction? What if the contour circled the poles multiple times? What if the contour circled some poles some number of times, and other poles a different number of times?
+\end{exercise}
 
 
+\subsection{Non-simple poles (a case study in being careful)}
 
+So far we've focused only on meromorphic functions that have \emph{simple} poles. What about higher order singularities? Here's a tangible example:
+\begin{align}
+	\oint_C dz \, f(z) = ?
+	&&
+	f(z) &= \frac{1}{(z-2i)^2} \ ,
+	\label{eq:non-simple:pole:example}
+\end{align}
+where $C$ is a positively oriented contour that circles the second-order pole $z_0 = 2i$. Because $f(z)$ has no simple pole at $z_0$, it looks like there's no contribution to the integral. To check this, we recall Cauchy's integral formula, \eqref{eq:cauchy:integral:theorem:step}. The reason why simple poles contributed to the contour integral is the observation that for an integer,  $n$, the integral of $e^{in\theta}d\theta$ behaves as follows: 
+\begin{align}
+	\int_0^{2\pi}d\theta\, e^{in\theta} 
+	&=
+	\begin{cases}
+	2\pi i & \text{\quad if } n\neq 0
+	\\
+	0 & \text{\quad if } n= 0
+	\end{cases} \ .
+\end{align}
+Following the same in the previous sub-sections, the integral in \eqref{eq:non-simple:pole:example} about a contour $C$ that circles $z_0=2i$ once is equivalent to the integral over smaller contour $C'$ that is a small circle that surrounds $z_0$. Parameterize $C'$ by the angular variable:
+\begin{align}
+	z(\theta) &= z_0 + \varepsilon e^{i\theta} & dz &= i\varepsilon e^{i\theta} \, d\theta \ .
+\end{align}
+Then the integral is:
+\begin{align}
+	\oint_C dz\, f(z) 
+	= 
+	\oint_{C'} dz\, f(z) 
+	= 
+	\int_0^{2\pi} i\varepsilon e^{i\theta} d\theta\, 
+	\frac{1}{\varepsilon^2 e^{2i\theta}} 
+	=
+	\frac{i}{\varepsilon}
+	\int_0^{2\pi} d\theta\, 
+	e^{-i\theta}
+	= 0 \ .
+	\label{eq:non-simple:pole:eg:zero}
+\end{align}
+So this is all consistent with the mantra of \emph{find the $a_{-1}$ coefficient of the Laurent expansion, that's the residue}. 
+
+We should be careful, though. If we're too slick we can convince ourselves of wrong things. For example, suppose we wanted to generalize \eqref{eq:non-simple:pole:example} by changing the numerator of $f(x)$:
+\begin{align}
+	\oint_C dz \, f(z) = ?
+	&&
+	f(z) &= \frac{h(z)}{(z-2i)^2} \ ,
+	\label{eq:non-simple:pole:example:hz}
+\end{align}
+where $h(z)$ is an analytic function. For the sake of argument, let's assume that $h(z)/(z-2i)^2$ has been simplified so that there are no common factors between the numerator and denominator\footnote{For example, if $h(z)=(z-2i)$ then clearly $f(z)$ has a simple pole at $z_0=2i$ so the integral picks up a non-zero residue.}. One might think that when we shrink the contour from $C$ to $C'$, we can approximate $h(z)= h(z_0)$ so that
+\begin{align}
+	\oint_{C'}dz\, f(z)
+	&=
+	\oint_{C'} i\varepsilon e^{i\theta}d\theta\, 
+	\frac{h(z_0)}{\left(z-2i\right)^2}
+	=
+	\frac{i}{\varepsilon}h(z_0)
+	\int_0^{2\pi} d\theta\, 
+	e^{-i\theta}
+	= 0\,?
+\end{align}
+In general, this argument is \emph{wrong}. It is wrong even though the \eqref{eq:non-simple:pole:eg:zero} happens to be true. 
+\begin{exercise}
+Can you spot the incorrect assumption?
+\end{exercise}
+The incorrect assumption is that we could approximate $h(z) = h(z_0)$ because the little circle $C'$ is always close to $z_0$. The intuition is fine, but we weren't careful enough: even though $h(z)$ is analytic everywhere, we should remember write a Taylor expansion:
+\begin{align}
+	h(z) = h(z_0) + h'(z_0)(z-z_0) + \cdots
+\end{align}
+Even if our intent is to only keep the first term, it's a good habit to remember that the Taylor expansion contains many terms. Let's see what happens: 
+\begin{align}
+	\oint_{C'}dz\, f(z)
+	&=
+	\oint_{C'} i\varepsilon e^{i\theta}d\theta\, 
+	\frac{h(z_0)+ h'(z_0)(z-z_0) + \cdots}{\left(z-2i\right)^2}
+	\\
+	&
+	=
+	\frac{ih(z_0)}{\varepsilon}
+	\int_0^{2\pi} d\theta\, 
+	e^{-i\theta}
+	+
+	{ih'(z_0)}
+	\int_0^{2\pi} d\theta
+	+\cdots
+	\label{eq:non-simple:pole:example:hz:punchline}
+\end{align}
+While the first term vanishes, the second term is clearly non-zero since it's a contour integral. Indeed, one ends up with
+\begin{align}
+	\oint_{C'}dz\, \frac{h(z)}{(z-2i)^2}
+	= 2\pi i h'(z_0) \ ,
+\end{align}
+where evidently $\text{Res}_f(2i)=h'(2i)$ is the residue of $f(z)=h(z)/(z-2i)^2$ at $z_0=2i$. 
+\begin{exercise}
+Why don't higher order terms in \eqref{eq:non-simple:pole:example:hz:punchline} do not contribute to the contour integral.
+\end{exercise}
+The purpose of this example was to show that it can be a little tricky to identify the residue of a function by simply `looking at the denominator.' You will derive an explicit formula in your homework. Fortunately, we will rarely consider non-simple poles in this course. 
+
+% Lec 14 2017
+
+Let's go through a few examples. These are from the third edition of Boas, chapter 14.6. 
+
+\begin{example}
+Let $f(z)=\cot z$. Find the residue of $f$ at $z=0$. 
+
+To solve this, we can write out the numerator and denominator of the cotangent:
+\begin{align}
+	\cot z &= \frac{\cos z}{\sin z}
+	= \frac{1-z^2/2 + \cdots}{z - z^3/3!} \ .
+\end{align}
+From this we see that $z\to 0$ is indeed a simple pole, and one may write the residue as
+\begin{align}
+	\text{Res}_f(0) &= \lim_{z\to 0} z \frac{1}{z} = 1 \ .
+\end{align}
+\end{example}
+
+
+\begin{example}\label{ex:cot:2:residue}
+Let $f(z)=\cot^2 z$. Find the residue of $f$ at $z=0$. 
+
+Writing out the numerator and denominator again:
+\begin{align}
+	\cot^2 z &= 
+	= \frac{1-z^2 + \cdots}{z^2 - 2z^3/3! + \cdots} 
+	\sim \frac{1}{z^2} + \mathcal O(1)
+	\ .
+\end{align}
+From this we deduce that $\text{Res}_f(0) = 0$. 
+\end{example}
+
+\begin{exercise}
+Why were we able to be slick in Example~\eqref{ex:cot:2:residue} after making a big deal about being careful in \eqref{eq:non-simple:pole:example:hz:punchline}?
+\end{exercise}
+
+\begin{exercise}
+Let $f(z)=z\cot^2 z$. Find the residue of $f$ at $z=0$. 
+\end{exercise}
+
+
+\begin{exercise}
+Let $f(z)$ be
+\begin{align}
+	f(z) &= \left(\sum_{n=0}^\infty c_n z^n\right)\cot^2 z
+\end{align}
+Show that the residue of $f$ at $z=0$ is $c_1$.
+\end{exercise}
+
+
+\subsection{The Killer App: Real Integrals}
+
+The \emph{killer app}\footnote{This is an old phrase from the first dot-com bubble.} for complex contour integrals is to solve integrals along the \emph{real line}. It is often the case that some of the real functions that we would like to integrate happen to have poles in the complex plane. In this case, the integral along the real line can be completed into a closed contour $C$ in the complex plane. If we can separate the contribution of the real line from the rest of the contour, then we can use the residue theorem to do the integral without any of the hard work of, uh, integrating.
+
+\begin{example}
+Consider the real function
+\begin{align}
+	f(x) = \frac{1}{x^2 +1} \ .
+\end{align}
+Typically we care about real functions with real arguments. However, let's \emph{analytically continue} $f(x)$ into a meromorphic function $f(z)$
+\begin{align}
+	f(z) = \frac{1}{z^2+1} \ .
+\end{align}
+This is the (unique\footnote{The proof is left to you to derive or look up.}) complex function that is analytic and agrees with the original function on the real line. We immediately notice that $z^2+1 = (z+i)(z-i)$ so that $f(z)$ has simple poles at $z=\pm i$. Consider the following contour which includes the real interval $x\in [-R,R]$ as part of it:
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Lec_2017_14_contour.png}
+\end{center}
+We will care about the limit $R\to \infty$ where the integral includes the entire real line.
+Observe that the contour only encloses the pole at $z=i$. Let us integrate the function around $C$. From the residue theorem, we have
+\begin{align}
+	\oint_Cdz\, \frac{1}{(z+i)(z-i)} 
+	= 2\pi i \text{Res}_f(i) 
+	= \pi \ ,
+\end{align}
+where we've used $\text{Res}_f(i)=1/2i$. However, we can also write the integral as a sum of the real integral plus a counter-clockwise arc of radius $R$:
+\begin{align}
+	\oint_C dz\, f(z) = \int_{-R}^R dx\, f(x) 
+	+ \int_0^\pi iR e^{i\theta} d\theta  \, f\left(Re^{i\theta}\right) \ .
+\end{align}
+where in the second term we've used the parameterization $z(\theta) = Re^{i\theta}$. Note that the first term on the right-hand side is the `ordinary' purely real integral. The second term behaves as follows:
+\begin{align}
+	\int_0^\pi iR e^{i\theta} d\theta  \, f\left(Re^{i\theta}\right)
+	&= 
+	\frac{Re^{i\theta}}{R^2 e^{2i\theta}+1} d\theta \ .
+\end{align}
+As we take the limit $R\to\infty$, the integral goes like $\sim 1/R \to 0$. Thus as long as we actually care about the integral along the entire real line, $R\to \infty$, we have
+\begin{align}
+	\oint_Cdz\, \frac{1}{(z+i)(z-i)}  
+	= \pi 
+	= \lim_{R\to\infty} \int_{-R}^R \frac{dx}{x^2+1} \ .
+\end{align}
+And so we find
+\begin{align}
+	\int_{-\infty}^\infty dx \, 
+	\frac{dx}{x^2+1}
+	= \pi \ .
+\end{align}
+This is an absolutely correct result about a \emph{real} integral that we sneakily derived without actually doing the integral. I assume one may check this by the appropriate trigonometric substitution\footnote{Just kidding, you can just check it on \emph{Mathematica}. You can even tell people that you did the trig substitution if it makes you feel better.} Observe that the critical step was that the curved part of the contour (the one that actually had imaginary parts) went to zero in a well defined limit. 
+\end{example}
+\begin{exercise}
+What result do you get when you solve for the same integral of function $f(x)=(x^2+1){-1}$ over the real line, but this time you use the contour $C'$ that encircles the lower half of the complex plane?
+\end{exercise}
+Let's address the question of \textbf{analytic continuation}\footnote{See Appel section 5.3 for a more careful discussion.}. We started with a purely real function $f(x)$ and `generalized it' to a complex function $f(z)$ that happened to have poles in the complex plane. Because we used the residue theorem, the details of these poles (residue and whether they're enclosed by $C$) are critical for performing the integral. So a good question is: is the \emph{complex function} $f(z)$ even uniquely defined given the \emph{real} function $f(x)$?\footnote{My notation is a little glib and assumes the answer. If you want, you can write $f_\mathbbm{C}$ and $f_\mathbbm{R}$ to differentiate the two functions that are different in principle.}
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/Lec_2017_14_analytic_continuation.png}
+\end{center}
+There is a handy theorem that states that when two analytic functions agree on their domain of overlap, then they agree on their common domain. For \emph{meromorphic} functions, we can just imagine the domain where those singularities are not included. In our example above, $f(x)$ is analytic along the real line and $f(z)$ is a function that trivially (by construction) is analytic and matches $f(x)$ on the real line. Then the theorem says that $f(z)$ and $f(x)$ `agree' in the entire domain of analyticity; so one can \emph{analytically continue} $f(x)$ to the complex plane as long as one avoids any singularities.
+
+The gist of the proof is that if two functions $f$ and  $g$ agree in some overlapping domain of analyticity, then their difference $h(z)\equiv f(z)-g(z)$ is also an analytic function in this domain. Analyticity means one has finite radius of convergence because it has a well defined Taylor expansion. One can then use this to argue that $h(z)$ can be defined beyond the overlapping domain. Continuity requires that $h(z)$ remains zero even outside the overlapping domain, which ensures that $f(z)=g(z)$. In other words, there is a unique analytic continuation of a function to a maximal domain of analyticity.
+
+There's another effect you may wonder about. Are there some `edge' effects from the corner of the contour?
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/Lec_2017_corner.png}
+\end{center}
+A hand-waving answer is to say that we take the $R\to\infty$ limit `first' and so that corner is pushed off into infinity. This should be totally unsatisfying since mathematical physics \emph{rarely} depends on the order in which limits are taken. 
+
+A better answer is that the complex plane \emph{with infinity} is a slightly different object from the complex plane without infinity. One way to see this is to note that the complex plane can be mapped one-to-one onto a sphere. This is called \emph{stereographic projection}. The picture is this:
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/Lec_2017_stereographic.png}
+\end{center}
+The idea is to place a unit sphere at the origin of $\mathbbm{C}$. The south pole of the sphere is touching $z=0$. Then for any point $z\in\mathbbm{C}$, one can draw a line from $z$ to the north pole of the sphere. There is a single unique point on the sphere that intersects that line. This maps the entire complex plane onto the sphere---except for the north pole of the sphere. We identify the north pole with complex infinity. That's right: all infinities are the same: $\infty$, $i\infty$, $\infty e^{2\pi/3}$, $-\infty$, etc. From this point of view, the real line maps onto the prime meridian of the sphere and there there are no `corners' in the contour. In fact, there's no arc component, either! The integral along the real line is a closed contour with respect to the stereographic projection. Note that the orientation of the contour depends on which hemisphere you are figuratively standing in.
+
+\subsection{The Main Example: follow this carefully}
+Let's try another instructive example. Here's an real integral that we would like to solve using contour integral techniques:
+\begin{align}
+f(x) = \int_{-\infty}^\infty  dx\,
+\frac{2\cos x}{x^2+1} \ .
+\end{align}
+We can analytically continue this into a complex function by simply replacing the real variable with a complex variable, $x\to z$. This complex function $f(z)$ is analytic on the real line. The presence of simple poles at $z=\pm i$ mean that it is meromorphic with respect to the whole complex plane. It is convenient---for reasons that will be clear momentarily---to write the cosine as a sum of exponentials:
+\begin{align}
+	f(z) 
+	= \frac{e^{iz}+e^{-iz}}{(z+i)(z-i)} 
+	= \frac{e^{iz}}{(z+i)(z-i)} + \frac{e^{-iz}}{(z+i)(z-i)} 
+	\equiv f_+(z) + f_-(z)
+	\ .
+\end{align}
+With some foresight, we have separated $f(z)=f_+(z)+f_-(z)$ into two different functions. 
+%
+There are now two obvious choices for convenient integration contours that include the real line with the appropriate orientation:
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/Lec_2017_14_whichcontour.png}
+\end{center}
+We label the two contours are $C_1$ and $\bar C_2$. The bar over $\bar C_2$ is to remind us of the clockwise orientation; alternatively one could\footnote{This all boils down to notation. You are free to be creative with notation, but the underlying quest is \emph{clarity}. Notation doesn't change the underlying mathematics or physics, but a good notation make your ideas clearer---perhaps even to yourself.} have written $\bar C_2 = -C_2$.  Does it matter which contour we pick?
+
+Our criteria for a convenient contour are that (1) the contour includes the real line with the appropriate orientation and (2) the rest of the contour integrates to zero. That way we can use the residue theorem:
+\begin{align}
+	\int_C f(z) dz 
+	= \int_{-\infty}^\infty dx\, f(x)
+	+ \int_{\text{arc}}dz\, f(z) = 
+	\int_{-\infty}^\infty dx\, f(x)
+	= \sum_{i=\text{poles}}\text{Res}_f(z_i) \ ,
+\end{align}
+where we recall that $i$ is runs over the poles enclosed by the contour $C$. The condition that the integral over the arc vanishes determines which contour we take. We may conveniently parameterize the arcs as follows:
+\begin{align}
+	z(\theta) &= R\cos\theta + i R\sin\theta
+	\label{eq:z:paramterization:large:arc}
+\end{align}
+where for $C_1$ the arc is given by $\theta \in [0,\pi]$ while for $\bar C_2$ the arc is $\theta\in[0,-\pi]$. We assume the limit $R\to \infty$. The arc integral is then:
+\begin{align}
+	\int_{\text{arc}}
+	dz \, 
+	\left[f_+(z) + f_-(z)\right]
+	=
+	\int_\text{arc}
+	d\theta \, 
+	\frac{e^{iz}}{z^2+1}
+	+ 
+	\int_\text{arc}
+	d\theta \, 
+	\frac{e^{iz}}{z^2+1} \ .
+\end{align}
+When we plug in the parameterization \eqref{eq:z:paramterization:large:arc}, we see that the denominator of $f_\pm$ scales like $R^2$. There's an additional factor of $R$ in the numerator coming from $dz$, and so it may  appear that \emph{either} $C_1$ or $\bar C_2$ could be used. However, recall that $f_{\pm}(z)\sim e^{\pm iz}$ and exponentials beat polynomials. Plugging in $z(\theta)$ into the exponentials gives
+\begin{align}
+	e^{\pm iz} &= e^{\pm i\left(R\cos\theta + i R\sin\theta\right)} \ ,
+\end{align}
+where the difference between $C_1$ and $\bar C_2$ is the range (and direction) of $\theta$.
+\begin{itemize}
+	\item $C_1$ lives in the upper half plane so the imaginary part of $z$ is positive: $R\sin\theta > 0$ \ .
+	\item Similarly, $C_2$ lives in the lower half plane so the imaginary part of $z$ is negative: $R\sin\theta < 0$\ .	
+\end{itemize}
+This makes it easy to read off the convergence properties of the exponential
+\begin{align}
+	e^{\pm iz} &= (\text{oscillating})e^{\mp R\sin\theta} \ .
+\end{align}
+The oscillating part is not relevant: since $|e^{i\varphi}| = 1$ , this factor doesn't actually affect the magnitude of the contribution of the integrand, just the phase. The $\exp(\mp R\sin\theta)$ factor, on the other hand, is everything. 
+\begin{itemize}
+	\item $e^{- R\sin\theta}$ is exponentially suppressed when $\sin\theta > 0$, this corresponds to the upper half plane and so we use the $C_1$ arc to complete the integration contour of the $f_+(z)\sim \exp(-R\sin\theta)$ integrand.
+	\item $e^{+ R\sin\theta}$ is exponentially suppressed when $\sin\theta < 0$, this corresponds to the lower half plane and so we use the $\bar C_2$ arc to complete the integration contour of the $f_-(z)\sim \exp(+R\sin\theta)$ integrand.
+\end{itemize}
+Because the $e^{-R}$ exponential suppression defeats the polynomial $R^{-1}$ scaling, the vanishing of the integral along the arc is determined only by this exponential factor: $\lim_{R\to\infty}e^{-R}/R\to 0$. We thus have the following approach to the original real integral:
+\begin{align}
+f(x) &= \int_{-\infty}^\infty  dx\,
+\frac{2\cos x}{x^2+1} 
+	= 
+	\int_{-\infty}^\infty  dx\,
+	\frac{e^{+ix}}{x^2+1} 
+	+
+	\int_{-\infty}^\infty  dx\,
+	\frac{e^{-ix}}{x^2+1} 
+	\\ 
+	&=
+	\int_{C_1} dz\, 
+	\frac{e^{+iz}}{z^2+1} 
+	+
+	\int_{\bar C_2} dz\, 
+	\frac{e^{-iz}}{z^2+1} 
+	\\
+	&=
+	2\pi i \text{Res}_{f_+}(i)
+	-
+	2\pi i \text{Res}_{f_-}(-i)
+\ .
+\end{align}
+In the second step we have used the fact that the integral along the real line can be extended by large arcs along $C_1$ or $\bar C_2$ as long as the integral along those arcs vanishes. The residues are straightforward: 
+\begin{align}
+	\text{Res}_{f_\pm}(\pm i) = \frac{1}{2ie}
+\end{align}
+so that the final result is
+\begin{align}
+	\int_{-\infty}^\infty dx\, f(x) &= \frac{2\pi}{e} \ .
+\end{align}
+
+
+ \subsection{A fancy example}
+
+ Here's an example of the residue theorem used to calculate an integral along just the positive real line,
+ \begin{align}
+ 	\int_0^\infty dx\, x^{1/3} F(x) \ .
+ \end{align}
+ We can trivially analytically continue the integrand by replacing $x\to z$. Let us assume that $F(x)$ is a meromorphic function with poles away from the positive real line. Let us further assume further that $F(z)$ is exponentially suppressed for $|z| = R \gg 1$, say $F(z)\sim e^{-R}$. Note that the $x^{1/3} \to z^{1/3}$ factor is problematic. It tells us that there's an \emph{branch cut} in our integrand: if we start at some point and went a full circle around the origin, say $z(\theta) = e^{i\theta}$ for $\theta\in[0,2\pi]$, then $z^{1/3}$ doesn't return to the origin. This means you probably need to extend the complex plane into Riemann sheets. Practically what this means is that we have to pick a branch cut that prevents us from taking contours that are `full circles' around the origin. We have the freedom to pick the orientation of this branch cut, but in this case it is convenient to pick it along the positive real line\footnote{If you want to be careful to make sure that you're not interfering with the original integral, you can put the branch cut just below the real line by some vanishingly small amount and take that amount to zero at the end of the calculation.}. Let's take a peculiar contour that includes the integration region we want, $x\in [0,\infty)$, then circles the entire complex plane, and returns back to zero along $x\in (\infty, 0]$. 
+ \begin{center}
+ \includegraphics[width=.8\textwidth]{figures/Lec_2017_14_branch.png}
+ \end{center}
+ In the past, we'd have said that the integral along $x\in [0, \infty)$ should cancel that from $x\in (\infty, 0]$. However, we now notice that there's a branch cut separating those two regions. Indeed, you may already see that the \emph{integrand} is not identical along those two lines. 
+
+Construct the following contour integral:
+ \begin{align}
+ 	\oint_C  dz\, z^{1/3} F(z) &= 
+ 	\int_0^\infty dx x^{1/3}F(x)
+ 	+ \int_{\text{arc}} dz \, z^1/3 F(z)
+ 	+ \int_\infty^0 dx \left(x e^{2\pi i}\right)^{1/3} F\left(e^{2\pi i}\right) \ .
+ \end{align}
+ The left-hand side is simple to evaluate with the residue theorem and will depend on the poles of the unspecified function $F(z)$. On the right-hand side, the integral along the arc vanishes by the assumptions we've made about $F(z)$ becoming exponentially small for large arguments, $|z|=R\gg 1$.  Finally, we notice that the third term on the right-hand side we've written $z=xe^{2\pi i}$; this is critical since it includes the phase that $z$ picks up when traversing the large circular path. Since $F(z)$ is meromorphic, we may simply replace $F(x\exp(2\pi i)) \to F(x)$. However, the $z^{1/3}$ needs some care. We find:
+ \begin{align}
+ 	2\pi i \sum_{j=\text{poles}} z_j^{1/3} \text{Res}_F (z_j)
+ 	=
+ 	\left(1-e^{2\pi i/3}\right) \int_0^\infty dx\,  x^{1/3} F(x) \ .
+ \end{align}
+The $-e^{2\pi i/3}$ came from the $1/3$-power of the phase. The minus sign comes from $\int_{\infty}^0 dx = -\int_0^\infty dx$. Converting the difference of exponentials into a sine gives
+\begin{align}
+	\left(1-e^{2\pi i/3}\right) 
+	= 2e^{i\pi/3} \cdot \frac{1}{2}\left(e^{-i\pi/3}-e^{i\pi/3}\right)
+	= -2 e^{i\pi/3} \sin(\pi/3) \ .
+\end{align}
+We thus find an expression for the original integral:
+\begin{align}
+	\int_0^\infty dx\, x^{1/3}F(x) &=
+	\sum_{j=\text{poles}}
+	\frac{\pi i e^{i\pi/3} z_j^{1/3}\text{Res}_F(z_j)}{\sin(\pi/3)}
+	\ .
+\end{align}
+We won't worry too much about branch cuts in this course. However, they do occasionally show up in physical manifestations, such as in dispersion relations\footnote{See, e.g., \url{https://arxiv.org/abs/1610.06090} for a peek at how it can show up in quantum field theory.}.
 
 
 
