@@ -1,0 +1,102 @@
+%!TEX root = P231_notes.tex
+
+\section{The Harmonic Oscillator}
+% \lecdate{lec~12}
+
+Let's return to the problem of solving for Green's functions. Let's focus on our favorite example---arguably, the \emph{only} example\footnote{Upon generalizing to higher dimensions, curvilinear coordinates. Physicists have Harmonic Oscillators in different area codes.}---is the harmonic oscillator. The differential operator is
+\begin{align}
+	\mathcal O = \left(\frac{d}{dt}\right)^2 + \omega_0^2 \ .
+\end{align}
+The Green's function equation tells us the response $G(t,t_0)$ at time $t$ from a `unit displacement' at $t_0$:
+\begin{align}
+	G''(t,t_0) + \omega_0^2 G(t,t_0) = \delta(t-t_0) \ .
+	\label{eq:HO:Greens:eqn}
+\end{align}
+Recall that the arguments $t$ and $t_0$ are analogous to the indices of a finite-dimensional matrix. For notational convenience, we will set $t_0=0$ and not list it explicitly. We are primarily concerned about the $t$-dependence of $G(t,t_0)$. 
+
+\subsection{Fourier Transform}
+
+The first thing we're going to do is write $G(t,t_0)$ as a Fourier transform with respect to $t$. Please refer to Appendix~\ref{app:Fourier} for our set of Fourier transform conventions. We can write $G(t)$ as an integral over Fourier modes with frequency $\omega$ and weight (Fourier transform) $\tilde G(\omega)$:
+\begin{align}
+	G(t) &= \int_{-\infty}^\infty\dbar \omega \, e^{-i\omega t} \tilde G(\omega) 
+	&
+	\dbar = \frac{d}{2\pi}
+	\ .
+	\label{eq:HO:Greens:Fourier}
+\end{align}
+We say that $\tilde G(\omega)$ is the Fourier transform of $G(t)$. The key point is that the $t$-dependence of $G(t)$ has been sequestered into the $e^{-i\omega t}$ plane waves. This is convenient since these plane waves are eigenfunctions of the derivative operator:
+\begin{align}
+	\frac{d}{dt} e^{-i\omega t} &= -i\omega e^{-i\omega t} \ .
+\end{align}
+The left-hand side of the Green's function equation \eqref{eq:HO:Greens:eqn} is
+\begin{align}
+	\mathcal O_t G(t,t_0) 
+	&= 
+	-
+	\int_{-\infty}^\infty \dbar \omega \, 
+	\left(\omega^2-\omega_0^2\right) e^{-i\omega t} \tilde G(\omega,t_0) \ .
+\end{align}
+The right-hand side is simply the Fourier transform of $\delta(t-t_0)$:
+\begin{align}
+	\delta(t-t_0)
+	&=
+	\int_{-\infty}^\infty \dbar \omega \, e^{-i\omega (t-t_0)} \ .
+	\label{eq:delta:fourier}
+\end{align}
+\begin{exercise}
+Use our conventions for the Fourier transform \eqref{eq:HO:Greens:Fourier} (see also Appendix~\ref{app:Fourier}) to confirm the Fourier representation of $\delta(t-t_0)$ in \eqref{eq:delta:fourier}. In our notation, the Fourier coefficients $\tilde f(\omega)$ of a function $f(t)$ is
+\begin{align}
+	\tilde f(\omega) &= 
+	% \frac{1}{2\pi}
+	\int_{-\infty}^\infty d t\, e^{i\omega t} f(t) \ .
+\end{align}
+\end{exercise}
+So the Green's function equation for the 1D harmonic oscillator, \eqref{eq:HO:Greens:eqn}, tells us
+\begin{align}
+	-
+	\int_{-\infty}^\infty \dbar \omega \, 
+	\left(\omega^2-\omega_0^2\right) e^{-i\omega t} \tilde G(\omega)
+	&=
+	\int_{-\infty}^\infty \dbar \omega \, e^{i\omega t}
+	\ .
+	\label{eq:G:HO:Fourier:equation:integrals}
+\end{align}
+For simplicity we have set $t_0=0$ and don't write it explicitly. There's a rather unscrupulous\footnote{I don't think this is rigorously valid, but the result is true. The ends don't justify the means, but let's take this morally ambiguous shortcut to make the big picture clear. I encourage you to live the rest of your lives with virtue.} way to solve this equation for $\tilde G(\omega)$. Since the two sides of this expression are equal, they have the same Fourier expansion. This implies that the Fourier coefficients are equal. Since both sides are already written as Fourier expansions, we can just match the coefficients of the basis functions, $e^{-i\omega t}$. This gives us:
+\begin{align}
+	\tilde G(\omega) &= \frac{-1}{\omega^2-\omega_0^2}
+	\label{eq:G:HO:Fourier:term}
+\end{align}
+\begin{exercise}
+Prove \eqref{eq:G:HO:Fourier:term} honestly. {Hint}: Start with \eqref{eq:G:HO:Fourier:equation:integrals} and project out the Fourier coefficients. Recall that you do this by taking the inner product with one of the basis functions and then using the orthogonality of the eigenbasis. You may need to be careful with the normalization.
+\end{exercise}
+\begin{exercise}
+In \eqref{eq:G:HO:Fourier:equation:integrals} we had already set $t_0 = 0$. What is the expression for $\tilde G(\omega)$ if we kept $t_0$ explicit?
+\end{exercise}
+That was the critical step: we have successfully solved for the Green's function Fourier coefficient. This means that we have a closed form expression for the Green's function by plugging $\tilde G(\omega)$ into \eqref{eq:HO:Greens:Fourier}:
+\begin{align}
+	G(t) &=  \int_{-\infty}^\infty \dbar \omega
+	\, 
+	\frac{-e^{-i\omega t}}{\omega^2-\omega_0^2} \ .
+	\label{eq:G:HO:Fourier:Rep:t0:0}
+\end{align}
+All that's left is for us to actually \emph{do} this integral. Fortunately, this integral should look very similar. It seems to beg for us to solve using the residue theorem. 
+\begin{exercise}
+What are the poles of the integrand in \eqref{eq:G:HO:Fourier:Rep:t0:0}? What are their associated residues? What is the residue if $t_0\neq 0$?
+\end{exercise}
+
+\subsection{Contour Integral}
+
+The integral \eqref{eq:G:HO:Fourier:Rep:t0:0} looks like it's perfect for contour integration. There's an exponential factor on top that will determine the convergence, and the denominator can be factored to see where the poles are. Except we notice something troubling:
+\begin{align}
+	\frac{-e^{-i\omega t}}{\omega^2-\omega_0^2} 
+	&=
+	\frac{-e^{-i\omega t}}{(\omega - \omega_0)(\omega + \omega_0)} \ .
+\end{align}
+The poles are located at $\omega = \pm \omega_0$. These are \emph{on the real axis}, precisely along the integration contour! How annoying!
+
+Now you may want to have an existential moment. Remind yourself that all we're doing is solving for the behavior of the one-dimensional \emph{harmonic oscillator}. This is an eminently \emph{physical} system. We could have written this system as $\mathcal O f(t) = s(t)$ where $f(t)$ is the displacement of a harmonic oscillator and $s(t)$ is some driving function. The Green's function, $G(t,t_0)$ gives the response of the system to a `unit' driving function, $s(t) = \delta(t-t_0)$. The response of the system should be perfectly physical. And yet---\emph{and yet}---we now face an integral \eqref{eq:G:HO:Fourier:Rep:t0:0} that seems to run right into not only one, but \emph{two} singularities along the integration contour!
+
+%% t0 general case
+
+
+
