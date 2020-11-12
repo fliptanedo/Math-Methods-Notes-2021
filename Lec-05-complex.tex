@@ -141,6 +141,7 @@ where we're using
 	\frac{\partial}{\partial y}
 	\right) 
 	\ .
+	\label{eq:ddz:ddzst}
 \end{align}
 The fact that partial derivatives combine like this may be familiar\footnote{This comes from the underlying mathematical structure. The partial derivatives are basis vectors for the \emph{tangent space} at some point $(x,y)$. These partial derivatives ask: how much does the function I'm acting on change if I move by one unit in this direction?}. 
 
@@ -185,6 +186,32 @@ This implies the \textbf{Cauchy--Riemann equations}, which are equivalent to the
 \end{align}
 
 Thus far we've talked about functions being analytic or not. It turns out that analytic functions are \emph{so} nice that there really aren't that many physically relevant functions that are analytic \emph{everywhere}\footnote{The analog here is people who are nice. Most people are nice most of the time. But very few people are nice \emph{all} of the time. I suspect Fred Rogers may be one of the few who could plausibly be \sout{analytic} \emph{nice} everywhere.}. Instead, we will often talk about functions that are analytic in most places but are not analytic (differentiable) in other places. Indeed, the \emph{non}-analyticity of Green's functions is a key result in this class.
+
+\subsection{Analyticity is Differentiability}
+
+We have motivated the Cauchy--Riemann equations from the notion of being independent of $z^*$. This is a useful crutch and fits our theme of motivating rather than rigorously proving results. Let us be clear, however, that the underlying definition of analyticity is that:
+\begin{quote}
+a function that is analytic at a point $z_0$ is differentiable at $z_0$.
+\end{quote}
+A function is differentiable at a point $z_0$ if its derivative, \eqref{eq:df:dz:analytic:def}, has a well-defined \emph{finite} value. A function that is itself infinite at a point cannot have a well-defined limit \eqref{eq:df:dz:analytic:def}, and thus are \emph{not} analytic at that point.
+We distinguish this from $df/dz^*=0$ because of the importance of \emph{singular} functions in physics. 
+\begin{example}
+The following function is non-analytic at $z=2i$ and $z=1$:
+\begin{align}
+	f(z) = \frac{3z}{(z-2i)(z-1)} \ .
+\end{align}
+It may seem like $df/dz^* = 0$ at these points because $f(z)$ is independent of $z^*$. However, one cannot say that $df/dz^*=0$ because the limit definition analogous to \eqref{eq:df:dz:analytic:def} is not defined. 
+\end{example}
+\begin{exercise}
+The notion of `independent of $z^*$' sometimes causes more confusion than its worth. After all, $z$ and $z^*$ are clearly \emph{not} independent variables. Given $z$, you know exactly what $z^*$ is. The notion in which we \emph{pretend} that $z$ and $z^*$ are independent is that
+\begin{align}
+	\frac{\partial z}{\partial z^*} = 
+	\frac{\partial z^*}{\partial z} = 0 \ ,
+\end{align}
+which we understand to come from an interpretation of $\mathbbm C \sim \mathbbm R^2$. Use \eqref{eq:ddz:ddzst} to prove the above partial derivative relations.
+\end{exercise}
+
+
 
 \subsection{A geometric point of view (optional)}
 \label{sec:analytic:geometric}
@@ -588,14 +615,18 @@ Cauchy's Theorem tells us that integrating functions over domains where they are
 	f(z_0) &= \frac{1}{2\pi i} \oint_C dz \frac{f(z)}{(z-z_0)}  \ .
 	\label{eq:cauchy:integral}
 \end{align}
-This is the statement that the value of some function at some point $z_0$ is related to an integral of the function around the point. In fact, maybe this shouldn't be so surprising: the right-hand side looks like some kind of average of the function in the neighborhood of the function. Given the relation between analytic functions and harmonic functions, this sounds plausible. On the right-hand side there's a factor of $(2\pi (z-z_0))^{-1}$ which indeed looks like one is averaging over the circumference around the point $z_0$. The factor of $i$ is curious. Those who are familiar with all of this will notice the `famous' combination $(2\pi i)$.
+This is the statement that the value of some function at some point $z_0$ is related to an integral of the function around the point. In fact, maybe this shouldn't be so surprising: the right-hand side looks like some kind of average of the function in the neighborhood of the function. Given the relation between analytic functions and harmonic functions, this sounds plausible. On the right-hand side there's a factor of $[2\pi (z-z_0)]^{-1}$ which indeed looks like one is averaging over the circumference around the point $z_0$. The factor of $i$ is curious. Those who are familiar with all of this will notice the `famous' combination $(2\pi i)$.
 
 Let is highlight that the integrand on the right-hand side is 
 \begin{align}
 	g(z) &= \frac{f(z)}{z-z_0} \ .
 	\label{eq:g:z:cauchy:integral:theorem}
 \end{align}
-Unlike $f(z)$, $g(z)$ is absolutely \emph{not} analytic `everywhere' in the region that we're looking at. Most notably, it is not analytic at $z=z_0$. What's the derivative of $g(z)$ at the singularity? Heck if I know\footnote{Is it infinity? I suppose, but the notion of infinity in complex space can be a little tricky. At any rate, usually `infinity' is not the kind of answer that inspires much confidence.}. This is important because it is our first example of a function that is analytic in a region up to a single point; we say that the function $g(z)$ has a \textbf{pole} at $z=z_0$.
+Unlike $f(z)$, $g(z)$ is absolutely \emph{not} analytic `everywhere' in the region that we're looking at. It is not analytic at $z=z_0$. What's the derivative of $g(z)$ at the singularity? Heck if I know\footnote{Is it infinity? I suppose, but the notion of infinity in complex space can be a little tricky. At any rate, usually `infinity' is not the kind of answer that inspires much confidence.}. This is important because it is our first example of a function that is analytic in a region up to a single point\footnote{%
+%
+One observant student said that it is not obvious that $g(z)$ is non-analytic at the singularity $z=z_0$. If we define analytic to mean that a function is independent of $z^*$, then it is indeed not clear why $g(z)$ is non-analytic at $z_0$. This ends up being a failure of that definition: the more constructive definition of analyticity is having a unique and well-defined derivative as defined by the limiting procedure, $$\lim_{\Delta z\to 0}[g(z+\Delta z)-g(z)]/\Delta z \ .$$ 
+%
+}; we say that the function $g(z)$ has a \textbf{pole} at $z=z_0$.
 
 Since the integrand $g(z)$ has a pole, we probably shouldn't integrate over it. No problem, our integration contour $C$ away from $z_0$. However, $z_0$ still punctures our domain over which the integrand is analytic\footnote{We've given our domain a topology. This, by the way, perhaps the one of the lamest things you can give someone. Once when I was a child I was sad when my parents got me a pair of socks for my birthday. I'd have been even more disappointed with topology. At least the socks kept my feet warm.}. To see what this does, let's consider the integral on the right-hand side.
 \begin{center}
@@ -628,11 +659,19 @@ Now watch carefully:
 	=
 	\oint_{C_\text{in}} dz\, \frac{f(z)}{z-z_0}
 	= 
-	i\oint_{C_\text{in}} d\theta f(z) 
-	= 2\pi i f(z_0). 
+	i\int_0^{2\pi} d\theta f(z) 
+	= 2\pi i f(z_0) \ . 
 	\label{eq:cauchy:integral:theorem:step}
 \end{align}
 Note that once we wrote the integral with respect to $d\theta$, this is just an ordinary `real' integral where the integrand happens to have complex numbers in it. What is critical is that the powers of $e^{i\theta}$ canceled. Compare this to what happened in \eqref{eq:complex:theta:integral:trivial}, which was the analogous critical step for showing that the integral of analytic functions vanishes. In \eqref{eq:cauchy:integral:theorem:step} we ended up with \emph{no} factors of $e^{i\theta}$ so that the $d\theta$ integral ended up being non-zero. 
+\begin{exercise}
+Derive the last equality of \eqref{eq:cauchy:integral:theorem:step}:
+\begin{align}
+	i\int_0^{2\pi} d\theta f(z) 
+	&= 2\pi i f(z_0) \ .
+\end{align}
+Why are we able to insert $f(z_0)$ in place of $f(z)$? Does this depend on the smallness of $\varepsilon$? (Answer: no.) {Hint}: $f(z)$ is analytic, which means it admits a Taylor expansion. Show that only the zeroth order term contributes, independently of how small $\varepsilon$ may be.
+\end{exercise}
 
 Putting this all together gives the desired result,
 \begin{align}

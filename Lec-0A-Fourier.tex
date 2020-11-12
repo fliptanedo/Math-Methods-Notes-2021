@@ -1,6 +1,7 @@
 %!TEX root = P231_notes.tex
 
 \section{Fourier Conventions}
+\label{app:Fourier}
 % \lecdate{lec~12}
 % 2017 Lec 15
 
@@ -45,10 +46,9 @@ The convention that we will choose for the \emph{time}--\emph{frequency} [invers
 This corresponds to $a=-1$ and $b=1$. The corresponding transform for the frequency-domain function is
 \begin{align}
 	\tilde f(\omega) &= 
-	\frac{1}{2\pi}
-	\int_{-\infty}^\infty dt\, e^{i\omega t} f(t) \ .
+	% \frac{1}{2\pi}
+	\int_{-\infty}^\infty d t\, e^{i\omega t} f(t) \ .
 \end{align}
-
 
 
 All of this generalizes to higher dimensions: you simply Fourier transform each dimension. In fact, one is free to use a different Fourier transform convention for each direction. We can use this freedom to pick a convention that `automatically' fits our conventions for spacetime. In particular, given a four-vector $x=(t,\vec{x})$ and its conjugate four-momentum $p=(\omega, \vec{k})$, one may choose to Fourier transform as follows: 
