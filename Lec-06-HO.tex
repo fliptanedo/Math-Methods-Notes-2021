@@ -325,6 +325,7 @@ Combining this with \eqref{eq:HO:G:ret:acausal} using the Heaviside $\Theta$-fun
 	\frac{1}{\omega_0}
 	\sin(\omega_0 t)
 	\Theta(t) \ .
+	\label{eq:HO:Gret:sin:theta}
 \end{align}
 \begin{exercise}
 Restore $t_0\neq$ in the above equation for the retarded Green's function.
@@ -433,3 +434,133 @@ which is in the form that we used in \eqref{eq:HO:S:Feynman:quad}. When we deriv
 	-\mathcal O_\text{quad} q(t) = 0 \ ,
 \end{align}
 where I'm probably assuming that $\mathcal O_\text{quad}$ is Hermitian if we want to be technical. The main observation here is that this is a \emph{linear} differential equation. Linear differential equations in physics come from the quadratic pieces of actions. Since we argued that the linear piece is usually not there and we know that the constant piece corresponds to a shift in the vacuum energy (that's \emph{usually} not physical\footnote{Damn you, dark energy.}), then this quadratic piece of the action is the \emph{lowest order} contribution to the action in an expansion of the particle $q(t)$ with respect to the vacuum ($q(t)=0$). The higher-order terms correspond to differential equations that are \emph{not} linear since the variation of that term contains $q^2(t)$. So yes, even though the mathematical structures here are a bit more fancy, let us state out loud that all of our main differential equations in physics basically boil down to taking the leading term in a Taylor expansion. Typical for physicists, eh?
+
+% 2017 - 17: skipping Kramers Kronig for now
+
+% 2017 - 18: skipping Kramers Kronig for now
+
+\subsection{Example: The Damped Harmonic Oscillator}
+ 
+ At this point we are happy that the physical solution to the classical harmonic oscillator is the retarded Green's function, $G_\text{ret}(t)$. There is an unphysical solution, the advanced Green's function, $G_\text{adv}(t)$ that reflects a mathematical symmetry of the theory (time-reversal invariance) but is otherwise not of physical interest. Finally, there is a solution that makes sense for quantum physics, the Feynman Green's function, $G_\text{F}(t)$, which is complex but reflects the existence of anti-particles. Each of the above cases came from \emph{almost} the same harmonic oscillator differential operator, $\mathcal O$, except the operators were slightly deformed so that its poles were off of the real line in the complex momentum plane. We took the limit where this deformation goes to zero, but not until after we've exploited those deformations to do the Fourier integral using the residue theorem. We came to appreciate that the infinitesimal nudge in the imaginary direction was telling us something about the causality of the harmonic oscillator.
+
+ We can understand the nature of this imaginary push by looking at the \emph{damped harmonic oscillator}. The dynamical equation for the damped harmonic oscillator is
+ \begin{align}
+ 	\mathcal O_\text{DHO} x(t) = \ddot{x}(t) + 2\gamma\dot x(t) + \omega_0^2 x(t) = F(t) \ ,
+ \end{align}
+ where $\gamma$ is the \textbf{damping coefficient} and $F(t)$ is a driving force.
+ \begin{exercise}
+ What are the dimensions of the damping coefficient, $\gamma$?
+ \end{exercise}
+ 
+ \paragraph{Back of the envelope version.}
+ Before doing anything quantitative, we can guess the behavior. A non-zero $\gamma$ suppresses the response $x(t)$ to the source $F(t)$. Unlike an idealized instrument, a guitar string has non-zero damping and the vibrations get smaller the longer you wait after plucking it. If we imagine a plane wave\footnote{I keep calling $e^{-i\omega t}$ a plane wave because I'm thinking of the generalization to spacetime. For now there are no transverse directions, so of course $e^{-i\omega t}$ is really just a wave.} $x(t)\sim e^{-i\omega t}$ and ask what this wave looks like far away from the source, $F(t)\to 0$, then the differential equation reads:
+ \begin{align}
+ 	-\left(\omega^2 +2i\gamma \omega - \omega_0^2\right)e^{-i\omega t} &= 0 \ .
+ \end{align}
+ The solution for the plane wave's frequency $\omega$ is
+ \begin{align}
+ 	\omega = \omega_R - i\Gamma \ , \label{eq:DHO:back:envelope:poles}
+ \end{align}
+ where for $\gamma^2 \ll \omega_0^2$, $\omega_R \approx \omega_0$ is the frequency.  Plugging $\omega$ back into our plane wave gives
+ \begin{align}
+ 	x(t) = e^{-i\omega_R t}e^{-\gamma t} \ .
+ \end{align}
+ The first factor is the usual plane wave. We recognize the $\exp(-\gamma t)$ as an exponential suppression that causes the plane wave to get rapidly smaller for times larger than $1/\gamma$. There are a few lessons:
+ \begin{enumerate}
+ \item In \eqref{eq:DHO:back:envelope:poles} we have implicitly but decisively bought into the idea of a complex frequency. The interpretation of this complex frequency is that the real part is the usual oscillation and the imaginary part corresponds to damping.
+
+ \item The solution \eqref{eq:DHO:back:envelope:poles} corresponds to finding the poles of the Fourier integrand; recall, for example, \eqref{eq:G:HO:Fourier:equation:integrals}. So damping has something to do with the imaginary part of the poles in the complex plane.
+
+ \item Because the position of the pole in the imaginary direction is related to the \emph{causality} of the theory, we have now connected `damping' to causality in a round-about way.
+
+ \item When we derived the retarded Green's function $G_\text{ret}(t)$ that describes the classical, ideal harmonic oscillator, we took $i\varepsilon\to 0$. For the damped harmonic oscillator the corresponding value is $i\gamma$, which we keep finite\footnote{Here's a funny bit of linguistics in our discipline. Any physical quantity is naturally not-infinite, so it seems silly when physicists make a point to call something `finite.' You would think that this is in contrast to that quantity being infinite. In fact, when physicists say \emph{finite} what they really mean is \emph{not zero}, which is quite different from `not infinite.'}; it has some physical significance after all.
+
+ \item The exponential notation for the Fourier transform made all of this very easy: we just let $\omega$ be complex in $e^{-i\omega t}$ and we are able to capture the physics of oscillations and damping. If we had used trigonometric functions then we'd have a bunch of $\sinh$ or $\cosh$ floating around and the convergence would not be so clear.
+ \end{enumerate}
+ 
+ \paragraph{More carefully.} Let's go through the steps to derive the Green's function for the damped harmonic oscillator properly. The Green's function equation is
+ \begin{align}
+ 	\left[
+ 	\left(\frac{d}{dt}\right)^2
+ 	+ 2\gamma \frac{d}{dt}
+ 	+ \omega_0^2
+ 	\right]
+ 	G(t)
+ 	&=
+ 	\delta(t) \ ,
+ \end{align}
+ where we've again set $t_0 = 0$. It is easy at this stage to restore\footnote{There is a theorem that $G(t,t')$ only depends on $|t-t'|$ under reasonable assumptions. You should be able to argue this on physical grounds.} $t_0$ by taking $t\to (t-t_0)$. Plugging in the Fourier representations for the $t$-dependence,
+ \begin{align}
+ 	G(t) &= \int \dbar \omega \, e^{-i\omega t}\tilde G(\omega)
+ 	&
+ 	\delta(t) &= \int \dbar \omega e^{-i\omega t} \ ,
+ \end{align}
+ then gives:
+ \begin{align}
+ 	\tilde G(\omega) &=
+ 	\frac{-1}{\omega^2+2i\gamma\omega -\omega_0^2} \ .
+ \end{align}
+ The poles occur at 
+ \begin{align}
+ 	\omega_\pm &= \frac{-2i\gamma \pm \sqrt{-4\gamma + 4\omega_{0^2}}}{2}
+ 	= \pm \sqrt{\omega_0^2 - \gamma^2} - i \gamma \equiv \pm \omega_R - i\gamma\ .
+ 	\label{eq:DHO:poles}
+ \end{align}
+ \begin{example}
+ The poles in \eqref{eq:DHO:poles} have a real part as long as $\omega_0^2 > \gamma^2$. What does it mean when $\omega_0^2 < \gamma^2$? This is the observation that the damping is stronger than the characteristic oscillation frequency, $\omega_0$. Thus the system is properly describe by an exponentially suppression because it never has a chance to oscillate.\footnote{This is one of the magical things about $B$ mesons. $B$ mesons are really nice systems whose characteristic oscillation frequency (between $B$ and anti-$B$ mesons) and characteristic decay width are roughly of the same order of magnitude. When we produce $B$ mesons at, say, the LHCb experiment, we get to observe the decays (imaginary part) of these mesons after $\sim 1$ oscillation which gives a powerful tool for studying matter--anti-matter asymmetry.\label{footnote:B:meson}}
+ \end{example}
+ Assuming $\omega_0^2 > \gamma^2$, then we may identify $\omega_R = +\sqrt{\omega_0^2 - \gamma^2}$ and the poles may be written as $\pm \omega_R - i\gamma$. This looks a \emph{just} like the pole prescription for the retarded Green's function of the ideal harmonic oscillator with $\omega_0\to \omega_R$ and $i\varepsilon\to i\gamma$. In fact, we can just follow all of the same steps that we did for the retarded Green's function:
+ \begin{enumerate}
+ \item The poles are in the lower half-plane of $\omega$. This means that the propagator is automatically causal (it's the retarded, not the advanced Green's function).
+ \item The exponential factor $e^{-i\omega t}$ in the Fourier integral determines the convergence of the integrand and hence how we complete the contour. For $t>0$ we close the contour on the lower half-plane and pick up these poles in the residue theorem. For $t<0$ we close the contour on the upper half-plane; since there are no poles here, the Fourier integral vanishes.
+ \item We end up with our own version of \eqref{eq:HO:Gret:sin:theta} with $\omega_0\to\omega_R$ except we need to account for the finite $\gamma$. 
+ \end{enumerate}
+ The only substantial difference between the damped harmonic oscillator and the ordinary harmonic oscillator is that $\omega_\pm$ contains a non-negligible imaginary part. The contour integral takes the form:
+ \begin{align}
+ 	\oint_C dz \,
+ 	\frac{-e^{-izt}}{
+ 	\left(z-\omega_+\right)
+ 	\left(z-\omega_-\right)
+ 	}
+ 	=&
+ 	\phantom+ 
+ 	2\pi i\left(\text{Res}_f\omega_+ + \text{Res}_f\omega_-\right)
+ 	\\
+ 	=&
+ 	-2\pi i\left[
+ 	\frac{e^{i\omega_+t}}{\omega_+-\omega_-}
+ 	+
+ 	\frac{e^{i\omega_-t}}{\omega_--\omega_+}
+ 	\right]
+ 	\\
+ 	=&
+ 	-2\pi i
+ 	\frac{e^{i\omega_+t} - e^{i\omega_-t}}{\omega_+-\omega_-}
+ 	\\
+ 	=&
+ 	-2\pi i \frac{e^{-i\gamma t}}{2\omega_R}
+ 	\left(e^{i\omega_Rt} - e^{-i\omega_Rt}\right)
+ 	\\
+ 	=&
+ 	\pi \frac{e^{-i\gamma t}}{2\omega_R}
+ 	\sin(\omega t)
+ 	 \ .
+ \end{align}
+ Plugging this into the full solution---which involves keeping track of which contour integral is non-zero and where the factors of $2\pi$ belong---we find:
+ \begin{align}
+ 	G(t) = \frac{e^{-\gamma t}}{\sqrt{\omega_0-\gamma^2}} \sin\left(\sqrt{\omega_0^2-\gamma^2} t\right) \Theta(t) \ .
+ 	\label{eq:DHO:G:sin:theta}
+ \end{align} 
+ \begin{exercise}
+Compare and contrast \eqref{eq:DHO:G:sin:theta} to \eqref{eq:HO:Gret:sin:theta}. Why is the general form the same? How do you explain the differences? What is the behavior for $\omega \gg \gamma$, $\omega \ll \gamma$? What does it look like if you restored $t_0$?
+ \end{exercise}
+ The key observation that we have from this discussion is that the choice of pushing the poles into the lower half plane---which we found was critical for a causal Green's function---is actually physically motivated. Any \emph{physical} oscillating system actually has some small amount of friction (or the appropriate generalization) that causes it to not only oscillate, but also decay. 
+ \begin{exercise}
+ In quantum mechanics the time evolution operator is $e^{i\hat H t}$. Maybe there's a minus sign in there, I don't remember and I don't really care. It is important that this operator is unitary, or else probabilities are not preserved in time. However, there are plenty of physical systems (say, the $B$ meson in footnote~\ref{footnote:B:meson}) that \emph{are} described my non-Hermitian Hamiltonians, i.e.~non-unitary time evolution operators. Reason tells us that the form of the time-evolution operator should be $e^{i\hat H t}e^{-\gamma t}$, since probabilities less than one make more sense than probabilities bigger than one. What is the physical interpretation of this non-unitary time evolution? Hint: this has to do with the notion that our theory (our Hamiltonian) models something in nature, but it not model \emph{all} of the relevant pieces nature for a given problem.
+ \end{exercise}
+ At this point in my note I have the following written:
+ \begin{quote}
+ \emph{I took 7 weeks of physics 231 and all I have is this one stupid Green's function.}
+ \end{quote}
+ 
+ 
