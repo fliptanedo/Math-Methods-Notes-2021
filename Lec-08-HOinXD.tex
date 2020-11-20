@@ -1,0 +1,86 @@
+%!TEX root = P231_notes.tex
+
+\section{Green's functions in diverse dimensions}
+% \lecdate{lec~12}
+% 2018 Lec 27
+
+Our usual approach is to take the simplest example and then focus on understanding the physics, while leaving each of you to generalize to the horrible real-world scenarios that you'll encounter in your other graduate courses and research. There's one generalization that we should take time to do properly: the shift from one dimension to multiple dimensions. This is the shift from treating time as a dependent variable to working on \emph{spacetime}. Equivalently, the harmonic oscillator converts into the wave equation.
+%
+Keep in mind that we're not doing any special relativity, even though we'll borrow notation from special relativity\footnote{There was once a professor teaching electrodynamics who used notation informed by relativity. The condensed matter students complained the class is about electricity and magnetism, not relativity. The professor replied: just where do you think magnetism comes from?}. 
+
+\subsection{The `harmonic oscillator' in spacetime}
+The second derivative, $d^2/dt^2$, is generalized in Euclidean space to the Laplacian, $\nabla^2$. But when you combine space and time (Minkowski space), there's the famous relative minus sign\footnote{At this level the minus sign is a convenient convention, but we know that the second derivative should really be relativistically invariant: $\partial^2 = \partial_\mu \partial^\mu$.}:
+\begin{align}
+	\frac{d^2}{dt^2}
+	\to 
+	\frac{1}{c^2}
+	\frac{\partial}{\partial t}^2
+	-
+	\frac{\partial^2}
+	{\partial \vec x^2} \ ,
+\end{align}
+where $\partial/\partial\vec x = \nabla$ is the gradient. Against all of my hard-developed instincts for natural units, I have replaced the explicit value of $c$ so that the operator makes sense dimensionally. Each term has powers of inverse length squared. In what follows I'm likely to make mistakes\footnote{My adviser used to say: if you think there may be a sign error or a factor of two error, then your homework is to fix those errors. In this case, if you think there's a missing factor of $c=1$, I'm not even sure if I'd even acknowledge that it's actually an error.} with the factors of $c$. 
+
+
+In (1+1)-dimensions of spacetime\footnote{The (1+1) notation means one dimension of space, one dimension of time.} this is $\partial^2 = c^{-2} \partial_t^2 - \partial_x^2$. That looks familiar, doesn't it? The minus sign tells us that if we move forward in time a little bit, but look `backward' in space, then the function doesn't change. The description of the state at time $t-\delta t$ and position $x-\delta x$, subject to $\delta x = c\delta t$, is the same as the state at time $t$ and position $x$. 
+%
+This, in turn, means that the information was propagated \emph{forward} in space as time also moves forward. This is exactly what we expect from a wave. We recall that the solution to second derivative differential equations are usually trigonometric functions or their exponential counterparts. We further recall that `plane waves' are described with the same funny minus sign:
+\begin{align}
+	f(t) \sim \sin (\omega t - kx) \ .
+\end{align}
+From this you can read off that the plane wave velocity is $\omega/k$. Of course, you already knew that from dimensional analysis. 
+
+\subsection{Green's functions for multidimensional spaces}
+Our `harmonic oscillator' equation becomes:
+\begin{align}
+	\left[\frac{1}{c^2}
+			\frac{\partial}{\partial t}^2
+			-
+			\frac{\partial^2}
+			{\partial x^2}
+			-
+			\frac{\partial^2}
+			{\partial y^2}
+			-
+			\frac{\partial^2}
+			{\partial z^2}
+		\right]
+		\varphi(\vec{x},t) = \rho(\vec{x},t) \ .
+		\label{eq:phi:wave:eq}
+\end{align}
+Huh, that looks familiar, doesn't it? We've chosen variables so that this looks just like the wave equation for the scalar potential $\varphi$ subject to a charged source $\rho$ in electrodynamics! In fact, you know how this works. There are three more equations that correspond to the vector potential:
+\begin{align}
+	\left[\frac{1}{c^2}
+			\frac{\partial}{\partial t}^2
+			-
+			\frac{\partial^2}
+			{\partial x^2}
+			-
+			\frac{\partial^2}
+			{\partial y^2}
+			-
+			\frac{\partial^2}
+			{\partial z^2}
+		\right]
+		\vec A(\vec{x},t) = \vec j(\vec{x},t) \ .
+		\label{eq:A:wave:eq}
+\end{align}
+Now let's go through a series of questions about \eqref{eq:phi:wave:eq} and \eqref{eq:A:wave:eq} to make sure we're on the same page. 
+\begin{enumerate}
+\item \textbf{Are these differential equations still linear?} Yes. Remember what it means to be linear! $\mathcal O(f+g) = \mathcal Of +\mathcal Og$, for example.
+\item \textbf{Are we worried that there are multiple arguments?} Not really. The functions now depend on $t$ and $\vec{x}=(x,y,z)$. You went from an infinite dimensional `vector space' to a still-infinite dimensional vector space\footnote{You can pontificate about whether or not this infinity has gotten `bigger.' It doesn't really make a difference.}. You can also mumble reassuring words to yourself, perhaps recalling how in prior encounters with the wave equation you've perhaps separated your functions into single-argument factors, $\Psi(t,x) = T(t)X(x)$, or something like that.
+\item \textbf{How many equations are there?} There are \emph{four}\footnote{Obligatory TNG reference: \url{https://www.youtube.com/watch?v=wjKQQpPVifY}} equations. There is an equation for $\phi$ and one equation for each component of $\vec A$. In fact, we typically bundle this all up into a four-vector $A_\mu=(\varphi, \vec A)$. 
+\item \textbf{How many differential operators are there?} Just one. There is only \emph{one} differential operator, $\partial^2$. It acts on different components of $A_\mu$, but it's the same wave operator acting on each component. 
+\item \textbf{... so how many equations are there, really?} All four equations are essentially the same equation with different state functions and different sources. So it's really just one class of differential equation.
+\end{enumerate}
+Okay, here's the really important one. I'm going to put it in a box to make sure you pay really close attention. Please answer the following question before reading on:
+\begin{framed}
+\centering
+How many Green's functions are there?
+\end{framed}
+Do we need a Green's function for each component of $A_\mu$? Do we need a Green's function for each dependent variable, $x^\mu = (ct,x,y,z)$? \emph{No}! There is only \emph{one} differential equation, and thus there is only \emph{one} Green's function. 
+
+
+
+
+% A good exercise: phase and group velocity; see appell or cahill
