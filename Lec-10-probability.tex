@@ -1,0 +1,68 @@
+%!TEX root = P231_notes.tex
+\section{Green's Functions from Statistics and Gaussian Integrals}
+
+In Section~\ref{sec:CHO:fields} we showed how fields emerge from a system of nearest-neighbor coupled harmonic oscillators. To leading order, fields are described by the wave operator. We remarked that the differential equation that governs a physical theory comes from a variation of the action functional $\delta S[\varphi]=0$. We even motivated how one builds theories: you start by imagining the most general action $S$ and then you remove terms because they violate symmetries or because they're suppressed by an energy scale $M$ much larger than the energy $E$ or physical phenomena you're examining. The latter point amounts to a $(E/M)^n$ suppression on physical observables. 
+
+At this point, you may ask: well, where does $\delta S = 0$ come from? Curious, aren't we? It turns out that this connects to a few different ideas which we'll map out in this section. In case you haven't noticed, the latter part of these notes are much less technical than the first half. The point is no longer to teach you techniques. We are stepping back and seeing how these ideas interconnect with different theoretical structure that you may [soon] know. Don't worry if there are more results that are left to you to prove or look up, the goal isn't the technical derivation. The goal is to see the interconnection of these tools.
+
+In this section, we'll make a connection to a bit of probability theory and a cute trick for solving Gaussian integrals. First, though, a quantum mechanical interlude.
+
+\subsection{Quantum Mechanics: Green's Function from the Path Integral}
+
+Time evolution by some amount of time $\Delta t$ in quantum mechanics is enacted by the Hamiltonian (energy) as an operator: $e^{i\hat H\Delta t}$. This time evolution may be described as a Green's function that takes an initial state $\Psi(q_0,t_0)$ and evolves it into a final state $\Psi(q, t)$. The wavefunctions are defined by a projection of a state $|\psi(t)\rangle$ onto the position basis $q$:
+\begin{align}
+	\Psi(q,t) = \langle q | \psi(t) \rangle \ .
+\end{align}
+Since $|\psi(t)\rangle$ is the time evolution of $|\psi(t_0)\rangle$ by a time $\Delta t = t-t_0$, we may continue:
+\begin{align}
+	\Psi(q,t) 
+	&= \langle q | e^{-i\hat H \Delta t} |\psi(t_0) \rangle
+	\\
+	&= \int dq_0\langle q | e^{-i\hat H \Delta t} |q_0 \rangle\langle q_0 |\psi(t_0) \rangle 
+	\\
+	&= \int dq_0\,\langle q | e^{-i\hat H \Delta t} |q_0 \rangle \Psi(q_0, t_0)
+	\ ,
+\end{align}
+where we have simply inserted a complete set of states (\emph{multiplied by one}) $\mathbbm{1} = \int dq_0 |q_0 \rangle\langle q_0 |$; this is simply the completeness relation that we recall from our review of linear algebra. We identify the quantity $\langle q | e^{-i\hat H \Delta t} |q_0 \rangle$ as the Green's function $G(q,t;q_0,t_0)$ since it now manifestly plays the role of a Green's function to solve for the state $\Psi(q,t)$ given the initial state $\Psi(q_0, t_0)$:
+\begin{align}
+	\Psi(q,t)\, 
+	&= \int dq_0\, G(q,t;q_0,t_0) \Psi(q_0, t_0)
+	\ . 
+\end{align}
+We didn't have to explicitly write the Schr\"odinger equation because that's already implicit in our starting point that $e^{-i\hat H \Delta t}$ is the time-evolution operator. 
+
+If you go over the path integral formulation of quantum mechanics, one finds that by repeating this trick and inserting a complete set of states over \emph{many} time slices between $t_0$ and $t$ you end up with\footnote{You may refer to the first couple of lectures here: \url{https://sites.google.com/ucr.edu/p230b/}} a closed form expression for the Green's function:
+\begin{align}
+	G(q,t;q_0,t_0)  = \int \mathcal Dq(t) \, e^{iS[q]/\hbar} \ .
+	\label{eq:G:QM}
+\end{align}
+\begin{exercise}
+For those with some familiarity with quantum mechanics, derive the above result. Be sure to keep track of how $e^{i\hat H t}$ turns into $e^{iS[q]}$. I personally find this to be the most compelling motivation for defining the action $S$ as the difference of the kinetic and the potential energies. 
+\end{exercise}
+I've broken my usual convention of natural units and explicitly written out the $\hbar$ required to make $S[q]$ dimensionless. Recall that $[L]$ is energy and $S = \int dt \, L$ so that $[S] = E\times t$, which just happens to be the units of $\hbar$. The curious integration measure $\mathcal Dq(t)$ is an integral over different functions $q(t)$. The meaning is clear if we discretize in time:
+\begin{align}
+	\mathcal D q(t) = dq(t_0)\,dq(t_1)\,dq(t_2)\,\cdots dq(t_{N-1})\,dq(t_N = t) \ .
+\end{align}
+In other words, for each discrete time $t_i$, we vary the position $q(t_i)$ independently of the other positions. In this way, the integral over $\mathcal D q(t)$ is an integral over all possible functions $q(t)$ subject to the initial and final states.
+
+You should interpret this expression as the famous quantum mechanical \emph{sum over histories}. The amplitude for a state to go from $\Psi(q_0,t_0)$ to $\Psi(q,t)$ includes a sum over the amplitude for each possible way to transition from the initial to the final state. At this point, you should recall the double slit experiment\footnote{The argument goes like this: imagine a double slit experiment. Now poke a third slit through the board; you sum over three paths. Now insert another board with two slits; you sum over $3\times 2 = 6$ paths. Now poke more holes, add more boards until you have an infinite number of boards each with an infinite number of holes. This corresponds to summing over all possible continuum paths from the initial to the final positions.}.
+%
+Evidently the quantity $e^{iS/\hbar}$ is the weight of each path. It corresponds to the amplitude of each path we're summing together. The total amplitude is given by the sum of these complex numbers with unit magnitude\footnote{You may want to look up `phasor' diagrams to see how to interpret this sum. Feynman describes this well in his for-the-public book \emph{QED: The Strange Theory of Light and Matter}, or you can see a more recent pop physics summary from PBS Spacetime: \url{https://youtu.be/vSFRN-ymfgE}.}.
+
+$\hbar$ is also a measure of `quantumness'. Recall that it shows up in statistical mechanics due to the Gibbs paradox. The `quantum' of quantum mechanics refers to the fact that $\hbar\neq 0$ so that $[\hat p, \hat q] \neq 0$. As $\hbar\to 0$ one recovers the classical limit. We see that in the classical limit, the argument of the exponential $e^{iS/\hbar}$ becomes large and highly sensitive to variations of $S$. At this point one can make the \emph{saddle point approximation}. This is the observation that for $\hbar\to 0$, changes in $S[q]$ coming from nearby paths will rapidly change the phase of $e^{iS/\hbar}$ and cause the contributions of these nearby paths to cancel as one integrates over paths $q(t)$. There is one exception: when $S[q]$ is near an extremum (say, a minimum) then the contribution from nearby paths will change more slowly---this is obvious, you're at an extremum so the functional $S[q]$ is flat---and the those paths will dominate the integral. The result is that in the classical limit, the paths $q(t)$ that give the dominant contribution are simply those which realize an extremum of the action:
+\begin{align}
+	\delta S[q] = 0 \ .
+\end{align}
+And there you go, we have `derived' the principle of least action as the classical limit of time evolution in quantum mechanics. 
+
+\begin{exercise}
+How do you expect the Green's function \eqref{eq:G:QM} to change when we go from a \emph{particle} at $q(t)$ at time $t$ to a \emph{field} $\varphi(x,t)$ that takes in position $x$ and time $t$ as variables?  Congratulations, you're on your way to quantum field theory. 
+\end{exercise}
+
+\section{A probability refresher}
+
+Now you may have a bit of mental whiplash as I change gears completely, but humor me a moment, we'll get back to the quantum mechanical picture shortly. 
+
+
+
+

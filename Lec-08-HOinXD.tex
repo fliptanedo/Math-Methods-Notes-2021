@@ -351,59 +351,62 @@ Solve for the Green's function of the wave equation in (2+1)-dimensional spaceti
 \end{exercise}
 
 
-\subsection{A theoretical digression}
-
-If you'll permit one further digression, let me remind you that the reason why we spend so much time solving for the second derivative is that our models of physics tend to be local. Consider the action, $S = \int dt \, L$. If we have some state $q$ that propagates in spacetime, the natural form of the action is actually an integral with respect to a Lagrangian \emph{density},
-\begin{align}
-	S = \int d^4x \mathcal L = \int d^4x \left(\text{const.} + q + \partial_\mu q + \cdots\right) \ ,
-\end{align}
-where on the right-hand side we just started writing out all possible polynomials of $q(x,t)$ and the four-derivative $\partial_\mu$. If you have been paying close attention, you'll notice that by writing $q(x,t)$ I have surreptitiously passed from $q$ being a `particle' to being a `field'. We only use $\partial_\mu$ instead of $d/dt$ or $\nabla$ because we expect the theory to be Lorentz invariant\footnote{If your theory is not Lorentz invariant, then replace `Lorentz' with whatever symmetries your system does have. If it has no appreciable symmetries, then may Boltzmann have mercy on your soul.}. In fact, we probably don't want to have any terms that have any free indices like $\partial_\mu q$ because that means it transforms like a Lorentz vector and thus the term is not Lorentz invariant. Furthermore, we can use field redefinitions to remove linear terms\footnote{This is not an obvious statement in the action, but the variation of the action usually comes from a path integral, where on varies over $q(x,t)$. Shifting $q(x,t)$ is like integrating $dx$ versus $d(x+3) = dx$.}. Subject to symmetries, the action looks like:
-\begin{align}
-S = \int d^4x \left[\frac{1}{2}q\left(\partial^2 + \omega_0^2\right)q + cq^3 + dq^4 + e\partial^2 q^2 + \cdots \right]	 \ .
-\end{align}
-You may recognize that the term in parenthesis is simply the `harmonic oscillator' (or wave equation, they're all the same to me) operator, $\mathcal O$. Indeed, when you vary that part of action by itself, you end up with the appropriate differential equation, $\mathcal O q = 0$. 
-
-What about the other terms? First we should do a bit of dimensional analysis. For my own sanity, let's use natural units where we set $c=\hbar =1$ and all units are measure in mass dimension:
-\begin{align}
-	[x] = [t] &= -1 \ .
-\end{align}
-This means that $[d^4x] = -4$. Since the action is dimensionless in natural units---after all, it shows up in a $e^{iS}$---then we know the Lagrangian density has dimension $[\mathcal L] = +4$. Since $[\partial]=+1$, we deduce that the variable $q$ has mass dimension $[q]=+1$. Ok, with that in mind, we can look at the `higher order' terms. The coefficients of these terms must have some \emph{negative} mass dimension:
-\begin{align}
-	c\, , d\, e \, , \cdots = \left(\frac{1}{M}\right)^n \ ,
-\end{align}
-where $n$ is a positive integer. We've written the mass scale as $M$. Any mass scale in the theory must have physical significance. We could question whether the mass scale $M$ is big or small compared to either $\omega_0$ or the characteristic energies at which we are studying the system. If $M$ is small, then these coefficients are large, and their dynamics are important. However, if we include these terms in our dynamics, then the equations of motion become very nonlinear:
-\begin{align}
-	\mathcal O q + 3cq^2 + 4d q^3 + \cdots = 0 \ .
-\end{align}
-That would mean that the wave equation approximation is quite bad. By the way, those terms are also clearly non-linear. If we see physics that is approximately described by the wave equation, then these coefficients must be small. We thus expect $M$ to be large---it is an ultraviolet scale. 
-
-What we intuit is that the scale $M$ is some energy scale where our theory is breaking down. If, for example, we were to \emph{experimentally}\footnote{In the \emph{gedanken} sense.} study this system at energies $E\sim M$, we expect that the effect of these non-linear terms are no longer small and become significant. In other words, the scale $M$ plays the role of a \emph{cutoff} at which our theory described by the linear operator $\mathcal O$ breaks down. For energies well below $M$, we can study the linear system and do \emph{perturbation theory} to study the first few non-linear coefficients that have coefficients that go like $(1/M)$ to a relatively small power. In the regime where our experiment has characteristic energy $E\ll M$, the in-principle infinite number of higher-order coefficients are negligible because we expect those effects to go like $(E/M)^n$; so keeping the first few should be an accurate description of the system.
-
-This is the notion of an \textbf{effective theory}. All physical models are effective theories. We're simply parameterizing our ignorance about the universe and working in a regime where we are predictive. The effective theory philosophy explains why we are so obsessed with Green's functions of second-derivative operators:
-\begin{itemize}
-	\item Constant operators are trivial, they're not even differential.
-	\item Operators with a single derivative are not Lorentz invariant. (The exceptions, like the diffusion operator, are only valid in the non-relativistic regime.)
-	\item Operators with three, five, or any odd number of derivatives are not Lorentz invariant. They are also suppressed by inverse powers of the cutoff, $M$.
-	\item Operators that are nonlinear, i.e.~terms in the Lagrangian density that have more than four powers of $q(x,t)$, are also suppressed by inverse powers of the cutoff $M$.
-\end{itemize}
-This tells you that in (3+1)-dimensions, the most interesting non-linear terms are $\mathcal L \supset cq^3+ dq^4$. If you assume that your theory has some $q\to -q$ symmetry, then you can even remove the $c$ term. By the way, this is how you build theories: you start with the most general $\mathcal L$ with an infinite number of terms. Then you argue based on symmetries and the relevance of high-dimensional operators which terms you can throw out. The result is that any reasonable theory in (3+1)-dimensions should be some perturbation of the harmonic oscillator/wave/Poisson system.
-
-Let me layer onto this a bit more: implicit in writing out $S=\int d^4x\mathcal L$ is the idea that our theory should be manifestly \emph{local}. When we write terms like $q^3$, we really mean $q(x,t)q(x,t)q(x,t)$ at the \emph{same} spacetime point. If this were not true, then the theory would be non-local and the causal structure of the theory would depend on the reference frame. This, in turn would put causality and Lorentz invariance at odds with one another and you'd have to pick one but not both. Some recent alternative formulation of quantum physics based on amplitudes (and not Lagrangians) have proposed that by giving up on \emph{manifest} locality, there may be more elegant descriptions of a theory. Those descriptions are local, they're just not obviously so.
-
-\begin{exercise}
-If we lived in Flatland, then the action would take the form $S = \int d^3x \mathcal L$. How does the power counting change for a state $q$? How does it change for a general number of spatial dimensions, $D$? Note: quantum effects can change the story quite a bit in $D=1$ and $D>3$. That's different story
-\end{exercise}
-
-\begin{exercise}
-The Lagrangian density for electrodynamics is
-\begin{align}
-	\mathcal L = \frac{1}{4}F^{\mu\nu}F_{\mu\nu} \ ,
-\end{align}
-where $F_{\mu\nu}$ is the field strength tensor. Write out the corresponding equations of motion. Notice that you only get half of Maxwell's equations. Where does the other half come from? \textsc{Answer} (partial): the other half of Maxwell's equations come from the geometry of that system. It's most clear in the language of differential forms, but then one has to build up that mathematical machinery.
-\end{exercise}
 
 
-% potential future topic: fields from springs
+%% MOVED TO Lec-09
+% \section{A theoretical digression}
+
+% If you'll permit one further digression, let me remind you that the reason why we spend so much time solving for the second derivative is that our models of physics tend to be local. Consider the action, $S = \int dt \, L$. If we have some state $q$ that propagates in spacetime, the natural form of the action is actually an integral with respect to a Lagrangian \emph{density},
+% \begin{align}
+% 	S = \int d^4x \mathcal L = \int d^4x \left(\text{const.} + q + \partial_\mu q + \cdots\right) \ ,
+% \end{align}
+% where on the right-hand side we just started writing out all possible polynomials of $q(x,t)$ and the four-derivative $\partial_\mu$. If you have been paying close attention, you'll notice that by writing $q(x,t)$ I have surreptitiously passed from $q$ being a `particle' to being a `field'. We only use $\partial_\mu$ instead of $d/dt$ or $\nabla$ because we expect the theory to be Lorentz invariant\footnote{If your theory is not Lorentz invariant, then replace `Lorentz' with whatever symmetries your system does have. If it has no appreciable symmetries, then may Boltzmann have mercy on your soul.}. In fact, we probably don't want to have any terms that have any free indices like $\partial_\mu q$ because that means it transforms like a Lorentz vector and thus the term is not Lorentz invariant. Furthermore, we can use field redefinitions to remove linear terms\footnote{This is not an obvious statement in the action, but the variation of the action usually comes from a path integral, where on varies over $q(x,t)$. Shifting $q(x,t)$ is like integrating $dx$ versus $d(x+3) = dx$.}. Subject to symmetries, the action looks like:
+% \begin{align}
+% S = \int d^4x \left[\frac{1}{2}q\left(\partial^2 + \omega_0^2\right)q + cq^3 + dq^4 + e\partial^2 q^2 + \cdots \right]	 \ .
+% \end{align}
+% You may recognize that the term in parenthesis is simply the `harmonic oscillator' (or wave equation, they're all the same to me) operator, $\mathcal O$. Indeed, when you vary that part of action by itself, you end up with the appropriate differential equation, $\mathcal O q = 0$. 
+
+% What about the other terms? First we should do a bit of dimensional analysis. For my own sanity, let's use natural units where we set $c=\hbar =1$ and all units are measure in mass dimension:
+% \begin{align}
+% 	[x] = [t] &= -1 \ .
+% \end{align}
+% This means that $[d^4x] = -4$. Since the action is dimensionless in natural units---after all, it shows up in a $e^{iS}$---then we know the Lagrangian density has dimension $[\mathcal L] = +4$. Since $[\partial]=+1$, we deduce that the variable $q$ has mass dimension $[q]=+1$. Ok, with that in mind, we can look at the `higher order' terms. The coefficients of these terms must have some \emph{negative} mass dimension:
+% \begin{align}
+% 	c\, , d\, , e \, , \cdots = \left(\frac{1}{M}\right)^n \ ,
+% \end{align}
+% where $n$ is a positive integer. We've written the mass scale as $M$. Any mass scale in the theory must have physical significance. We could question whether the mass scale $M$ is big or small compared to either $\omega_0$ or the characteristic energies at which we are studying the system. If $M$ is small, then these coefficients are large, and their dynamics are important. However, if we include these terms in our dynamics, then the equations of motion become very nonlinear:
+% \begin{align}
+% 	\mathcal O q + 3cq^2 + 4d q^3 + \cdots = 0 \ .
+% \end{align}
+% That would mean that the wave equation approximation is quite bad. By the way, those terms are also clearly non-linear. If we see physics that is approximately described by the wave equation, then these coefficients must be small. We thus expect $M$ to be large---it is an ultraviolet scale. 
+
+% What we intuit is that the scale $M$ is some energy scale where our theory is breaking down. If, for example, we were to \emph{experimentally}\footnote{In the \emph{gedanken} sense.} study this system at energies $E\sim M$, we expect that the effect of these non-linear terms are no longer small and become significant. In other words, the scale $M$ plays the role of a \emph{cutoff} at which our theory described by the linear operator $\mathcal O$ breaks down. For energies well below $M$, we can study the linear system and do \emph{perturbation theory} to study the first few non-linear coefficients that have coefficients that go like $(1/M)$ to a relatively small power. In the regime where our experiment has characteristic energy $E\ll M$, the in-principle infinite number of higher-order coefficients are negligible because we expect those effects to go like $(E/M)^n$; so keeping the first few should be an accurate description of the system.
+
+% This is the notion of an \textbf{effective theory}. All physical models are effective theories. We're simply parameterizing our ignorance about the universe and working in a regime where we are predictive. The effective theory philosophy explains why we are so obsessed with Green's functions of second-derivative operators:
+% \begin{itemize}
+% 	\item Constant operators are trivial, they're not even differential.
+% 	\item Operators with a single derivative are not Lorentz invariant. (The exceptions, like the diffusion operator, are only valid in the non-relativistic regime.)
+% 	\item Operators with three, five, or any odd number of derivatives are not Lorentz invariant. They are also suppressed by inverse powers of the cutoff, $M$.
+% 	\item Operators that are nonlinear, i.e.~terms in the Lagrangian density that have more than four powers of $q(x,t)$, are also suppressed by inverse powers of the cutoff $M$.
+% \end{itemize}
+% This tells you that in (3+1)-dimensions, the most interesting non-linear terms are $\mathcal L \supset cq^3+ dq^4$. If you assume that your theory has some $q\to -q$ symmetry, then you can even remove the $c$ term. By the way, this is how you build theories: you start with the most general $\mathcal L$ with an infinite number of terms. Then you argue based on symmetries and the relevance of high-dimensional operators which terms you can throw out. The result is that any reasonable theory in (3+1)-dimensions should be some perturbation of the harmonic oscillator/wave/Poisson system.
+
+% Let me layer onto this a bit more: implicit in writing out $S=\int d^4x\mathcal L$ is the idea that our theory should be manifestly \emph{local}. When we write terms like $q^3$, we really mean $q(x,t)q(x,t)q(x,t)$ at the \emph{same} spacetime point. If this were not true, then the theory would be non-local and the causal structure of the theory would depend on the reference frame. This, in turn would put causality and Lorentz invariance at odds with one another and you'd have to pick one but not both. Some recent alternative formulation of quantum physics based on amplitudes (and not Lagrangians) have proposed that by giving up on \emph{manifest} locality, there may be more elegant descriptions of a theory. Those descriptions are local, they're just not obviously so.
+
+% \begin{exercise}
+% If we lived in Flatland, then the action would take the form $S = \int d^3x \mathcal L$. How does the power counting change for a state $q$? How does it change for a general number of spatial dimensions, $D$? Note: quantum effects can change the story quite a bit in $D=1$ and $D>3$. That's different story
+% \end{exercise}
+
+% \begin{exercise}
+% The Lagrangian density for electrodynamics is
+% \begin{align}
+% 	\mathcal L = \frac{1}{4}F^{\mu\nu}F_{\mu\nu} \ ,
+% \end{align}
+% where $F_{\mu\nu}$ is the field strength tensor. Write out the corresponding equations of motion. Notice that you only get half of Maxwell's equations. Where does the other half come from? \textsc{Answer} (partial): the other half of Maxwell's equations come from the geometry of that system. It's most clear in the language of differential forms, but then one has to build up that mathematical machinery.
+% \end{exercise}
+
+
+% % potential future topic: fields from springs
 
 
 
