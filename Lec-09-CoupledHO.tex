@@ -88,6 +88,7 @@ If we had a lattice in $D$ spatial dimensions, then this result generalizes to
 Finally, let us rescale the state variable by defining a `better' state variable
 \begin{align}
 	\varphi(x,t) \equiv \frac{q(x,t)}{\sqrt{\rho}} \ .
+	\label{eq:field:normalization}
 \end{align}
 Further, let's go ahead and write the action $S=\int dt \, L$ with the idea of writing one big \emph{spacetime} integral over a Lagrangian \emph{denstiy} $S = \int dt\, d^Dx \, \mathcal L$:
 \begin{align}
@@ -130,8 +131,9 @@ Aha! Check it out, we have recovered the \emph{wave operator} $\partial^2$.  Now
 	\delta S &=0 
 	&\Rightarrow&&
 	\partial^2 \varphi &= 0 \ .
+	\label{eq:delta:S:operator:phi}
 \end{align}
-Let's be completely honest: we should do this variation more carefully... and we will, but just not right now. But this result is rather compelling: $\partial^2\varphi(x,t) = 0$ is simply the wave equation.
+Let's be completely honest: we should do this variation more carefully... and we will, but just not right now; see Example~\ref{eg:varying:discrete:action}. But this result is rather compelling: $\partial^2\varphi(x,t) = 0$ is simply the wave equation.
 \begin{exercise}
 Confirm that \eqref{eq:HO:coupled:D} is the appropriate generalization to $D$ spatial dimensions.
 \end{exercise}
@@ -238,7 +240,7 @@ Finally, let me end this theoretical digression by re-emphasizing the effective 
 Our theories of protons, neutrons, and electrons make sense until you study them at energies $E>\text{GeV}$ at which point the substructure of the nucleons becomes important. The protons and neutrons are no longer fundamental degrees of freedom and are replaced by a new description, quantum chromodynamics, that looks nothing like a theory of protons and neutrons. To say it differently, a chef doesn't need to know plasma physics when boiling a soup at 373 Kelvin. However, if you want to describe the phase transitions of early universe at $10^{13}$ Kelvin, then you really do need to know about subnuclear physics. The \emph{relevant} description of nature depends on the energy scale. Often times, the idea of a \emph{relevant} description is far more important than getting \emph{the right} description\footnote{One of the most intriguing ideas in theoretical physics is the existence of dualities that relate the mathematical description of two completely different theories. One of the implications of these observations is that there may not be a single `right' description of nature at a given energy scale. It may be that many completely different-looking theories make equivalent predictions about the same phenomena. Typically, though, only one of these descriptions is perturbative and easily calculable. Turning this observation upside down, one may use these dualities as a way to understand what happens to one description of nature when it breaks down---perhaps a dual description that was non-perturbative becomes perturbative in that break-down region. This turns out to be one of the main motivations to study extra dimensions.}.
 \end{example}
 
-If we only took the quadratic part of the action, then the theory is completely linear and every field looks like it's described by the wave equation. We call that case a \emph{free} field theory because it has no interactions and is completely solvable. Theories are distinguished by the kinds of interactions that \emph{perturb} the linear theory. Suppose, for example, we included a $-\lambda \varphi^4$ term in the action. Now we have a theory that is not \emph{just} the wave equation---in fact, it is not even linear. Since our theory is non-linear, what good is any of the Green's function garbage we've learned in this class?! There are two standard options:
+If we only took the quadratic part of the action, then the theory is completely linear and every field looks like it's described by the wave equation. We call that case a \emph{free} field theory because it has no interactions and is completely solvable. Theories are distinguished by the kinds of interactions that \emph{perturb} the linear theory\footnote{The observation that all theories basically look alike up to a handful of parameters is called \textbf{universality}. This idea is formalized in theoretical physics in what is called the \textbf{renormalization group}.}. Suppose, for example, we included a $-\lambda \varphi^4$ term in the action. Now we have a theory that is not \emph{just} the wave equation---in fact, it is not even linear. Since our theory is non-linear, what good is any of the Green's function garbage we've learned in this class?! There are two standard options:
 \begin{itemize}
 	\item Numerical approach: simulate the system on a lattice and solve for the extrema of the action. This is called lattice QCD in the high-energy physics community. In the astronomy community this is just called `simulation.' 
 	\item Feynman diagrams: do perturbation theory with respect to the couplings as long as they are small. 

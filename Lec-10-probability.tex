@@ -87,16 +87,16 @@ A probability distribution can be decomposed into moments. This the same way tha
 \end{align}
 The notation should remind you of a `correlation function' or an `expectation value.' The moments are an expansion that encode the whole distribution. There is, in turn, a fancy way to encode the moments in a \textbf{generating function}:
 \begin{align}
-	Z(\xi) \equiv \int dx\, e^{\xi x} \, p(x) \  
-	= \langle e^{\xi x}\rangle
-	= \langle 1 \rangle + \xi\langle x\rangle
-	+ \frac{1}{2}\xi^2 \langle x^2\rangle + \cdots \ ,
+	Z(J) \equiv \int dx\, e^{\xi x} \, p(x) \  
+	= \langle e^{J x}\rangle
+	= \langle 1 \rangle + J \langle x\rangle
+	+ \frac{1}{2}J^2 \langle x^2\rangle + \cdots \ ,
 	\label{eq:generating:function}
 \end{align}
 where $\xi$ is the argument of the generating function. The moments of the distribution are derivatives of the generating function:
 \begin{align}
 	M_n =
-	\left.\frac{\partial^n Z(\xi)}{\partial \xi^n}\right|_{\xi = 0} \ .
+	\left.\frac{\partial^n Z(J)}{\partial J^n}\right|_{J = 0} \ .
 \end{align}
 The generating function is a \emph{Laplace transform} of the distribution $p(x)dx$. Like the Fourier transform, this is an integral transform that can be used to solve differential equations. To the best of my limited experience, engineers learn about Laplace transforms and physicists learn about Fourier transforms\footnote{I suspect this is because the momentum basis has physical significance for us. Maybe engineers are a little more skeptical of imaginary numbers than we are. Who knows. ... okay, I suspect someone with a mathematical background knows and will say that both physicists and engineers are being silly. \url{https://xkcd.com/435/}}.
 \begin{example}
@@ -242,13 +242,14 @@ Very interesting! Let's make a few hot takes:
 \end{enumerate}
 The two-point correlation function can, in turn, be written with respect to the multidimensional generating functional, which is simply our multi-dimensional Gaussian with a source:
 \begin{align}
-	Z[q]
+	Z[\vec{J}]
 	\equiv
 	\mathcal N^{-1}
 	\int\cdots\int dq^1\cdots dq^n \, e^{-\frac{1}{2} \vec{q}\cdot \vec{A}\cdot\vec{q} +\vec{J}\cdot\vec{q}}
 	&=
 	% \sqrt{\frac{(2\pi)^n}{\det A}} 
 	e^{\frac{1}{2}\vec{J}\cdot \vec{A}^{-1}\cdot\vec{J}} \ .
+	\label{eq:Z:gaussian}
 \end{align}
 Then it is clear that the two-point correlation function (or \emph{correlator}) is indeed a second derivative of $Z[q]$ evaluated at $\vec{J}=0$:
 \begin{align}
@@ -258,6 +259,7 @@ Then it is clear that the two-point correlation function (or \emph{correlator}) 
 	\frac{\partial}{\partial J_i}
 	\frac{\partial}{\partial J_j}
 	Z[q]\right|_{\vec{J}=0} \ .
+	\label{eq:correlator:J}
 \end{align}
 \begin{exercise}
 Argue in one sentence that the one-point correlation function is zero\footnote{Side comment: the funny thing about the Higgs boson is that its one-point correlation function is non-zero. This is related to its identity as the order parameter of electroweak symmetry.}.
@@ -284,6 +286,14 @@ where on the right-hand side what we really mean is $\int dx'\, G(x,x') J(x')$, 
 \end{align}
 This shows up in an action $S=\int dt\, L$, which in turn shows up in an exponential $e^{iS[q]/\hbar}$ that gets integrated over the states $q$. 
 
+\begin{example}
+\label{eg:varying:discrete:action}
+If we interpret the argument of the exponential in $Z[q]$ to be an action, then one can imagine varying the action with respect to $q_i$ to determine the condition $\delta S = 0$. Here one can see that the variation of the `action' gives
+\begin{align}
+	-\vec{A} \vec{q} + \vec{J} = 0 \ .
+\end{align}
+Observe that when $J=0$, this is simply \eqref{eq:delta:S:operator:phi}. In other words, from the discrete function space picture, the variation of the action indeed gives the differential equation $\mathcal O q = 0$. Restoring $J$ gives a source term on the right-hand side.
+\end{example}
 
 \paragraph{Probabilistic Interpretation}
 
@@ -295,7 +305,7 @@ The integrals over $q_{k\neq i, j}$ don't matter: they just give you Gaussian pr
 
 In general, $A$ is \emph{not} diagonal, and so we end up with $\langle q_i q_j\rangle = A_{ij}$ in \eqref{eq:multi:Gaussian:2:point}. Probabilistically, this tells us that $q_i$ and $q_j$ are correlated. If $q_i$ has some positive value, then $q_j$ is likely to be positive. If $q_i$ has some negative value, then $q_j$ is likely to be negative. 
 
-\subsection{From Lattice to Field} (spacetime)
+\subsection{From Lattice to Field} % (spacetime)
 
 
 Thus far the lattice sites $i$ and $j$ have been abstract. We have used language analogous to the coupled harmonic oscillator in Section~\ref{sec:CHO}. Let's draw the picture again: 
@@ -332,7 +342,7 @@ The matrix multiplication turns into integrals
 \end{align}
 where you may want to take a moment to convince yourself that there's only one integral and not two. And, up to a factor of $i$, it looks like the 
 \begin{align}
-	Z[q(t)] \sim \int \mathcal Dq(t) e^{i\int dt\, L} \ ,
+	Z \sim \int \mathcal Dq(t) e^{i\int dt\, L} \ ,
 \end{align}
 where $L$ is the harmonic oscillator Lagrangian.
 
@@ -344,11 +354,13 @@ In continuum language, $A$ is simply the quadratic part of the Lagrangian densit
 \end{align}
 and the generating function (which I usually just call a \emph{partition function} inspired by statistical physics) is
 \begin{align}
-	Z[\varphi(x,t)] &= \int \mathcal D\varphi(x,t) e^{iS[\varphi]} \ 
+	Z &= \int \mathcal D\varphi(x,t) e^{iS[\varphi]} \ 
 	&
 	S[\varphi] &= \int d^4x \, \mathcal L \ ,
 \end{align}
 with $\mathcal L$ the Lagrangian \emph{density} for the theory. At this point, we can remind ourselves of \eqref{eq:G:QM}, throw in factors of $\hbar$ for dimensional consistency, and pat ourselves on the back. By the way, I don't think there's anything too deep to read into the fact that \eqref{eq:G:QM} is a quantum mechanical Green's function while $Z[\varphi(x,t)]$ is a partition function. There's a slight nuance related to what is called second quantization (which is related to what we've been doing), but that is now beyond the focus of this course\footnote{See, e.g.~\url{https://sites.google.com/ucr.edu/p230b/}}.
+
+\subsection{Interpretation}
 
 What's the lesson of all of this? The `\emph{fields are coupled harmonic oscillators in spacetime}' picture gives us a lot of intuition for solving [linear] differential equations. It brings us to the \emph{origin} of these differential equations, the action. It connects the solution to the linear differential equations to a Gaussian integral. For the non-linear cases, we still need to do some work, but this is where life gets difficult. The coupled harmonic oscillator picture also brings us back to the notion of a \emph{discretized function space} as a crutch to understand the continuum\footnote{If you're a condensed matter physicist, then the lattice holds some physical significance. If you're a particle physicist, then you assume that the lattice is just a coarse model of the continuum. In either case, you gain a lot from working with a handful of fields rather than $N\to \infty$ coupled harmonic oscillators.}. That discrete function space picture helps reinforces the idea that the Green's function is the inverse of some quadratic form\footnote{This is the fancy way of saying matrix.} in the action. 
 
@@ -376,6 +388,164 @@ Great! We're now experts in solving linear differential equations. These corresp
  
 
 \section{Feynman Diagrams}
+
+The idea of Feynman diagrams is to do perturbation theory with respect to the quadratic piece of the action. Rather then jumping into the field theory language, let's keep using the more familiar $N$-site lattice language. Let the matrix $A$ represent the quadratic part of the action which, at the very least, includes the kinetic term and the nearest-neighbor interactions. There is also the linear term, $\vec{J}\vec{q}$ that we interpret as a source for $\vec{q}$. Let us add to this a quartic term which we write as
+\begin{align}
+ 	-V(\vec{q}) &= - \lambda \sum_i q_i^4 \ .
+ \end{align}
+The minus sign is to remind us that this is a potential term and such terms appear with a minus sign in the Lagrangian. $\lambda$ is a number that represents the four-point coupling or interaction strength. When $q_i$ is a discrete harmonic oscillator $\lambda$ has some dimension, but upon passing to the continuum field $\varphi$ using the normalization \eqref{eq:field:normalization} one can check that $\lambda$ is dimensionless in natural units. By the way, it is important that we wrote $\sum q_i^4$ and not $(\sum_i q_i)^4$. The latter mixes terms at different sites, whereas $q_i^4$ is a local term that is evaluated at each site $i$. 
+
+The partition function/path integral/generating function for $\vec{q}$ in the presence of $V(\vec{q})$ is
+\begin{align}
+	Z_V[\vec{J}] &= \mathcal N^{-1} \int d^N\vec{q} \, 
+		e^{-\frac{1}{2} \vec{qAq} + \vec{Jq} - V(\vec{q})}
+		\\
+	&= 
+	\mathcal N^{-1} \int d^N\vec{q} \, 
+	e^{-V\left(\frac{\partial}{\partial \vec{J}}\right)}
+		e^{-\frac{1}{2} \vec{qAq} + \vec{Jq}} \ .
+\end{align}
+In the second line we have used the fact that because
+\begin{align}
+	\mathcal N^{-1} \int d^N\vec{q} \, 
+	q_i^n \, 
+	e^{-\frac{1}{2} \vec{qAq} + \vec{Jq}}
+	=
+	\mathcal N^{-1} \int d^N\vec{q} \, 
+	\left(\frac{\partial}{\partial J_i}\right)^n
+	e^{-\frac{1}{2} \vec{qAq} + \vec{Jq}} \ ,
+\end{align}
+one may write any function of $q_i$, including $e^{-V(\vec{q})}$ as a function of $(\partial/\partial J_i)$ acting on $Z[J]$, the generating function \emph{without} $V(\vec{q})$. Thus
+\begin{align}
+	Z_V[\vec{J}] &= e^{-V\left(\frac{\partial}{\partial \vec{J}}\right)} Z[\vec{J}] \ .
+	\label{eq:ZV:from:Z}
+\end{align}
+It is conventional to write the generating function(al) to be a function of the source $\vec{J}$ since it is formally an integral transform of the distribution. When we take correlation functions, we take derivatives of $Z_V[\vec{J}]$ with respect to $\vec{J}$, recall \eqref{eq:correlator:J}.
+
+As long as $\lambda$ is small, one may Taylor expand the exponential in $V(\vec{q})$,
+\begin{align}
+	Z_V[\vec{J}] &= Z[\vec{J}] + \lambda\left[-\sum_i \left(\frac{\partial}{\partial J_i}\right)^4\right] Z[\vec{J}] + \cdots \ .
+\end{align}
+
+Let's put this to work. Suppose I'd like to ask about the four-point correlation function between four oscillators, which I'll call $q_{1,2,3,4}$. I'm labeling them 1--4 for notational simplicity, not because they have to be sequential oscillators. You could have picked any four numbers, say $q_4$, $q_9$, $q_{8}$, and $q_{24}$. Mathematically, we know what this object corresponds to:
+\begin{align}
+	\langle q_1q_2q_3q_4 \rangle
+	&= 
+	\frac{1}{\mathcal N}
+	\int d^N\vec{q} \, 
+	q_1q_2q_3q_4 \,
+	e^{-\frac{1}{2}\vec{qAq} - V(\vec{q})}
+	\\
+	&=
+	\left.\frac{\partial^4 Z_V[\vec{J}]}{\partial J_1\partial J_2\partial J_3 \partial J_4}\right|_{\vec{J}=0}
+	\\
+	&= \left.\partial_{J_1}\partial_{J_2}\partial_{J_3}\partial_{J_4}
+	\left(1 - \lambda\sum_i \partial_{J_i}^4 + \cdots\right) Z[\vec{J}] 
+	\right|_{\vec{J}=0}
+	\ .
+	\label{eq:4pt:example:4derivatives}
+\end{align}
+At this point, let us recall the closed form expression for $Z[\vec{J}]$ from performing the Gaussian integral, \eqref{eq:Z:gaussian}:
+\begin{align}
+	Z[\vec{J}]
+	=
+	e^{\frac{1}{2}\vec{J}\vec{A}^{-1}\vec{J}} \ .
+\end{align}
+This means that
+\begin{align}
+	\left.
+	\partial_{J_k}Z[\vec{J}]
+	\right|_{\vec{J}=0}
+	&= 
+	\left(\vec{A}^{-1}\vec{J}\right)_k
+	= 0
+	&
+	\left.
+	\partial_{J_k}\partial_{J_\ell}Z[\vec{J}]
+	\right|_{\vec{J}=0}
+	&= 
+	A^{-1}_{k\ell}
+	\ .
+\end{align}
+This means that every \emph{pair} of derivatives with respect to source lattice sites $J_k$ and $J_\ell$ produces a propagator (Green's function) $A^{-1}_{k\ell}$. Any single derivative $\partial_{J_k}$ of $Z$ is proportional to $A^{-1}J$, which vanishes when we set the sources to zero. The $\mathcal O(\lambda^0)$ term of \eqref{eq:4pt:example:4derivatives} may be written as:
+\begin{align}
+	\left.
+	\partial_{J_1}\partial_{J_2}\partial_{J_3}\partial_{J_4}
+	Z[\vec{J}] 
+	\right|_{\vec{J}=0}
+	&=
+	A^{-1}_{12}A^{-1}_{34} + A^{-1}_{13}A^{-1}_{24} + A^{-1}_{14}A^{-1}_{23} \ .
+	\label{eq:4pt:ex:4der:leading:props}
+\end{align}
+The indices refer to particular lattice points where the sources are turned on. These, in turn, correspond to the specific oscillators int he correlation function $\langle q_1q_2q_3q_4 \rangle$. 
+\begin{exercise}
+Check that \eqref{eq:4pt:ex:4der:leading:props} is correct. You may need to do this the hard way and write out a bunch of terms to see how it works out. It is worth your time doing this to see how \eqref{eq:4pt:ex:4der:leading:props} pops out. 
+\end{exercise}
+There is a graphical way of drawing this. Assign each point $i=1,2,3,4$ a point on the page and draw $A^{-1}_{k\ell}$ as a line that connects point $k$ to point $\ell$. The result is
+\begin{align}
+	A^{-1}_{12}A^{-1}_{34} + A^{-1}_{13}A^{-1}_{24} + A^{-1}_{14}A^{-1}_{23} 
+	&=
+	\vcenter{
+		\hbox{\includegraphics[width=.4\textwidth]{figures/P230b_4ptdisco.png}}
+		} \ .
+\end{align}
+The $\mathcal O(\lambda)$ term now has \emph{eight} derivatives with respect to $\vec{J}$; the four new ones are at some \emph{new} point $J_i$, which is then summed over: 
+\begin{align}
+	\left.
+		- \lambda\sum_i
+		\partial_{J_1}\partial_{J_2}\partial_{J_3}\partial_{J_4}
+		 \partial_{J_i}^4
+		Z[\vec{J}] 
+	\right|_{\vec{J}=0} \ .
+\end{align}
+Following our observation above that pairs of $\partial_{J_k}\partial_{J_\ell}$ bring down a propagator $A^{-1}_{k\ell}$, we can write this diagrammatically in terms of a general intermediate point $i$ that is summed over:
+\begin{align}
+	\left.
+		- \lambda\sum_i
+		\partial_{J_1}\partial_{J_2}\partial_{J_3}\partial_{J_4}
+		 \partial_{J_i}^4
+		Z[\vec{J}] 
+	\right|_{\vec{J}=0} 
+	&=
+	- 4! \lambda \sum_i
+	A^{-1}_{1i} A^{-1}_{2i} A^{-1}_{3i} A^{-1}_{4i} \ .
+\end{align}
+The $4!$ is a combinatorial factor that counts the number of different ways in which you can pair up $J_i$ derivatives with $J_{1,2,3,4}$ derivatives. 
+\begin{exercise}
+Confirm the factor of $4!$ by explicitly deriving the above result.
+\end{exercise}
+Finally, we may write this diagrammatically as well:
+\begin{align}
+	- 4! \lambda \sum_i
+	A^{-1}_{1i} A^{-1}_{2i} A^{-1}_{3i} A^{-1}_{4i}
+	&= 
+	\vcenter{
+		\hbox{\includegraphics[width=.2\textwidth]{figures/P230b_4ptlocal.png}}
+		}\ .
+\end{align}
+What we end up with is a rule for describing the Taylor expansion of $e^{-V[\partial_{\vec{J}}]}$ in \eqref{eq:ZV:from:Z} when calculating $n$-point correlation functions $\langle q_1\cdots q_n\rangle$:
+\begin{enumerate}
+\item For each of the $n$ points, draw a point on the page. Your goal will be the connect these points into a graph.
+
+\item To leading order, connect all the points using lines that do not intersect. This represents free propagation and is the $\mathcal O(\lambda^0)$ contribution.
+
+\item The $\mathcal O(\lambda)$ graphs correspond to the same set up, but with one additional point that accepts four lines. Draw all graphs where each point is connected, with the reminder that the new point must have four lines connecting to it.
+
+\item You can read this graph as the product of propagators $A^{-1}_{k\ell}$ corresponding to each line. Each four-point vertex picks up a factor $\lambda$ (up to other combinatorial factors that one may determine).
+
+\item For higher-order terms, you insert more vertices that accept four lines. One such vertex for each order in $\lambda$. You interpret more complicated diagrams the same way: each line corresponds to a propagator between those two nodes, each vertex comes with a prefactor of $\lambda$ up to combinatorial factors.
+\end{enumerate}
+As long as $\lambda$ is small, one may truncate the sum at a small number of insertions to approximate the correlation function. These are called Feynman diagrams.
+
+Note that each line is a Green's function from the \emph{quadratic} operator $\vec{qAq}$: each line represents the solution to the \emph{linear} differential equation. Recall that this Green's function is precisely what `propagates' over long distances as a free wave. The vertices are the non-linearities. You can see this because rather than one $q$ coming in and one $q$ coming out, you have many $q$'s interacting at the same point. For example, you could read this as one $q$ turning into three lower-energy $q$s. This non-conservation of particle number for an interacting theory is part of what makes a quantum theory of fields different from quantum mechanics. 
+
+The sum over all of these Feynman diagrams is completely analogous to the sum over histories in quantum mechanics. You can imagine that $q_1$ and $q_2$ are some harmonic oscillators in in the asymptotic past that have excitations. We would like to know the amplitude for those excitations to show up at harmonic oscillators $q_3$ and $q_4$ in the asymptotic future. In order to figure that out, we sum over all the ways in which those excitations could propagate. The leading terms include no interactions; this term is usually zero since you can't exchange momentum. The next-to-leading terms include an interaction where the initial particles overlap at a point $q_i$ before spitting out two new particles. In this way, you can `read off' a story of what the excitations are doing in spacetime. Now you know everything you need to know to play with Feynman diagrams\footnote{See, e.g.~\url{https://sites.google.com/ucr.edu/p165/}. For a teaser, you can try this exercise that I give to the undergraduate particle physics course: \url{https://github.com/Tanedo/Physics165-2020/blob/master/P165_L02.pdf}.}.
+
+
+
+
+
+
 
 
  
