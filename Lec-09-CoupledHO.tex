@@ -16,11 +16,16 @@ If you imagine that you have \emph{many} harmonic oscillators that are spaced ve
 	q_i(t) \to q(x,t) \ .
 \end{align}
 If I pick some point along the line, $x$, then the displacement of the harmonic oscillator at $x$ observed at time $t$ is $q(x,t)$. Congrats, $q(x,t)$ is now a field. You can see why we didn't want to use $x(t)$: it confuses the position along the line with the displacement of the harmonic oscillator at that position. 
-
+%
+The picture is as follows:
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/coupledHO.jpg}
+\end{center}
 The generalization to a dense three-dimensional lattice is straightforward, you end up with $q(x,y,z,t)$ or $q(\vec{x},t)$.
 
 
 \subsection{Coupled Harmonic Oscillators}
+\label{sec:CHO}
 
 The Lagrangian for a single harmonic oscillator $q(t)$ is
 \begin{align}
@@ -154,6 +159,7 @@ We assumed that each harmonic oscillator on the lattice only couples to its near
 
 
 \subsection{A theoretical digression}
+\label{sec:EFT:philosophy}
 
 If you'll permit yet another digression, let me remind you that the reason why we spend so much time solving for the second derivative is that our models of physics tend to be local. Consider the action, $S = \int dt \, L$. If we have some state $\varphi$ that propagates in spacetime, then $\varphi$ is a \emph{field}. The natural form of the action is an integral with respect to a Lagrangian \emph{density},
 \begin{align}
