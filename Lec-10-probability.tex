@@ -1,5 +1,5 @@
 %!TEX root = P231_notes.tex
-\section{Green's Functions from Statistics and Gaussian Integrals}
+\section{Green's Functions, Statistics, and Gaussian Integrals}
 
 In Section~\ref{sec:CHO:fields} we showed how fields emerge from a system of nearest-neighbor coupled harmonic oscillators. To leading order, fields are described by the wave operator. We remarked that the differential equation that governs a physical theory comes from a variation of the action functional $\delta S[\varphi]=0$. We even motivated how one builds theories: you start by imagining the most general action $S$ and then you remove terms because they violate symmetries or because they're suppressed by an energy scale $M$ much larger than the energy $E$ or physical phenomena you're examining. The latter point amounts to a $(E/M)^n$ suppression on physical observables. 
 
@@ -87,13 +87,13 @@ A probability distribution can be decomposed into moments. This the same way tha
 \end{align}
 The notation should remind you of a `correlation function' or an `expectation value.' The moments are an expansion that encode the whole distribution. There is, in turn, a fancy way to encode the moments in a \textbf{generating function}:
 \begin{align}
-	Z(J) \equiv \int dx\, e^{\xi x} \, p(x) \  
+	Z(J) \equiv \int dx\, e^{J x} \, p(x) \  
 	= \langle e^{J x}\rangle
 	= \langle 1 \rangle + J \langle x\rangle
 	+ \frac{1}{2}J^2 \langle x^2\rangle + \cdots \ ,
 	\label{eq:generating:function}
 \end{align}
-where $\xi$ is the argument of the generating function. The moments of the distribution are derivatives of the generating function:
+where $J$ is the argument of the generating function. The moments of the distribution are derivatives of the generating function:
 \begin{align}
 	M_n =
 	\left.\frac{\partial^n Z(J)}{\partial J^n}\right|_{J = 0} \ .
@@ -342,7 +342,7 @@ The matrix multiplication turns into integrals
 \end{align}
 where you may want to take a moment to convince yourself that there's only one integral and not two. And, up to a factor of $i$, it looks like the 
 \begin{align}
-	Z \sim \int \mathcal Dq(t) e^{i\int dt\, L} \ ,
+	Z[J=0] \sim \int \mathcal Dq(t) e^{i\int dt\, L} \ ,
 \end{align}
 where $L$ is the harmonic oscillator Lagrangian.
 
@@ -354,11 +354,11 @@ In continuum language, $A$ is simply the quadratic part of the Lagrangian densit
 \end{align}
 and the generating function (which I usually just call a \emph{partition function} inspired by statistical physics) is
 \begin{align}
-	Z &= \int \mathcal D\varphi(x,t) e^{iS[\varphi]} \ 
+	Z[J=0] &= \int \mathcal D\varphi(x,t) e^{iS[\varphi]} \ 
 	&
 	S[\varphi] &= \int d^4x \, \mathcal L \ ,
 \end{align}
-with $\mathcal L$ the Lagrangian \emph{density} for the theory. At this point, we can remind ourselves of \eqref{eq:G:QM}, throw in factors of $\hbar$ for dimensional consistency, and pat ourselves on the back. By the way, I don't think there's anything too deep to read into the fact that \eqref{eq:G:QM} is a quantum mechanical Green's function while $Z[\varphi(x,t)]$ is a partition function. There's a slight nuance related to what is called second quantization (which is related to what we've been doing), but that is now beyond the focus of this course\footnote{See, e.g.~\url{https://sites.google.com/ucr.edu/p230b/}}.
+with $\mathcal L$ the Lagrangian \emph{density} for the theory. At this point, we can remind ourselves of \eqref{eq:G:QM}, throw in factors of $\hbar$ for dimensional consistency, and pat ourselves on the back. By the way, I don't think there's anything too deep to read into the fact that \eqref{eq:G:QM} is a quantum mechanical Green's function while $Z$ is a partition function. There's a slight nuance related to what is called second quantization (which is related to what we've been doing), but that is now beyond the focus of this course\footnote{See, e.g.~\url{https://sites.google.com/ucr.edu/p230b/}}.
 
 \subsection{Interpretation}
 
@@ -488,6 +488,7 @@ There is a graphical way of drawing this. Assign each point $i=1,2,3,4$ a point 
 	\vcenter{
 		\hbox{\includegraphics[width=.4\textwidth]{figures/P230b_4ptdisco.png}}
 		} \ .
+		\label{eq:feynman:4pt:disco}
 \end{align}
 The $\mathcal O(\lambda)$ term now has \emph{eight} derivatives with respect to $\vec{J}$; the four new ones are at some \emph{new} point $J_i$, which is then summed over: 
 \begin{align}
@@ -522,6 +523,7 @@ Finally, we may write this diagrammatically as well:
 	\vcenter{
 		\hbox{\includegraphics[width=.2\textwidth]{figures/P230b_4ptlocal.png}}
 		}\ .
+		\label{eq:feynman:4pt}
 \end{align}
 What we end up with is a rule for describing the Taylor expansion of $e^{-V[\partial_{\vec{J}}]}$ in \eqref{eq:ZV:from:Z} when calculating $n$-point correlation functions $\langle q_1\cdots q_n\rangle$:
 \begin{enumerate}
@@ -537,9 +539,29 @@ What we end up with is a rule for describing the Taylor expansion of $e^{-V[\par
 \end{enumerate}
 As long as $\lambda$ is small, one may truncate the sum at a small number of insertions to approximate the correlation function. These are called Feynman diagrams.
 
+\paragraph{Interpretation.}
 Note that each line is a Green's function from the \emph{quadratic} operator $\vec{qAq}$: each line represents the solution to the \emph{linear} differential equation. Recall that this Green's function is precisely what `propagates' over long distances as a free wave. The vertices are the non-linearities. You can see this because rather than one $q$ coming in and one $q$ coming out, you have many $q$'s interacting at the same point. For example, you could read this as one $q$ turning into three lower-energy $q$s. This non-conservation of particle number for an interacting theory is part of what makes a quantum theory of fields different from quantum mechanics. 
 
-The sum over all of these Feynman diagrams is completely analogous to the sum over histories in quantum mechanics. You can imagine that $q_1$ and $q_2$ are some harmonic oscillators in in the asymptotic past that have excitations. We would like to know the amplitude for those excitations to show up at harmonic oscillators $q_3$ and $q_4$ in the asymptotic future. In order to figure that out, we sum over all the ways in which those excitations could propagate. The leading terms include no interactions; this term is usually zero since you can't exchange momentum. The next-to-leading terms include an interaction where the initial particles overlap at a point $q_i$ before spitting out two new particles. In this way, you can `read off' a story of what the excitations are doing in spacetime. Now you know everything you need to know to play with Feynman diagrams\footnote{See, e.g.~\url{https://sites.google.com/ucr.edu/p165/}. For a teaser, you can try this exercise that I give to the undergraduate particle physics course: \url{https://github.com/Tanedo/Physics165-2020/blob/master/P165_L02.pdf}.}.
+By the way, the diagrams represent the \emph{dynamics} of a system. A rough definition of this is the physical content of the Lagrangian---how the states interact. This is in contrast to the \emph{kinematics} of the system, which has to do with things like the conservation of momentum  and dispersion-like relations (`on-shell-ness') that connect the energy of a state to its momentum. The diagrams tell you about possible [quantum] interactions, but you have to impose the phase space constraints before converting the diagrams into, say, a probability or a cross section.
+
+The sum over all of these Feynman diagrams is completely analogous to the sum over histories in quantum mechanics. You can imagine that $q_1$ and $q_2$ are some harmonic oscillators in in the asymptotic past that have excitations. We would like to know the amplitude for those excitations to show up at harmonic oscillators $q_3$ and $q_4$ in the asymptotic future. In order to figure that out, we sum over all the ways in which those excitations could propagate. The leading terms include no interactions; this term is usually zero since you can't exchange momentum. The next-to-leading terms include an interaction where the initial particles overlap at a point $q_i$ before spitting out two new particles. In this way, you can `read off' a story of what the excitations are doing in spacetime. 
+
+\paragraph{Connected versus disconnected.} The types of diagrams that we draw fall into two classes. There are disconnected diagrams like 
+\eqref{eq:feynman:4pt:disco} and connected diagrams like \eqref{eq:feynman:4pt}. The disconnected diagrams represent propagation in spacetime, but not necessarily causal or kinematically allowed propagation. This is clear since each line is a propagator (Green's function, $A^{-1}$, $\cdots$). For a dynamical field, the propagator carries some well defined momentum. You know this because we know the propagator is the solution to a wave equation and so it's something like a sine wave with some well defined angular frequency (energy) and wave number (momentum).  If your initial and final states conserve total energy and momentum but are not otherwise identical, then the diagrams in \eqref{eq:feynman:4pt:disco} don't actually contribute. On the other hand, the four-point interaction in \eqref{eq:feynman:4pt} allows the states to exchange momenta. 
+
+There's some good physics here. The standard introduction to field theory in statistical mechanics is the Ising model for magnetism: a lattice of spins that take binary values (spin-up or spin-down) with nearest-neighbor interactions. You may have already met this system: at high temperatures, the spins each have a lot of thermal energy and end up randomly oriented. At low temperatures, the dipole interactions between neighboring spins cause them to align. The typical length scale of these correlations are small---if you wiggle a spin at one lattice site, it's neighbor will respond, but the neighbor's neighbor may already be largely insensitive\footnote{This is just like in social situations: if you are blasting Rammstein at 3am in the morning, your next-door neighbors will get upset, but the people one apartment away will barely hear it.}. However, if one tunes the temperature to be near a \emph{critical temperature}, then the typical number of sites that are correlated becomes large: as if a wave is propagating across the lattice\footnote{This as if you played Rammstein at 3am in the morning, causing your neighbors to say `oh hell yes' and then turn on all of \emph{their} speakers up to also play Rammstein, and then \emph{their} neighbors do the same thing.}. I'll leave way in which this happens to your statistical mechanics/field theory courses, but suffice it to say that this is an example where a microphysical lattice has a continuum limit that is best described by a quantum field theory\footnote{What more, the quantum field theory exhibits universal behavior. It turns out to capture precisely the same physics as the water--ice transition.}. 
+
+
+The connected and disconnected diagrams have a physical meaning in this system. Correlators like $\langle q_iq_j\rangle$ tell you how likely a spin at site $i$ is likely to be aligned with a spin at site $j$. If the temperature is near absolute zero, then this correlation is large no matter how far away $i$ and $j$ are: the thermal energy is so low that all of the spins want to line up. However, that's not really `propagation' of information: that's just the ground state of the system, reflected in the fact that the single-spin expectation value (``one-point correlation function,'' which sounds silly) is non-zero, $\langle q_i\rangle \approx \pm 1$. What we really care about is what happens when we flip one of the spins relative to that background. Thus the figure of merit is the \emph{connected} two-point function:
+\begin{align}
+	\langle q_i q_j\rangle_\text{connected} = \langle q_i q_j\rangle 
+	- \langle q_i\rangle\langle q_j\rangle \ ,
+\end{align}
+where the second term removes the effect of the ground state being aligned. As you can expect from its name, the connected correlation function only includes diagrams that are connected. In a particle-physics-based field theory course, one usually sees the removal of disconnected diagrams when carefully normalizing the partition function\footnote{By the way, in the discussion above I did \emph{not} carefully normalize the partition function. The value of $\mathcal N$ should be with respect to the full theory, not just the free theory. However, we didn't actually use this normalization so it was convenient to lie a bit for pedagogical efficiency.}. Here it's nice to have a concrete physical interpretation.
+
+
+\paragraph{Onward and upward.}
+Now you know everything you need to know to play with Feynman diagrams\footnote{See, e.g.~\url{https://sites.google.com/ucr.edu/p165/}. For a teaser, you can try this exercise that I give to the undergraduate particle physics course: \url{https://github.com/Tanedo/Physics165-2020/blob/master/P165_L02.pdf}.}.
 
 
 
