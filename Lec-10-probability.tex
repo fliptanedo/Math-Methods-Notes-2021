@@ -102,14 +102,39 @@ The generating function is a \emph{Laplace transform} of the distribution $p(x)d
 \begin{example}
 One could also write the Fourier transform of the distribution $p(x)dx$. This is called the \textbf{characteristic function} and is defined by
 \begin{align}
-	\phi(k) = \int_{-\infty}^\infty dx\, e^{ikx}p(x) = 1 + ikM_1 + \cdots \ .
+	\tilde p(k) = \int_{-\infty}^\infty dx\, e^{ikx}p(x) = 1 + ikM_1 + \cdots \ .
 \end{align}
-Note that one can then write the distribution as
-\begin{align}
-	p(x) &= \int \dbar k\left( 1+ikM_1 + \frac{(ik)^2}{2!}M_2 + \cdots \right)e^{-ikx} \ ,
-\end{align}
-where the $e^{-ikx}$ looks like a $\delta$-function in momentum space. This is a toy version of the partition function in quantum field theory and the $\delta$-function imposes overall momentum conservation on any scattering process. 
 \end{example}
+
+\begin{example}
+Observe that $\tilde p(k) = Z(ik)$.
+\end{example}
+
+\begin{example}
+Note that one can write the distribution in a Fourier representation:
+\begin{align}
+	p(x) &= \int \dbar k 
+	\left( 1+ikM_1 + \frac{(ik)^2}{2!}M_2 + \cdots \right)e^{-ikx} \ .
+\end{align}
+The $e^{-ikx}$ looks like a $\delta$-function in momentum space\footnote{This is a toy version of the partition function in quantum field theory and the $\delta$-function imposes overall momentum conservation on any scattering process.}. In fact, we can think of this as a derivative expansion:
+\begin{align}
+	p(x) &= \int \dbar k \left( 1+ \left(-\partial_x\right) M_1 + \frac{\left(-\partial_x\right)^2}{2!}M_2 + \cdots \right)e^{-ikx} \ .
+\end{align}
+Recalling that $\int \dbar k e^{-ikx} = \delta(x)$, we see that this is indeed an expansion in derivatives of the $\delta$-function:
+\begin{align}
+	p(x) &= \left[ 1+ \left(-\partial_x\right) M_1 + \frac{\left(-\partial_x\right)^2}{2!}M_2 + \cdots \right] \delta(x) \ .
+\end{align}
+This means that if we would like to determine the expectation value of a test function, $\langle f(x)\rangle$, with respect to the distribution $p(x)$, we have
+\begin{align}
+	\langle f(x)\rangle = \int dx\, f(x)\, p(x) = f(0) + m_1 f'(0) + \cdots \ .
+\end{align}
+\end{example}
+
+
+
+\subsection{If this were a different class}
+
+If this were a different class, we would take a moment and talk about probabilities in physics. Rather than doing that, let me refer to some fun ideas in Appendix~\ref{sec:probability}.
 
 \subsection{A cute trick: the Gaussian integral}
 
@@ -326,7 +351,7 @@ and the matrix/operator $A$ encodes something about propagation in time. For exa
 		&	&	&	&	& \ddots
 	\end{pmatrix}
 \end{align}
-One can see clearly that $A$ couples nearby lattice points in time. If I displace the oscillator at time $i$, then at some later\footnote{One still has to impose causlity by hand since the operator is symmetric under time reversal.} time $j$ the oscillator will have some correlated displacement. In other words, the disturbance at time $i$ has \emph{propagated} to time $j$. The object that enabled that propagation is $A^{-1} \sim [-(d/dt)^2]{-1} \sim G(t,t')$. 
+One can see clearly that $A$ couples nearby lattice points in time. If I displace the oscillator at time $i$, then at some later\footnote{One still has to impose causlity by hand since the operator is symmetric under time reversal.} time $j$ the oscillator will have some correlated displacement. In other words, the disturbance at time $i$ has \emph{propagated} to time $j$. The object that enabled that propagation is $A^{-1} \sim [-(d/dt)^2]^{-1} \sim G(t,t')$. 
 
 Observe that even though $A$ is local---the discretized second derivative connects nearest-neighbors and next-to-nearest neighbor sites---the Green's function is \emph{non}-local: it allows the information to propagate over long distances. The physical mechanism is clear: if we think about this as a bunch of coupled oscillators (in time), then each oscillator causes its neighbor to move. You should imagine `the wave' in a stadium when the crowd cheers. As a matrix, the indices of the Green's function ($A^{-1}_{ij}$) gives the value of $q_j$ given a value at $q_i$:
 \begin{center}
