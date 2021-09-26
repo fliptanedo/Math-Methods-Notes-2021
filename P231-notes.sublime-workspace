@@ -80,10 +80,7 @@
 	"buffers":
 	[
 		{
-			"contents": "%!TEX root = P231_notes.tex\n\n\\documentclass[12pt]{article}\n\\input{P231_header}\n\n\\begin{document}\n\n%\\thispagestyle{empty}\t\t% default if no preprint #\n\\thispagestyle{firststyle} \t% to include preprint\n%% I think this may screw up pdfsync on the first page\n\n\\begin{center}\n\t\n\t{\\large \\acronum{P231:}}\n    {\\Large \\bf Mathematical Methods in Graduate Physics}\n\n    \\vskip .7cm\n\n%% SINGLE AUTHOR FORMAT\n%% --------------------\n\t\\textbf{Flip Tanedo} \\\\\n\t\\texttt{\\footnotesize \\email{flip.tanedo@ucr.edu}}\n\n\t\\vspace{-1em}\n    \\begin{institutions}[1.5cm]\n    \\footnotesize\n    {\\it \n\t    Department of Physics \\& Astronomy, \n\t    University of  California, Riverside, \n\t    {CA} 92521\t    \n\t    }    \n    \\end{institutions}\n\n\n\\end{center}\n\n\n\n\n%%%%%%%%%%%%%%%%%%%%%\n%%%  ABSTRACT    %%%%\n%%%%%%%%%%%%%%%%%%%%%\n\n\\begin{abstract}\n\\noindent \nThis is a crash course on mathematical methods necessary to succeed in the first-year physics graduate curriculum at \\acro{UC} Riverside. \n%\nThe focus is how to solve differential equations using Green's functions.\n\\end{abstract}\n\n\n\n\\small\n\\setcounter{tocdepth}{2}\n\\tableofcontents\n\\normalsize\n%\\clearpage\n\n\n%%%%%%%%%%%%%%%%%%%%%\n%%%  THE CONTENT  %%%\n%%%%%%%%%%%%%%%%%%%%%\n\n\\input{Lec-00-intro}\n\\input{Lec-01-physics-vs-math}\n\\input{Lec-02-dimensional-analysis}\n\\input{Lec-03-linear-algebra}\n\\input{Lec-04-functionspace}\n\\input{Lec-05-complex}\n\\input{Lec-06-HO}\n% \\input{Lec-07-KramersKonig}\n\\input{Lec-08-HOinXD}\n\\input{Lec-09-CoupledHO}\n\\input{Lec-10-probability}\n\n\\section{Closing Thoughts}\n\nWhat I hope you've come to appreciate is that the mathematical machinery that you face in your first year of graduate school may appear daunting at first, but that you're never too far off from some variation of the harmonic oscillator. Green's functions are a powerful tool for solving differential equations, but we found that their \\emph{analytic structure} tells is about the underlying physics of our theory. We waxed poetic about going from a harmonic oscillator to a field and how this is connected to the idea of extending time to spacetime. We danced carefully with the picture of functions as infinite-dimensional function spaces that could be understood in their discretized form as large-but-finite-dimensional vector spaces. We said a few words about the notion of effective theory and action principles. After arguing that everything really does reduce to something like a harmonic oscillator, we showed one way (perturbation theory) to deal with the \\emph{non-linearities} that make \\emph{actual} physics really interesting. There are any number of directions for you to go from here. Experimentalists and observers may want to dig into statistics and probability, condensed matter folks may flock to statistical mechanics while particle folks head to quantum field theory (only to discover that at the hearts of their respective fields they are speaking dialects of the same language\\footnote{... that differ by an $i$}). From here on out, \\emph{you} define your path through mathematical physics: what you need for your work, what tickles your fancy, and what gets a slice of your precious attention as you set forth in your scientific careers.\n\n\n\n\\section*{Acknowledgments}\n%This work is supported in part by \n%the \\textsc{nsf} grant \\textsc{phy}-1316792. \n%\nI thank the students of Physics 231 (2016--2020) for their patience and feedback on on this course. Especially notable are those poor souls who suffered the first iteration of this course in 2016. I appreciate the advice of my more experienced colleagues when shaping this course and the many fantastic physics references out there that each take their own twists through mathematical physics. I am especially appreciative to the textbooks by Stone and Goldbart as well as that by Cahill. Those two references not only inspired big portions of these notes, but also led me down hours of delightful rabbit holes of enlightenment that did not necessarily end up in my course.\n\n\\appendix\n\\input{Lec-999-Appendix-method-of-variations}\n\\input{Lec-0A-Fourier}\n\\input{Lec-11-bayes}\n\n%\n% \\textsc{p.t.} thanks the Aspen Center for Physics (NSF grant \\#1066293) for its hospitality during a period where part of this work was completed. \\textsc{p.t.} is supported by the DOE grant \\textsc{de-sc}/0008541.\n\n%% Appendices\n% \\appendix\n\n\n%% Bibliography\n%\\bibliographystyle{utcaps} \t% arXiv hyperlinks, preserves caps in title\n%\\bibliographystyle{utphys} \t% arXiv hyperlinks\n% \\bibliography{bib title without .bib}\n\n\n\\end{document}",
 			"file": "P231_notes.tex",
-			"file_size": 3953,
-			"file_write_time": 132524623688034055,
 			"settings":
 			{
 				"buffer_size": 4520,
@@ -122,7 +119,7 @@
 			"file": "Lec-11-bayes.tex",
 			"settings":
 			{
-				"buffer_size": 16668,
+				"buffer_size": 16759,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -133,17 +130,6 @@
 			{
 				"buffer_size": 27459,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "\n  BRANCH:  On branch `master` tracking `origin/master`.\n  ROOT:    ~/Documents/P231 Notes/Math-Methods-Notes\n  HEAD:    39f4a69 Last updates for 2020\n\n    Your working directory is clean.\n\n  ###################                   ###############\n  ## SELECTED FILE ##                   ## ALL FILES ##\n  ###################                   ###############\n\n  [o] open file                         [a] stage all unstaged files\n  [s] stage file                        [A] stage all unstaged and untracked files\n  [u] unstage file                      [U] unstage all staged files\n  [d] discard changes to file           [D] discard all unstaged changes\n  [h] open file on remote\n  [M] launch external merge tool\n\n  [l] diff file inline                  [f] diff all files\n  [e] diff file                         [F] diff all cached files\n\n  #############                         #############\n  ## ACTIONS ##                         ## STASHES ##\n  #############                         #############\n\n  [c] commit                            [t][a] apply stash\n  [C] commit, including unstaged        [t][p] pop stash\n  [m] amend previous commit             [t][s] show stash\n  [p] push current branch               [t][c] create stash\n                                        [t][u] create stash including untracked files\n  [i] ignore file                       [t][g] create stash of staged changes only\n  [I] ignore pattern                    [t][d] drop stash\n\n  [B] abort merge\n\n  ###########\n  ## OTHER ##\n  ###########\n\n  [g]         show graph repop history\n  [?]         toggle this help menu\n  [tab]       transition to next dashboard\n  [SHIFT-tab] transition to previous dashboard\n  [.]         move cursor to next file\n  [,]         move cursor to previous file\n\n-\n\n",
-			"settings":
-			{
-				"buffer_size": 1777,
-				"line_ending": "Unix",
-				"name": "STATUS: Math-Methods-Notes",
-				"read_only": true,
-				"scratch": true
 			}
 		},
 		{
@@ -473,7 +459,7 @@
 	],
 	"find":
 	{
-		"height": 73.0
+		"height": 71.0
 	},
 	"find_in_files":
 	{
@@ -489,6 +475,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"Bayes",
 			"includegraphics",
 			"graphics",
 			"\\cdot",
@@ -539,7 +526,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -658,7 +645,7 @@
 						"translation.y": 2341.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -777,7 +764,7 @@
 						"translation.y": 994.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -793,8 +780,8 @@
 						"selection":
 						[
 							[
-								13694,
-								13694
+								14995,
+								14996
 							]
 						],
 						"settings":
@@ -804,27 +791,12 @@
 							{
 								"close":
 								{
-									"1":
-									[
-										13688,
-										13693
-									]
 								},
 								"icon":
 								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/tag.png",
-										"region.orangish"
-									]
 								},
 								"open":
 								{
-									"1":
-									[
-										13599,
-										13604
-									]
 								},
 								"unmatched":
 								{
@@ -832,61 +804,61 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
@@ -895,10 +867,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6220.0,
+						"translation.y": 7330.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1026,15 +998,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16668,
+						"buffer_size": 16759,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14611,
-								14611
+								9766,
+								9766
 							]
 						],
 						"settings":
@@ -1057,61 +1029,61 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
@@ -1120,10 +1092,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7455.0,
+						"translation.y": 5149.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1178,61 +1150,61 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"git_gutter_is_enabled": true,
 							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
@@ -1240,126 +1212,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7018.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1777,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								156,
-								156
-							]
-						],
-						"settings":
-						{
-							"__vi_external_disable": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"default_dir": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"git_gutter_is_enabled": false,
-							"git_savvy.help_hidden": false,
-							"git_savvy.interface": "status",
-							"git_savvy.repo_path": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"git_savvy.status_view": true,
-							"git_savvy.tabbable": true,
-							"result_base_dir": "/Users/flip/Documents/P231 Notes/Math-Methods-Notes",
-							"result_file_regex": "^(?:    .+ -> |  [ -] (?!\\(\\d+\\) ))(?!Your working directory is clean\\.)(\\S.*)$",
-							"syntax": "Packages/GitSavvy/syntax/status.sublime-syntax",
-							"tab_size": 2
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 7080.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "P231_header.tex",
 					"semi_transient": false,
 					"settings":
@@ -1476,7 +1336,7 @@
 						"translation.y": 3271.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
