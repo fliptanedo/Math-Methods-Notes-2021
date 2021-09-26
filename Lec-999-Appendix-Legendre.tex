@@ -1,0 +1,39 @@
+%!TEX root = P231_notes.tex
+\section{Legendre Transform}
+\label{app:Legendre}
+
+The \textbf{Legendre transform} is a mathematical tool that shows up often in physics. Like many of the ideas in mathematical physics, it one can get lost going down a rabbit hole of the mathematical significance and different ways in which it pops up in physics. As a result, physics textbooks often avoid talking about the Legendre transform---I think they assume that you must have learned it `properly' in some other textbook.
+
+\subsection{Where you've seen this before}
+
+The Legendre transform converts between Lagrangian and Hamiltonian mechanics. Depending on the sophistication of your last mechanics course, this may seem trivial: \emph{isn't the Hamiltonian just the Lagrangian with a positive sign on the potential?} The answer is \emph{yes, but...}
+
+The answer is \emph{yes} because the statement is true. The `\emph{but}...' is because the statement completely misses the significance of the passage between the Lagrangian and Hamiltonian formalisms. This is usually described toward the back of graduate mechanics textbooks under the title of Hamilton--Jacobi relations or symplectic manifolds. Borrowing some of the language that we have used in this course: the Lagrangian formalism describes particle motion using its position, $q$, and its velocity, $\dot q$. The Hamiltonian formalism describes particle motion using the position, $q$, and \emph{momentum}, $p$. Formally, we have
+\begin{align}
+	H(q,p) = qp - L(q,\dot q) \ .
+\end{align}
+Since $p=m\dot q$, this seems like a trivial change. In fact, we recognize that $qp = m\dot q^2 = 2 (\text{kinetic energy})$; so the above `formal' definition seems like an arbitrary way to get $H = \text{KE}+V$. On the other hand, geometrically this goes from describing the dynamics using the tangent space (where vectors live) versus the co-tangent space (where one-forms live)\footnote{Technically, since the dynamics are imposed on $\{q,\dot q\}$ and $\{q,p\}$, these formalisms describe the tangent \emph{bundle} and co-tangent \emph{bundle}.} The equation of motion for the Lagrangian formalism is, in general, second order in derivatives. On the other hand, the equation of motion for the Hamiltonian formalism is first order\footnote{If you argue that this is only a superficial change since $p=m\dot q$, then you're missing the power of the Hamiltonian formalism. For most purposes---and certainly for most applications in a first year graduate course---the second-order Lagrangian formalism is fine. The mathematically inclined may want to look up jet bundles in physics. For the more physically inclined, read the section of your favorite mechanics book about the Hamilton--Jacobi equation and canonical transformations. If you can't find that chapter, then it's time to find a new favorite mechanics book. (By the way: never get relationship advice from people who talk like this.)}.
+
+Legendre transforms show up again in thermodynamics and statistical mechanics. Unsurprisingly, they show up most robustly in the language of differential forms, even if we don't typically write it as such\footnote{Though see \texttt{0711.4319} and \texttt{1908.07583}.}. Here there is a useful notion of a generalization of the energy--force--displacement relation
+\begin{align}
+	dE = F dx \quad\Rightarrow \quad dE = \sum F_i ds_i \ ,
+\end{align}
+where the $F_i$ are \emph{generalized forces} with respect to \emph{generalized displacements} $s_i$ \ . In the thermodynamic context, the generalized force is typically an \emph{intensive} quantity while the displacement is \emph{extensive}. Recall that intensive means that the quantity doesn't scale with volume (for example, local quantities like pressure) while extensive means that it scales with the volume of the system. Usually the generalized force is written as the derivative of some type of energy with respect to the generalized displacement: $F_i = \partial U_i / \partial s_i$.  The pair $\{F_i, s_i\}$ are called conjugate variables with respect to energy and are related by a Legendre transform. 
+
+An excellent example of the Legendre transform in thermodynamics is the \textbf{Hemholtz free energy} which describes the amount of energy available to do work at constant volume. 
+
+
+% Wikipedia is pretty good
+
+% https://physics.stackexchange.com/questions/4384/physical-meaning-of-legendre-transformation: clean picture
+
+%  https://www.andrew.cmu.edu/course/33-765/pdf/Legendre.pdf
+
+% https://arxiv.org/pdf/0806.1147.pdf
+
+% https://web.physics.wustl.edu/alford/physics/Legendre_introduction.pdf
+
+% https://aapt.scitation.org/doi/abs/10.1119/1.4795320
+
+% derivatives are inverses 
+% https://blog.jessriedel.com/2017/06/28/legendre-transform/
