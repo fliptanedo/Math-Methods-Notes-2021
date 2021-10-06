@@ -403,7 +403,7 @@ At this point we should take a deep breath and state explicitly that we’ve bee
 %
 In other words, in principle one could imagine a basis where \eqref{eq:basis:dual:vec:act:on:vec} does not hold.
 %
-There are many things to be said about this, none of them are particularly edifying without a full discussion. With no apologies, I’ll make the following [perhaps perplexing] remarks:
+There are many things to be said about this, none of them are particularly edifying without a full discussion. With no apologies, I’ll make the following [perhaps perplexing] remarks, illustrated in a figure below:
 \begin{enumerate}
 \item There is no such thing as a `position vector.' Positions refer to some base space, whereas vectors (like differential operators) act on the tangent space at a point of that base space. 
 \item A given tangent space is `nice’ and has a nice orthonormal basis. 
@@ -411,6 +411,9 @@ There are many things to be said about this, none of them are particularly edify
 \end{enumerate}
 In this course these nuances will not come up. In the rest of your life you’ll still have to deal with curvilinear coordinates. But suffice it to say that our study of function space will be nice an orthonormal. We haven’t yet given an adequate definition of `orthonormality,’ so let's take \eqref{eq:basis:dual:vec:act:on:vec} as a working definition.
 
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Lec_2021_tangentS2.pdf}
+\end{center}
 
 
 
@@ -474,13 +477,9 @@ In fact, assuming that all of the eigenvalues are non-zero, even the matrix inve
 The first time you see this should have brought a deep joy to your life: if you can decompose a matrix (linear transformation) into its eigenvectors and eigenvalues, then taking the inverse transformation is simple.
 
 
-\subsection{Linearity of Inverse Operators}
+\subsection{Transformation = action on all basis vectors}
 
-Given a linear operator $A$, the inverse operator $A^{-1}$ is defined by
-\begin{align}
-  A^{-1} A = \mathbbm{1}_{N\times N} \ .
-\end{align}
-For an $N$-dimensional vector space, this represents $N^2$ different equations: one for each element. The inverse operator, by the way, is also linear. Let's remind ourselves of what this means. A linear transformation, when written as a matrix, is simply stating what that linear trasformation does to your basis vectors. If a matrix $B$ has elments
+If you know the action of a linear transformation on all basis vectors, then you know the transformation. When written as a matrix, a linear transformation is simply stating what that linear trasformation does to your basis vectors. If a matrix $B$ has elments
 \begin{align}
   B = 
   \begin{pmatrix}
@@ -517,7 +516,17 @@ In column vector notation:
   b \\ d
   \end{pmatrix}\ .
 \end{align}
-So knowing the action on basis vectors is the same as knowing the transformation itself. Suppose I told you the action of the inverse transformation $A^{-1}$ on your basis vectors, vis-a-vis \eqref{eq:B:basis:action}:
+So knowing the action on basis vectors is the same as knowing the transformation itself. 
+
+
+Given a linear operator $A$, the inverse operator $A^{-1}$ is defined by
+\begin{align}
+  A^{-1} A = \mathbbm{1}_{N\times N} \ .
+\end{align}
+For an $N$-dimensional vector space, this represents $N^2$ different equations: one for each element. The inverse operator, by the way, is also linear. 
+% Let's remind ourselves of what this means. 
+%
+Suppose I told you the action of the inverse transformation $A^{-1}$ on your basis vectors, vis-a-vis \eqref{eq:B:basis:action}:
 \begin{align}
   A^{-1}|1\rangle &= x |1 \rangle + y|2\rangle 
   \\
@@ -553,99 +562,7 @@ We can write this as an equation for each component:
   \psi^i &= \sum_j \left(A^{-1}\right)^i_{\phantom{i}j} s^j
   \label{eq:Ainv:acting:on:source} \ .
 \end{align}
-We've restored the explicit sum over $j$ as a convenient reminder. The quantity $\left(A^{-1}\right)^i_{\phantom{i}j}$ is what we would like to identify with a Green's function.
-
-
-
-
-
-
-
-\subsection{The Green’s Function Problem}
-
-Going back to the big picture: recall that we want to solve differential equations of the form $\mathcal O f(x) = s(x)$. If we had a sense of the \emph{eigenfunctions} of $\mathcal O$, then we could expand $s(x)$ in a basis of those eigenfunctions and then apply $\mathcal O^{-1}$ to both sides. 
-
-The analog is this:
-
-\begin{center}
-\includegraphics[width=.7\textwidth]{figures/lec02_green01.pdf}
-\end{center}
-
- The operator $A$ encodes the \emph{physics} of the system, the underlying dynamics. This is presumably local: it is a near-diagonal matrix coming from one or two powers of derivatives.  The ket $|s\rangle$ is the source. This is the thing that \emph{causes} the dynamics. The ket $|\psi\rangle$ is some state that we would like to determine. \eqref{eq:linear:aglebra:inverse:eigenvectors} is telling us that to invert a differential operator $\mathcal O$, it may be useful to decompose it into \textbf{eigenfunctions}.
-
- By the way, \emph{this} is where all of the `special functions' in your physics education show up. The reason why you would ever care about Bessel functions (of various kinds) or Legendre polynomials is simply that they are the eigenfunctions of differential operators that we care about\footnote{In fact, they're mostly the eigenfunctions of the same differential operator in different coordinate systems. Do you know which differential operator? I'll give you a guess. It's starts with a `har-' and ends with a `monic oscillator.'}. Sometimes we confuse mathematical physics with `properties of special functions.' I do not care about special functions; perhaps with the notable exception of the $\Gamma$-function. Seriously, do not let special functions confuse you. The real intuition for what we're doing is evident in the few-dimensional harmonic oscillator. All the Bessel-schmessel function-ology that will pain you in your Jackson E\&M course are just \emph{technical details}.
-
-\begin{example}
-Consider a differential operator $A\to \mathcal O = (d/dx)^2$. There's a basis of nice eigenvectors $\xi_{(k)}$:
- \begin{align}
-   \xi_{(k)} &= \sin (kx)
-   &
-   \mathcal O \xi_{(k)} &= -k^2 \xi_{(k)}. 
- \end{align}
- I've deliberately avoided normalizing for now. From this you can see that writing a function as a \textbf{Fourier Series} is simply a change of basis to eigenfunctions of $(d/dx)^2$. Can you see how you would `invert' this operator acting on a general function $f(x)$ with a set of Fourier coefficients $f(x) = \sum_k c_k\sin(kx)$?
-\end{example} 
-
-
-\begin{example}\label{eq:charged:cat}
-A common example in electrostatics is the triboelectric effect. Go ahead, take a moment to look it up on Wikipedia. The image is very relevant. If you pet your cat with hard rubber\footnote{I do not recommend doing this.}, the cat builds up some electrostatic charge. For simplicity, let's model this system as a bunch of Lego blocks arranged in a cat-shape where each block has a constant electric charge. Let's say that each block has volume $dV$ and constant charge density $\rho_0$ so that each block has charge $\rho_0 dV$. The entire cat is described by a charge density $\rho(x)$ where $\rho(x)=0$ if you're outside the cat and $\rho(x)=\rho_0$ if you're inside the cat. 
-\begin{center}
-\includegraphics[width=.8\textwidth]{figures/lec06_cat.png}
-\end{center}
-You know how this problem works. You want to solve for the electrostatic potential, $\Phi(x)$, given the charge density $\rho(x)$. The relevant equation is
-\begin{align}
-  \nabla^2 \Phi(\vec{x}) = -\rho(\vec{x})\ ,
-\end{align}
-where $\epsilon_0=1$ in convenient units. This looks like a tricky differential equation to solve, but the fist week of our undergraduate electrodynamics course taught us that the potential from a \emph{unit point charge} is
-\begin{align}
-  \Phi(\vec{x}) = \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \ .
-\end{align}
-The relevant diagram is
-\begin{center}
-\includegraphics[width=.6\textwidth]{figures/lec06_1charge.png}
-\end{center}
-If we know the potential from a single point charge, then we can invoke linearity---specifically, the linearity of $\nabla^2$)---to write down the potential for two unit point charges: 
-\begin{center}
-\includegraphics[width=.7\textwidth]{figures/lec06_2charge.png}
-\end{center}
-At this point, you should start to see how this looks just like \eqref{eq:Ainv:basis:action:on:gen}. The result is
-\begin{align}
-  \Phi(\vec{x}) &= 
-  \sum_{\vec{x}'} \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \rho(\vec{x}') dV
-  \;\to \;
- \int d^3\vec{x}' \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \rho(\vec{x}')   \ .
- \label{eq:electrostatics:greens:func}
-\end{align}
-\end{example}
-This last example is really useful. You've seen this calculation before, but please review it carefully from the perspective of the action of $(\nabla^2)^{-1}$. Just as we are able to build a `Lego cat' out of unit blocks, each of those unit blocks comes with an electrostatic potential. The solution to $\nabla^2 \Phi(x) = -\rho(x)$ is to simply sum together those point-source solutions in the same way that one sums together the point sources (assembles the blocks) to model the finite source.
-
-\begin{exercise}
-In the example above, what plays the role of the basis vectors? 
-\end{exercise}
-
-Compare \eqref{eq:electrostatics:greens:func} to \eqref{eq:Ainv:acting:on:source}. The sum over positions $\vec{x}'$ that becomes an integral over $d^3\vec{x}'$ is completely analogous to the sum over the index $j$. $\rho(\vec{x}')$ plays the role of a component of the source, $s^j$. On the left-hand side, $\Phi(\vec{x})$ plays the role of $\psi^i$. We note that the index $i$ is replaced by the position $\vec{x}$. Evidently, the inverse of $\nabla^2$ is simply
-\begin{align}
-  (\nabla^2)^{-1} \equiv G(\vec{x},\vec{x}') = -\frac{1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \ .
-  \label{eq:laplacian:greens:func:eg}
-\end{align}
-Here we've written out $G(\vec{x},\vec{x}')$, the Green's function for $\nabla^2$. Observe that the Green's function has two arguments in the same way that the inverse matrix $\left(A^{-1}\right)^i_{\phantom{i}j}$ has two indices. The $\vec{x}'$ `index' is integrated/summed over---it scans each `building block' of the source in the same way that we sum over $j$ in the index contraction $\left(A^{-1}\right)^i_{\phantom{i}j}s^j$. In other words, we may heuristically write \eqref{eq:laplacian:greens:func:eg} as
-\begin{align}
-  \Phi^i \sim \sum_j G^i_{\phantom{i}j}\rho^j \ .
-\end{align}
-
-At this point, it's useful to point out that the Green's function is often called a \textbf{propagator}. As a function, $G(x,x')$ propagates the information of the source at $x'$ to the observer at $x$ assuming some dynamics---the operator for which $G$ is a Green's function.
-\begin{center}
-\includegraphics[width=.5\textwidth]{figures/lec06_propagator.png}
-\end{center}
-
-Please, please, please make sure you understand this example. This will be the key starting point from which we will generalize our study of Green's functions in physics.
-
-\subsection{Remark: Implicit assumption of linearity}
-
-In everything we're building we're assuming that the dynamics that relates  the source $|s\rangle$ and the state $|\psi\rangle$ is \emph{linear}. That's why we can think of the differential operator $\mathcal O$ as a matrix. If $|\psi_0$ is the effect of source $|s_0\rangle$, then you know by linearity that $2|\psi_0\rangle$ is the effect of a source that is twice as strong, $2|s_0\rangle$. 
-
-Linearity is \emph{not} a truth of nature, yet we're spending all of this course developing techniques for dealing with linear dynamics! The fact of the matter is that a good chunk of physics \emph{is} linear---and that's good because those are the parts that we can solve using our standard toolkit. Most of the frontier of physics has to do with how to deal with the \emph{non}-linearities. There are a few options here: numerical solution, perturbation expansions about a linear solution (Feynman diagrams), and looking for topological invariants. 
-
-
+We've restored the explicit sum over $j$ as a convenient reminder. The quantity $\left(A^{-1}\right)^i_{\phantom{i}j}$ is what we would like to identify with a Green's function; see Section~\ref{sec:lin:alg:greens} for a hint of that.
 
 
 
@@ -850,3 +767,99 @@ If you are mathematically inclined, prove the existence, uniqueness, and lineari
 \end{exercise}
 
 The adjoint/Hermitian conjugate is important because of the result that \textbf{self-adjoint operators}, $A^\dag = A$, have real eigenvalues and a complete set of orthogonal eigenvectors. Then we can use the strategy of Section~\ref{sec:eigenvectors} to use eigenvectors of $A$ to simplify the solution of $A\vec{v} = \vec{w}$.
+
+
+
+
+
+
+\subsection{The Green’s Function Problem}
+\label{sec:lin:alg:greens}
+
+Going back to the big picture: recall that we want to solve differential equations of the form $\mathcal O f(x) = s(x)$. If we had a sense of the \emph{eigenfunctions} of $\mathcal O$, then we could expand $s(x)$ in a basis of those eigenfunctions and then apply $\mathcal O^{-1}$ to both sides. 
+
+The analog is this:
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/lec02_green01.pdf}
+\end{center}
+
+By the way, now is a good time to recall \eqref{eq:Ainv:acting:on:source}.
+
+ The operator $A$ encodes the \emph{physics} of the system, the underlying dynamics. This is presumably local: it is a near-diagonal matrix coming from one or two powers of derivatives.  The ket $|s\rangle$ is the source. This is the thing that \emph{causes} the dynamics. The ket $|\psi\rangle$ is some state that we would like to determine. \eqref{eq:linear:aglebra:inverse:eigenvectors} is telling us that to invert a differential operator $\mathcal O$, it may be useful to decompose it into \textbf{eigenfunctions}.
+
+ By the way, \emph{this} is where all of the `special functions' in your physics education show up. The reason why you would ever care about Bessel functions (of various kinds) or Legendre polynomials is simply that they are the eigenfunctions of differential operators that we care about\footnote{In fact, they're mostly the eigenfunctions of the same differential operator in different coordinate systems. Do you know which differential operator? I'll give you a guess. It's starts with a `har-' and ends with a `monic oscillator.'}. Sometimes we confuse mathematical physics with `properties of special functions.' I do not care about special functions; perhaps with the notable exception of the $\Gamma$-function. Seriously, do not let special functions confuse you. The real intuition for what we're doing is evident in the few-dimensional harmonic oscillator. All the Bessel-schmessel function-ology that will pain you in your Jackson E\&M course are just \emph{technical details}.
+
+\begin{example}
+Consider a differential operator $A\to \mathcal O = (d/dx)^2$. There's a basis of nice eigenvectors $\xi_{(k)}$:
+ \begin{align}
+   \xi_{(k)} &= \sin (kx)
+   &
+   \mathcal O \xi_{(k)} &= -k^2 \xi_{(k)}. 
+ \end{align}
+ I've deliberately avoided normalizing for now. From this you can see that writing a function as a \textbf{Fourier Series} is simply a change of basis to eigenfunctions of $(d/dx)^2$. Can you see how you would `invert' this operator acting on a general function $f(x)$ with a set of Fourier coefficients $f(x) = \sum_k c_k\sin(kx)$?
+\end{example} 
+
+
+\begin{example}\label{eq:charged:cat}
+A common example in electrostatics is the triboelectric effect. Go ahead, take a moment to look it up on Wikipedia. The image is very relevant. If you pet your cat with hard rubber\footnote{I do not recommend doing this.}, the cat builds up some electrostatic charge. For simplicity, let's model this system as a bunch of Lego blocks arranged in a cat-shape where each block has a constant electric charge. Let's say that each block has volume $dV$ and constant charge density $\rho_0$ so that each block has charge $\rho_0 dV$. The entire cat is described by a charge density $\rho(x)$ where $\rho(x)=0$ if you're outside the cat and $\rho(x)=\rho_0$ if you're inside the cat. 
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/lec06_cat.png}
+\end{center}
+You know how this problem works. You want to solve for the electrostatic potential, $\Phi(x)$, given the charge density $\rho(x)$. The relevant equation is
+\begin{align}
+  \nabla^2 \Phi(\vec{x}) = -\rho(\vec{x})\ ,
+\end{align}
+where $\epsilon_0=1$ in convenient units. This looks like a tricky differential equation to solve, but the fist week of our undergraduate electrodynamics course taught us that the potential from a \emph{unit point charge} is
+\begin{align}
+  \Phi(\vec{x}) = \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \ .
+\end{align}
+The relevant diagram is
+\begin{center}
+\includegraphics[width=.6\textwidth]{figures/lec06_1charge.png}
+\end{center}
+If we know the potential from a single point charge, then we can invoke linearity---specifically, the linearity of $\nabla^2$)---to write down the potential for two unit point charges: 
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/lec06_2charge.png}
+\end{center}
+At this point, you should start to see how this looks just like \eqref{eq:Ainv:basis:action:on:gen}. The result is
+\begin{align}
+  \Phi(\vec{x}) &= 
+  \sum_{\vec{x}'} \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \rho(\vec{x}') dV
+  \;\to \;
+ \int d^3\vec{x}' \frac{-1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \rho(\vec{x}')   \ .
+ \label{eq:electrostatics:greens:func}
+\end{align}
+\end{example}
+This last example is really useful. You've seen this calculation before, but please review it carefully from the perspective of the action of $(\nabla^2)^{-1}$. Just as we are able to build a `Lego cat' out of unit blocks, each of those unit blocks comes with an electrostatic potential. The solution to $\nabla^2 \Phi(x) = -\rho(x)$ is to simply sum together those point-source solutions in the same way that one sums together the point sources (assembles the blocks) to model the finite source.
+
+\begin{exercise}
+In the example above, what plays the role of the basis vectors? 
+\end{exercise}
+
+Compare \eqref{eq:electrostatics:greens:func} to \eqref{eq:Ainv:acting:on:source}. The sum over positions $\vec{x}'$ that becomes an integral over $d^3\vec{x}'$ is completely analogous to the sum over the index $j$. $\rho(\vec{x}')$ plays the role of a component of the source, $s^j$. On the left-hand side, $\Phi(\vec{x})$ plays the role of $\psi^i$. We note that the index $i$ is replaced by the position $\vec{x}$. Evidently, the inverse of $\nabla^2$ is simply
+\begin{align}
+  (\nabla^2)^{-1} \equiv G(\vec{x},\vec{x}') = -\frac{1}{4\pi} \frac{1}{|\vec{x}-\vec{x}'|} \ .
+  \label{eq:laplacian:greens:func:eg}
+\end{align}
+Here we've written out $G(\vec{x},\vec{x}')$, the Green's function for $\nabla^2$. Observe that the Green's function has two arguments in the same way that the inverse matrix $\left(A^{-1}\right)^i_{\phantom{i}j}$ has two indices. The $\vec{x}'$ `index' is integrated/summed over---it scans each `building block' of the source in the same way that we sum over $j$ in the index contraction $\left(A^{-1}\right)^i_{\phantom{i}j}s^j$. In other words, we may heuristically write \eqref{eq:laplacian:greens:func:eg} as
+\begin{align}
+  \Phi^i \sim \sum_j G^i_{\phantom{i}j}\rho^j \ .
+\end{align}
+
+At this point, it's useful to point out that the Green's function is often called a \textbf{propagator}. As a function, $G(x,x')$ propagates the information of the source at $x'$ to the observer at $x$ assuming some dynamics---the operator for which $G$ is a Green's function.
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/lec06_propagator.png}
+\end{center}
+
+Please, please, please make sure you understand this example. This will be the key starting point from which we will generalize our study of Green's functions in physics.
+
+\subsection{Remark: Implicit assumption of linearity}
+
+In everything we're building we're assuming that the dynamics that relates  the source $|s\rangle$ and the state $|\psi\rangle$ is \emph{linear}. That's why we can think of the differential operator $\mathcal O$ as a matrix. If $|\psi_0$ is the effect of source $|s_0\rangle$, then you know by linearity that $2|\psi_0\rangle$ is the effect of a source that is twice as strong, $2|s_0\rangle$. 
+
+Linearity is \emph{not} a truth of nature, yet we're spending all of this course developing techniques for dealing with linear dynamics! The fact of the matter is that a good chunk of physics \emph{is} linear---and that's good because those are the parts that we can solve using our standard toolkit. Most of the frontier of physics has to do with how to deal with the \emph{non}-linearities. There are a few options here: numerical solution, perturbation expansions about a linear solution (Feynman diagrams), and looking for topological invariants. 
+
+
+
+
