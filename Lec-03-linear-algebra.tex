@@ -398,6 +398,7 @@ So we can write \eqref{eq:oneform:eats:vector} and \eqref{eq:oneform:eats:vector
 
 
 \subsection{Orthonormal Bases}
+\label{sec:lin:alg:orthonormal}
 
 At this point we should take a deep breath and state explicitly that we’ve been assuming an orthonormal basis. In this course we will continue to use an orthonormal basis. You may object to this and say that you used to believe in orthonormal bases until you were forced to write down the gradient (or worse, the Laplacian) in spherical coordinates. 
 %
@@ -594,7 +595,10 @@ so that
  \end{align}
  Here we see the usefulness of the $\otimes$ notation. It tells us that the bras and kets resolve as follows:
  \begin{align}
-   g_{ij}\langle i | \otimes \langle j | \left(v^k|k\rangle\right)\left(w^\ell|\ell\rangle\right) 
+   g_{ij}\langle i | \otimes \langle j | 
+   \left( \; v^k|k\rangle
+   \, , \,
+   w^\ell|\ell\rangle \; \right) 
    = 
    g_ij v^k w^\ell 
    \langle i | k\rangle \langle j |\ell\rangle
@@ -606,7 +610,7 @@ so that
  \end{align}
  If this is your first time seeing it, please re-read \eqref{eq:metric:basis:vectors} carefully to see exactly how the bras and kets resolve themselves. 
  %
- For ordinary Euclidean space in flat coordinates, the metric is simply the unit matrix: $g_{ij} = \text{diag}(1,\cdots, 1)$. In Minkowksi space there’s a relative minus sign between space and time. In curvilinear coordinates things get ugly. 
+ For ordinary Euclidean space in flat coordinates, the metric is simply the unit matrix: $g_{ij} = \text{diag}(1,\cdots, 1)$. In Minkowksi space there’s a relative minus sign between space and time. In curvilinear coordinates things can get ugly: the value of $g_{ij}$ can depend on the position, $g_{ij} = g_{ij}(x)$.\footnote{This is related to the comment in Section~\ref{sec:lin:alg:orthonormal} that there is no such thing as `position vectors.' When we write a general metric $g_{ij}(x)$, the value of $x$ is a \emph{position} on a base space (manifold). The vectors that are `eaten' by the metric come from the \emph{tangent space at $x$}, or more generally some other vector space (fiber) at the position $x$.}
  
 Here’s the neat thing about metrics. We can take a metric $g$ and pre-load it with a vector $\vec{v}$: 
 \begin{align}
