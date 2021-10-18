@@ -83,49 +83,109 @@ Complex functions take complex numbers and return complex numbers. Inspired by t
 \end{align}
 This is clearly a map from $\mathbbm{C} \to \mathbbm{C}$ and so we can simply ``do multivariable calculus'' on this space. 
 
+\begin{exercise}
+The goal of this problem is to review line integrals in a 2D space. Perform the integral
+\begin{align}
+	\int_i^{1+i} dz \; z \,
+\end{align}
+with respect to the path that connects $z=i$ and $z=i+1$ by a straight line segment. This is \emph{not} a closed loop, there's no magic formula for this. Just parameterize the path by writing $z$ as a function of a real parameter. Then write out $dz$ in terms of the parameter. Do the integral. Answer: $\frac{1}{2}+i$.
+
+ Integrals on the complex plane can seem mysterious because we end up using tricks that we develop below. This problem is to remind you that what we are doing is really a version of the Riemann sum with complex-valued chunks. 
+\end{exercise}
+
 If we forget the complex structure, then this \emph{seems} to simply be the calculus of maps between $\mathbbm{R}^2 \to \mathbbm{R}^2$ where
 \begin{align}
 	f(x,y) &= u(x,y) \hat{\vec{x}} + v(x,y)\hat{\vec{y}} \ .
 \end{align}
-In that case, we need to collect the partial derivatives. We know that we can write the variation of $f$ as
+In that case, we need to collect the partial derivatives. On the one hand, we may write the differential of $f$ as
 \begin{align}
-\delta f(x,y) &= \delta u(x,y) \hat{\vec{x}} + \delta v(x,y)\hat{\vec{y}} 
-=
-\left(
-	\frac{\partial u}{\partial x}\delta x +
-	\frac{\partial u}{\partial y}\delta y
-\right)\hat{\vec{x}}+
-\left(
-	\frac{\partial v}{\partial x}\delta x +
-	\frac{\partial v}{\partial y}\delta y
-\right)\hat{\vec{y}} \ .
+	df = \frac{\partial f}{\partial x} dx + \frac{\partial f}{\partial y} dy \ .
 \end{align}
-Remembering our complex structure, we can write this succinctly as
+Please note that the partial derivatives of $f$ contain both real and imaginary parts. That is to say: $\partial f/\partial x$ generally contains both r real ($\hat x$) and imaginary ($\hat y$) pieces. 
+
+% From Appel, Ch. 4.1.c
+From the definitions of $z=x+iy$ and $\bar z = x-iy$, we may write $dz = dx+idy$ and $d\bar z = dx-idy$. This lets us rewrite
 \begin{align}
-	\delta f &= 
-	\frac{\partial f}{\partial z}\delta z +
-	\frac{\partial f}{\partial \bar z}\delta \bar z \ ,
-	\label{eq:complex:2D:deviation}
+	dx &= \frac{1}{2}(dz+d\bar z)
+	&
+	dy & \frac{1}{2i}(dz-d\bar z) \ .
 \end{align}
-where we're using
+Plugging this into our expression for the differential of $f$ gives
+\begin{align}
+	df = \frac{1}{2}
+	\left(
+		\frac{\partial f}{\partial x}
+		-i\frac{\partial f}{\partial y}
+	\right)dz
+	+ 
+	\frac{1}{2}
+	\left(
+		\frac{\partial f}{\partial x}
+		+i\frac{\partial f}{\partial y}
+	\right)d\bar z \ .
+\end{align}
+From this we may identify the partial derivatives in the $z$ and $\bar z$ coordinates:
+
+
+
+% We know that we can write the variation of $f$ as
+% \begin{align}
+% \delta f(x,y) &= \delta u(x,y) \hat{\vec{x}} + \delta v(x,y)\hat{\vec{y}} 
+% =
+% \left(
+% 	\frac{\partial u}{\partial x}\delta x +
+% 	\frac{\partial u}{\partial y}\delta y
+% \right)\hat{\vec{x}}+
+% \left(
+% 	\frac{\partial v}{\partial x}\delta x +
+% 	\frac{\partial v}{\partial y}\delta y
+% \right)\hat{\vec{y}} \ .
+% \end{align}
+% Remembering our complex structure, we can write this succinctly as
+% \begin{align}
+% 	\delta f &= 
+% 	\frac{\partial f}{\partial z}\delta z +
+% 	\frac{\partial f}{\partial \bar z}\delta \bar z \ ,
+% 	\label{eq:complex:2D:deviation}
+% \end{align}
+% where we're using
+% \begin{align}
+% 	\frac{\partial}{\partial z} &= 
+% 	\frac{1}{2}
+% 	\left(
+% 	\frac{\partial}{\partial x}
+% 	+
+% 	\frac{\partial}{\partial (iy)}
+% 	\right)
+% 	&
+% 	\frac{\partial}{\partial \bar z} &= 
+% 	\frac{1}{2}
+% 	\left(
+% 	\frac{\partial}{\partial x}
+% 	+
+% 	\frac{\partial}{\partial (-iy)}
+% 	\right) 
+% 	\\
+% 	&=
+% 	\frac{1}{2}
+% 	\left(
+% 	\frac{\partial}{\partial x}
+% 	-i
+% 	\frac{\partial}{\partial y}
+% 	\right)
+% 	&
+% 	\frac{\partial}{\partial \bar z} &= 
+% 	\frac{1}{2}
+% 	\left(
+% 	\frac{\partial}{\partial x}
+% 	+i
+% 	\frac{\partial}{\partial y}
+% 	\right) 
+% 	\ .
+% 	\label{eq:ddz:ddzst}
+% \end{align}
 \begin{align}
 	\frac{\partial}{\partial z} &= 
-	\frac{1}{2}
-	\left(
-	\frac{\partial}{\partial x}
-	+
-	\frac{\partial}{\partial (iy)}
-	\right)
-	&
-	\frac{\partial}{\partial \bar z} &= 
-	\frac{1}{2}
-	\left(
-	\frac{\partial}{\partial x}
-	+
-	\frac{\partial}{\partial (-iy)}
-	\right) 
-	\\
-	&=
 	\frac{1}{2}
 	\left(
 	\frac{\partial}{\partial x}
@@ -371,13 +431,14 @@ Do not integrate across a branch cut!
 \subsection{Integration on the Complex Plane}
 % StoGo 17.2.1
 
-Let's now focus on integrating analytic functions. Oops, I just mis-spoke a bit there. What I meant to write was that we want to integrate functions in a region of $\mathbbm{C}$ where those functions are analytic. Rarely are functions simply `analytic' or `not-analytic.' The functions we care about will be analytic in most places, but non-analytic in others. 
+Let's now focus on integrating analytic functions. Oops, I just misspoke. What I meant to write was that we want to \emph{integrate functions in a region of $\mathbbm{C}$ where those functions are analytic.} Rarely are functions simply `analytic' or `not-analytic.' The functions we care about will be analytic in most places, but non-analytic in others. 
 
 When we integrate on the complex plane, $\mathbbm{C}$, we have to define a \textbf{contour}---this is just the curve, $C$, that we are integrating over. This is similar to doing a ``line integral'' in $\mathbbm{R}^2$: you are doing a `one-dimensional integral' over a two[ish]-dimensional space. An integral over the contour $C$ is:
 \begin{align}
 	\int_C dz\, f(z) &= 
 	\int_C (dx + i dy) \ , \left[u(x,y)+ i v(x,y)\right]
-	= 
+	\\
+	&= 
 	\int_C \left[u(x,y)dx - v(x,y)dy\right] 
 	+ i \int_C \left[u(x,y)dy + v(x,y)dx\right] \ .
 \end{align}

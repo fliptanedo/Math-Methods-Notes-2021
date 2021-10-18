@@ -571,7 +571,7 @@ Plugging this all in gives
 \end{example}
 Observe that you find two \emph{different} expressions for $G$ by these methods. Please confirm---perhaps numerically---that these indeed represent the same function $G(x,x')$. 
 
-\begin{example}{ex:patching:second:integration}
+\begin{example}%{ex:patching:second:integration}
 In the previous example, we integrated the Green's function equation `twice' to get two boundary conditions at $x=x'$. You may be concerned that after doing the first definite integral, we just have a relation between numbers. That is to say, we can no longer `integrate a total derivative' $\int dx\; \partial_x f(x) = f(x)$ because the integrand is not a total derivative, it is just a number. 
 
 It may be helpful to think about this as follows. The first definite integral of the Green's function equation gives the jump condition, \eqref{eq:eg:patching:jump:condition}. For the second integral, we may take
@@ -612,7 +612,7 @@ One can compare to \eqref{eq:eg:jump:condition:integration:eg:1}. You should be 
 	 G'(x'-\varepsilon, x')
 	\right] \ .
 \end{align}
-Observe that the second term is simply a constant. It vanishes when we take the limit $\varepsilon\, ,\, \varepsilon'\to 0$. For the first term, we may strategically take $\varepsilon\to 0$  (or otherwise $\varepsilon < \varepsilon'$) so that we now have
+$G'(x'-\varepsilon, x')$ is simply a constant. Its integral vanishes when we take the limit $\varepsilon\, ,\, \varepsilon'\to 0$. For the first term, we may strategically take $\varepsilon\to 0$  (or otherwise $\varepsilon < \varepsilon'$) so that we now have
 \begin{align}
 	\int_{-\varepsilon'}^{\varepsilon'}
 	dy \,
