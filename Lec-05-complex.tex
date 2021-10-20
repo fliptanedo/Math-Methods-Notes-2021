@@ -32,23 +32,32 @@ What's powerful about this is that that when we apply a differential operator in
 \begin{align}
 	\left(\frac{d}{dx}\right)^n e^{-ikx} &= (-ik)^n \ .
 \end{align}
-This means that we may write the differential operator $\mathcal O_x$ in \eqref{eq:complex:intro:defining:Ox} when it acts on the Fourier representation as
+This means that we may write the differential operator $\mathcal O_x$ in \eqref{eq:complex:intro:defining:Ox} when it acts on the Fourier basis function $e_{(k)}(x) = e^{-ikx}$ as
 \begin{align}
-	\mathcal O_x = \sum_{n=0}^{\infty}
-	p_n(x) \left(-ik\right)^n
-	\equiv P\left(x,-ik\right)  \ ,
+	\mathcal O_x e^{-ikx} = \sum_{n=0}^{\infty}
+	p_n \left(-ik\right)^n e^{-ikx}
+	\equiv P(-ik) e^{-ikx}  \ .
 \end{align}
-so that the defining relation for $G$,
+For simplicity we have assumed that the polynomial coefficients in $x$ are simply constants, $p_n(x) = p_n$, and written $P(y) \equiv P(0,y)$.\footnote{This simplification does not affect anything in this course. For the more general case, one would want to also Fourier transform the $p_n(x)$ and use the convolution theorem to write everything as a single Fourier expansion; see e.g.~\url{https://mathoverflow.net/a/37873}.}
+The defining relation for $G$,
 \eqref{eq:complex:intro:defining:G:}, may in turn be simplified:
 \begin{align}
-	\int \dbar k \, e^{-ikx} P(x, -ik) \tilde G(k,x') &= \int \dbar k \, e^{-ik(x-x')} \ ,
+	\int \dbar k \, e^{-ikx} P(-ik) \tilde G(k,x') &= \int \dbar k \, e^{-ik(x-x')} \ ,
 \end{align}
 which suggests a simple expression for the Fourier coefficients:
 \begin{align}
-	\tilde G(k,x') &= e^{ikx'} \left[P(x,-ik)\right]^{-1} \ ,
+	\tilde G(k,x') &= e^{ikx'} \left[P(-ik)\right]^{-1} \ ,
 	\label{eq:Greens:function:Fourier:transform:heuristic}
 \end{align}
 where one may find $G(x,x')$ from simply taking the inverse Fourier transform. There will turn out to be a few neat features of this approach, but before getting there, let's start from the very beginning.
+
+\begin{exercise}
+This procedure is completely analogous to solving $A \vec{g} = \mathbbm{1}$ for $\vec{g}$ by expanding in eigenfunctions of $A$, $\vec g = g^k \vec{e}_{(k)}$. Then we have $A\vec{g} = \sum_k \lambda_k g^k e_{(k)}$. Follow through this analogy to argue that \eqref{eq:Greens:function:Fourier:transform:heuristic} corresponds to $g^k = c_k/\lambda_k$ where $c_k$ is identified with $e^{ikx'}$.
+\end{exercise}
+
+\begin{exercise}
+For $\mathcal O_x = (d/dx)^2$, what is the value of $P(-ik)$? What is $\tilde G(k,x')$?
+\end{exercise}
 
 \lecdate{lec~13} % or Lec 11 of 2017
 
@@ -112,7 +121,7 @@ From the definitions of $z=x+iy$ and $\bar z = x-iy$, we may write $dz = dx+idy$
 \end{align}
 Plugging this into our expression for the differential of $f$ gives
 \begin{align}
-	df = \frac{1}{2}
+	df &= \frac{1}{2}
 	\left(
 		\frac{\partial f}{\partial x}
 		-i\frac{\partial f}{\partial y}
@@ -122,7 +131,12 @@ Plugging this into our expression for the differential of $f$ gives
 	\left(
 		\frac{\partial f}{\partial x}
 		+i\frac{\partial f}{\partial y}
-	\right)d\bar z \ .
+	\right)d\bar z 
+	\\
+	&\equiv \frac{\partial f}{\partial z}dz
+	+ \frac{\partial f}{\partial \bar z}d\bar z
+	\label{eq:complex:2D:deviation}
+	\ .
 \end{align}
 From this we may identify the partial derivatives in the $z$ and $\bar z$ coordinates:
 
@@ -194,7 +208,7 @@ From this we may identify the partial derivatives in the $z$ and $\bar z$ coordi
 	\right)
 	&
 	\frac{\partial}{\partial \bar z} &= 
-	\frac{1}{2}
+ 	\frac{1}{2}
 	\left(
 	\frac{\partial}{\partial x}
 	+i
@@ -207,15 +221,15 @@ The fact that partial derivatives combine like this may be familiar\footnote{Thi
 
 So far we have emphasized that $f(x,y)$ behaves like a function in two real dimensions. Critically, in some ways we want to think about functions $f(z)$ that are functions of `one' [complex] dimension rather than two real dimensions. In two real dimensions, calculus came with a notion of directional derivative. When we wanted the rate of change for a function, we had to ask \emph{in what direction} are we checking the rate of change. At a given function may change by a positive amount in the $x$-direction, but a negative amount in the $y$-direction, for example. This is in contrast to one-dimensional calculus where each point had an unambiguous derivative that represented how much the function changed in the positive $x$ direction with respect to a point $x_0$:
 \begin{align}
-	\delta f(x) = \frac{d f(x_0)}{d x} (x-x_0) + \cdots \ .
+	df(x) = \frac{d f(x_0)}{d x} (x-x_0) + \cdots \ .
 \end{align}
 This is in contrast to the change in a general complex function \eqref{eq:complex:2D:deviation}. In fact, if we explicitly wrote some expansion with respect to a point $z_0$, it looks a little funny:
 \begin{align}
-	\delta f(z) &= 
+	df(z) &= 
 	\frac{\partial f}{\partial z}(z-z_0) +
 	\frac{\partial f}{\partial \bar z}(\bar z-\bar z_0) + \cdots \ .
 \end{align}
-What is going on here? Why should $f(z)$ be a function of one complex variable $z$ but the expansion seems to depend not only on $(z-z_0)$ but also $(z-z_0)^*$?
+What is going on here? Why should $f(z)$ be a function of one complex variable $z$ but the expansion seems to depend not only on $(z-z_0)$ but also $(z-z_0)^*$? 
 
 \subsection{Analytic complex functions are nice}
 
@@ -225,6 +239,10 @@ This leads us to a definition of ``nice'' complex functions. The following terms
 	\label{eq:df:dz:analytic:def}
 \end{align}
 The key aspect of this is that there is only \emph{one} value of $df/dz$ at $z_0$ no matter how you approach $z_0$. In other words, it doesn't matter if $\delta z = z-z_0$ is coming from the positive/negative real/imaginary direction. The value of $df/dz$ is the same. 
+
+\begin{example}
+We cannot overemphasize the interpretation of analyticity here. The left-hand side of \eqref{eq:df:dz:analytic:def} is supposed to be a \emph{unique number}, analogous to the slope of $f$ at $z_0$. However, on the right-hand side you can see that the denominator is very different if we take $z = z_0+ i \epsilon$ or $z= z_0 + \epsilon$ for real $\epsilon$. In the first case the denominator gives an overall factor of $-i = i^{-1}$ to $df(z_)/dz$, in the second case it does not. Thus the idea of having a unique `slope' at $z_0$ hinges on requiring $f(z)$ to be sufficiently well-behaved that it does not matter how $z$ approaches $z_0$.
+\end{example}
 
 For most of these lectures we will use the term \textbf{analytic} to refer this property. Let us see what happens when we impose $df/d\bar{z} = 0$ onto the component functions $u(x,y)$ and $v(x,y)$:
 \begin{align}
@@ -249,24 +267,24 @@ Thus far we've talked about functions being analytic or not. It turns out that a
 
 \subsection{Analyticity is Differentiability}
 
-We have motivated the Cauchy--Riemann equations from the notion of being independent of $z^*$. This is a useful crutch and fits our theme of motivating rather than rigorously proving results. Let us be clear, however, that the underlying definition of analyticity is that:
+We have motivated the Cauchy--Riemann equations from the notion of being independent of $\bar z$. This is a useful crutch and fits our theme of motivating rather than rigorously proving results. Let us be clear, however, that the underlying definition of analyticity is that:
 \begin{quote}
 a function that is analytic at a point $z_0$ is differentiable at $z_0$.
 \end{quote}
 A function is differentiable at a point $z_0$ if its derivative, \eqref{eq:df:dz:analytic:def}, has a well-defined \emph{finite} value. A function that is itself infinite at a point cannot have a well-defined limit \eqref{eq:df:dz:analytic:def}, and thus are \emph{not} analytic at that point.
-We distinguish this from $df/dz^*=0$ because of the importance of \emph{singular} functions in physics. 
+We distinguish this from $df/d\bar z =0$ because of the importance of \emph{singular} functions in physics. 
 \begin{example}
 The following function is non-analytic at $z=2i$ and $z=1$:
 \begin{align}
 	f(z) = \frac{3z}{(z-2i)(z-1)} \ .
 \end{align}
-It may seem like $df/dz^* = 0$ at these points because $f(z)$ is independent of $z^*$. However, one cannot say that $df/dz^*=0$ because the limit definition analogous to \eqref{eq:df:dz:analytic:def} is not defined. 
+It may seem like $df/dz^* = 0$ at these points because $f(z)$ is independent of $\bar z$. However, one cannot say that $df/\bar dz=0$ because the limit definition analogous to \eqref{eq:df:dz:analytic:def} is not defined. 
 \end{example}
 \begin{exercise}
-The notion of `independent of $z^*$' sometimes causes more confusion than its worth. After all, $z$ and $z^*$ are clearly \emph{not} independent variables. Given $z$, you know exactly what $z^*$ is. The notion in which we \emph{pretend} that $z$ and $z^*$ are independent is that
+The notion of `independent of $\bar z$' sometimes causes more confusion than its worth. After all, $z$ and $\bar z$ are clearly \emph{not} independent variables. Given $z$, you know exactly what $\bar z$ is. The notion in which we \emph{pretend} that $z$ and $\bar z$ are independent is that
 \begin{align}
-	\frac{\partial z}{\partial z^*} = 
-	\frac{\partial z^*}{\partial z} = 0 \ ,
+	\frac{\partial z}{\partial \bar z} = 
+	\frac{\partial \bar z}{\partial z} = 0 \ ,
 \end{align}
 which we understand to come from an interpretation of $\mathbbm C \sim \mathbbm R^2$. Use \eqref{eq:ddz:ddzst} to prove the above partial derivative relations.
 \end{exercise}
@@ -276,25 +294,29 @@ which we understand to come from an interpretation of $\mathbbm C \sim \mathbbm 
 \subsection{A geometric point of view (optional)}
 \label{sec:analytic:geometric}
 
-For culture, let us comment on a geometric perspective of analyticity/complex-differentiability. The differential of a function, $df$, is a \textbf{differential one-form}. If you recall some of our nomenclature for dual vectors, a one-form is a kind of `row vector': it is a linear function that takes in a vector and spits out a number. If $df$ is such a dual vector, what is the vector space upon which it acts?
+For culture, let us comment on a geometric perspective of analyticity/complex-differentiability. The differential of a function, $df$, is a \textbf{differential one-form}. If you recall some of our nomenclature for dual vectors, a one-form is a kind of `row vector': it is a linear function that takes in a vector and spits out a number.\footnote{The number that is spit out is unique for each spacetime point $z_0$, but is independent of which direction on the complex plane one is probing the `slope' of the function $f$.} If $df$ is such a dual vector, what is the vector space upon which it acts?
 
-Let's specifically consider the differential of $f$ at a specific point $z_0$ in the complex plane: $df(z_0)$. This is not a number. In order to get a number from this, you have to feed it a vector: I claim this vector is an element of the tangent plane\footnote{The tangent plane is exactly what it sounds like: if you have a curved surface like a globe, the tangent plane at $z_0$ and glued a rigid piece of cardboard to one point, $z_0$. Now imagine that the piece of paper has graph paper on it.} of the complex plane at $z_0$: $T_{z_0}\mathbbm{C}$. We can sketch this if you allow me to artificially `curve' the complex plane to help make it easy to distinguish:
+Consider the differential of $f$ at a specific point $z_0$ in the complex plane: $df(z_0)$. This is not a number---it is a dual vector. In order to get a number from this, you have to feed it a vector. What are the vectors? A vector is an element of the tangent plane\footnote{The tangent plane is exactly what it sounds like: if you have a curved surface like a globe, the tangent plane at $z_0$ and glued a rigid piece of cardboard to one point, $z_0$. Now imagine that the piece of paper has graph paper on it.} of the complex plane at $z_0$: $T_{z_0}\mathbbm{C}$. We can sketch this if you allow me to artificially `curve' the complex plane to help make it easy to distinguish:
 \begin{center}
 \includegraphics[width=.5\textwidth]{figures/lec13_mani.png}
 \end{center}
-Using the jargon of differential geometry, we call the complex plane the \emph{base manifold}. The set of all tangent spaces is called a \emph{tangent bundle}\footnote{More general types of vector spaces can be attached to each point of the base manifold. These are called fiber bundles. They are the underlying mathematical structure of mechanics and reflect why Hamilton's equations are so damn special. They are also the mathematical structure that defines gauge theories and so address the question ``what is a force?''}. Each tangent space is a vector space `attached' to a single point of the base space. 
+Using the jargon of differential geometry, we call the complex plane the \emph{base manifold}. The set of all tangent spaces is called a \emph{tangent bundle}\footnote{More general types of vector spaces can be attached to each point of the base manifold. These are called fiber bundles. They are the underlying mathematical structure of mechanics and reflect why Hamilton's equations are so damn special. They are also the mathematical structure that defines gauge theories and so address the question ``what is a force?''}. Each tangent space is a vector space attached to a single point of the base space. 
 
 The object $df(z_0)$ is a dual vector on the vector space\footnote{The standard notation is to write a dual vector of a space $V$ as a vector in the dual space $V^*$, so one could write $df(z_0) \in T^*_{z_0}(\mathbbm{C})$.} $T_{z_0}(\mathbbm{C})$.  The vectors of this space are `velocities' of trajectories that pass through $z_0$. For now let's think of them as quantities
 \begin{align}
-	\vec v = \Delta x + i \Delta y \ .
+	\vec v = v^1 + i v^2 = \Delta x + i \Delta y \ .
 \end{align}
+where we identify $v^1 = \Delta x$ and $v^2 = \Delta y$. Alternatively, $\vec{v}$ can be thought of as a `velocity' along some trajectory $\gamma(t)$ on the space $\mathbbm{C}$. The velocity in the real direction is $v^1 = d\gamma^1(t)/dt$ and the velocity in the imaginary direction is $v^2 = d\gamma^2(t)/dt$, where $\gamma = \gamma^1 + i \gamma^2$.\footnote{This is a vector space with $\vec{e}_{1} = 1$ and  $\vec{e}_{2} = 2$. The only difference from $\mathbbm{R}^2$ is that the vector space $\mathbbm{C}$ is equipped with a complex structure: the rule $i^2 = -1$.}
+
 \begin{center}
 \includegraphics[width=.5\textwidth]{figures/lec13_tanvec.png}
 \end{center}
 Then we may write the linear action of $df(z_0)$ on $\vec v \in T_{z_0}(\mathbbm{C})$ as
 \begin{align}
 	df(z_0)\left[\vec{v}\right] &=
-	f'(z_0)\Delta x + f'(z_0)i\Delta y \ ,
+	f'(z_0)\left(v^1 + i v^2\right)
+	% \Delta x + f'(z_0)i\Delta y 
+	\ ,
 	\label{eq:diff:geo:CR:1}
 \end{align}
 where we assume that $f$ is analytic so that $f'(z_0)$ is unambiguously defined (independent of the direction of $\delta z$) as in \eqref{eq:df:dz:analytic:def}. 
@@ -305,9 +327,13 @@ However, if we think about this complex space as a two-dimensional real space, t
 	\left.\frac{\partial f}{\partial x}\right|_{z_0} \Delta x
 	+
 	\left.\frac{\partial f}{\partial y}\right|_{z_0} \Delta y
+	=
+	\left.\frac{\partial f}{\partial x}\right|_{z_0} v^1
+	+
+	\left.\frac{\partial f}{\partial y}\right|_{z_0} v^2
 	\label{eq:diff:geo:CR:2}
 \end{align}
-Comparing \eqref{eq:diff:geo:CR:1} and \eqref{eq:diff:geo:CR:1} gives 
+Comparing \eqref{eq:diff:geo:CR:1} and \eqref{eq:diff:geo:CR:2} gives 
 \begin{align}
 	\frac{\partial f}{\partial x} = f'(z_0) = - i\frac{\partial f}{\partial y} \ .
 \end{align}
@@ -324,7 +350,7 @@ Recalling that $f= u+iv$ then gives
 \end{align}
 Setting the real and imaginary parts equal to one another give, as expected, the Cauchy--Riemann equations. 
 
-\subsection{Analytic and harmonic}
+\subsection{Analytic and harmonic (optional)}
 
 One more comment is in order. If a function $f(z) = u(x,y)+ i v(x,y)$ is analytic, then its real and imaginary parts are independently 2D harmonic with respect to $\mathbbm{R}^2$:
 \begin{align}
@@ -345,9 +371,14 @@ Consider the function that multiplies a complex number by a constant phase,
 \end{align}
 This takes each point and rotates it in the counterclockwise direction by $\theta$. 
 \begin{center}
-\includegraphics[width=.5\textwidth]{figures/lec13_map1.png}
+% \includegraphics[width=.5\textwidth]{figures/lec13_map1.png}
+\includegraphics[width=.4\textwidth]{figures/Complex_01_rot.pdf}
 \end{center}
 \end{example}
+We can see this more viscerally by imagining the action on the image of a cat:
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/Complex_03_rot.pdf}
+\end{center}
 
 \begin{exercise}
 What happens to points under $f(z) = z+ z_0$?
@@ -361,7 +392,8 @@ Now consider the simplest non-trivial polynomial, the function that squares its 
 \end{align}
 For a point $z = \rho e^{i\theta}$, $f(z)  = \rho^2 e^{2i\theta}$. This squares the modulus (length) of each point and rotates according to how much the point is already rotated relative to the positive real axis.
 \begin{center}
-\includegraphics[width=.7\textwidth]{figures/lec13_map2.png}
+% \includegraphics[width=.7\textwidth]{figures/lec13_map2.png}
+\includegraphics[width=.7\textwidth]{figures/Complex_03_sq.pdf}
 \end{center}
 Points that are inside the unit circle get pulled closer to the origin while points outside the unit circle are pushed away from the origin.  Points in the first quadrant (positive real and imaginary parts) are sent to points in the upper half plane (positive imaginary part).
 \end{example}
@@ -380,14 +412,19 @@ Now let's consider a curious case. What about the square root function?
 \end{align}
 Something very weird happens here. Consider a closed path $\gamma(t) = e^{it}$ with path parameter $t \in [0,2\pi]$. This just means consider a bunch of points corresponding to $\gamma(t)$ with a bunch of values of $t$ in the specified range. Clearly this corresponds to a circle. However, when we put those points through the square root function, these only map onto \emph{half} of the circle. 
 \begin{center}
-\includegraphics[width=\textwidth]{figures/lec13_map3.png}
+% \includegraphics[width=\textwidth]{figures/lec13_map3.png}
+\includegraphics[width=.7\textwidth]{figures/Complex_04_log.pdf}
 \end{center}
 The technical fact that this happens is not surprising at all, you can see that $f(\gamma(t)) = e^{it/2}$ which only spans the upper half circle. But a deeper question bubbles to the surface: if we're thinking about complex functions as maps of the complex plane to itself, what does it mean that $f(z) = \sqrt{z}$ appears to have `lost' the entire lower half of $\mathbbm{C}$? Or more strangely, how is it that a \emph{closed path} has been mapped to an \emph{open path} with endpoints?
 
 It's clear that if we wanted to reach the \emph{lower} half plane in the iamage, we'd need $\theta \in [0, 4\pi]$. Algebraically that means that $f(\gamma(t)) = e^{it/2}$ covers the entire complex plane \emph{only} if we allow angles from 0 to $4\pi$
-\footnote{You may be familiar with another case where `rotating by $2\pi$' only takes you halfway---spinors in relativistic quantum mechanics. You should know that the `double cover' nature of the spinor is (to the best of my view) independent of the present discussion of Riemann sheets. That double cover has to do with the universal cover of the Poincar\'e group. I refer to the literature on the Wigner theorem, see e.g.\ volume 1 of Weinberg's \emph{Quantum Theory of Fields}. For an unrelated cute spinor paper, see \url{https://www.jstor.org/stable/2318771}.}. In some sense, this is totally ridiculous, since $\rho e^{i\theta} \equiv \rho e^{i(\theta+2\pi)}$. I put that third bar on the equal sign because they're supposed to be \emph{that} equal.
+\footnote{You may be familiar with another case where `rotating by $2\pi$' only takes you halfway---spinors in relativistic quantum mechanics. You should know that the `double cover' nature of the spinor is (to the best of my view) independent of the present discussion of Riemann sheets. That double cover has to do with the universal cover of the Poincar\'e group. I refer to the literature on the Wigner theorem, see e.g.\ volume 1 of Weinberg's \emph{Quantum Theory of Fields}. For an unrelated cute spinor paper, see \url{https://www.jstor.org/stable/2318771}.}. In some sense, this is totally ridiculous, since $\rho e^{i\theta} \equiv \rho e^{i(\theta+2\pi)}$. I used the $\equiv$ sign because the two sides really are \emph{that} equal.
 
-If, say, $z_1=e^{i\pi/3}$ and $ z_2 e^{7i\pi/3}$ are supposed to be the \emph{same} point, $z_1\equiv z_2$, how is it that $f(z_1) = e^{i\pi/6}$ and $f(z_2) = e^{7i\pi/6}$ so that $f(z_1)\neq f(z_2)$? Stated differently, functions are supposed to be single valued. It appears that $f(z)=\sqrt{z}$ is \emph{multivalued} since the same point $z_1=z_2$ is mapped onto two different points. One way to do this is to \emph{define} additional structure and extend the domain (pre-image) of $f$. In order to do this, we take \emph{two} copies of the complex plane and stitch them together:
+If, say, $z_1=e^{i\pi/3}$ and $ z_2 e^{7i\pi/3}$ are supposed to be the \emph{same} point, $z_1\equiv z_2$, how is it that $f(z_1) = e^{i\pi/6}$ and $f(z_2) = e^{7i\pi/6}$ so that $f(z_1)\neq f(z_2)$?
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Complex_01_log.pdf}
+\end{center}
+Stated differently, functions are supposed to be single valued. It appears that $f(z)=\sqrt{z}$ is \emph{multivalued} since the same point $z_1=z_2$ is mapped onto two different points. One way to do this is to \emph{define} additional structure and extend the domain (pre-image) of $f$. In order to do this, we take \emph{two} copies of the complex plane and stitch them together:
 \begin{center}
 \includegraphics[width=.8\textwidth]{figures/lec13_map4.png}
 \end{center}
@@ -433,7 +470,13 @@ Do not integrate across a branch cut!
 
 Let's now focus on integrating analytic functions. Oops, I just misspoke. What I meant to write was that we want to \emph{integrate functions in a region of $\mathbbm{C}$ where those functions are analytic.} Rarely are functions simply `analytic' or `not-analytic.' The functions we care about will be analytic in most places, but non-analytic in others. 
 
-When we integrate on the complex plane, $\mathbbm{C}$, we have to define a \textbf{contour}---this is just the curve, $C$, that we are integrating over. This is similar to doing a ``line integral'' in $\mathbbm{R}^2$: you are doing a `one-dimensional integral' over a two[ish]-dimensional space. An integral over the contour $C$ is:
+When we integrate on the complex plane, $\mathbbm{C}$, we have to define a \textbf{contour}---this is just the curve, $C$, that we are integrating over. A contour has an \emph{orientation}: the direction along the curve over which one is integrating. Recall that for single variable real calculus,
+\begin{align}
+	\int_a^b dx\; f(x) = - \int_b^a dx\; f(x) \ ,
+\end{align}
+you get a relative minus sign if you integrate in the opposite direction.
+
+Integrating along a complex contour is just like a ``line integral'' in $\mathbbm{R}^2$: you are doing a one-dimensional integral in a two[ish]-dimensional space. An integral over the contour $C$ is:
 \begin{align}
 	\int_C dz\, f(z) &= 
 	\int_C (dx + i dy) \ , \left[u(x,y)+ i v(x,y)\right]
@@ -444,11 +487,29 @@ When we integrate on the complex plane, $\mathbbm{C}$, we have to define a \text
 \end{align}
 Written this way, we are simply doing calculus on $\mathbbm{R}^2$ and keeping track of funny factors of $i$. 
 %
-It may be helpful to remind ourselves what this means:
+It may be helpful to remind ourselves what this means.
+\begin{example}\textbf{Integration on the real line.}
+As a reminder, let's review integration along the real line, pictorially. Usually we think of the Riemann sum as follows:
 \begin{center}
-\includegraphics[width=\textwidth]{figures/Lec_2017_12_integral.png}
+\includegraphics[width=.5\textwidth]{figures/Complex_06_RRiem.pdf}
 \end{center}
-The integral along a curve can be thought of as two-dimensional version of a Riemann sum. Recall that the one-dimensional Riemann sum approximated the integral as a sum of terms $f(x_i)\Delta x$. In more than one dimension, the quantity $\Delta x$ is promoted to a `vector'\footnote{As I write this I feel sick to my stomach. In fact, $\Delta x$ is \emph{not} promoted to a `vector,' though it is promoted to something that points in a direction. More properly, it is a [differential] one-form which is more like an \emph{dual vector} in the sense referenced in Section~\ref{sec:analytic:geometric}.}. In other words, we may write
+A more appropriate picture is to draw $f(x)$ on a separate real line:
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Complex_06_RRiem2.pdf}
+\end{center}
+The integral is a sum over the function evaluated at some point $f(x_i)$ multiplied by the difference $(x_i-x_{i-1})$. We usually call the difference $\Delta x$ and assume that it is constant and positive. Note, however, that $(x_i-x_{i-1})$ has an \emph{orientation}: there's a sense of direction along the real line. If you go in the opposite direction, you get an overall minus sign.
+\end{example}
+
+
+
+The integral along a curve can be thought of as two-dimensional version of a Riemann sum. By comparison to the above example, the appropriate picture is this:
+\begin{center}
+% \includegraphics[width=\textwidth]{figures/Lec_2017_12_integral.png}
+\includegraphics[width=.7\textwidth]{figures/Complex_06_CRiem.pdf}
+\end{center}
+Note that the complex plane on the right-hand side has coordinate $u(x,y)$ and $v(x,y)$ since $f(z) = u(x,y) + i v(x,y)$. We have written down the generalization of the Riemann sum to $\mathbbm{C}$. 
+
+The one-dimensional real-valued Riemann sum approximated the integral as a sum of terms $f(x_i)\Delta x$. In more than one dimension, the quantity $\Delta x$ is promoted to a `vector'\footnote{As I write this I feel sick to my stomach. In fact, $\Delta x$ is \emph{not} promoted to a `vector,' though it is promoted to something that points in a direction. More properly, it is a [differential] one-form which is more like an \emph{dual vector} in the sense referenced in Section~\ref{sec:analytic:geometric}.}. In other words, we may write
 \begin{align}
 	\int_C dz\, f(z) = \sum_i \Delta z_i \, f(z_i) \ ,
 	\label{eq:complex:integral:Riemann}
@@ -464,13 +525,13 @@ However, if the curve $C$ happens to be moving in the horizontal (pure real) dir
 	\int_C dz\, f(z) = \cdots + \Delta x\left[(1+i)^2 + i\right] + \cdots \ .
 \end{align}
 \end{example}
-\begin{exercise}\label{eq:fundamental:theorem:calculus}
+\begin{exercise}\label{eq:fundamental:theorem:calculus} \textbf{(Important!)}
 Suppose $f$ is itself a derivative of an analytic function, $f(z)=dF(z)/dz$.
 Convince yourself that if $C$ is a smooth connected path between two points $z_0$ and $z_N$, then the integral of $f(z)$ over $C$ is
 \begin{align}
 	\int_C dz\, f(z) &= F(z_N) - F(z_0) \ ,
 \end{align}
-as you would expect from real-number calculus.
+as you would expect from real-number calculus. This fact probably has some pompous name, like the fundamental theorem of calculus. \textbf{Hint}: write out the Riemann sum.
 % \footnote{By the way, this all a generalization of Stokes' theorem: the integral of the derivative of some function $f$ over some domain $D$ is simply the function evaluated on the boundary of the domain, $\partial D$. The $\partial D$ is notation for `boundary of $D$.' The fancy way to write this is
 % \begin{align}
 % 	\int_D df &= \int_{\partial D} f \ .
