@@ -482,7 +482,7 @@ you get a relative minus sign if you integrate in the opposite direction.
 Integrating along a complex contour is just like a ``line integral'' in $\mathbbm{R}^2$: you are doing a one-dimensional integral in a two[ish]-dimensional space. An integral over the contour $C$ is:
 \begin{align}
 	\int_C dz\, f(z) &= 
-	\int_C (dx + i dy) \ , \left[u(x,y)+ i v(x,y)\right]
+	\int_C (dx + i dy) \, \left[u(x,y)+ i v(x,y)\right]
 	\\
 	&= 
 	\int_C \left[u(x,y)dx - v(x,y)dy\right] 
@@ -534,13 +534,7 @@ Convince yourself that if $C$ is a smooth connected path between two points $z_0
 \begin{align}
 	\int_C dz\, f(z) &= F(z_N) - F(z_0) \ ,
 \end{align}
-as you would expect from real-number calculus. This fact probably has some pompous name, like the fundamental theorem of calculus. \textbf{Hint}: write out the Riemann sum.
-% \footnote{By the way, this all a generalization of Stokes' theorem: the integral of the derivative of some function $f$ over some domain $D$ is simply the function evaluated on the boundary of the domain, $\partial D$. The $\partial D$ is notation for `boundary of $D$.' The fancy way to write this is
-% \begin{align}
-% 	\int_D df &= \int_{\partial D} f \ .
-% \end{align}
-% This statement holds for $f$ as a differential $n$-form (the generalization of a one-form and related to an $n$-index tensor) and $D$ is an $n$-dimensional domain. Even if you are not familiar with this nomenclature, please note the qualitative similarities with the integral of a derivative in 1D $\int dx\, (df/dx)$---which is simply the difference of $f$ at the endpoints of the domain, the integral of a curl in 2D---which is related to the `circulation' around the boundary of the 2D domain, and the integral of a divergence in 3D---which is simply related to the flux across the enclosing surface. Vector calculus isn't hard---it's just weird when we treat the 2D and 3D cases as different from the general $n$-dimensional case. 
-% }.  
+as you would expect from real-number calculus. This fact probably has some pompous name, like the fundamental theorem of calculus. \textbf{Hint}: write out the Riemann sum, then recall the limit definition of the derivative.\footnote{To make this hint transparent: it helps to write the $dz = z_i - z_{i-1}$ in the integral measure to be the same $dz$ in the definition of the derivative. The whole point is that $F$ is analytic so that $dF/dz$ is uniquely defined at each point and is independent of which direction one is taking the derivative.} 
 \end{exercise}
 
 
@@ -563,11 +557,12 @@ In other words, $C$ can be parameterized by the angle $\theta$. We can write poi
 	&
 	dz &= i \varepsilon e^{i\theta} d\theta \ .
 \end{align}
+Note that this parameterization has an orientation: increasing $\theta$ goes counter-clockwise along the circle.
 Then the integral around the little circle around $z_0$ is
 \begin{align}
 	\oint_C dz\, f(z) &= \int_0^{2\pi} i \varepsilon e^{i\theta} d\theta \, f\left( z_0 + \varepsilon e^{i\theta} \right) \ .
 \end{align}
-Now we observe that since $f$ is analytic, we can differentiate it---which means we can write it as a Taylor expansion:
+Now we observe that since $f$ is analytic around $z_0$, we can differentiate it---which means we can write it as a Taylor expansion about $z_0$:
 \begin{align}
 	f(z)
 	 = f(z_0) + f'(z_0)(z-z_0) + \mathcal O(\varepsilon^2) \ ,
@@ -584,9 +579,12 @@ where we recognize that $z-z_0 = \varepsilon e^{i\theta}$. Plugging this in give
 Observe that the only $\theta$-dependence in the integrand shows up in factors of $e^{n i\theta}$ for positive integers $n$. However, we note that
 \begin{align}
 	\int_0^{2\pi} d\theta e^{in\theta} 
-	= 
+	&= 
 	\frac{1}{in} \left(e^{2\pi i n} - e^{0}\right)
-	= 0 \ .
+	= 0 
+	&
+	n &\in \mathbbm{Z}_+
+	\ .
 	\label{eq:complex:theta:integral:trivial}
 \end{align}
 What we find is that 
@@ -601,7 +599,7 @@ Notice that we did not rely on $\varepsilon\to 0$ in order to motivate this argu
 
 \subsubsection{Finite regions}
 
-Let's now prove a more general version of this known as the \textbf{Cauchy Integral Theorem}. If $f$ is analytic in a connected region $R \in \mathbbm{C}$ with some boundary $C = \partial R$ , then 
+Let's now prove a more general version of this known as the \textbf{Cauchy Integral Theorem}. We use the notation where the boundary of a region $R$ is called $\partial R$. The boundary is assumed to be oriented in the counter-clockwise direction. If $f$ is analytic in a connected region $R \in \mathbbm{C}$ with some boundary $C = \partial R$ , then 
 \begin{align}
 	\oint_{C=\partial R} dz\, f(z) &= 0 \ ,
 \end{align}
@@ -672,7 +670,7 @@ In other words, if a function $f$ is analytic in a connected region $R$ and you 
 % This statement holds for $f$ as a differential $n$-form (the generalization of a one-form and related to an $n$-index tensor) and $D$ is an $n$-dimensional domain. Even if you are not familiar with this nomenclature, please note the qualitative similarities with the integral of a derivative in 1D $\int dx\, (df/dx)$---which is simply the difference of $f$ at the endpoints of the domain, the integral of a curl in 2D---which is related to the `circulation' around the boundary of the 2D domain, and the integral of a divergence in 3D---which is simply related to the flux across the enclosing surface. Vector calculus isn't hard---it's just weird when we treat the 2D and 3D cases as different from the general $n$-dimensional case. 
 % }.  
 
-For those who are mathematically inclined, here's a geometrically-motivated argument for Cauchy's integral theorem. Consider two points $z_1$ and $z_2$ in a connected region $R$ where a function $f$ is analytic. Now consider any path $C_1$ that connects $z_1$ to $z_2$ and any other path $C_2$ that connects $z_2$ to $z_1$. The orientation matters.
+For those who are mathematically inclined, here's a geometrically-motivated argument for Cauchy's integral theorem. If you did Exercise~\eqref{eq:fundamental:theorem:calculus}, then this is already obvious. Consider two points $z_1$ and $z_2$ in a connected region $R$ where a function $f$ is analytic. Now consider any path $C_1$ that connects $z_1$ to $z_2$ and any other path $C_2$ that connects $z_2$ to $z_1$. The orientation matters.
 \begin{center}
 \includegraphics[width=.5\textwidth]{figures/Lec_2017_paths.png}
 \end{center}
