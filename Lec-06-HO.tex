@@ -15,6 +15,10 @@ The Green's function equation tells us the response $G(t,t_0)$ at time $t$ from 
 \end{align}
 Recall that the arguments $t$ and $t_0$ are analogous to the indices of a finite-dimensional matrix. For notational convenience, we will set $t_0=0$ and not list it explicitly. We are primarily concerned about the $t$-dependence of $G(t,t_0)$. 
 
+\begin{exercise}
+One may argue that the harmonic oscillator operator should be defined with an overall minus sign. Life is too short to quibble over signs in these notes. Please confirm that if  $\mathcal O_\text{minus} = -\mathcal O$, then the Green's function is simply $G_\text{minus} = - G$. Relate this to the physical interpretation of the Green's function equation. {Hint:} if you pluck a guitar string in the opposite direction, you still get a `unit' wave.
+\end{exercise}
+
 \subsection{Fourier Transform}
 
 The first thing we're going to do is write $G(t,t_0)$ as a Fourier transform with respect to $t$. Please refer to Appendix~\ref{app:Fourier} for our set of Fourier transform conventions. We can write $G(t)$ as an integral over Fourier modes with frequency $\omega$ and weight (Fourier transform) $\tilde G(\omega)$:
@@ -377,33 +381,34 @@ This section is purely `for culture'. We present a qualitative discussion of how
 	\tilde G(k) &=
 	\frac{-1}{
 	\left[k-(\omega_0 -i\varepsilon)\right]
-	\left[k-(\omega_0 + i\varepsilon)\right]
+	\left[k-(-\omega_0 + i\varepsilon)\right]
 	}
 	=
 	\frac{-1}{
-	k^2 - \omega_0^2 + \frac{i}{2} \delta 
+	k^2 - \omega_0^2 + 2i\varepsilon \omega_0
 	}
-	\ ,
+	\ .
 	\label{eq:Feynman:G:tilde}
 \end{align}
-where $2i\epsilon \omega_0 \equiv \delta = \frac{i}{2}\delta$ is just shorthand for a small, positive quantity. This is what we would expect from a Lagrangian:
+Define the small imaginary part to be $2i\epsilon \omega_0 \equiv 2i\delta$. This is just a small, dimensionful quantity.\footnote{A `small dimensionful quantity' implicitly makes reference to another dimensionful quantity against which `smallness' is measured. In this case, it is the resonant frequency $\omega$. Ultimately, the `small' thing is the dimensionless $\varepsilon$.}  This is what we would expect from a Lagrangian:
 \begin{align}
-	L = \frac{1}{2}\dot x^2 - \frac{1}{2}\left(\omega_0^2 + i \delta\right)x^2 \ .
+	L = \frac{1}{2}\dot q^2 - \frac{1}{2}\left(\omega_0^2 - 2i \delta\right)q^2 \ .
 \end{align}
+Note: this replacement should be `obvious': we just take $\omega_0^2 \to \omega^2 - 2i\delta$.
 \begin{exercise}
 Check that the equation of motion from this Lagrangian indeed gives a differential operator whose Green's function has Fourier components \eqref{eq:Feynman:G:tilde}.
 \end{exercise}
 Since the the Lagrangian is related to the action, $S$, by $S=\int dt\, \mathcal L$, one can integrate the $\dot x^2$ term by parts to write:
 \begin{align}
 	S = -\int dt \, \frac{1}{2}
-	x 
-	\left[\left(\frac{d}{dt}\right)^2 + \omega_0^2 - i\delta \right]
-	x 
+	q 
+	\left[\left(\frac{d}{dt}\right)^2 + \omega_0^2 - 2i\delta \right]
+	q 
 	=
 	-\int dt \, \frac{1}{2}
-	x 
-	\left[\mathcal O_\text{HO} - i\delta \right]
-	x  \ ,
+	q 
+	\left[\mathcal O_\text{HO} - 2i\delta \right]
+	q  \ ,
 	\label{eq:HO:S:Feynman:quad}
 \end{align}
 where $\mathcal O_\text{HO}$ is the original harmonic oscillator differential operator that we started with in \eqref{eq:O:HO}. This shows us that the Feynman prescription for pushing poles around corresponds to adding a small imaginary part to the harmonic oscillator Lagrangian. This is a little weird since the resulting operator is clearly not Hermitian.
@@ -411,11 +416,11 @@ where $\mathcal O_\text{HO}$ is the original harmonic oscillator differential op
 If you're familiar with statistical mechanics or quantum field theory, you may know that the fundamental object is neither the Lagrangian nor the action\footnote{... and is definitely not the Hamiltonian; sorry condensed matter folks and Lin-Manuel Miranda fans.}, but actually the path integral, $Z$ which is defined as an integral over all possible functions $x(t)$:
 \begin{align}
 	Z &= 
-	\int \mathcal Dx \, e^{iS[x]}
+	\int \mathcal Dq(t) \, e^{iS[q}
 	= 
-	\int \mathcal Dx \, e^{iS_\text{HO}[x] - \frac{\delta}{2} x^2} \ .
+	\int \mathcal Dq(t) \, e^{iS_\text{HO}[q] - \delta q^2} \ .
 \end{align}
-Here $\mathcal Dx$ is just the measure of the path integral. For discretized space, it corresponds to $\mathcal Dx\sim dx(t_0)\,dx(t_1)\, dx(t_2)\cdots$. The harmonic oscillator action $S_\text{HO}$ is real and thus $e^{iS_\text{HO}}$ oscillates and the path integral doesn't converge. By adding the $- \frac{\delta}{2} x^2$ term to the action we are imposing a small perturbation that forces the integrand to converge for very large values of $x(t)$. With this factor the path integral is well defined. If we approached the harmonic oscillator assuming that path integral is sufficiently convergent\footnote{Physically this is saying that these extreme path configurations should not contribute since the path that minimizes the action should be far away from these cases; so we're just helping the theory focus on the part of the path integral that matters.} and plugging in some factor to force this convergence, then we can run this argument backward and `deduce' the Feynman prescription for the Green's function.
+Here $\mathcal Dx$ is just the measure of the path integral. For discretized space, it corresponds to $\mathcal Dx\sim dq(t_0)\,dq(t_1)\, dq(t_2)\cdots$. The harmonic oscillator action $S_\text{HO}$ is real and thus $e^{iS_\text{HO}}$ oscillates and the path integral doesn't converge. By adding the $- \frac{\delta}{2} q^2$ term to the action we are imposing a small perturbation that forces the integrand to converge for very large values of $x(t)$. With this factor the path integral is well defined. If we approached the harmonic oscillator assuming that path integral is sufficiently convergent\footnote{Physically this is saying that these extreme path configurations should not contribute since the path that minimizes the action should be far away from these cases; so we're just helping the theory focus on the part of the path integral that matters.} and plugging in some factor to force this convergence, then we can run this argument backward and `deduce' the Feynman prescription for the Green's function.
 
 If everything in this subsection is a bit boring, then here's what you should know. This discussion gives us a hint of where all of our physical differential equations come from. The equations of motion that define a theory come from a variational principle with respect to some action. 
 \begin{exercise}
@@ -459,7 +464,7 @@ where I'm probably assuming that $\mathcal O_\text{quad}$ is Hermitian if we wan
  \end{align}
  The solution for the plane wave's frequency $\omega$ is
  \begin{align}
- 	\omega = \omega_R - i\Gamma \ , \label{eq:DHO:back:envelope:poles}
+ 	\omega = \omega_R - i\gamma \ , \label{eq:DHO:back:envelope:poles}
  \end{align}
  where for $\gamma^2 \ll \omega_0^2$, $\omega_R \approx \omega_0$ is the frequency.  Plugging $\omega$ back into our plane wave gives
  \begin{align}
@@ -473,7 +478,7 @@ where I'm probably assuming that $\mathcal O_\text{quad}$ is Hermitian if we wan
 
  \item Because the position of the pole in the imaginary direction is related to the \emph{causality} of the theory, we have now connected `damping' to causality in a round-about way.
 
- \item When we derived the retarded Green's function $G_\text{ret}(t)$ that describes the classical, ideal harmonic oscillator, we took $i\varepsilon\to 0$. For the damped harmonic oscillator the corresponding value is $i\gamma$, which we keep finite\footnote{Here's a funny bit of linguistics in our discipline. Any physical quantity is naturally not-infinite, so it seems silly when physicists make a point to call something `finite.' You would think that this is in contrast to that quantity being infinite. In fact, when physicists say \emph{finite} what they really mean is \emph{not zero}, which is quite different from `not infinite.'}; it has some physical significance after all.
+ \item When we derived the retarded Green's function $G_\text{ret}(t)$ that describes the classical, ideal harmonic oscillator, we took $i\varepsilon\to 0$. For the damped harmonic oscillator the corresponding value is $i\gamma$, which we keep finite\footnote{Here's a funny bit of linguistics in our discipline. Any physical quantity is naturally not-infinite, so it seems silly when physicists make a point to call something `finite.' You would think that this is in contrast to that quantity being infinite. In fact, when physicists say \emph{finite} what they really mean is \emph{not zero}, which is quite different from `not infinite.'}\footnote{Actually, there's a second aside I'd like to make in the footnotes. Jim Holt has an excellent essay, ``The Dangerous Idea of the Infinitesimal'' about how mathematicians struggled with the idea of infinitesimal quantities. The essay is reproduced in his volume \emph{When Einstein Walked with G\"odel}.}; it has some physical significance after all.
 
  \item The exponential notation for the Fourier transform made all of this very easy: we just let $\omega$ be complex in $e^{-i\omega t}$ and we are able to capture the physics of oscillations and damping. If we had used trigonometric functions then we'd have a bunch of $\sinh$ or $\cosh$ floating around and the convergence would not be so clear.
  \end{enumerate}
