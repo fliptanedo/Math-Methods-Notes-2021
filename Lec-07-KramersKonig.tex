@@ -4,4 +4,236 @@
 % \lecdate{lec~12}
 % 2017 Lec 17ish
 
-There is another way to deal with poles..
+\subsection{Cauchy Principal Value}
+% See Cohen, "Complex Analysis with Applications to Science and Engineering"
+% p. 139
+
+We have seen that the pole structure of an integrand has physical significance. When solving for the harmonic oscillator Green's function, we saw that we had to \emph{change} the nature of the harmonic oscillator differential operator in order to derive the \emph{retarded} (causal) Green's function rather than the \emph{advanced} (acausal) Green's function. In that case, we found a real integral with a pole along the integration axis and decided that the integrand itself was the problem.
+
+What happens if \emph{we don't want to change the integrand?} For example, most physicists wouldn't object too much that the integral
+\begin{align}
+	\int_{-1}^4 dx\, \frac{1}{x-1}
+\end{align}
+should have a well defined value even though there is a simple pole at $x=1$. In fact, with a bit of thought (try sketching the integrand on a graph), one may argue that
+\begin{align}
+	\int_{-1}^4 dx\, \frac{1}{x-1}
+	= 
+	\int_{3}^4 dx\, \frac{1}{x-1}
+\end{align}
+because the integrand is antisymmetric about the pole. Sure, the integrand is undefined at $x=1$, but every contribution just to the right of the pole, say $x=1+\varepsilon$ is exactly canceled by a contribution just to the left of the pole, $x=1-\varepsilon$. This is purely \emph{real} calculus.
+
+The \textbf{Cauchy principal value} of a real integral with a pole along the integration contour (the real axis) formalizes this idea. Suppose $f(x)$ is well behaved (analytic) along the real axis. For an integrand $f(x)/(x-x_0)$, the Cauchy principal value is defined to be
+\begin{align}
+	\mathcal P \int_{-\infty}^\infty dx\, \frac{f(x)}{x-x_0}
+	= 
+	\lim_{\varepsilon\to 0}
+	\left[
+	\int_{-\infty}^{x_0-\varepsilon} dx\, \frac{f(x)}{x-x_0}
+	+\int_{x_0+\varepsilon}^\infty dx\, \frac{f(x)}{x-x_0}
+	\right] \ .
+\end{align}
+In other words, you simply integrate everywhere except the pole along the real axis. Formally we cannot say anything about the integrand at $x=x_0$, but perhaps part of you secretly thinks this is not a big deal since the $\varepsilon\to 0$ limit is well behaved. Again, thus far we are only doing real calculus.
+
+\flip{Include picture}
+
+\paragraph{Relation to a contour.} We can now connect to complex analysis. Suppose $f(x)$ is well behaved enough that we can imagine integrating $f(z)/(z-x_0)$ along a closed contour with the integral along the ``arc at infinity'' (either in the upper or lower half plane) going to zero. Then we can write the following:
+\begin{align}
+	\int_{C(\gamma_\pm)} dz \; \frac{f(z)}{(z-x_0)} &= 
+	\int_{-\infty}^{x_0-\varepsilon} dx\, \frac{f(x)}{x-x_0}
+	+
+	\int_{x_0+\varepsilon}^\infty dx\, \frac{f(x)}{x-x_0}
+	+
+	\int_{\gamma_\pm} dz \; \frac{f(z)}{(z-x_0)}
+	+
+	\int_{\text{arc}} dz \; \frac{f(z)}{(z-x_0)} \ .
+	\label{eq:cauchy:contour}
+\end{align}
+By assumption, the last term goes to zero. The first two terms are the Cauchy principal value when $\varepsilon\to 0$. The third term along contour $\gamma$ is a small semicircle of radius $\varepsilon$ that connects the two contours of the Cauchy principal value. It's a little semicircle that either goes just above ($\gamma_+$) or just below ($\gamma_-$) the real axis. Of course, you already realize the important point: the contour $C$ \emph{depends} on the choice of $\gamma_\pm$. This determines whether or not the point $z=x_0$ is inside or outside the contour.
+
+\paragraph{Residue Theorem.} Let us assume that the integrand $f(z)/(z-x_0)$ is such that one can close the integral along the upper-half plane.\footnote{The argument is completely analogous if it were to be closed along the lower-half plane} This means that $f(z)/(z-x_0) \to 0$ fast enough as the radius of the semicircle goes to $R\to \infty$.\footnote{Remind yourself why `fast enough' is $1/R^2$ or faster.} Now the residue theorem tells us that
+\begin{align}
+	\int_{C(\gamma_\pm)} dz \; \frac{f(z)}{(z-x_0)} &= 2\pi i \sum_j \text{Res}_F(z_j)
+	&
+	F(z) = \frac{f(z)}{(z-x_0)} \ ,
+\end{align}
+where $j$ runs over the poles enclosed in $C(\gamma_\pm)$. When we take $\gamma_+$, this means that the poles do not include $x_0$. When we take $\gamma_-$, the poles do include $x_0$. The residue at $x_0$ is
+\begin{align}
+ 	\text{Res}_F(x_0) &= f(x_0) \ .
+\end{align}
+In general, we expect $f(z)$ to have its own poles off the real axis; if any of those poles simple and are enclosed then they contribute to the sum. Just remember that if $z_j$ is a simple pole of $f(z)$, then the relevant residue is $(z_j-x_0)^{-1}\text{Res}_f(z_j)$.\footnote{Take the time to remind yourself why this is true if it is not obvious.}
+
+\paragraph{Little semi-circles.}
+The next step is to identify what the $\gamma_\pm$ integrals give. We may use the parameterization $z=x_0+\varepsilon e^{i\theta}$ to write
+\begin{align}
+	\int_{\gamma_+} dz \; \frac{f(z)}{(z-x_0)}
+	&=
+	\int_{\pi}^0 i\varepsilon e^{i\theta} d\theta \frac{f\left(x_0+\varepsilon e^{i\theta}\right)}{\varepsilon e^{i\theta}}
+	=
+	-i \pi f(x_0) \ .
+\end{align}
+We went ahead and took the $\varepsilon\to 0$ limit, implicitly using the analyticity of $f(z)$ at $z=x_0$. Similarly, if we used $\gamma_-$ as part of our contour,
+\begin{align}
+	\int_{\gamma_-} dz \; \frac{f(z)}{(z-x_0)}
+	&=
+	\int_{\pi}^{2\pi} i\varepsilon e^{i\theta} d\theta \frac{f\left(x_0+\varepsilon e^{i\theta}\right)}{\varepsilon e^{i\theta}}
+	=
+	+i \pi f(x_0) \ .
+\end{align}
+
+\paragraph{Putting it all together.}
+We may then write \eqref{eq:cauchy:contour} as
+\begin{align}
+	\int_{C(\gamma_\pm)} dz \; \frac{f(z)}{(z-x_0)} &= 
+	\mathcal P
+	\int_{-\infty}^\infty dx\, \frac{f(x)}{x-x_0}
+	+
+	\int_{\gamma_\pm} dz \; \frac{f(z)}{(z-x_0)}
+\end{align}
+so that
+\begin{align}
+	\mathcal P
+	\int_{-\infty}^\infty dx\, \frac{f(x)}{x-x_0}
+	&=
+	2\pi i \sum_j \left.\text{Res}_F(z_j)\right|_{C_\pm}
+	\pm i \pi f(x_0) \ ,
+	\label{eq:cauchy:principal:wrt:residues}
+\end{align}
+where we remind ourselves that the choice of contour ($\pm$) determines both the sign of the $\mp i \pi f(x_0)$ term \emph{and} whether or not the pole $z=x_0$ is enclosed by $C_\pm$. 
+\begin{exercise}
+Confirm that the right-hand side of \eqref{eq:cauchy:principal:wrt:residues} is independent of whether one closes the contour with $\gamma_+$ or $\gamma_-$.
+\end{exercise}
+
+\paragraph{Cauchy principal value and the $i\varepsilon$ notation.} %see Cohen.
+
+Let us continue to assume that the contour $C$ is closed by an arc in the upper-half plane.\footnote{Recall that this amounts to an assumption about the convergence of $F(z)$ as $z\to Re^{i\theta}$ for large $R$ and $0 < \theta < \pi$.}
+It is clear that closing the contour $C(\gamma_+)$ with $\gamma_+$ corresponds to excluding the pole at $z=x_0$ from the sum of residues. This means it is equivalent to a contour with the uninterrupted entire real axis $C_0$ for a modified integrand where the pole has been pushed downward:
+\begin{align}
+	\int_{C(\gamma_+)} dz \, \frac{f(z)}{z-x_0}
+	=
+	\lim_{\varepsilon\to 0}
+	\int_{C_0} dz \, \frac{f(z)}{z-(x_0-i\varepsilon)} \ .
+\end{align}
+Similarly, for the contour $C(\gamma_-)$ with $\gamma_-$, the integral is equivalent to the contour that includes the uninterrupted real axis $C_0$ for a modified integrand where the pole is pushed upward into the contour:
+\begin{align}
+	\int_{C(\gamma_-)} dz \, \frac{f(z)}{z-x_0}
+	=
+	\lim_{\varepsilon\to 0}
+	\int_{C_0} dz \, \frac{f(z)}{z-(x_0+i\varepsilon)} \ .
+\end{align}
+This gives a way to write \eqref{eq:cauchy:principal:wrt:residues} independently of the $\gamma_\pm$:
+\begin{align}
+	\mathcal P
+	\int_{-\infty}^\infty dx\, \frac{f(x)}{x-x_0}
+	&=
+	% 2\pi i \sum_j \left.\text{Res}_F(z_j)\right|_{C_\pm}
+	\lim_{\varepsilon\to 0}
+	\int_{C_0} dz \, \frac{f(z)}{z-(x_0\mp i\varepsilon)} \ 
+	% \mp i \pi \int dx\; f(x) \delta(x-x_0) \ .
+	\pm i \pi f(x_0) \ .
+\end{align}
+Recalling that the contour integral over $C_0$ is really just the integral along the real line plus a vanishing integral over the arc, we may write the right-hand side as a real integral:
+\begin{align}
+	\mathcal P
+	\int_{-\infty}^\infty dx\, \frac{f(x)}{x-x_0}
+	&=
+	% 2\pi i \sum_j \left.\text{Res}_F(z_j)\right|_{C_\pm}
+	\lim_{\varepsilon\to 0}
+	\int_{-\infty}^\infty dx\; f(x)\left[
+		\frac{1}{x-(x_0\mp i\varepsilon)} \ 
+		\pm i \pi   \delta(x-x_0) 
+	\right] 
+	 \ .
+\end{align}
+We see that a procedure for making sense of a real integral over a singularity gives us an expression that contains an imaginary part. This is often written at the level of \emph{distributions} as
+\begin{align}
+	\left.\frac{1}{x-x_0}\right|_P
+	&= 
+	\lim_{\varepsilon\to 0}
+		\frac{1}{x-(x_0\mp i\varepsilon)} \ 
+		\pm i \pi   \delta(x-x_0) \ .
+		\label{eq:cauchy:principal:as:distribution}
+\end{align}
+By distribution we mean that the object \emph{only} makes sense in an integral, most likely being multiplied against another function. You already know that this expression only makes sense as a distribution because there's a `naked' $\delta$ function, and those things do not make sense outside of an integral. The $\left.\right|_P$ means principal value, that is: remember to put the $\mathcal P$ when you perform the integral. 
+
+\subsection{Cauchy Principal Value + Cauchy Integral Representation}
+
+Remember the Cauchy integral formula, \eqref{eq:cauchy:integral}? This told us that if a function $f$ is analytic around some point $z$, then we can express $f(z)$ as a contour integral around $z$:
+\begin{align}
+	f(z) = \frac{1}{2\pi i}\oint dz' \frac{f(z')}{(z'-z)} \ .
+\end{align}
+We first introduced this formula as a stepping stone to deriving the residue theorem. Now we have returned to the integral formula due to its striking resemblance to the integrals that popped up when describing principal values.
+
+Suppose we want to take the limit where $z$ is the complexification of a real (physical) quantity. That is to say, we want to take the limit $z\to x$. For concreteness, let's assume that the physical limit is
+\begin{align}
+	z = \lim_{\varepsilon\to 0} x + i\varepsilon \ ,
+\end{align}
+so that $z$ approaches the real axis from above. This may be the case due to causality with our choice of sign conventions, as we saw for the harmonic oscillator Green's function.\footnote{You may be confused why we're approaching the real axis from above. We argued in the harmonic oscillator case that a causal theory has the poles pushed below the real axis---at least with our sign conventions for the Fourier transform. Because the physical pole approaches the real axis from below, we know that the function $f(x)$ is analytic in the region above (and in principle including) the real axis.} The relevant sign for the Cauchy principal value expression \eqref{eq:cauchy:principal:as:distribution} is
+\begin{align}
+	\lim_{\varepsilon\to 0} \frac{1}{x'-(x+i\varepsilon)}
+	=
+	\left.
+	\frac{1}{x'-x}\right|_P
+	+ i\pi \delta(x'-x) \ , 
+\end{align}
+where we've been careful with the choice of variable names.
+\begin{exercise}
+Write this expression for the case where the physically relevant limit approaches the real axis from above.
+\end{exercise}
+Let us now plug this into the Cauchy integral representation for $z = x-i\varepsilon$. Assume that $f(z)$ has all the usual convergence requirements\footnote{Pop quiz: what are these requirements? Ultimately there's a real integral that we have analytically continued into the complex plane. We want the integrand along the large arc around the lower-half plane to vanish.}
+\begin{align}
+	f(z) &= \frac{1}{2\pi i}\oint dz' \frac{f(z')}{z' - (x+i\varepsilon)}
+	\\
+	&=
+	\frac{1}{2\pi i} 
+	\left[	
+		\mathcal P \int_{-\infty}^\infty dx \, 
+		\frac{f(x')}{x'-x}
+		-
+		i\pi \int_{-\infty}^\infty dx \, f(x')\delta(x'-x)
+	\right]
+	\\
+	&=
+	\frac{1}{2\pi i} 
+		\mathcal P \int_{-\infty}^\infty dx \, 
+		\frac{f(x')}{x'-x}
+		-\frac{1}{2}f(x) \ .
+\end{align}
+Simplifying this expression gives
+\begin{align}
+	f(x) &= \frac{1}{\pi i} 
+		\mathcal P \int_{-\infty}^\infty dx 
+		\, \frac{f(x')}{x'-x} \ .
+\end{align}
+This is now rather surprising! At this point, we have written everything in terms of the function $f(x)$ evaluated for \emph{real} arguments. Nothing in the integral along the real axis introduces any additional `imaginary-ness' to the right-hand side. However, there is this pernicious factor of $i$ on the right-hand side that seems to mix up the real and imaginary parts of $f$. To see this explicitly, write $f(x) = u(x) + i v(x)$. Then we have
+\begin{align}
+	u(x) &= \frac{1}{\pi}
+	\mathcal P \int_{-\infty}^\infty dx 
+		\, \frac{v(x')}{x'-x} 
+		&
+	v(x) &= -\frac{1}{\pi}
+	\mathcal P \int_{-\infty}^\infty dx 
+		\, \frac{u(x')}{x'-x} 
+	\ .
+\end{align}
+To spell it out explicitly, we have the \textbf{Kramers--Kronig dispersion relations} (a name we justify below):
+\begin{align}
+	\text{Re}~f(x) &= \frac{1}{\pi}
+	\mathcal P \int_{-\infty}^\infty dx 
+		\, \frac{\text{Im}~f(x')}{x'-x} 
+		&
+	\text{Im}~f(x) &= -\frac{1}{\pi}
+	\mathcal P \int_{-\infty}^\infty dx 
+		\, \frac{\text{Re}~f(x')}{x'-x} 
+	\ .
+\end{align}
+The remarkable observation is that the real and imaginary parts of the function $f$ are determined by one another through a principal value integral. The only assumption we made about $f$ is that it is is analytic just above the real line because the physical poles approach the real line from the lower half plane due to causality.
+
+\subsection{Example: Dielectric Media}
+
+
+
+
+\flip{In Progress.}
+
+
+
