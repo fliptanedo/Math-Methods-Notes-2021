@@ -1336,9 +1336,9 @@ Construct the following contour integral:
  	+ \int_{\text{arc}} dz \, z^{1/3} F(z)
  	+ \int_\infty^0 dx \left(x e^{2\pi i}\right)^{1/3} F\left(e^{2\pi i} x\right) \ .
  \end{align}
- The left-hand side is simple to evaluate with the residue theorem and will depend on the poles of the unspecified function $F(z)$. On the right-hand side, the integral along the arc vanishes by the assumptions we've made about $F(z)$ becoming exponentially small for large arguments, $|z|=R\gg 1$.  Finally, we notice that the third term on the right-hand side we've written $z=xe^{2\pi i}$; this is critical since it includes the phase that $z$ picks up when traversing the large circular path. Since $F(z)$ is meromorphic, we may simply replace $F(x\exp(2\pi i)) \to F(x)$. However, the $z^{1/3}$ needs some care. We find:
+ The left-hand side is simple to evaluate with the residue theorem and will depend on the poles of the unspecified function $F(z)$. On the right-hand side, the integral along the arc vanishes by the assumptions we've made about $F(z)$ becoming exponentially small for large arguments, $|z|=R\gg 1$.  Finally, we notice that the third term on the right-hand side we've written $z=xe^{2\pi i}$; this is critical since it includes the phase that $z$ picks up when traversing the large circular path. Since $F(z)$ is meromorphic, we may simply replace $F(x\exp(2\pi i)) \to F(x)$. However, the $z^{1/3}$ needs some care. Writing $f(z)\equiv z^{1/3}F(z)$, We find:
  \begin{align}
- 	2\pi i \sum_{j=\text{poles}}  \text{Res}_{z^{1/3}F(z)}(z_j)
+ 	2\pi i \sum_{j=\text{poles}}  \text{Res}_{f(z)}(z_j)
  	=
  	\left(1-e^{2\pi i/3}\right) \int_0^\infty dx\,  x^{1/3} F(x) \ .
  \end{align}
@@ -1347,7 +1347,7 @@ The $-e^{2\pi i/3}$ came from the $1/3$-power of the phase. The minus sign comes
 	\int_0^\infty dx \, x^{1/3}F(x)
 	&= 
 	\left(1-e^{2\pi i/3} \right)^{-1}
-	2\pi i \sum_{j=\text{poles}}  \text{Res}_{z^{1/3}F(z)}(z_j) \ .
+	2\pi i \sum_{j=\text{poles}}  \text{Res}_{f(z)}(z_j) \ .
 \end{align}
 Two important notes:
 \begin{enumerate}
@@ -1360,6 +1360,58 @@ Choose a function $F(x)$ that satisfies the requirements to use the residue theo
 \begin{exercise}
 Check the result for $F(x) = e^{-x}/(x^2+1)$. Does it work? If not, why not?
 \end{exercise}
+
+\begin{example} \textbf{Unparticles.}
+Here's an actual example from something called \emph{unparticle physics}\footnote{\url{https://arxiv.org/abs/hep-ph/0703260}}. In 2006 Howard Georgi proposed that rather than particles with unique masses, a theory could have states with a continuum of masses so that the theory is scale-invariant. Perhaps in part due to its silly name, the unparticle idea has largely been subsumed into the study of conformal dynamics using tools like the \acro{AdS/CFT} correspondence.
+
+The momentum-space Green's function for a particle of mass $m$ takes the form
+\begin{align}
+	\tilde G(p) = \frac{1}{p^2 - m^2 + i\varepsilon} \ ,
+\end{align}
+where here $p^2$ is the four-momentum squared and $m^2$ is the mass of the particle. In the next section you will recognize this as the Green's function for a harmonic oscillator $p^2$ replaced by the angular frequency $\omega^2$ and $m^2$ replaced by the resonant angular frequency $\omega_0^2$. A scale-invariant `unparticle' is characterized by its scaling dimension $d$ and has a Green's function that is an integral over the possible masses:
+\begin{align}
+	\tilde G(p) &= \int_0^{\infty} d\mu^2
+	\frac{(\mu^2)^{d-2}}{p^2 - \mu^2 + i\varepsilon}
+	\ .
+\end{align}
+We can perform this integral using the residue theorem with some modest assumptions about $d$ to ensure convergence. In general, $d$ is non-integer and therefore this integral has a branch cut. For convenience, we take the branch cut just below the positive real axis.  We observe that the integration variable is $z \equiv \mu^2$. There is a simple pole at $z = p^2+i\varepsilon$; owing to the $+i\varepsilon$ it is formally off of the cut. The significance of this $i\varepsilon$ is addressed below, but for now we may take $\varepsilon\to 0$ once we are convinced that the pole is formally separated from any cuts or contours.
+
+The residue theorem tells us that
+\begin{align}
+	\oint_\text{pacman} {dz} \frac{-z^{d-2}}{z-(p^2+i\varepsilon)}
+	&=
+	\left(1-e^{2\pi i(d-2)}\right) \tilde G(p) \ ,
+\end{align}
+where we assume that $d < 2$ so that the integrals along the arc converge to zero. The residue at $z=p^2$ is 
+\begin{align}
+	\text{Res}_f(p^2) =& -(p^2)^{d-2} 
+	&
+	f(z)\equiv 
+	\frac{-z^{d-2}}{z-p^2} \ .
+\end{align}
+Applying the residue theorem to perform the contour integral then gives us
+\begin{align}
+	\tilde G(p) &= \left(1-e^{2\pi i(d-2)}\right)^{-1} (2\pi i) (-) (p^2)^{d-2}  \ .
+\end{align}
+We would like to turn that prefactor into a sine. To do this, we write
+\begin{align}
+	1-e^{2\pi i(d-2)}
+	=
+	e^{\pi i(d-2)}\left(e^{-\pi i(d-2)}-e^{\pi i(d-2)}\right)
+	= -2i e^{\pi i(d-2)} \sin(\pi d) \ .
+\end{align}
+We used $e^{\pm\pi i(d-2)} = e^{\pm\pi id}$. Plugging this into $\tilde G(p)$ gives
+\begin{align}
+	\tilde G(p) &= 
+	\frac{\pi}{\sin(\pi d)}
+	e^{i\pi (d-2)}
+	(p^2)^{d-2}
+	\\
+	&	=
+	\frac{\pi}{\sin(\pi d)} (-p^2)^{d-2} \ .
+\end{align}
+Note the key step where an overall complex phase $e^{\pi i(d-2)}$ is absorbed into the $(p^2)^{d-2}$ factor as a sign.
+\end{example}
 
 % Converting the difference of exponentials into a sine gives
 % \begin{align}
