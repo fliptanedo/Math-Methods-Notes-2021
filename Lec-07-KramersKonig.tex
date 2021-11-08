@@ -391,18 +391,20 @@ You already know that $\chi(t<0)$ is zero, but this separation is instructive si
 \end{align}
 Now use the fact that the integral over all space of an odd times an even function vanishes. This means that the $\cos(\omega t)$ term only has non-zero integral when multiplying the $\chi_+(t)$ term, and similarly with $\sin(\omega t)$ with $\chi_-(t)$. Thus
 \begin{align}
-	\chi \omega &= 
+	\chi(\omega) &= 
 	\frac{1}{2}\int dt\, 
 	\cos(\omega t) \chi_+
 	+
 	\frac{i}{2}\int dt\, 
-	\sin(\omega t) \chi_+
+	\sin(\omega t) \chi_-
 	\equiv
-	\text{Re}[\chi(t)]
+	\text{Re}[\chi(\omega)]
 	+i
-	\text{Im}[\chi(t)] \ ,
+	\text{Im}[\chi(\omega)] \ ,
 \end{align}
-where we have explicitly identified the real and imaginary parts. There's an excellent graphic from Wikipedia\footnote{``Kramers--Kronig relations,'' image by user FDominec, \acro{CC BY-SA 3.0}.}:
+where we have explicitly identified the real and imaginary parts. That is to say: the real part is the piece that is \emph{even} in time and the odd part is the piece that is \emph{odd} in time. Both the even and odd pieces give acausal propagation, but when combined in equal parts, you have only causal propagation. The Kramers--Kr\"onig relation enforces causal propagation.
+
+There's an excellent graphic from Wikipedia\footnote{``Kramers--Kronig relations,'' image by user FDominec, \acro{CC BY-SA 3.0}.}:
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/Kramers_05_Fdominec.pdf}
 \end{center}
