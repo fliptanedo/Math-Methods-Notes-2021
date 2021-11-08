@@ -225,6 +225,7 @@ To spell it out explicitly, we have the \textbf{Kramers--Kronig dispersion relat
 	\mathcal P \int_{-\infty}^\infty dx 
 		\, \frac{\text{Re}~f(x')}{x'-x} 
 	\ .
+	\label{eq:KK:Cauchy:relations}
 \end{align}
 The remarkable observation is that the real and imaginary parts of the function $f$ are determined by one another through a principal value integral. The only assumption we made about $f$ is that it is is analytic just above the real line because the physical poles approach the real line from the lower half plane due to causality.
 
@@ -233,17 +234,182 @@ The step-function ($\Theta$) is 1 for arguments larger than 0 and is otherwise z
 \end{example}
 
 \subsection{Digression: Convolution Theorem}
+\label{sec:convolution:theorem}
+
+Suppose that the Fourier components of a function $f(t)$ is the product of the Fourier components of two other functions,
+\begin{align}
+	\tilde f(\omega) &= \tilde g(\omega) \tilde h(\omega) \ .
+\end{align}
+The convolution theorem relates the function $f(t)$ to $g(t)$ and $h(t)$. The trick is to insert 1 in a clever representation.\footnote{This may be the theme of the course: this is how you convert units, it is also how you project onto a different basis.} The particular representation of one is\footnote{We're breaking our conventions for taking a Fourier transform versus an inverse Fourier transform. However, because we end up doing both a Fourier and an inverse Fourier transform, the result is fully consistent.} 
+\begin{align}
+	1
+	=\int d\omega' \delta(\omega'-\omega) 
+	= \int \dbar t' e^{-i(\omega'-\omega)t'} \ .
+\end{align}
+Here's how it works:
+\begin{align}
+	f(t) &= \int \dbar \omega \, e^{-i\omega t}\, \tilde g(\omega) \tilde h(\omega)
+	\\ 
+	&= \int \dbar \omega  \, e^{-i\omega t} \tilde g(\omega)\, d\omega' \delta(\omega'-\omega) \tilde h(\omega')
+	\\ 
+	&= \int \dbar \omega d\omega' \dbar t'  \, e^{-i(\omega'-\omega)t'}e^{-i\omega t}\,  \tilde g(\omega)\tilde h(\omega')
+	\\ 
+	&= \int \dbar \omega  \dbar\omega' d t'  \, e^{-i\omega(t-t')}e^{-i\omega' t'}\,  \tilde g(\omega)\tilde h(\omega')
+	\\ 
+	&= \int dt'  \, g(t-t') h(t') \ .
+	\label{eq:convolution:theorem:fourier}
+\end{align}
+You have already seen that Green's functions in time depend on the difference of the source and observation times, $G(t,t') = G(t-t')$.\footnote{Can you trace back why this is true?} The manipulation above shows that if $\tilde f(\omega) = \tilde g(\omega)\tilde h(\omega)$, then we may interpret one of $g$ or $h$ as a source and the other as a Green's function. Compare \eqref{eq:convolution:theorem:fourier} to our solution to $\mathcal O\psi = s$:
+\begin{align}
+	\psi(t) &= \int dt' \, G(t-t') s(t') \ .
+\end{align}
 
 
-j
-Suppose $f(x) = g(x)h(x)$. Then the Fourier transform is
-% https://doi.org/10.1119/1.15901
+
 \subsection{Example: Dielectric Media}
 
+\paragraph{Brief review of electrostatics.}
+A dialectric medium is one where there are bound charges that have some freedom to delocalize. When you subject the medium to an electric field, the charges separate a bit and polarize the medium.
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Kramers_01.pdf}
+\end{center}
+
+We can split the charge density $\rho$ into free charges and bound charges so that the relevant Maxwell equation is:
+\begin{align}
+	\nabla \cdot \vec{E} &= 4\pi (\rho_\text{free} + \rho_\text{bound}) \ .
+\end{align}
+In turn, we may define the \textbf{polarization}, $\vec{P}$, with respect to the bound charge as the electric field sourced by the charge:
+\begin{align}
+	\rho_{\text{bound}} \equiv - \nabla \cdot\vec{P} \ .
+\end{align}
+This is a \emph{response} field to the initial electric field $\vec E$. Rearranging this gives
+\begin{align}
+	\nabla \cdot (\vec{E} + 4\pi \vec{P}) = 4\pi \rho_\text{free} \ .
+\end{align}
+We sometimes identify the dielectric displacement $\vec{D} \equiv \vec{E} + 4\pi \vec{P}$. For electric fields that are not too strong,\footnote{Can you explain on physical principles what `too strong' means? When does this model break down?}, many materials have the polarization parallel to the electric field:\footnote{You should appreciate why this is the `obvious' thing and reflect on what it would take for a material \emph{not} to obey this.}
+\begin{align}
+	\vec{P} \equiv \chi \vec{E} \ ,
+	\label{eq:KK:polarization}
+\end{align}
+where we have defined the constant of proportionality to be $\chi$, the electric susceptibility. One may define the permittivity $\varepsilon \equiv 1+4\pi\chi$ so that it is the proportionality between the dielectric displacement and the electric field: $\vec{D} = \varepsilon \vec{E}$.
+
+\paragraph{Waves through a medium.} Now let's imagine what happens when an electromagnetic wave passes through the medium. For our purposes, the wave is just a time dependence on the electric field, $\vec{E}(t)$.\footnote{And you should appreciate how much we're sweeping under the rug here.} The key point is that the susceptibility is \emph{frequency-dependent} $\chi(\omega)$. This should be clear to you intuitively: the microphysics of bound charges react to the changing electric field with respect to some characteristic time scale. It is a harmonic oscillator, after all.
 
 
+In fact, we may write \eqref{eq:KK:polarization} as
+\begin{align}
+	\vec{P}(\omega) &= \chi(\omega) \vec E(\omega) \ .
+	\label{eq:KK:P:XE}
+\end{align}
+The $\vec{P}(\omega)$, $\chi(\omega)$, and $\vec{E}(\omega)$ written here are the Fourier components of functions of time, $\vec{P}(t)$, $\chi(t)$, and $\vec{E}(t)$. Forgive me for not indicating tildes ($\tilde \chi$), hopefully making the arguments explicit will avoid confusion.
 
-\flip{In Progress.}
+
+Let's be clear what we're doing: we want to treat the medium as some homogeneous background. In this background, the speed of light happens to be a bit slower: $v < c$. We define the ratio of the speed of light in vacuum to the speed of light in the homogeneous medium, $n = c/v$, the index of refraction. This is related to the microphysics by $n = \sqrt{\varepsilon\mu}$. For a pure dielectric (no magnetic funny business so $\mu=1$ in appropriate units), this is simply $n=\sqrt{\varepsilon} = \sqrt{1+4\pi\chi}$. What we're saying is that we \emph{know} that there's microphysics (bound charge) that does something weird. We also \emph{know} that fundamentally the speed of light is $c=1$. However, dealing with an Avogadro's number of bound charges is a pain. Instead, we realize that we can \emph{model} the complicated system of bound charges with respect to a susceptibility $\chi(\omega)$. This is an example of an effective theory, an idea that underscores everything that we do in physics.\footnote{Remember: we work with models. Good models are reasonable approximations with well defined limits where they are no longer good approximations. Do not confuse the model with nature, which is the complicated system that we're trying to approximate.}
+
+Let's ignore polarization for this discussion. That's not where the key feature is. An electromagnetic wave of some polarization propagates as
+\begin{align}
+	\vec E(x,t) \sim \vec{E}_0 e^{ikx - i\omega t} \ .
+\end{align}
+For simplicity we assume a plane wave moving in the $x$ direction so we ignore the $y$ and $z$ dependence. The momentum/wave number $k$ is related to the angular frequency/energy by $k = \omega/v$, where $v$ is the velocity of the wave in units of $c$.
+\begin{exercise}
+Confirm for yourself that it is `obvious' that $v = \omega/k$ is the wave velocity. You can start with dimensional analysis, then remind yourself what $k$ and $\omega$ mean physically for a propagating wave.
+\end{exercise}
+Plugging in the susceptibility gives 
+\begin{align}
+	\vec E(x,t) \sim \vec{E}_0 e^{i\sqrt{1+4\pi \chi}x - i\omega t} \ .
+\end{align}
+Implicit here is the assumption that $\chi(\omega)$ is a real number. Perhaps it is not. However, it certainly has a real part. $\text{Re}[\chi(\omega)]$ is the \textbf{dispersion} of the medium. It gives the frequency-dependence of the index of refraction $n\sim v^{-1}$. This frequency dependence tells us how prisms and rainbows work according to Snell's law.
+
+If there is an imaginary part, $\text{Im}[\chi(\omega)]$, it corresponds to \textbf{dissipation}. It's a damping of the wave at a given frequency. Writing
+\begin{align}
+	k = \frac{\omega}{v} = k_R + i \kappa \ ,
+\end{align}
+we have the expression for a dissipative wave:
+\begin{align}
+	\vec E(x,t) \sim \vec{E}_0 e^{-\kappa x} e^{ik_Rx - i\omega t} \ .
+\end{align}
+
+\paragraph{Kramers--Kr\"onig.} Let us now pull in two observations:
+\begin{enumerate}
+\item The susceptibility as a function of time, $\chi(t)$, is a Green's function. We can see this because \eqref{eq:KK:P:XE} tells us that $\vec{P}(\omega) = \chi(\omega \vec{E}(\omega))$ and we know from the convolution theorem in Section~\ref{sec:convolution:theorem} that this means $\vec{P}(t) = \int dt' \chi(t-t')\vec{E}(t)$, which is precisely the form of a Green's function solution to the polarization response to an external electric field $\vec{E}$.
+\item We may invoke the Kramers--Kr\"onig relations \eqref{eq:KK:Cauchy:relations} to relate the real and imaginary parts of $\chi(\omega)$.
+\end{enumerate}
+Recall that the Kramers--Kr\"onig relations relate the real part of an analytic function on the real line to a principal value integral of the imaginary part of the function (and vice versa with `real' $\leftrightarrow$ `imaginary'). 
+
+Is the susceptibility analytic? We know that physics is causal. So in the so-called time domain, $\chi(t)\sim \Theta(t)$. That is, $\chi(t<0)=0$. We want the retarded Green's function where the polarization is \emph{caused by} the external field $\vec{E}(t)$. The system may lag in its response to the external field---and indeed, this is the nature of the slower speed of light in the medium---but it may not \emph{anticipate} the electric field. This causality is imposed by an $i\varepsilon$ prescription on the poles of the Fourier integrand, just as we saw for the harmonic oscillator.\footnote{You can stop to think about why the bound charges really are harmonic oscillators.} Causality tells us that the poles are in the lower half plane (perhaps infinitesimally), so that the integral along and above the real line is analytic. Then the Kramers--Kr\"onig relations tell us
+\begin{align}
+	\text{Re}\left[\chi(\omega)\right]
+	&=
+	\frac{i}{\pi} \mathcal P \int d\omega' \frac{\text{Im}\left[\chi(\omega)\right]}{\omega'-\omega}
+	\\
+	\text{Im}\left[\chi(\omega)\right]
+	&=
+	\frac{-i}{\pi} \mathcal P \int d\omega' \frac{\text{Re}\left[\chi(\omega)\right]}{\omega'-\omega} \ .
+\end{align}
+Since $k=\sqrt{1+4\pi\chi}$, the real and imaginary parts of $\chi$ determine the dispersion (rainbows) and the dissipation (absorption) of the medium. Evidently, these two properties of a medium are not independent from one another. 
+
+\begin{example}
+You may wonder what this is good for. As a theorist, I certainly wonder this. It turns out that measuring the index of refraction is usually challenging. On the other hand, measuring absorption can be simpler: you just measure how much energy comes out of a material compared to how much energy went in. In this way, by measuring the absorption you can measure everything there is to know about the susceptibility of the material.
+\end{example}
+
+\begin{example}
+This shows up in quantum mechanics and quantum field theory as the optical theorem. By calculating the amplitude for a particle to `fall out' of a particular Hilbert space due to decay into other particles, you also calculate corrections from virtual particles to its propagation. When you see this in quantum mechanics, you may stop a moment to think: ``it's odd that we're taking the imaginary part of this function.'' If you are too quick, you may dismiss this as quantum mechanics being strange because everything is complex. However, if you are cautious, you'll realize that we're really invoking cousins of the Kramers--Kr\"oning relations.
+\end{example}
+
+\paragraph{Why this has to be true.} He's a plausibility argument\footnote{Full disclosure: I learned this on \emph{Wikipedia}.} Imagine that you have some medium that you shine a Gaussian wavepacket of light into. By Gaussian I mean you shine a pulse of some duration that has the shape of a bell-curve in $t$:
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Kramers_02.pdf}
+\end{center}
+The vertical axis is the field amplitude. As you know, the Fourier transform of a Gaussian is a Gaussian. So the pulse is a Gaussian in frequency space as well. 
+
+Now suppose that this material had a magical property: it \emph{perfectly} absorbs \emph{one} frequency of light: $\omega_\times$. If you want to be realistic you can imagine some tiny-but-finite width around $\omega_\times$. Further, let's assume that there is no dispersion---it's a magical material for which all frequencies of light travel at the same velocity, except frequencies around $\omega_\times$ which do not propagate at all. This means that the electromagnetic wave \emph{after} passing through the material has a $\delta$-function gap in it at $\omega_\times$:
+\begin{center}
+\includegraphics[width=.5\textwidth]{figures/Kramers_03.pdf}
+\end{center}
+By linearity, we can think about this as a Gaussian plus a $\delta$-function spike:
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Kramers_04.pdf}
+\end{center}
+
+Now we have a problem. The Fourier transform is also linear, so we can Fourier transform each component. The Gaussian in $\omega$ becomes another Gaussian in $t$. However, the $\delta$-function in $\omega$ becomes a \emph{flat distribution} in $t$! Remember Heisenberg's uncertainty relation? This is it: if you localize in one variable, you maximally delocalize in a conjugate variable. This should really bother you: this $-\delta(\omega-\omega_\times)$ spike gives contributions from $t<0$ to $\vec{E}_\text{after}(t)$! What do we make of this apparent paradox?
+
+
+There is a nice resolution in terms of odd and even parts of $\chi$ with respect to time reversal. Let us define
+\begin{align}
+	\chi_+ &= \frac{1}{2}\left[\chi(t) + \chi(-t)\right]
+	\\
+	\chi_- &= \frac{1}{2}\left[\chi(t) - \chi(-t)\right] \ .
+\end{align}
+You already know that $\chi(t<0)$ is zero, but this separation is instructive since the above analysis seems to be probing $t<0$. Let's go to momentum space with the inverse Fourier transform:
+\begin{align}
+	\chi(\omega) &= \int dt\,  e^{i\omega t} \, \chi(t)
+	\\
+	&=
+	\int dt\,  \left[\cos(\omega t)+i\sin(\omega t)\right] 
+	\, \frac{1}{2}\left[\chi_+(t)+ \chi_-(t)\right] \ .
+\end{align}
+Now use the fact that the integral over all space of an odd times an even function vanishes. This means that the $\cos(\omega t)$ term only has non-zero integral when multiplying the $\chi_+(t)$ term, and similarly with $\sin(\omega t)$ with $\chi_-(t)$. Thus
+\begin{align}
+	\chi \omega &= 
+	\frac{1}{2}\int dt\, 
+	\cos(\omega t) \chi_+
+	+
+	\frac{i}{2}\int dt\, 
+	\sin(\omega t) \chi_+
+	\equiv
+	\text{Re}[\chi(t)]
+	+i
+	\text{Im}[\chi(t)] \ ,
+\end{align}
+where we have explicitly identified the real and imaginary parts. There's an excellent graphic from Wikipedia\footnote{``Kramers--Kronig relations,'' image by user FDominec, \acro{CC BY-SA 3.0}.}:
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/Kramers_05_Fdominec.pdf}
+\end{center}
+What we see in this figure is that the relation between the real and imaginary parts of $\chi(t)$ are precisely what forces $\chi(t<0) = 0$. In frequency space, one cannot simply posit that one frequency is absorbed without any implication on the dispersion of other frequencies. This would violate causality. The resolution to our paradox is that we cannot have a magical material that only absorbs in one frequency \emph{without} causing dispersion. We had stated this assumption with the [wrong] understanding that dispersion and disspation are independent properties that we can tune with microphysics. Evidently, one cannot construct a material whose polarizability is `stiff' to only one frequency without introducing a frequency-dependence to the speed of light across other frequencies.
+
+
+\flip{In Progress. To do: fourier transform of Theta function.}
 
 
 
