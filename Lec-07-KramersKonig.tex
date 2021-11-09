@@ -1,6 +1,6 @@
 %!TEX root = P231_notes.tex
 
-\section{Kramers--Kronig [optional]}
+\section{Kramers--Kr\"onig and Principal Value [optional]}
 % \lecdate{lec~12}
 % 2017 Lec 17ish
 
@@ -39,16 +39,19 @@ In other words, you simply integrate everywhere except the pole along the real a
 \paragraph{Relation to a contour.} We can now connect to complex analysis. Suppose $f(x)$ is well behaved enough that we can imagine integrating $f(z)/(z-x_0)$ along a closed contour with the integral along the ``arc at infinity'' (either in the upper or lower half plane) going to zero. Then we can write the following:
 \begin{align}
 	\int_{C(\gamma_\pm)} dz \; \frac{f(z)}{(z-x_0)} &= 
-	\int_{-\infty}^{x_0-\varepsilon} dx\, \frac{f(x)}{x-x_0}
-	+
-	\int_{x_0+\varepsilon}^\infty dx\, \frac{f(x)}{x-x_0}
+	% \int_{-\infty}^{x_0-\varepsilon} dx\, \frac{f(x)}{x-x_0}
+	% +
+	% \int_{x_0+\varepsilon}^\infty dx\, \frac{f(x)}{x-x_0}
+	\left(\int_{-\infty}^{x_0-\varepsilon} 
+	 	 	+
+	 	 	\int_{x_0+\varepsilon}^\infty\right)  \frac{f(x) dx}{x-x_0}
 	+
 	\int_{\gamma_\pm} dz \; \frac{f(z)}{(z-x_0)}
 	+
 	\int_{\text{arc}} dz \; \frac{f(z)}{(z-x_0)} \ .
 	\label{eq:cauchy:contour}
 \end{align}
-By assumption, the last term goes to zero. The first two terms are the Cauchy principal value when $\varepsilon\to 0$. The third term along contour $\gamma$ is a small semicircle of radius $\varepsilon$ that connects the two contours of the Cauchy principal value. It's a little semicircle that either goes just above ($\gamma_+$) or just below ($\gamma_-$) the real axis. Of course, you already realize the important point: the contour $C$ \emph{depends} on the choice of $\gamma_\pm$. This determines whether or not the point $z=x_0$ is inside or outside the contour.
+By assumption, the last term goes to zero. The first term is the Cauchy principal value when $\varepsilon\to 0$. The second term along contour $\gamma$ is a small semicircle of radius $\varepsilon$ that connects the two contours of the Cauchy principal value. It's a little semicircle that either goes just above ($\gamma_+$) or just below ($\gamma_-$) the real axis. Of course, you already realize the important point: the contour $C$ \emph{depends} on the choice of $\gamma_\pm$. This determines whether or not the point $z=x_0$ is inside or outside the contour.
 
 \paragraph{Residue Theorem.} Let us assume that the integrand $f(z)/(z-x_0)$ is such that one can close the integral along the upper-half plane.\footnote{The argument is completely analogous if it were to be closed along the lower-half plane} This means that $f(z)/(z-x_0) \to 0$ fast enough as the radius of the semicircle goes to $R\to \infty$.\footnote{Remind yourself why `fast enough' is $1/R^2$ or faster.} Now the residue theorem tells us that
 \begin{align}
@@ -371,6 +374,7 @@ By linearity, we can think about this as a Gaussian plus a $\delta$-function spi
 \begin{center}
 \includegraphics[width=.7\textwidth]{figures/Kramers_04.pdf}
 \end{center}
+\flip{The inverse Fourier transform of $\delta(\omega-\omega_\times)$ is a sine wave, not a straight line. Duh. The coefficient of $e^{-i\omega_\times t}$ is unity, but the function $1\times e^{-i\omega_\times t}$ is obviously not a flat line.}
 
 Now we have a problem. The Fourier transform is also linear, so we can Fourier transform each component. The Gaussian in $\omega$ becomes another Gaussian in $t$. However, the $\delta$-function in $\omega$ becomes a \emph{flat distribution} in $t$! Remember Heisenberg's uncertainty relation? This is it: if you localize in one variable, you maximally delocalize in a conjugate variable. This should really bother you: this $-\delta(\omega-\omega_\times)$ spike gives contributions from $t<0$ to $\vec{E}_\text{after}(t)$! What do we make of this apparent paradox?
 
@@ -411,7 +415,151 @@ There's an excellent graphic from Wikipedia\footnote{``Kramers--Kronig relations
 What we see in this figure is that the relation between the real and imaginary parts of $\chi(t)$ are precisely what forces $\chi(t<0) = 0$. In frequency space, one cannot simply posit that one frequency is absorbed without any implication on the dispersion of other frequencies. This would violate causality. The resolution to our paradox is that we cannot have a magical material that only absorbs in one frequency \emph{without} causing dispersion. We had stated this assumption with the [wrong] understanding that dispersion and disspation are independent properties that we can tune with microphysics. Evidently, one cannot construct a material whose polarizability is `stiff' to only one frequency without introducing a frequency-dependence to the speed of light across other frequencies.
 
 
-\flip{In Progress. To do: fourier transform of Theta function.}
+\subsection{Fourier Transform of the Step Function}
+% Following Appel section 11.1e
+
+Our goal is to find the Fourier transform of the Heaviside step function, $\Theta(t)$. It turns out this has a nice representation with respect to principal values. A nice alternative derivation of the Kramers--Kr\"onig relations\footnote{"Kramers–Kronig in two lines," Ben Hu, \emph{American Journal of Physics} \textbf{57}, 821 (1989)} uses the Fourier transform of $\Theta(t)$, so it may be nice to see how one derives this.
+
+\paragraph{A reminder about distributions.}
+We've been a little glib about taking Fourier transforms of distributions. Remember that {distributions} are not quite functions. Just like relativists say that there's no such thing as a naked singularity and particle physicists say that there's no such thing as a free quark in a vacuum, there is no such thing as a $\delta$-function floating around without an integral. The integral may be implicit, but it is \emph{always} integrated over. 
+
+
+
+\begin{example}
+What are the Fourier coefficients of $\delta(t)$? Our inverse Fourier transform formula is \eqref{eq:inverse:fourier:convention}:
+\begin{align}
+	\tilde f(\omega) = \int dt\, e^{i\omega t} f(t) \ ,
+\end{align}
+so that we have $\tilde\delta(\omega) = 1$.
+\end{example}
+
+\begin{example}
+What about the more nefarious object, the \emph{derivative} of a $\delta$-function? We simply have to integrate by parts to move that derivative off the $\delta$-function. 
+\begin{align}
+	\tilde \delta'(\omega) &= \int dt\, e^{i\omega t} \delta'(t)
+	= -\int dt\, \left[\frac{d}{dt}e^{i\omega t}\right] \delta(t)
+	= - i\omega \ .
+\end{align}
+\end{example}
+
+One distribution that's particularly helpful for encoding causality is the Heaviside step function, $\Theta(t)$ which is zero for $t<0$ and one for $t>0$. It is convenient to further define that $\Theta(0) = 1/2$. It is useful to note that the derivative of the step function is the Dirac $\delta$ function: $\Theta'(t) = \delta(t)$. Can you see how to prove this?
+\begin{example}
+Because $\Theta(t)$ is a distribution, it only makes sense in an integral. The same holds for its derivative, $\Theta'(t)$. Imagine an integral over a test function $f(t)$ and integrate by parts with some modest assumptions about the boundary conditions of $f(t)$:
+\begin{align}
+	\int dt\, \Theta'(t) f(t) = - \int dt\, \Theta(t) f'(t)
+	= f'(0) = \int dt\, \delta(t) f(t) \ . 
+\end{align}
+From this we identify $\Theta'(t) = \delta(t)$.
+\end{example}
+
+\paragraph{Fourier transform of the derivative of a distribution.} Given a distribution $p(t)$, one can find the Fourier components $\tilde p(\omega)$. What are the Fourier coefficients of the related distribution, $q(t) = p'(t)$? The Fourier transform of a distribution is, itself, a distribution. We may solve for $\tilde q(\omega)$ by integrating $\tilde q(\omega)$ over a test function:
+\begin{align}
+	\int d\omega\, \tilde q(\omega) \tilde f(\omega)
+	&= 
+	\int d\omega \left[dt\, q(t) e^{i\omega t}\right] \tilde f(\omega)
+	\\	
+	&= 
+	\int d\omega dt\, q(t) \left[e^{i\omega t}  \tilde f(\omega)\right]
+	\\	
+	&= 
+	\int d\omega dt\, \frac{d}{dt}p(t) \left[e^{i\omega t}  \tilde f(\omega)\right]
+	\\
+	&= 
+	-\int d\omega dt\, p(t) (i\omega) e^{i\omega t}  \tilde f(\omega)
+	\\
+	&= 
+	\int d\omega\, (-i\omega) \left[dt\,  p(t)  e^{i\omega t}\right]  \tilde f(\omega)
+	\\
+	&= 
+	\int d\omega\, (-i\omega) \tilde p(\omega)  \tilde f(\omega) \ .
+\end{align}
+Comparing the first and last lines, we have
+\begin{align}
+	\tilde{p'}(\omega) = -i\omega \, \tilde p(\omega) \ .
+	\label{eq:FT:Dist:derivative}
+\end{align}
+
+
+
+
+\paragraph{Principal values and distributions.}
+What does all of this have to do with principal values? The Fourier transform of the step function contains a principal value distribution. To see this, we must build up some useful background.
+
+First: if you know that $t\, p(t)=0$ for some distribution $p(t)$, then you must have
+\begin{align}
+	t \, p(t) = 0 \quad\Leftrightarrow \quad
+	p(t) \propto \delta(t) \ .
+\end{align}
+Perhaps a hand-wavy intuitive explanation is useful here. If $p(t)=\delta(t)$, then the only non-zero point of the distribution is $t=0$. But multiplying by $t$ then forces the distribution to be zero at $t=0$ as well. Conversely, for any $t\neq 0$, the only way for $t\,p(t)=0$ is for $p(t)=0$ at that point. When $t=0$, $p(t)$ needn't be zero, and you may think that $p(t)=0$ is a valid solution. However, distributions are normalized so that $\int dt\, p(t) =1$, so $p(t)$ must be a $\delta$-function.
+
+Next we note that a principal value integral can be interpreted as a distribution. Let us write
+\begin{align}
+	\mathcal P \int dx\, \frac{f(x)}{x-x_0} \equiv \int dx\, f(x) \left[\frac{1}{x-x_0}\right]_P \ ,
+\end{align}
+where the subscript $P$ on the right-hand side tells us that the bracketed term is understood to be a distribution that should be integrated over the real line \emph{except} around a ball of radius $\varepsilon\to 0$ about $x_0$. 
+
+For simplicity, let us set $x_0=0$ and consider the principal value distribution $(1/x)_P$. The distribution $x (1/x)_P$ is, as one may expect from the notation, simply equal to one:
+\begin{align}
+	\int dx\, x\left( \frac{1}{x} \right)_P f(x)
+	&= 
+	\mathcal P \int dx\, \frac{x f(x)}{x}
+	= 
+	\mathcal P \int dx\, f(x)
+	=
+	\int dx\, f(x) \ .
+\end{align}
+This is obvious in that multiplying by $x$ has `plugged the simple pole' at $x=0$. 
+
+We will also want to learn more about distributions $p(t)$ that satisfy $t\, p(t) = 1$. If this is the case, then we may define another distribution
+\begin{align}
+	q(t) &\equiv p(t) - (1/t)_P &
+	\text{such that}&
+	&
+	t\,q(t) = t\, p(t) - t\left(\frac{1}{t}\right)_P = t\,p(t) - 1 = 0 \ .
+\end{align}
+Since $q(t)$ satisfies $t\,q(t)=0$, we use the prior observation to give
+\begin{align}
+	p(t) - \left(\frac{1}{t}\right)_P \propto \delta(t) \ .
+	\label{eq:FT:Dist:PV:Delta}
+\end{align}
+
+
+\paragraph{Fourier transforming the step function.}
+Finally, we can connect all of our observations this section to the Heaviside step function. First we use the fact that $\Theta'(t) = \delta(t)$. We invoke the rule for the Fourier coefficients of the derivative of a distribution, \eqref{eq:FT:Dist:derivative} to write
+\begin{align}
+	\tilde{\Theta'}(\omega) &= -i\omega \tilde \Theta(\omega) \ .
+\end{align}
+Inserting $\tilde{\Theta'}=\tilde\delta = 1$ gives
+\begin{align}
+	-i\omega\tilde \Theta(\omega) = 1 \ .
+\end{align}
+We know that distributions that satisfy $\omega p(\omega) =1$ have a nice property, \eqref{eq:FT:Dist:PV:Delta}, so that:
+\begin{align}
+	-i\tilde \Theta(\omega) - \left(\frac{1}{\omega}\right)_P \propto \delta(\omega) \ .
+\end{align}
+Define the constant of proportionality to be $-ic$ so that
+\begin{align}
+	\tilde \Theta(\omega) = 
+	i\left(\frac{1}{\omega}\right)_P + c \delta(\omega) \ .
+	\label{eq:FT:Dist:PV:Th:tilde}
+\end{align}
+To determine $c$, we invoke a bit of cleverness. The shifted step function $H(t)\equiv\Theta(t) - 1/2$ is real and odd in $t$. This means, in turn, that the Fourier transform of $H(t)$ is also odd. You can see this for any odd function $f(t)$ by examining the Fourier representation of $0=f(t)+f(-t)$ with a simple change in variables $\omega' = -\omega$ in the second term:
+\begin{align}
+	f(t)+f(-t) &= 
+	\int \dbar \omega \,
+ 	e^{-i\omega t} \tilde f(\omega) 
+	-
+	\int \dbar \omega' \, e^{-i\omega'(-t)}  \tilde f(\omega') 
+	\\&=
+	\int \dbar\omega\, e^{i \omega t} 
+	\left[\tilde f(\omega) - \tilde f(-\omega) \right] \ .
+\end{align}
+Since $f(t)-f(-t)=0$, we must have $\tilde f(\omega)- \tilde f(-\omega) =0$ and so the Fourier transform is also odd. We thus know that $\tilde H(t)$ is odd, which tells us that $\tilde\Theta(\omega) - \delta(\omega)/2$ must be odd. 
+
+When we compare to the expression for $\tilde\Theta(\omega)$ in \eqref{eq:FT:Dist:PV:Th:tilde}, we see that the piece that is \emph{not} odd is $c\delta(\omega)$. We thus require $c$ to cancel the $\delta(\omega)$ piece in $\tilde\Theta(\omega) - \delta(\omega)/2$, which implies $c=1/2$. The result is a handy---if somewhat surprising---representation for the Fourier coefficients of the step function:
+\begin{align}
+	\tilde Theta(\omega) = i\left(\frac{1}{\omega}\right)_P + \frac{1}{2}\delta(\omega) \ .
+\end{align}
 
 
 
