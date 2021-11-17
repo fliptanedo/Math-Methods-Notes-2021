@@ -4,12 +4,12 @@
 % \lecdate{lec~12}
 % 2018 Lec 27
 
-Our usual approach is to take the simplest example and then focus on understanding the physics, while leaving each of you to generalize to the horrible real-world scenarios that you'll encounter in your other graduate courses and research. There's one generalization that we should take time to do properly: the shift from one dimension to multiple dimensions. This is the shift from treating time as a dependent variable to working on \emph{spacetime}. Equivalently, the harmonic oscillator converts into the wave equation.
+For most graduate courses, we we examine simple examples where we can focus on understanding the physics. We then leave it to you to generalize to the horrible real-world scenarios that you'll encounter in your other graduate courses and research. There's one generalization that we should take time to do properly together: the shift from one dimension to multiple dimensions. This is the shift from working with functions of time to functions \emph{spacetime}. Equivalently, the harmonic oscillator converts into a wave.
 %
-Keep in mind that we're not doing any special relativity, even though we'll borrow notation from special relativity\footnote{There was once a professor teaching electrodynamics who used notation informed by relativity. The condensed matter students complained the class is about electricity and magnetism, not relativity. The professor replied: just where do you think magnetism comes from?}. 
+Keep in mind that we're not doing any special relativity, even though we'll borrow notation from special relativity\footnote{There was once a professor teaching electrodynamics who used notation informed by relativity. Some of the condensed matter students complained the class is about electricity and magnetism, not relativity. The professor replied: just where do you think magnetism comes from?}. 
 
 \subsection{The `harmonic oscillator' in spacetime}
-The second derivative, $d^2/dt^2$, is generalized in Euclidean space to the Laplacian, $\nabla^2$. But when you combine space and time (Minkowski space), there's the famous relative minus sign\footnote{At this level the minus sign is a convenient convention, but we know that the second derivative should really be relativistically invariant: $\partial^2 = \partial_\mu \partial^\mu$.}:
+The second derivative in higher-dimensional Euclidean space is the Laplacian, $\nabla^2= \partial_x^2 + \partial_y^2 +\cdots$. But when you combine space and time (Minkowski space), there's the famous relative minus sign\footnote{At this level the minus sign is a convenient convention, but we know that the second derivative should really be relativistically invariant: $\partial^2 = \partial_\mu \partial^\mu$.}:
 \begin{align}
 	\frac{d^2}{dt^2}
 	\to 
@@ -19,7 +19,7 @@ The second derivative, $d^2/dt^2$, is generalized in Euclidean space to the Lapl
 	\frac{\partial^2}
 	{\partial \vec x^2} \ ,
 \end{align}
-where $\partial/\partial\vec x = \nabla$ is the gradient. Against all of my hard-developed instincts for natural units, I have replaced the explicit value of $c$ so that the operator makes sense dimensionally. Each term has powers of inverse length squared. In what follows I'm likely to make mistakes\footnote{My adviser used to say: if you think there may be a sign error or a factor of two error, then your homework is to fix those errors. In this case, if you think there's a missing factor of $c=1$, I'm not even sure if I'd even acknowledge that it's actually an error.} with the factors of $c$. 
+where $\partial/\partial\vec x = \nabla$ is the gradient. The overall sign is a convention. Against all of my hard-developed instincts for natural units, I have replaced the explicit value of $c$ so that the operator makes sense dimensionally: each term has powers of inverse length squared. In what follows I'm likely to make mistakes\footnote{My adviser used to say: if you think there may be a sign error or a factor of two error, then your homework is to fix those errors. In this case, if you think there's a missing factor of $c=1$, I'm not even sure if I'd even acknowledge that it's actually an error.} with the factors of $c$. 
 
 
 In (1+1)-dimensions of spacetime\footnote{The (1+1) notation means one dimension of space, one dimension of time.} this is $\partial^2 = c^{-2} \partial_t^2 - \partial_x^2$. That looks familiar, doesn't it? The minus sign tells us that if we move forward in time a little bit, but look `backward' in space, then the function doesn't change. The description of the state at time $t-\delta t$ and position $x-\delta x$, subject to $\delta x = c\delta t$, is the same as the state at time $t$ and position $x$. 
@@ -30,6 +30,14 @@ This, in turn, means that the information was propagated \emph{forward} in space
 	\label{eq:plane:wave}
 \end{align}
 From this you can read off that the plane wave velocity is $\omega/k$. Of course, you already knew that from dimensional analysis. 
+
+\begin{exercise}
+This is a great place to reflect on phase versus group velocity. I should probably write such a discussion into a future version of this notes. \flip{To do.} In the meanwhile, one of my favorite puzzles is the following (perhaps apocryphal) story.\footnote{I think I first heard this story from Tony Zee's lectures at the African School for Theoretical Physics in 2004. He posed this as an obvious problem in dimensional analysis. I don't think I properly appreciated the `obvious' aspect until about 15 years later while preparing this course. It wasn't completely obvious to me at all.} During the second world war, an admiral wanted to be able to use reconnaissance photographs of ships to determine their velocities. The admiral knew that given data about the ships' positions and velocities, one could extrapolate where those ships are going and when they will arrive. Because ships leave a wake behind them, the admiral figured that a clever physicist should be able to determine a ship's velocity based on the angle of the wake behind the boat.
+
+In deep water, this is called a Kelvin wake. You also see this when watching ducks on the river.\footnote{Not everyone has a chance to watch battleships from a spy plane, but it turns out plenty of universities are situated near rivers where generations of the mathematically inclined could reflect on physical phenomena. I suspect this is the reason why Cambridge has such a historically strong fluid dynamics department. Anyway, I used to watch the ducks swimming in the stream near my old Ph.D institution. There were also geese around. I wouldn't watch the geese. I suspect they also leave a Kelvin wake, but I am quite sure that geese leave behind gigantic goose shits that make it unpleasant to sit by the water.} The key `aha' moment for understanding the Kelvin wake is that the relevant model is one where the key restoring force comes from gravity---these wakes are formed by \emph{gravity} waves. Do not confuse this with \emph{gravitational waves}, which are quite different. By neglecting surface tension, we find that the phase velocity is $\sqrt{g/k}$, where $k$ is the wave number ($e^{ikx}$). The group velocity (that carries energy) is $d\omega/dk$, where $\omega=\sqrt{gk}$ is the angular frequency. Thus the group velocity is half the phase velocity. 
+
+Using a geometric argument, show that the angle of the Kelvin wake is $\sin^{-1}(1/3)$. The book by Stone \& Goldbart has a nice discussion.\footnote{See also \url{www.itp.uni-hannover.de/fileadmin/itp/emeritus/zawischa/static_html/KWake.html}} Even before jumping into the construction, you should wonder where the ratio 1:3 shows up in the problem. 
+\end{exercise}
 % A good exercise: phase and group velocity; see appell or cahill
 
 \subsection{Green's functions for multidimensional spaces}
@@ -70,8 +78,8 @@ Huh, that looks familiar, doesn't it? We've chosen variables so that this looks 
 Now let's go through a series of questions about \eqref{eq:phi:wave:eq} and \eqref{eq:A:wave:eq} to make sure we're on the same page. 
 \begin{enumerate}
 \item \textbf{Are these differential equations still linear?} Yes. Remember what it means to be linear! $\mathcal O(f+g) = \mathcal Of +\mathcal Og$, for example.
-\item \textbf{Are we worried that there are multiple arguments?} Not really. The functions now depend on $t$ and $\vec{x}=(x,y,z)$. You went from an infinite dimensional `vector space' to a still-infinite dimensional vector space\footnote{You can pontificate about whether or not this infinity has gotten `bigger.' It doesn't really make a difference.}. You can also mumble reassuring words to yourself, perhaps recalling how in prior encounters with the wave equation you've perhaps separated your functions into single-argument factors, $\Psi(t,x) = T(t)X(x)$, or something like that.
-\item \textbf{How many equations are there?} There are \emph{four}\footnote{Obligatory TNG reference: \url{https://www.youtube.com/watch?v=wjKQQpPVifY}} equations. There is an equation for $\phi$ and one equation for each component of $\vec A$. In fact, we typically bundle this all up into a four-vector $A_\mu=(\varphi, \vec A)$. 
+\item \textbf{Are we worried that there are multiple arguments?} Not really. The functions now depend on $t$ and $\vec{x}=(x,y,z)$. You went from an infinite dimensional `vector space' to a still-infinite dimensional vector space\footnote{You can pontificate about whether this infinity is `bigger.' It doesn't really make a difference.}. You can also mumble reassuring words to yourself, perhaps recalling how in prior encounters with the wave equation you've perhaps separated your functions into single-argument factors, $\Psi(t,x) = T(t)X(x)$, or something like that.
+\item \textbf{How many equations are there?} There are \emph{four}\footnote{Obligatory TNG reference: \url{https://www.youtube.com/watch?v=wjKQQpPVifY}} equations. There is an equation for $\phi$ and one equation for each component of $\vec A$. In fact, we typically bundle this all up into a four-vector $A_\mu=(\varphi, \vec A)$.\footnote{For now this is just a bundling, so you may argue that it's not obviously a \emph{vector}. The fact that $\varphi$ and $\vec{A}$ transform into each other upon performing a boost is something we learn from physical observations. Alternatively, the identity of $A_\mu$ as a vector (technically, a one-form) is imposed by the mathematical structure---but that mathematical structure was adopted after the empirical progress in the 1800s.}
 \item \textbf{How many differential operators are there?} Just one. There is only \emph{one} differential operator, $\partial^2$. It acts on different components of $A_\mu$, but it's the same wave operator acting on each component. 
 \item \textbf{... so how many equations are there, really?} All four equations are essentially the same equation with different state functions and different sources. So it's really just one class of differential equation.
 \end{enumerate}
@@ -98,7 +106,7 @@ where the $N$-dimensional $\delta$-function is simply the product of one-dimensi
 \end{align}
 The solution to the above differential equation is
 \begin{align}
-	f(\vec{x}) &= \int d^N\vec{x}' s(\vec{x}') G(\vec{x},\vec{x}') \ ,
+	f(\vec{x}) &= \int d^N\vec{x}'\,  G(\vec{x},\vec{x}') s(\vec{x}') \ ,
 \end{align}
 which you can check by acting on both sides with $\mathcal O_\vec{x}$.
 
@@ -143,7 +151,7 @@ That's one equation for each value of $\mu$, but each equation has the \emph{sam
 	\partial^2 G(x,x') &= \delta^{(4)}(x-x') \ ,
 	\label{eq:wave:eq:Greens:eq}
 \end{align}
-where I'm writing $x$ and $x'$ to mean \emph{four}-vectors with \emph{components} $x^\mu$ and $(x')^\mu$. Given a current $j_\mu(x)$, the vector potential is the solution to the wave equation which integrates over all of the current (source) positions:
+where we write $x$ and $x'$ to mean \emph{four}-vectors with \emph{components} $x^\mu$ and $(x')^\mu$. Given a current $j_\mu(x)$, the vector potential is the solution to the wave equation which integrates over all of the current (source) positions:
 \begin{align}
 	A_\mu(x) &= \int d^4x' \, G(x,x') j_\mu(x) \ .
 \end{align}
@@ -156,11 +164,14 @@ At this point you may want to start going over Homework \#4 where \emph{you} sol
 
 We solve \eqref{eq:wave:eq:Greens:eq} in what is now the `usual' way. We Fourier decompose both sides. Making deliberate choices for our Fourier transform conventions, let us write
 \begin{align}
-	f(t,\vec{x}) &= \int \dbar^4k \, e^{ik\cdot x} \tilde f(\omega, \vec{k})
+	f(t,\vec{x}) &= \int \dbar^4k \, e^{-ik\cdot x} \tilde f(\omega, \vec{k})
 	&
 	\dbar^4k &= \frac{dE\, d^3\vec{k}}{(2\pi)^4}
 	 \ .
 \end{align}
+\begin{exercise}
+Please confirm that with our metric convention, this choice of (3+1)-dimensional Fourier conventions matches the (0+1)-dimensional Fourier conventions we used for the harmonic oscillator.
+\end{exercise}
 For simplicity we'll just write $f(x)$ and $\tilde f(k)$ to refer to the four-component arguments\footnote{Later on we'll use $k=|\vec{k}|$ to mean the spatial length of the 3-momentum; there should be no ambiguity because the context should be clear. This is an example of `read what I mean, not what I [literally] write.' This is a common `chalkboard physics' peccadillo; usually it's a pain to write \emph{literally} what you mean. Sometimes it's better to write the `easy to interpret' equation, then tell people to interpret it slightly differently. Mathematicians should be incensed. That's okay. This is mathematics for physicists, not physics for mathematicians. The latter course is also quite interesting and theorists should take it if it's ever offered from John Baez.}. 
 We have used the Minkowski spacetime inner product,
 \begin{align}
@@ -269,14 +280,15 @@ Plugging this into \eqref{eq:Greens:function:For:4D:int} gives
 	\frac{1}{8\pi^3 ir}
 	\int_0^\infty dk\, 
 	k \left(e^{ikr} - e^{-ikr}\right)
-	\int_0^\infty dE \, 
+	\int_{-\infty}^\infty dE \, 
 	\frac{-e^{-iE (t-t')}}{\bar{E}^2-k^2}
 	\ .
 \end{align}
+For simplicity we have renamed $|\vec k| \to k$. Note the limits of the integrals. Because $k$ is a radial variable, it only takes non-negative values. The energy integral, on the other hand, is an honest Fourier transform over all real values.
 
 \paragraph{The energy integral.} Ah! The $dE$ integral is an old friend: you remember it when it used to go by the name $d\omega$ for the harmonic oscillator. You know how to do this one: just follow what we did to derive the retarded Green's function for the harmonic oscillator. Nudge the poles infinitesimally into the lower-half plane\footnote{This is as good a time as any to point out that the rule of nudging the poles into the \emph{lower} half plane for the causal propagator is directly related to our Fourier integral convention. Some references use the opposite convention and thus nudge the poles into the upper half plane.}. The solution is
 \begin{align}
-	 \frac{1}{2\pi}\int_0^\infty dE \, 
+	 \frac{1}{2\pi}\int_{-\infty}^\infty dE \, 
 	\frac{-e^{-iE \Delta t}}{\bar{E}^2-k^2}
 	&= \frac{-i}{2k}\left(e^{ikc\Delta t} - e^{-ikc\Delta t}\right)\Theta(\Delta t) \ .
 \end{align}
@@ -326,11 +338,11 @@ In the second line we were slick and realized that we could convert the lat two 
 	\left[ \delta(r-c\Delta t) - \delta(r+c\Delta t) \right]
 	\ .
 \end{align}
-At this point a bit of either physical or mathematical insight is required. The second term is problematic: $\delta(r+c\Delta t)$. Recall that $r$ is a radial coordinate, which means that $r>0$. However, we also have this $\Theta(\Delta t)$ sitting in the function that imposes that $\Delta t > 0$. That means that $\delta(r+c\Delta t) = 0$ for any interesting values of $r$ and $t$ away from the original `$\delta$-function' source\footnote{Such a source is not at all physical and is just a model for a physical source whose details are not resolved by our model. For example: in Newtonian mechanics, when we say that an ideal particle has an ideal elastic collision with an ideal wall, we say that the momentum changes from $\vec{p}$ to $-\vec{p}$ and that this happens instantaneously at the moment the particle hits the wall. This is a discontinuous jump in the momentum, which means that the force, $\vec{F} = \dot{\vec{p}}$ must be infinite. We don't actually believe that there is an infinite force, but the model doesn't care about the details of how the ideal wall is actually a little squishy. The details of that \emph{microphysics} are only a negligible contribution to the model of, say, a basketball hitting the backboard. This is the idea that physical models as effective theories with domains of validity.}. The non-physical term apparently encodes acausal propagation, so we'll go ahead and drop it like its hot.
+At this point a bit of either physical or mathematical insight is required. The second term is problematic: $\delta(r+c\Delta t)$. Recall that $r$ is a radial coordinate, which means that $r>0$. However, we also have this $\Theta(\Delta t)$ sitting in the function that imposes that $\Delta t > 0$. That means that $\delta(r+c\Delta t) = 0$ for any interesting values of $r$ and $t$ away from the original `$\delta$-function' source\footnote{Such a source is not at all physical and is just a model for a physical source whose details are not resolved by our model. For example: in Newtonian mechanics, when we say that an ideal particle has an ideal elastic collision with an ideal wall, we say that the momentum changes from $\vec{p}$ to $-\vec{p}$ and that this happens instantaneously at the moment the particle hits the wall. This is a discontinuous jump in the momentum, which means that the force, $\vec{F} = \dot{\vec{p}}$ must be infinite. We don't actually believe that there is an infinite force, but the model doesn't care about the details of how the ideal wall is actually a little squishy. The details of that \emph{microphysics} are only a negligible contribution to the model of, say, a basketball hitting the backboard. This is the idea that physical models as effective theories with domains of validity.}. The non-physical term apparently encodes acausal propagation, so we'll go ahead and drop it like its hot. Formally this is because we have the $\Theta(\Delta t)$ forcing the integral over $\delta(r+c\Delta t)$ to be zero.
 
 The result for the retarded Green's function in spacetime is remarkably simple
 \begin{align}
-	G_\text{ret} \frac{1}{4\pi r} \Theta(\Delta t) \delta(r-c\Delta t) \ .
+	G_\text{ret} = \frac{1}{4\pi r} \Theta(\Delta t) \delta(r-c\Delta t) \ .
 \end{align}
 Take a moment to appreciate this. The first factor is \emph{exactly} the Green's function for the Poisson operator, $\nabla^2$, in three spatial dimensions. The $\Theta$ function imposes forward-propagation in time (retarded versus advanced). Then there's a $\delta$-function whose sole purpose seems to impose that $r = c\Delta t$. A moment's thought reveals the interpretation. Recall that the Green's function is the solution to an idealized $\delta$-function source at spacetime point $x'$: $\partial^2 G = \delta^4(x-x')$. The $\delta(r-c\Delta t)$ is telling me that the response from my initial idealized $\delta^4$-function source propagates outward (increasing $r$) at speed $c$ along a \emph{wave front}. At time $t$ the wave front reaches radial distance $c(t-t')$. In other words, this is just reminding us about propagation speed in the wave equation. In other words, the speed of electrodynamic waves (light) is constant\footnote{We can be snotty and say ``you mean, the speed of light... \emph{in vacuum},'' but this is really beside the point. We started with Maxwell's equations. We didn't even specify the medium. Maybe it's uniform water. The point is that the \emph{wave equation} told us that the speed of propagation is constant.}. Here's what the propagation of a `blip' of light looks like (this is no surprise to you):
 \begin{center}
@@ -349,6 +361,71 @@ Solve for the Green's function of the wave equation in (2+1)-dimensional spaceti
 \includegraphics[width=.47\textwidth]{figures/Lec27_2db}
 \end{center}
 \end{exercise}
+
+
+\subsection{Dimensional Reduction}
+
+You can guess that the (2+1)-dimensional Green's function is a different beast. In (3+1) dimensions, we have $\nabla^2 (-1/4\pi r) = \delta^{(3)}(\vec{x})$. On the other hand, in (2+1) dimensions we have $\nabla^2 (\ln r)/(2\pi) = \delta^{(2)}(x)$, where the $\nabla^2$ is the appropriate spatial d'Alembertian in each case.
+
+\begin{exercise}
+Do you remember deriving the $\phi\sim \ln r$ potential somewhere? I think most students must have done this, but perhaps not explicitly in the guise of Green's functions in flatland.
+\end{exercise}
+
+\begin{exercise}
+What are the dimensions of $G_{(2+1)}$? How do these compare to the dimensions of $G_{(3+1)}$? Keep track of this difference as we go over this section.
+\end{exercise}
+
+There is a clever way to deduce the (2+1)-dimensional Green's function. In fact, one could have used this trick to derive the (3+1)-dimensional Green's function from the 3-dimensional Green's function. We propose that
+\begin{align}
+	G_{(2+1)}(t,x,y) &= \int_{-\infty}^\infty dz\, G_{(3+1)}(t,x,y,z) \ .
+\end{align}
+That is: we integrate out the extraneous dimension from the higher-dimensional Green's function. To see this, insert the Fourier representation of $G_{(3+1)}$:
+\begin{align}
+	\int_{-\infty}^\infty dz\, G_{(3+1)}(t,x,y,z)
+	&=
+	\int dz\,\dbar^4k\, e^{-iEt+i\vec{k}\cdot\vec{x}} \tilde G_{(3+1)}(E,k_x,k_y,k_z) \ .
+\end{align}
+We can perform the $dz$ integral: $\int dz \,e^{ik_zz} = 2\pi \delta(k_z)$. This gives
+\begin{align}
+	\int_{-\infty}^\infty dz\, G_{(3+1)}(t,x,y,z)
+	&=
+	\int \dbar^3k\, e^{-iEt+ik_xx+ik_yy} \tilde G_{(3+1)}(E,k_x,k_y,0) \ .
+\end{align}
+We can now plug in the form of $\tilde G_{(3+1)}$:
+\begin{align}
+	\tilde G_{(3+1)}(E,k_x,k_y,0) &=\frac{1}{E^2-k_x^2-k_y^2} = \tilde G_{(2+1)}(E,k_x,k_y) \ .
+\end{align}
+\flip{check minus signs.} We observe that the (3+1)-dimensional momentum-space Green's function with $k_z=0$ is exactly the (2+1)-dimensional momentum-space Green's function. The difference is how many integrals one performs to go to position space. So we have found that
+\begin{align}
+	\int dz\, G_{(3+1)} = \int \dbar^3k\, e^{-iEt+ik_xx +ik_y y} \tilde G_{(2+1)}
+	\equiv G_{(2+1)} \ .
+\end{align}
+Thus we have proved our assertion that the (2+1)-dimensional Green's function is an integral of the (3+1)-dimensional Green's function over the `extra' dimension.
+
+We can go ahead and plug in $G_{(3+1)}$ to find
+\begin{align}
+	G_{(2+1)}(t,x,y) 
+	&= \frac{\Theta(t)}{4\pi}\int_{-\infty}^{\infty}dz\,
+	\frac{1}{\sqrt{x^2+y^2 + z^2}}
+	\delta(\sqrt{x^2+y^2+z^2}-t) \ .
+\end{align}
+Recall that
+\begin{align}
+	\delta(f(z)) &= \sum_{z_0} \frac{1}{|f'(z_0)|} \delta(z-z_0) \ ,
+\end{align}
+where the sum is over zeros of the function, $f(z_0)=0$. For for case we have $f'(z) = z/\sqrt{x^2+y^2+z^2}$ with zeros at $z_\pm = \pm \sqrt{t^2 - x^2+y^2}$. Using the $\Theta(t)$ to remove an unphysical term, we have
+\begin{align}
+	G_{(2+1)}(t,x,y) &= \frac{\Theta(t)}{2\pi} \frac{1}{\sqrt{t^2-x^2-y^2}} \ .
+\end{align}
+
+
+The following figures give a bit of intuition for this solution relative to an infinite line charge:
+\begin{center}
+\includegraphics[width=.47\textwidth]{figures/Lec08_XD_2D1}
+\includegraphics[width=.47\textwidth]{figures/Lec08_XD_2D2}
+\end{center}
+The key insight is that $\int dz\, G_{(3+1)}$ is precisely the form of the potential coming from an infinite, uniform line charge extending in the $z$-direction from the origin. The electric field would ordinarily `leak' into the extra dimension, but the infinite line charge cancels the potential that leaks off of a given sheet. Note that by symmetry the non-trivial potential profile is restricted to the plane.
+
 
 
 
