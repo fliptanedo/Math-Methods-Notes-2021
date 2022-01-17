@@ -6,6 +6,10 @@
 \section{Coupled Harmonic Oscillators and Fields}
 \label{sec:CHO:fields}
 
+% CONNECT: initial value problem of Euler Lagrange vs path integral
+% https://physics.stackexchange.com/questions/38348/is-the-principle-of-least-action-a-boundary-value-or-initial-condition-problem/38393#38393
+% 
+
 Let's take a break from Green's functions. In the previous section, we called the wave equation the \emph{harmonic oscillator in spacetime}. We proceeded to solve the wave equation for the electromagnetic field, $\partial^2 A_\mu = j_\mu$. We were very hand-wavy in arguing that the appropriate generalization of the harmonic oscillator operator $(d/dt)^2$ is the spacetime second derivative, $\partial^2 = c^{-2}\partial_t^2 - \nabla^2$. Furthermore, we noticed that our state functions went from being functions of only one variable, $\psi(t)$, to functions of space and time, $A_\mu(\vec{x},t)$. In other words, our states became \emph{fields}. It's instructive to see why a field is naturally understood as the continuum limit of a lattice of harmonic oscillators\footnote{I'm saying something `deep' here. Actual systems in condensed matter physics are atomic lattices with complicated electronic potentials. These are approximated by harmonic oscillators to leading order. At long wavelengths, the physics of this lattice often has a \emph{continuum limit} described by a field theory. The field theory is a model that has no underlying lattice, but whose long-wavelength predictions are designed to match that of a lattice with small spacing. In particle physics one usually assumes that nature is continuous so that the fundamental objects are actually fields. Whether or not this is literally true doesn't matter: it is sufficient that the range of phenomena that your theory hopes to describe are agnostic to whether or not there is a lattice. Sometimes particle physicists go the opposite way and use lattice techniques to make predictions where the continuum limit is difficult. The notion (and meaning) of a continuum limit is tied closely to the idea or renormalization group flow, which is one of the most elegant ideas in theoretical physics.}.
 
 
@@ -91,7 +95,7 @@ If we had a lattice in $D$ spatial dimensions, then this result generalizes to
 \end{align}
 Finally, let us rescale the state variable by defining a `better' state variable
 \begin{align}
-	\varphi(x,t) \equiv \frac{q(x,t)}{\sqrt{\rho}} \ .
+	\varphi(x,t) \equiv {\sqrt{\rho}}{q(x,t)} \ .
 	\label{eq:field:normalization}
 \end{align}
 Further, let's go ahead and write the action $S=\int dt \, L$ with the idea of writing one big \emph{spacetime} integral over a Lagrangian \emph{denstiy} $S = \int dt\, d^Dx \, \mathcal L$:
@@ -109,7 +113,7 @@ Further, let's go ahead and write the action $S=\int dt \, L$ with the idea of w
 \end{align}
 Observe that we have defined a speed
 \begin{align}
-	c^2 = k \Delta x^{2-D} \rho \ .
+	c^2 = \frac{k \Delta x^{2-D}}{\rho} \ .
 	\label{eq:HO:coupled:D:c2}
 \end{align}
 If we take one more step and integrate by parts, we may write the action in the form:

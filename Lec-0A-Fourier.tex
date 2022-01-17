@@ -7,6 +7,8 @@
 
 This section is inspired by an excellent post on \texttt{physics.stackexchange}\footnote{\url{https://physics.stackexchange.com/a/308248}}. There are many different conventions for Fourier transforms. The danger is that you accidentally use one convention to do the Fourier transform and a different convention for the inverse transform. 
 
+\subsection{A general Fourier transform}
+
 There are two choices one can make when defining a Fourier transform convention; we parameterize these choices by real numbers $a$ and $b$. The Fourier transform $\tilde f(\omega)$ of a function $f(t)$ is
 \begin{align}
 	\tilde f(\omega)
@@ -37,6 +39,8 @@ One may check that the inverse Fourier transform of a Fourier transform gives th
 \end{align}
 where we have used $\int d\xi \exp(2\pi i x\xi) = \delta(x)$. 
 
+\subsection{Our Conventions}
+
 The convention that we will choose for the \emph{time}--\emph{frequency} [inverse] Fourier transform is
 \begin{align}
 	f(t) &= \int_{-\infty}^{\infty} \dbar\omega e^{-i\omega t} \tilde f(\omega)
@@ -52,6 +56,8 @@ This corresponds to $a=b=1$. The corresponding transform for the frequency-domai
 \end{align}
 
 
+\subsection{Higher Dimensions}
+
 All of this generalizes to higher dimensions: you simply Fourier transform each dimension. In fact, one is free to use a different Fourier transform convention for each direction. We can use this freedom to pick a convention that `automatically' fits our conventions for spacetime. In particular, given a four-vector $x=(t,\vec{x})$ and its conjugate four-momentum $p=(\omega, \vec{k})$, one may choose to Fourier transform as follows: 
 \begin{align}
 	f(x) &= \int \dbar\omega\dbar^3\vec{k} e^{-i(\omega t-\vec{k}\cdot\vec{x})} \tilde f(p)
@@ -63,3 +69,21 @@ With this convention, the basis function is simply
 	= e^{-ip\cdot x} \ , 
 \end{align}
 where $p\cdot x$ is the usual Minkowski dot product, $p_\mu x^\mu$. This makes it clear that the basis function is Lorentz invariant. The Fourier transform would still respect the spacetime symmetries even if we had not chosen a convenient notation---it just wouldn't be as simple to see.
+
+\begin{example}
+\textbf{Statistical Mechanics.} One motivation for our Fourier convention is statistical mechanics. One formulation of classical statistical mechanics is to assume that phase space is discrete: a particle has momentum $\vec{p}$ whose components take integer multiples of some unit momentum, $h$. Assuming that the particle has $g$ internal degrees of freedom (e.g.~$g=2$ for a particle that can be spin-up or spin-down), then the density of states is $g/h^{3}$. Quite remarkably in the history of physics, the value of $h$ can be identified with Planck's constant in quantum mechanics. In natural units we take $\hbar = h/(2\pi)\equiv 1$, so the phase space density is $g/(2\pi)^3$. For a particle with a phase space distribution function $f(\vec{x},\vec{p})$, this means that the number density of particles is
+\begin{align}
+	n = g\int \dbar^3p \, f(p) \ .
+\end{align}
+We see that it is convenient to take a convention where every $dp$ comes with a $(2\pi)^{-1}$.
+\end{example}
+
+\begin{exercise}\textbf{Lorentz-Invariant Phase Space.}
+In relativistic systems, the energy and the momenta are related by $E^2 = \vec{p}^2 + m^2$. We are, of course, using natural units where $c=1$. The phase space integral over $\dbar^3p$ is thus also an integral over the energy. In order to enforce the relativistic relation, the full phase space density is usually written as $\dbar^4p\, (2\pi)\delta(E^2-p^2-m^2)$. Show that integrating over the $\delta$-function gives
+\begin{align}
+	\int \dbar^4p\, \delta(E^2-p^2-m^2) &= 
+	\int \frac{\dbar^3\vec{p}}{2E(p)}
+	&
+	E(p) \equiv \sqrt{p^2 + m^2} \ .
+\end{align}
+\end{exercise}

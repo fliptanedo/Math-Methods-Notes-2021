@@ -192,3 +192,83 @@ One of my favorite essays that incorporates Gott's estimation is ``The Riemann Z
 \begin{exercise}
 Holt's essay uses the following inputs: humans and chimpanzees split off evolutionarily about 5 million years ago. Since chimpanzees are known to laugh and are known to be able to do elementary arithmetic, we assume that laughter and mathematics is at least 5 million years old. Fill in the rest of the argument that `numbers and laughter' will still be around in the year one million.
 \end{exercise}
+
+\section{The Monty Hall Problem}
+
+In 1975 Steve Selvin popularized the Monty Hall problem as a puzzle in probability. Consider the following game popularized in an old television show. There are three doors in front of a contestant. Behind one door is a prize, say a brand new car. 
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Monty_01.pdf}
+\end{center}
+The contestant picks one of the three doors. Rather than opening that door immediately, the host offers a twist. The host---who has perfect knowledge of which door has the car---selects a second door and opens it, revealing no prize. 
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/Monty_02.pdf}
+\end{center}
+The host then offers the contestant the opportunity to either open the door they have currently selected, or to change their mind and instead select the remaining unopened door. There are now two perspectives, leading to what may appear to be a paradox:
+\begin{enumerate}
+	\item The contents of doors are equally unknown to the contestant, so it does not matter whether or not the contestant swaps choices.
+	\item At the beginning of the game, the choice of a door has a 1/3 chance of winning the car. After the host has revealed one empty door, the choice if 1/2. If the contestant does not swap doors, then they are effectively locking in their 1-in-3 chance from the beginning of the game. Thus it makes sense for the contestant to swap choices since this locks in a 1-in-2 chance.
+\end{enumerate}
+Bayes theorem gives us the tools to quantify this puzzle. For concreteness, assume that the contestant initially chooses door 1, the host reveals door 2 to be empty, and then the host offers door 3. We would like to compare the following quantities
+\begin{itemize}
+	\item $P(1\,|\,\text{open}~2)$, the probability that the car is behind door 1 after the host has revealed that it is not in door 2. That is, the probability that the contestant wins by \emph{not} swapping doors.
+	\item $P(3\,|\,\text{open}~2)$, the probability that the car is behind door 3 after the host has revealed that it is not in door 2. That is, the probability that the contestant wins by \emph{swapping} doors.
+\end{itemize}
+We are \emph{not} comparing either of these to $P(1)$, the probability that the car is behind door 1 \emph{prior} to any information about the other doors. In order to calculate the above conditional probabilities, we invoke Bayes' theorem.
+\begin{align}
+	P(1\,|\,\text{open}~2) = \frac{P(\text{open}~2\,|\,1)\, P(1)}{P(\text{open}~2)} \ .
+\end{align}
+The prior probability is $P(1)=1/3$. The first factor in the numerator is the probability that the host opens door 2 \emph{assuming} that the car is actually behind door 1. If the contestant were correct with their initial guess, then the host could have opened door 2 or 3. Thus $P(\text{open}~2\,|\,1)=1/2$. The denominator is the probability that the host would have revealed door 2 without any constraint from the contestant. Because there are two choices of empty doors, this is  $P(\text{open}~2)=1/2$. As a result, the \emph{posterior} probability is
+\begin{align}
+	P(1\,|\,\text{open}~2) = \frac{1}{3} \ .
+\end{align}
+We interpret this as follows: if the contestant does not to switch doors and remains with door 1, the odds of them winning is 1-in-3. 
+
+What if the contestant switches? Bayes tells us
+\begin{align}
+	P(3\,|\,\text{open}~2) = \frac{P(\text{open}~2\,|\,3)\, P(3)}{P(\text{open}~2)} \ .
+\end{align}
+The denominator is unchanged. Similarly, the prior probability $P(3)=P(1)=1/3$ is unchanged. However, $P(\text{open}~2\,|\,3)$ is rather different. This is the probability that the host opens door 2 given that the actual car is behind door 3. However, what is not well conveyed in our notation---but nonetheless is true when applying Bayes' theorem---is that the host's choice is constrained by the fact that they \emph{cannot} reveal either (1) the door that the contestant has selected, or (2) the door that actually has the car. In this conditional probability, the host has no choice: they \emph{must} select door 2 since the contestant has selected door 1 and the car is behind door 3. This means that $P(\text{open}~2\,|\,3) = 1$. With that in mind, we have
+\begin{align}
+	P(3\,|\,\text{open}~2) = \frac{2}{3} \ .
+\end{align}
+Of course, we already knew this had to be true since conservation of probability tells us that $P(1\,|\,\text{open}~2)+P(3\,|\,\text{open}~2)=1$.
+
+\section{Information Entropy}
+
+In statistical mechanics we have a notion of \textbf{entropy},
+\begin{align}
+	S = -\sum_i p_i \ln p_i \ ,
+\end{align}
+where $p_i$ is the probability of a configuration. We have assumed $k_B=1$, a kind of `natural units' for statistical mechanics. 
+
+\begin{example}
+\textbf{Microcanonical ensemble}. For the microcanonical ensemble, all $N$ possible states have equal probability so that $p_i = 1/N$. Then the entropy is $S = -N^{-1}\sum_i\ln N^{-1} = \ln N$, which simply measure the logarithm of the number of microstates. 
+\end{example}
+
+There is a closely related idea in information theory called \textbf{information entropy} or Shannon entropy,
+\begin{align}
+	H = -\sim_i p_i \log_2 p_i \ ,
+\end{align}
+where the binary base tells you that we are counting bits of information. The Shannon entropy measures the information in a configuration. A bit is corresponds to reducing the uncertainty by a factor of two. Over the last ten years, information entropy has found its way into physics, so it is worth taking a moment to familiarize ourselves with the idea. 
+
+There is an excellent pedagogical example by Aur\'elien G\'eron. Suppose we live somewhere where the weather has a 50\% chance each of being sunny or rainy. If the weather report says it will definitely rain tomorrow, then it has reduced the uncertainty relative to the baseline scenario by one bit: you went from two equal possibilities to one possibility. 
+
+Similarly, if there were four equal probabilities (sun, rain, fog, snow), then a definite forecast reduces the uncertainty from 4 equally possible states to one. In other words, the forecast provides $2$ bits of information to reduce the number of possibilities by $1/2^2$. If there were eight equally possible weather possibilities, then a definite forecast provides $4$ bits of information that reduces the number of possibilities by $1/2^4$. 
+
+The uncertainty reduction from a specification of a state is the inverse of the probability of that state. We find a convenient definition: when there are $N$ equal probabilities for all possible states, the \textbf{number of bits} encoded in a message that specifies a state is simply $\log_2 N$.
+
+Of course, the weather analogy so far is pretty silly for us since we live in Riverside. In a climate slightly closer to Riverside, the odds of rain are only 25\% and the odds of a sunny day are 75\%. You expect it to be sunny tomorrow. This means that if the national weather service tells us that it will actually rain tomorrow, it has conveyed \emph{more information} than the case of equal probabilities. In other words, the information in a message can be interpreted as the degree of \emph{surprise} relative to the expected probability distribution. The uncertainty reduction coming from a rainy forecast is
+\begin{align}
+	\frac{1}{P(\text{rain})} = \frac{1}{25\%} = 4 \ .
+\end{align}
+The rainy forecast reduces our uncertainty by $4=2^2$, or $\log_2 4=-\log_2 P(\text{rain})=2$ bits. Alternatively, if the forecast is sunny, then we are not particularly impressed. That is what we expected. The number of bits is $-\log_2P(\text{sun}) = -\log_2(75\%) \approx 0.4$.
+
+This gives a useful general definition: \textbf{information entropy} is the expected number of bits given a statement of the state:
+\begin{align}
+	H(p) = \langle -\log_2 p_i \rangle = \sum_i (-\log_2 p_i)\, p_i \ .
+\end{align}
+This explains how autocomplete algorithms work. Some letters are more frequent in English words than others. Saying that a word begins with `x' reduces the number of possible words much more than saying that the word begins with a much more common letter, like `e'.
+
+\flip{To do: cross entropy, KL divergence.}
+
+
