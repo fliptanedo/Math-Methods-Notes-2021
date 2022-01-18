@@ -207,6 +207,22 @@ We can plug in the integrated expression \eqref{eq:gaussian:with:source} to get,
 Argue in a few words why $\langle x \rangle = 0$.
 \end{exercise}
 
+\begin{exercise}
+\textbf{Gaussians in Statistical Mechanics.} It is not long before a young physicist is forced to become an expert in Gaussian integrals. The first place where Gaussians are unavoidable is statistical mechanics, where we find that the partition function for the microcanonical ensemble is a Gaussian. Let us recall where this comes from. This example comes from Sethna's gem of a textbook, \emph{Entropy, Order Parameters, and Complexity}, chapter 3.2. Consider a gas of a large number $2N$ particles in a box. The probability that there are $m \ll N$ more particles on the right side of the box compared to the left side is
+\begin{align}
+	P_m = 2^{-2N}\frac{(2N)!}{(N+m)!(N-m)!} \ .
+\end{align}
+This is simply the probability of a given configuration, $2^{-2N}$, times the number of ways to choose $(N+m)$ particles on the right-hand side, $_{2N}C_{N+m}$. We can convert factorials into powers using the famous \textbf{Stirling's formula},
+\begin{align}
+	n! \sim \left(\frac{n}{e}\right)^n \ .
+\end{align}
+We dropped a factor of $\sqrt{2\pi n}$ on the right-hand side. Show that by expanding in the small $m/N$ limit gives the famous exponential in the microcanonical ensemble,
+\begin{align}
+	P_m \sim e^{-m/N}\ .
+\end{align}
+The prefactor could be approximated by keeping the factors of $\sqrt{2\pi n}$, or alternatively by normalizing $\int dm \, P_m = 1$.
+\end{exercise}
+
 \paragraph{Gaussians in many dimensions.} Here's the fun one. If the Gaussian integral is a parlor trick, then doing this one on a bar napkin should earn you a drink or two. Let's consider 3-dimensional space with $x,y,z$ directions. No---\emph{even better}! (You have to say it this way if you really want to impress the crowd.) Let's go to $N$-dimensional space described by $N$-vectors $\vec{q}$ with components $q^i$. Furthermore, consider a symmetric $N\times N$ matrix $A$ with components $\mat{A}{i}{j}$. Now consider the $N$-dimensional generalization of \eqref{eq:gaussian:a}:
 \begin{align}
 	\int\cdots\int dq^1\cdots dq^n \, e^{-\frac{1}{2} q_i \mat{A}{i}{j} q^j}
