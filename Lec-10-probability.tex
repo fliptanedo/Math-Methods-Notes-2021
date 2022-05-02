@@ -208,7 +208,7 @@ Argue in a few words why $\langle x \rangle = 0$.
 \end{exercise}
 
 \begin{exercise}
-\textbf{Gaussians in Statistical Mechanics.} It is not long before a young physicist is forced to become an expert in Gaussian integrals. The first place where Gaussians are unavoidable is statistical mechanics, where we find that the partition function for the microcanonical ensemble is a Gaussian. Let us recall where this comes from. This example comes from Sethna's gem of a textbook, \emph{Entropy, Order Parameters, and Complexity}, chapter 3.2. Consider a gas of a large number $2N$ particles in a box. The probability that there are $m \ll N$ more particles on the right side of the box compared to the left side is
+\textbf{Gaussians in Probability.} It is not long before a young physicist is forced to become an expert in Gaussian integrals. The first place where Gaussians are unavoidable is statistical mechanics. Let us recall where this comes from. This example comes from Sethna's gem of a textbook, \emph{Entropy, Order Parameters, and Complexity}, chapter 3.2. Consider a gas of a large number $2N$ particles in a box. The probability that there are $m \ll N$ more particles on the right side of the box compared to the left side is
 \begin{align}
 	P_m = 2^{-2N}\frac{(2N)!}{(N+m)!(N-m)!} \ .
 \end{align}
@@ -222,6 +222,19 @@ We dropped a factor of $\sqrt{2\pi n}$ on the right-hand side. Show that by expa
 \end{align}
 The prefactor could be approximated by keeping the factors of $\sqrt{2\pi n}$, or alternatively by normalizing $\int dm \, P_m = 1$.
 \end{exercise}
+
+\begin{exercise}
+\textbf{Stirling's Formula}. A convenient way to prove Stirling's approximation is to remember that
+\begin{align}
+	\ln N! = \sum_{n=1}^N \ln N \approx \int_1^\infty dx\, \ln x \ .
+\end{align}
+Here we are implicitly using $\Delta x = 1$ and arguing that the error from this becomes negligible as $N\to \infty$. In essence, all we have used is the Riemann sum. One can improve the approximation by using the trapezoidal rule; as recently re-discovered in 1994 by the endocrinology community\footnote{\url{https://pubmed.ncbi.nlm.nih.gov/8137688/}}, to much amusement by others\footnote{\url{https://pubmed.ncbi.nlm.nih.gov/7677819/}}. Show that the correction from the trapezoidal rule approximation gives
+\begin{align}
+	\ln N! \approx \int_1^\infty dx\, \ln x - \frac{1}{2}\ln N \ .
+\end{align}
+\end{exercise}
+% Now can derive the Bose-Einstein/Fermi-Dirac distribution a la Mukhanov (Cosmology ch. 3) using simply maximum entropy, Stirling's Formula, and Lagrange multipliers.
+
 
 \paragraph{Gaussians in many dimensions.} Here's the fun one. If the Gaussian integral is a parlor trick, then doing this one on a bar napkin should earn you a drink or two. Let's consider 3-dimensional space with $x,y,z$ directions. No---\emph{even better}! (You have to say it this way if you really want to impress the crowd.) Let's go to $N$-dimensional space described by $N$-vectors $\vec{q}$ with components $q^i$. Furthermore, consider a symmetric $N\times N$ matrix $A$ with components $\mat{A}{i}{j}$. Now consider the $N$-dimensional generalization of \eqref{eq:gaussian:a}:
 \begin{align}
