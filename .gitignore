@@ -1,7 +1,10 @@
-# macos
-.DS_Store
+# FLIP:
+!.gitignore
+*.pdf
+!/figures/*
+OLD/
 
-# LaTeX
+# LATEX
 *.aux
 *.glo
 *.idx
@@ -13,6 +16,7 @@
 *.alg
 *.bbl
 *.blg
+*.tmp
 *.dvi
 *.glg
 *.gls
@@ -30,3 +34,10 @@
 *.synctex.gz
 *.toc
 *.xdv
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# Mac finder files and hidden folders
+.DS_Store
